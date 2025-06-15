@@ -1,0 +1,103 @@
+<div class="home-container">
+  <header class="home-header">
+    <h1>Welcome to AgriMandi</h1>
+    <p class="intro-text">
+      🌱 <strong>AgriMandi</strong> is your <span class="highlight">gateway</span> to a direct connection between farmers and buyers—bringing fresh produce to your doorstep with just a click. 🚜🤝
+    </p>
+  </header>
+
+  <section class="features-section">
+    <h2>Why Choose AgriMandi?</h2>
+    <div class="features-list">
+      <div class="features-column">
+        <div class="feature-item">
+          <img src="images/3.jpg" alt="Direct Market" class="feature-image" />
+          <p>🌾 <strong>Direct Market Access:</strong> Empowering farmers to showcase their produce directly to buyers.</p>
+        </div>
+        <div class="feature-item">
+          <img src="images/2.jpg" alt="Easy Negotiations" class="feature-image" />
+          <p>💬 <strong>Easy Negotiations:</strong> Transparent communication between farmers and consumers for better deals.</p>
+        </div>
+      </div>
+      <div class="features-column">
+        <div class="feature-item">
+          <img src="images/6.jpeg" alt="Secure Payments" class="feature-image" />
+          <p>📊 <strong>Efficient Transactions:</strong> Simplified buying and selling process with secure payments.</p>
+        </div>
+        <div class="feature-item">
+          <img src="images/5.jpeg" alt="Global Reach" class="feature-image" />
+          <p>🌍 <strong>Broader Reach:</strong> Expand your market beyond local boundaries.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-it-works">
+    <h2>How It Works</h2>
+    <div class="steps-container">
+      <div class="step" *ngFor="let step of steps">
+        <img [src]="'images/' + step.image" [alt]="step.title" class="step-image" />
+        <h3>{{ step.number }}. {{ step.title }}</h3>
+        <p>{{ step.description }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials-section">
+    <h2>What Our Users Say</h2>
+    <div class="testimonials-container">
+      <div class="testimonial">
+        <p>"AgriMandi has revolutionized the way I sell my produce. The direct connection with buyers has increased my income!"</p>
+        <h4>- Ramesh Kumar, Farmer</h4>
+      </div>
+      <div class="testimonial">
+        <p>"Buying fresh produce directly from farmers has never been easier. I love the transparency and quality."</p>
+        <h4>- Anjali Sharma, Buyer</h4>
+      </div>
+    </div>
+  </section>
+
+  <section class="impact-section">
+    <h2>Our Impact</h2>
+    <div class="impact-stats">
+      <div class="stat" *ngFor="let stat of impactStats">
+        <h3>{{ stat.value }}</h3>
+        <p>{{ stat.label }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="blog-section">
+    <h2>Latest Insights</h2>
+    <div class="blog-container">
+      <div class="blog-post" *ngFor="let blog of blogs">
+        <img src="images/latest.png" [alt]="blog.title" class="blog-image" />
+        <h4>{{ blog.title }}</h4>
+        <p>{{ blog.description }}</p>
+        <!-- <a [routerLink]="['/blog', blog.id]">Read More</a> -->
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <h2>Ready to Start?</h2>
+    <p>Sign up today and experience the benefits of connecting directly with farmers and buyers.</p>
+    <button class="cta-btn" (click)="goToRegister()" [ngStyle]="{ 'background-color': selectedColor || '#198754' }">Join Now</button>
+  </section>
+
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-container">
+      <div class="faq-item" *ngFor="let faq of faqs">
+        <h4>{{ faq.question }}</h4>
+        <p>{{ faq.answer }}</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="home-footer">
+    <h2>Join AgriMandi Today!</h2>
+    <p>Be part of the revolution in agriculture. Together, we can build a more sustainable and efficient food supply chain.</p>
+    <button class="get-started-btn" (click)="goToRegister()" [ngStyle]="{ 'background-color': selectedColor || '#198754' }">Get Started</button>
+  </footer>
+</div>

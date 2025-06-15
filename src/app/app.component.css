@@ -1,0 +1,43 @@
+/* Reset and Base */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #b9f6ca;
+  color: #333;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  font-size: 14px;
+  /* background: linear-gradient(to right, #2e7d32, #66bb6a); */
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Foreground content goes above background */
+.content-overlay {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ensure main content doesn't go behind the background */
+.main-content {
+  padding: 1rem;
+}
+
+app-design {
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
