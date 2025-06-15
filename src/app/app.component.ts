@@ -7,6 +7,7 @@ import { DesignComponent } from './components/design/design.component';
 import { WheelComponent } from './components/wheel/wheel.component';
 import { ColorserviceService } from './services/colorservice.service';
 import * as AOS from 'aos';
+import { HeaderComponent } from "./components/header/header.component";
 
 @Component({
   selector: 'app-root',
@@ -17,10 +18,15 @@ import * as AOS from 'aos';
     NavbarComponent,
     AlertComponent,
     DesignComponent,
-    WheelComponent
-  ],
+    // WheelComponent,
+    HeaderComponent
+],
   styleUrls: ['./app.component.css'],
   template: `
+  <!-- Top Navbar -->
+<header>
+  <app-header></app-header>
+</header>
     <!-- Animated Background Layer -->
     <app-design></app-design>
 
@@ -37,7 +43,7 @@ import * as AOS from 'aos';
     </div>
 
     <!-- Floating Color Wheel -->
-    <app-wheel></app-wheel>
+    <!-- <app-wheel></app-wheel> -->
 
     <!-- Global Alert -->
     <app-alert></app-alert>
@@ -66,4 +72,5 @@ export class AppComponent implements OnInit {
       this.selectedColor = color;
     });
   }
+public title = 'flexierp-frontend';
 }

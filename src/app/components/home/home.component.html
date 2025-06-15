@@ -1,103 +1,72 @@
-<div class="home-container">
-  <header class="home-header">
-    <h1>Welcome to AgriMandi</h1>
-    <p class="intro-text">
-      🌱 <strong>AgriMandi</strong> is your <span class="highlight">gateway</span> to a direct connection between farmers and buyers—bringing fresh produce to your doorstep with just a click. 🚜🤝
+<div class="relative min-h-screen bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#334155] text-white overflow-hidden">
+  <!-- Background Lights -->
+  <div class="absolute -top-32 -left-32 w-[500px] h-[500px] bg-[#00ffee]/30 rounded-full blur-[160px] animate-float-fast shadow-2xl"></div>
+  <div class="absolute bottom-[-120px] right-[-120px] w-[600px] h-[600px] bg-[#ff6ec4]/20 rounded-full blur-[200px] animate-float-slow shadow-2xl"></div>
+  <div class="absolute top-1/2 left-1/2 w-[300px] h-[300px] bg-[#38bdf8]/15 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
+  <div class="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:18px_18px] opacity-10 pointer-events-none animate-stars"></div>
+
+  <!-- Hero Section -->
+  <div class="relative z-10 flex flex-col items-center justify-center text-center px-4 py-20 md:py-32">
+    <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight drop-shadow-neon animate-fade-in-slide">
+      Welcome to <span class="text-[#00ffee]">FlexiERP</span>
+    </h1>
+    <p class="mt-6 text-lg md:text-xl text-gray-200 max-w-2xl animate-fade-in-slide">
+      Your All-in-One Business Suite for MSMEs – manage inventory, billing, payroll, and vendors with ease.
     </p>
-  </header>
 
-  <section class="features-section">
-    <h2>Why Choose AgriMandi?</h2>
-    <div class="features-list">
-      <div class="features-column">
-        <div class="feature-item">
-          <img src="images/3.jpg" alt="Direct Market" class="feature-image" />
-          <p>🌾 <strong>Direct Market Access:</strong> Empowering farmers to showcase their produce directly to buyers.</p>
-        </div>
-        <div class="feature-item">
-          <img src="images/2.jpg" alt="Easy Negotiations" class="feature-image" />
-          <p>💬 <strong>Easy Negotiations:</strong> Transparent communication between farmers and consumers for better deals.</p>
-        </div>
+    <div class="mt-8 flex gap-4 animate-fade-in-slide">
+      <a routerLink="/signup" class="px-6 py-3 bg-[#00ffee] text-slate-900 font-semibold rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">Get Started</a>
+      <a routerLink="/about" class="px-6 py-3 border border-white text-white rounded-xl hover:bg-white hover:text-slate-900 transition duration-300">Learn More</a>
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <div class="relative z-10 px-6 py-20 md:py-28 max-w-7xl mx-auto">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-white">Why Choose FlexiERP?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center text-white">
+      <div class="bg-white/5 p-6 rounded-2xl shadow-lg backdrop-blur-sm hover:scale-105 transition">
+        <i class="bi bi-box-seam text-3xl text-[#00ffee] mb-4"></i>
+        <h3 class="text-xl font-semibold mb-2">Inventory Management</h3>
+        <p class="text-gray-300">Track stock levels, receive alerts, and manage supply chains effectively.</p>
       </div>
-      <div class="features-column">
-        <div class="feature-item">
-          <img src="images/6.jpeg" alt="Secure Payments" class="feature-image" />
-          <p>📊 <strong>Efficient Transactions:</strong> Simplified buying and selling process with secure payments.</p>
-        </div>
-        <div class="feature-item">
-          <img src="images/5.jpeg" alt="Global Reach" class="feature-image" />
-          <p>🌍 <strong>Broader Reach:</strong> Expand your market beyond local boundaries.</p>
-        </div>
+      <div class="bg-white/5 p-6 rounded-2xl shadow-lg backdrop-blur-sm hover:scale-105 transition">
+        <i class="bi bi-cash-stack text-3xl text-[#00ffee] mb-4"></i>
+        <h3 class="text-xl font-semibold mb-2">Billing & Invoicing</h3>
+        <p class="text-gray-300">Generate GST-ready invoices and streamline your payments easily.</p>
+      </div>
+      <div class="bg-white/5 p-6 rounded-2xl shadow-lg backdrop-blur-sm hover:scale-105 transition">
+        <i class="bi bi-person-lines-fill text-3xl text-[#00ffee] mb-4"></i>
+        <h3 class="text-xl font-semibold mb-2">Customer & Vendor CRM</h3>
+        <p class="text-gray-300">Maintain strong relationships with your customers and vendors in one place.</p>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section class="how-it-works">
-    <h2>How It Works</h2>
-    <div class="steps-container">
-      <div class="step" *ngFor="let step of steps">
-        <img [src]="'images/' + step.image" [alt]="step.title" class="step-image" />
-        <h3>{{ step.number }}. {{ step.title }}</h3>
-        <p>{{ step.description }}</p>
+  <!-- Who it's for Section -->
+  <div class="relative z-10 px-6 pb-28 max-w-6xl mx-auto">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-white">Perfect For</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-center">
+      <div class="p-6 bg-white/5 rounded-2xl shadow hover:scale-105 transition">
+        <h3 class="text-xl font-semibold text-[#00ffee] mb-2">Local Shopkeepers</h3>
+        <p class="text-gray-300">Manage sales, inventory, and billing from one easy interface.</p>
+      </div>
+      <div class="p-6 bg-white/5 rounded-2xl shadow hover:scale-105 transition">
+        <h3 class="text-xl font-semibold text-[#00ffee] mb-2">Small Factories</h3>
+        <p class="text-gray-300">Track raw materials, production, and staff payroll effortlessly.</p>
+      </div>
+      <div class="p-6 bg-white/5 rounded-2xl shadow hover:scale-105 transition">
+        <h3 class="text-xl font-semibold text-[#00ffee] mb-2">Traders & Service Providers</h3>
+        <p class="text-gray-300">Bill clients, monitor stock, and automate daily tasks.</p>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section class="testimonials-section">
-    <h2>What Our Users Say</h2>
-    <div class="testimonials-container">
-      <div class="testimonial">
-        <p>"AgriMandi has revolutionized the way I sell my produce. The direct connection with buyers has increased my income!"</p>
-        <h4>- Ramesh Kumar, Farmer</h4>
-      </div>
-      <div class="testimonial">
-        <p>"Buying fresh produce directly from farmers has never been easier. I love the transparency and quality."</p>
-        <h4>- Anjali Sharma, Buyer</h4>
-      </div>
+  <!-- Final CTA -->
+  <div class="relative z-10 bg-[#00ffee]/10 py-12 px-6 text-center">
+    <h2 class="text-2xl md:text-3xl font-bold text-white">Ready to Simplify Your Business?</h2>
+    <p class="mt-2 text-gray-200">Join hundreds of MSMEs already using FlexiERP to grow faster and smarter.</p>
+    <div class="mt-6">
+      <a routerLink="/signup" class="inline-block px-6 py-3 bg-[#00ffee] text-slate-900 font-semibold rounded-xl shadow hover:scale-105 transition">Create Your Account</a>
     </div>
-  </section>
-
-  <section class="impact-section">
-    <h2>Our Impact</h2>
-    <div class="impact-stats">
-      <div class="stat" *ngFor="let stat of impactStats">
-        <h3>{{ stat.value }}</h3>
-        <p>{{ stat.label }}</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="blog-section">
-    <h2>Latest Insights</h2>
-    <div class="blog-container">
-      <div class="blog-post" *ngFor="let blog of blogs">
-        <img src="images/latest.png" [alt]="blog.title" class="blog-image" />
-        <h4>{{ blog.title }}</h4>
-        <p>{{ blog.description }}</p>
-        <!-- <a [routerLink]="['/blog', blog.id]">Read More</a> -->
-      </div>
-    </div>
-  </section>
-
-  <section class="cta-section">
-    <h2>Ready to Start?</h2>
-    <p>Sign up today and experience the benefits of connecting directly with farmers and buyers.</p>
-    <button class="cta-btn" (click)="goToRegister()" [ngStyle]="{ 'background-color': selectedColor || '#198754' }">Join Now</button>
-  </section>
-
-  <section class="faq-section">
-    <h2>Frequently Asked Questions</h2>
-    <div class="faq-container">
-      <div class="faq-item" *ngFor="let faq of faqs">
-        <h4>{{ faq.question }}</h4>
-        <p>{{ faq.answer }}</p>
-      </div>
-    </div>
-  </section>
-
-  <footer class="home-footer">
-    <h2>Join AgriMandi Today!</h2>
-    <p>Be part of the revolution in agriculture. Together, we can build a more sustainable and efficient food supply chain.</p>
-    <button class="get-started-btn" (click)="goToRegister()" [ngStyle]="{ 'background-color': selectedColor || '#198754' }">Get Started</button>
-  </footer>
+  </div>
 </div>

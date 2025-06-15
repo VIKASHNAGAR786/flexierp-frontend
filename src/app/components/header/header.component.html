@@ -1,0 +1,42 @@
+<div class="fixed top-0 left-0 right-0 h-16 backdrop-blur-md bg-slate-900/80 text-white z-40 shadow-lg flex items-center px-4 md:pl-72 border-b border-slate-700">
+  <!-- Search Bar -->
+  <div class="flex items-center flex-1 max-w-md relative">
+    <i class="bi bi-search text-[#00ffee] absolute left-3 top-1/2 -translate-y-1/2 text-sm"></i>
+    <input
+      type="text"
+      placeholder="Search modules, reports, users..."
+      class="w-full bg-slate-800/70 text-white pl-10 pr-4 py-2 rounded-lg border border-slate-600 focus:outline-none focus:ring-2 focus:ring-[#00ffee] transition backdrop-blur-md"
+    />
+  </div>
+
+  <!-- Actions -->
+  <div class="flex items-center gap-4 ml-auto">
+
+    <!-- Theme Toggle (optional) -->
+    <button class="hidden md:flex items-center justify-center p-2 rounded-full hover:bg-slate-800 transition text-[#00ffee]">
+      <i class="bi bi-moon-stars-fill text-lg"></i>
+    </button>
+
+    <!-- Notifications -->
+    <button class="relative p-2 rounded-full hover:bg-slate-800 transition text-[#00ffee]">
+      <i class="bi bi-bell-fill text-xl"></i>
+      <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full ring-2 ring-slate-900 animate-ping"></span>
+    </button>
+
+    <!-- User Dropdown -->
+    <div class="relative group">
+      <button class="flex items-center gap-2 px-3 py-2 bg-slate-800/70 rounded-full hover:bg-slate-700 transition border border-slate-600 shadow-sm">
+        <img src="assets/user-avatar.png" alt="User" class="w-8 h-8 rounded-full shadow-md border border-[#00ffee]" />
+        <span class="hidden md:inline text-sm font-medium text-[#00ffee]">Hi, user</span>
+        <i class="bi bi-chevron-down text-sm text-slate-400"></i>
+      </button>
+
+      <!-- Dropdown -->
+      <div class="absolute right-0 mt-2 w-48 bg-slate-900 border border-slate-700 text-white rounded-lg shadow-xl opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-200 z-50 backdrop-blur-sm">
+        <a routerLink="/components/profileview" class="block px-4 py-2 hover:bg-slate-800">👤 Profile</a>
+        <a routerLink="/settings" class="block px-4 py-2 hover:bg-slate-800">⚙️ Settings</a>
+        <button (click)="onLogout()" class="block w-full text-left px-4 py-2 hover:bg-slate-800">🚪 Logout</button>
+      </div>
+    </div>
+  </div>
+</div>
