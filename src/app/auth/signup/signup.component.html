@@ -1,51 +1,53 @@
-<form (ngSubmit)="signup()" class="container bg-white p-4 p-md-5 rounded-4 shadow-lg mt-4">
-  <h2 class="text-center text-success fw-bold mb-4">Farmer Registration</h2>
+<div class="relative z-10 min-h-screen flex items-center justify-center px-4 py-8">
+  <form (ngSubmit)="signup()" class="container bg-white p-4 p-md-5 rounded-4 shadow-lg max-w-3xl w-full">
+    <h2 class="text-center text-success fw-bold mb-4">Farmer Registration</h2>
 
-  <div class="row g-4">
-    <div class="col-md-6">
-      <label class="form-label fw-semibold">Name</label>
-      <input type="text" [(ngModel)]="farmer.name" name="name" required class="form-control shadow-sm" placeholder="Enter your name">
+    <div class="row g-4">
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">Name</label>
+        <input type="text" [(ngModel)]="farmer.name" name="name" required class="form-control shadow-sm" placeholder="Enter your name">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">Email</label>
+        <input type="email" [(ngModel)]="farmer.email" name="email" required class="form-control shadow-sm" placeholder="Enter your email">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">User Name</label>
+        <input type="text" [(ngModel)]="farmer.userName" name="userName" required class="form-control shadow-sm" placeholder="Choose a username">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">Role</label>
+        <select [(ngModel)]="farmer.role" name="role" required class="form-select shadow-sm">
+          <option value="">-- Select Role --</option>
+          <option value="Farmer">Farmer</option>
+          <option value="Buyer">Buyer</option>
+        </select>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">Password</label>
+        <input type="password" [(ngModel)]="farmer.password" name="password" required class="form-control shadow-sm" placeholder="Enter a strong password">
+      </div>
+
+      <!-- Conditional Fields for Buyer -->
+      <div class="col-md-6" *ngIf="farmer.role === 'Buyer'">
+        <label class="form-label fw-semibold">Company Name</label>
+        <input type="text" [(ngModel)]="farmer.companyName" name="companyName" class="form-control shadow-sm" placeholder="Company Name">
+      </div>
+
+      <div class="col-md-6" *ngIf="farmer.role === 'Buyer'">
+        <label class="form-label fw-semibold">Company Type</label>
+        <input type="text" [(ngModel)]="farmer.companyType" name="companyType" class="form-control shadow-sm" placeholder="e.g., Agro Supplier, Exporter">
+      </div>
     </div>
 
-    <div class="col-md-6">
-      <label class="form-label fw-semibold">Email</label>
-      <input type="email" [(ngModel)]="farmer.email" name="email" required class="form-control shadow-sm" placeholder="Enter your email">
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-success btn-lg px-5 shadow-sm">
+        <i class="bi bi-person-plus me-2"></i> Sign Up
+      </button>
     </div>
-
-    <div class="col-md-6">
-      <label class="form-label fw-semibold">User Name</label>
-      <input type="text" [(ngModel)]="farmer.userName" name="userName" required class="form-control shadow-sm" placeholder="Choose a username">
-    </div>
-
-    <div class="col-md-6">
-      <label class="form-label fw-semibold">Role</label>
-      <select [(ngModel)]="farmer.role" name="role" required class="form-select shadow-sm">
-        <option value="">-- Select Role --</option>
-        <option value="Farmer">Farmer</option>
-        <option value="Buyer">Buyer</option>
-      </select>
-    </div>
-
-    <div class="col-md-6">
-      <label class="form-label fw-semibold">Password</label>
-      <input type="password" [(ngModel)]="farmer.password" name="password" required class="form-control shadow-sm" placeholder="Enter a strong password">
-    </div>
-
-    <!-- Conditional Fields for Buyer -->
-    <div class="col-md-6" *ngIf="farmer.role === 'Buyer'">
-      <label class="form-label fw-semibold">Company Name</label>
-      <input type="text" [(ngModel)]="farmer.companyName" name="companyName" class="form-control shadow-sm" placeholder="Company Name">
-    </div>
-
-    <div class="col-md-6" *ngIf="farmer.role === 'Buyer'">
-      <label class="form-label fw-semibold">Company Type</label>
-      <input type="text" [(ngModel)]="farmer.companyType" name="companyType" class="form-control shadow-sm" placeholder="e.g., Agro Supplier, Exporter">
-    </div>
-  </div>
-
-  <div class="text-center mt-4">
-    <button type="submit" class="btn btn-success btn-lg px-5 shadow-sm">
-      <i class="bi bi-person-plus me-2"></i> Sign Up
-    </button>
-  </div>
-</form>
+  </form>
+</div>

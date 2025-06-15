@@ -9,9 +9,6 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 
-// ⛔️ Removed ProductinventoryComponent — it's standalone and lazy-loaded
-
-
 
 const routes = [
   { path: '', component: HomeComponent },

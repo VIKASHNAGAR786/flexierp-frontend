@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FarmerService } from '../../services/signup.service';
 import { FormsModule } from '@angular/forms';
-import { AlertComponent } from '../../components/alert/alert.component';
 import { AlertService } from '../../services/alert.service';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 @Component({

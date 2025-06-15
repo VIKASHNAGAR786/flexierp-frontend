@@ -30,7 +30,9 @@ import * as AOS from 'aos';
     <!-- Main Content Wrapper (Pushes content to the right of sidebar) -->
     <div class="pt-20 md:pt-6 md:pl-64 min-h-screen bg-slate-100 text-gray-900 dark:bg-slate-900 dark:text-white transition-colors">
       <main class="p-4">
+        <div class="relative z-10">
         <router-outlet></router-outlet>
+        </div>
       </main>
     </div>
 

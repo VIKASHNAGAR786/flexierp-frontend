@@ -1,16 +1,28 @@
-<!-- 🌌 Rich Animated Background Theme -->
+<!-- 🌌 Enhanced Animated Background Theme -->
 <div class="fixed inset-0 z-0 w-full h-full overflow-hidden bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#334155]">
 
-  <!-- ✨ Animated Gradient Lights -->
+  <!-- ✨ Animated Gradient Blobs -->
   <div class="absolute -top-32 -left-32 w-[500px] h-[500px] bg-[#00ffee]/30 rounded-full blur-[160px] animate-float-fast shadow-2xl"></div>
-
   <div class="absolute bottom-[-120px] right-[-120px] w-[600px] h-[600px] bg-[#ff6ec4]/20 rounded-full blur-[200px] animate-float-slow shadow-2xl"></div>
-
   <div class="absolute top-1/2 left-1/2 w-[300px] h-[300px] bg-[#38bdf8]/15 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
 
-  <!-- 🌠 Subtle Twinkling Stars Layer -->
-  <div class="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:18px_18px] opacity-10 pointer-events-none animate-pulse-slow"></div>
+  <!-- 🌠 Twinkling Starfield -->
+  <div class="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:20px_20px] opacity-20 animate-stars pointer-events-none z-10"></div>
 
-  <!-- 💫 Moving Cloud-like Overlay -->
+  <!-- 🌀 Rotating Galaxy Ring -->
+  <div class="absolute top-1/3 left-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-purple-500/10 via-pink-500/10 to-transparent rounded-full blur-[150px] animate-spin-slow -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0"></div>
+
+  <!-- 🌈 Aurora Streaks -->
+  <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-cyan-400/10 via-indigo-500/10 to-fuchsia-500/10 blur-2xl animate-aurora pointer-events-none"></div>
+
+  <!-- 🔥 Floating Particles -->
+  <div class="absolute inset-0 pointer-events-none z-20">
+    <div class="absolute w-2 h-2 bg-white/10 rounded-full blur-sm animate-particle-slow top-[10%] left-[20%]"></div>
+    <div class="absolute w-1.5 h-1.5 bg-yellow-300/10 rounded-full blur-sm animate-particle-fast top-[40%] left-[70%]"></div>
+    <div class="absolute w-2 h-2 bg-pink-400/10 rounded-full blur-sm animate-particle-mid top-[75%] left-[50%]"></div>
+    <!-- Add more as needed for random sparks -->
+  </div>
+
+  <!-- ☁️ Moving Cloud-like Overlay -->
   <div class="absolute inset-0 bg-[url('/assets/clouds-overlay.png')] opacity-5 animate-clouds pointer-events-none"></div>
 </div>
