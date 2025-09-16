@@ -7,59 +7,339 @@
 
   <!-- Hero Section -->
   <div class="relative z-10 flex flex-col items-center justify-center text-center px-4 py-20 md:py-32">
-    <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight drop-shadow-neon animate-fade-in-slide">
-      Welcome to <span class="text-[#00ffee]">FlexiERP</span>
-    </h1>
-    <p class="mt-6 text-lg md:text-xl text-gray-200 max-w-2xl animate-fade-in-slide">
-      Your All-in-One Business Suite for MSMEs – manage inventory, billing, payroll, and vendors with ease.
-    </p>
+  <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight drop-shadow-neon animate-fade-in-slide">
+    Welcome to <span class="text-[#00ffee]">FlexiERP</span>
+  </h1>
+  <p class="mt-6 text-lg md:text-xl text-gray-200 max-w-2xl animate-fade-in-slide">
+    Your All-in-One Business Suite for MSMEs – manage inventory, billing, payroll, and vendors with ease.  
+    We help <span class="font-semibold text-[#00ffee]">digitize your business</span>, streamline daily operations, 
+    and empower you to <span class="font-semibold">grow faster with confidence</span>.
+  </p>
 
-    <div class="mt-8 flex gap-4 animate-fade-in-slide">
-      <a routerLink="/signup" class="px-6 py-3 bg-[#00ffee] text-slate-900 font-semibold rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">Get Started</a>
-      <a routerLink="/about" class="px-6 py-3 border border-white text-white rounded-xl hover:bg-white hover:text-slate-900 transition duration-300">Learn More</a>
-    </div>
+  <div class="mt-8 flex gap-4 animate-fade-in-slide">
+    <a routerLink="/signup" class="px-6 py-3 bg-[#00ffee] text-slate-900 font-semibold rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">Get Started</a>
+    <a routerLink="/about" class="px-6 py-3 border border-white text-white rounded-xl hover:bg-white hover:text-slate-900 transition duration-300">Learn More</a>
   </div>
+</div>
+
 
   <!-- Features Section -->
   <div class="relative z-10 px-6 py-20 md:py-28 max-w-7xl mx-auto">
-    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-white">Why Choose FlexiERP?</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center text-white">
-      <div class="bg-white/5 p-6 rounded-2xl shadow-lg backdrop-blur-sm hover:scale-105 transition">
-        <i class="bi bi-box-seam text-3xl text-[#00ffee] mb-4"></i>
-        <h3 class="text-xl font-semibold mb-2">Inventory Management</h3>
-        <p class="text-gray-300">Track stock levels, receive alerts, and manage supply chains effectively.</p>
-      </div>
-      <div class="bg-white/5 p-6 rounded-2xl shadow-lg backdrop-blur-sm hover:scale-105 transition">
-        <i class="bi bi-cash-stack text-3xl text-[#00ffee] mb-4"></i>
-        <h3 class="text-xl font-semibold mb-2">Billing & Invoicing</h3>
-        <p class="text-gray-300">Generate GST-ready invoices and streamline your payments easily.</p>
-      </div>
-      <div class="bg-white/5 p-6 rounded-2xl shadow-lg backdrop-blur-sm hover:scale-105 transition">
-        <i class="bi bi-person-lines-fill text-3xl text-[#00ffee] mb-4"></i>
-        <h3 class="text-xl font-semibold mb-2">Customer & Vendor CRM</h3>
-        <p class="text-gray-300">Maintain strong relationships with your customers and vendors in one place.</p>
-      </div>
+  <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-white">Why Choose FlexiERP?</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center text-white">
+    
+    <!-- Inventory -->
+    <div class="bg-white/5 p-6 rounded-2xl shadow-lg backdrop-blur-sm hover:scale-105 transition">
+      <i class="bi bi-box-seam text-3xl text-[#00ffee] mb-4"></i>
+      <h3 class="text-xl font-semibold mb-2">Inventory Management</h3>
+      <p class="text-gray-300">Track stock levels, receive alerts, and manage supply chains effectively.</p>
     </div>
+    
+    <!-- Billing -->
+    <div class="bg-white/5 p-6 rounded-2xl shadow-lg backdrop-blur-sm hover:scale-105 transition">
+      <i class="bi bi-cash-stack text-3xl text-[#00ffee] mb-4"></i>
+      <h3 class="text-xl font-semibold mb-2">Billing & Invoicing</h3>
+      <p class="text-gray-300">Generate GST-ready invoices and streamline your payments easily.</p>
+    </div>
+    
+    <!-- CRM -->
+    <div class="bg-white/5 p-6 rounded-2xl shadow-lg backdrop-blur-sm hover:scale-105 transition">
+      <i class="bi bi-person-lines-fill text-3xl text-[#00ffee] mb-4"></i>
+      <h3 class="text-xl font-semibold mb-2">Customer & Vendor CRM</h3>
+      <p class="text-gray-300">Maintain strong relationships with your customers and vendors in one place.</p>
+    </div>
+
+    <!-- Payroll -->
+    <div class="bg-white/5 p-6 rounded-2xl shadow-lg backdrop-blur-sm hover:scale-105 transition">
+      <i class="bi bi-wallet2 text-3xl text-[#00ffee] mb-4"></i>
+      <h3 class="text-xl font-semibold mb-2">Payroll Management</h3>
+      <p class="text-gray-300">Simplify employee salary processing, attendance tracking, and compliance.</p>
+    </div>
+
+    <!-- Analytics -->
+    <div class="bg-white/5 p-6 rounded-2xl shadow-lg backdrop-blur-sm hover:scale-105 transition">
+      <i class="bi bi-graph-up-arrow text-3xl text-[#00ffee] mb-4"></i>
+      <h3 class="text-xl font-semibold mb-2">Business Analytics</h3>
+      <p class="text-gray-300">Gain insights with real-time reports to make data-driven decisions.</p>
+    </div>
+
+    <!-- Support -->
+    <div class="bg-white/5 p-6 rounded-2xl shadow-lg backdrop-blur-sm hover:scale-105 transition">
+      <i class="bi bi-headset text-3xl text-[#00ffee] mb-4"></i>
+      <h3 class="text-xl font-semibold mb-2">24/7 Technical Support</h3>
+      <p class="text-gray-300">Our support team is always ready to assist you with quick solutions.</p>
+    </div>
+
+    <!-- Cloud Security -->
+    <div class="bg-white/5 p-6 rounded-2xl shadow-lg backdrop-blur-sm hover:scale-105 transition">
+      <i class="bi bi-cloud-lock text-3xl text-[#00ffee] mb-4"></i>
+      <h3 class="text-xl font-semibold mb-2">Secure Cloud Storage</h3>
+      <p class="text-gray-300">Your data is safe with enterprise-grade encryption and backups.</p>
+    </div>
+
+    <!-- Multi-Device -->
+    <div class="bg-white/5 p-6 rounded-2xl shadow-lg backdrop-blur-sm hover:scale-105 transition">
+      <i class="bi bi-laptop text-3xl text-[#00ffee] mb-4"></i>
+      <h3 class="text-xl font-semibold mb-2">Multi-Device Access</h3>
+      <p class="text-gray-300">Access your ERP from desktop, tablet, or mobile – anytime, anywhere.</p>
+    </div>
+
+    <!-- Customization -->
+    <div class="bg-white/5 p-6 rounded-2xl shadow-lg backdrop-blur-sm hover:scale-105 transition">
+      <i class="bi bi-sliders text-3xl text-[#00ffee] mb-4"></i>
+      <h3 class="text-xl font-semibold mb-2">Customizable Modules</h3>
+      <p class="text-gray-300">Tailor FlexiERP to match your unique business requirements.</p>
+    </div>
+
   </div>
+</div>
+
 
   <!-- Who it's for Section -->
-  <div class="relative z-10 px-6 pb-28 max-w-6xl mx-auto">
-    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-white">Perfect For</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-center">
-      <div class="p-6 bg-white/5 rounded-2xl shadow hover:scale-105 transition">
-        <h3 class="text-xl font-semibold text-[#00ffee] mb-2">Local Shopkeepers</h3>
-        <p class="text-gray-300">Manage sales, inventory, and billing from one easy interface.</p>
-      </div>
-      <div class="p-6 bg-white/5 rounded-2xl shadow hover:scale-105 transition">
-        <h3 class="text-xl font-semibold text-[#00ffee] mb-2">Small Factories</h3>
-        <p class="text-gray-300">Track raw materials, production, and staff payroll effortlessly.</p>
-      </div>
-      <div class="p-6 bg-white/5 rounded-2xl shadow hover:scale-105 transition">
-        <h3 class="text-xl font-semibold text-[#00ffee] mb-2">Traders & Service Providers</h3>
-        <p class="text-gray-300">Bill clients, monitor stock, and automate daily tasks.</p>
-      </div>
+<div class="relative z-10 px-6 pb-28 max-w-6xl mx-auto">
+  <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-white">Perfect For</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-center">
+
+    <!-- Shopkeepers -->
+    <div class="p-6 bg-white/5 rounded-2xl shadow hover:scale-105 transition">
+      <h3 class="text-xl font-semibold text-[#00ffee] mb-2">Local Shopkeepers</h3>
+      <p class="text-gray-300">Manage sales, inventory, and billing from one easy interface.</p>
     </div>
+
+    <!-- Factories -->
+    <div class="p-6 bg-white/5 rounded-2xl shadow hover:scale-105 transition">
+      <h3 class="text-xl font-semibold text-[#00ffee] mb-2">Small Factories</h3>
+      <p class="text-gray-300">Track raw materials, production, and staff payroll effortlessly.</p>
+    </div>
+
+    <!-- Traders -->
+    <div class="p-6 bg-white/5 rounded-2xl shadow hover:scale-105 transition">
+      <h3 class="text-xl font-semibold text-[#00ffee] mb-2">Traders & Service Providers</h3>
+      <p class="text-gray-300">Bill clients, monitor stock, and automate daily tasks.</p>
+    </div>
+
+    <!-- Wholesalers -->
+    <div class="p-6 bg-white/5 rounded-2xl shadow hover:scale-105 transition">
+      <h3 class="text-xl font-semibold text-[#00ffee] mb-2">Wholesalers</h3>
+      <p class="text-gray-300">Handle bulk orders, track customers, and simplify vendor payments.</p>
+    </div>
+
+    <!-- Startups -->
+    <div class="p-6 bg-white/5 rounded-2xl shadow hover:scale-105 transition">
+      <h3 class="text-xl font-semibold text-[#00ffee] mb-2">Growing Startups</h3>
+      <p class="text-gray-300">Scale your operations with smart tools for billing, payroll, and analytics.</p>
+    </div>
+
+    <!-- NGOs -->
+    <div class="p-6 bg-white/5 rounded-2xl shadow hover:scale-105 transition">
+      <h3 class="text-xl font-semibold text-[#00ffee] mb-2">NGOs & Organizations</h3>
+      <p class="text-gray-300">Manage donations, vendors, and resources transparently and efficiently.</p>
+    </div>
+
+    <!-- Freelancers -->
+    <div class="p-6 bg-white/5 rounded-2xl shadow hover:scale-105 transition">
+      <h3 class="text-xl font-semibold text-[#00ffee] mb-2">Freelancers</h3>
+      <p class="text-gray-300">Generate invoices, manage expenses, and keep client records in one place.</p>
+    </div>
+
+    <!-- Distributors -->
+    <div class="p-6 bg-white/5 rounded-2xl shadow hover:scale-105 transition">
+      <h3 class="text-xl font-semibold text-[#00ffee] mb-2">Distributors</h3>
+      <p class="text-gray-300">Monitor stock movement, sales pipelines, and partner networks seamlessly.</p>
+    </div>
+
+    <!-- Retail Chains -->
+    <div class="p-6 bg-white/5 rounded-2xl shadow hover:scale-105 transition">
+      <h3 class="text-xl font-semibold text-[#00ffee] mb-2">Retail Chains</h3>
+      <p class="text-gray-300">Unify billing, stock, and staff management across multiple outlets.</p>
+    </div>
+
   </div>
+</div>
+
+
+<!-- Difference Section - Table Style -->
+<div class="relative z-10 px-6 py-20 md:py-28 max-w-7xl mx-auto">
+  <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-white">FlexiERP vs Others</h2>
+
+  <div class="overflow-x-auto">
+    <table class="w-full border-collapse text-left text-gray-200">
+      <thead>
+        <tr class="bg-white/10 text-[#00ffee]">
+          <th class="px-6 py-4 text-lg font-semibold">Feature</th>
+          <th class="px-6 py-4 text-lg font-semibold text-center">FlexiERP ✅</th>
+          <th class="px-6 py-4 text-lg font-semibold text-center">Others ❌</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-white/10">
+        
+        <tr>
+          <td class="px-6 py-4">All-in-One Suite</td>
+          <td class="px-6 py-4 text-center">✔ Manage inventory, billing, payroll & CRM in one platform</td>
+          <td class="px-6 py-4 text-center">✘ Multiple tools, confusing & costly</td>
+        </tr>
+        
+        <tr>
+          <td class="px-6 py-4">Billing & Invoicing</td>
+          <td class="px-6 py-4 text-center">✔ GST-ready invoices & instant digital records</td>
+          <td class="px-6 py-4 text-center">✘ Manual billing, error-prone & delayed</td>
+        </tr>
+
+        <tr>
+          <td class="px-6 py-4">Support</td>
+          <td class="px-6 py-4 text-center">✔ 24/7 technical support team available</td>
+          <td class="px-6 py-4 text-center">✘ Limited or no dedicated support</td>
+        </tr>
+
+        <tr>
+          <td class="px-6 py-4">Accessibility</td>
+          <td class="px-6 py-4 text-center">✔ Cloud-based, multi-device access</td>
+          <td class="px-6 py-4 text-center">✘ Offline or single-device only</td>
+        </tr>
+
+        <tr>
+          <td class="px-6 py-4">Data Security</td>
+          <td class="px-6 py-4 text-center">✔ Encrypted, backed-up, enterprise-grade security</td>
+          <td class="px-6 py-4 text-center">✘ Weak security & risk of data loss</td>
+        </tr>
+
+        <tr>
+          <td class="px-6 py-4">Customization</td>
+          <td class="px-6 py-4 text-center">✔ Flexible modules tailored for MSMEs</td>
+          <td class="px-6 py-4 text-center">✘ Rigid systems not MSME-friendly</td>
+        </tr>
+
+        <tr>
+          <td class="px-6 py-4">Scalability</td>
+          <td class="px-6 py-4 text-center">✔ Grows with your business from 10 to 10,000+ records</td>
+          <td class="px-6 py-4 text-center">✘ Limited scalability, frequent system changes needed</td>
+        </tr>
+
+        <tr>
+          <td class="px-6 py-4">Reporting & Analytics</td>
+          <td class="px-6 py-4 text-center">✔ Real-time dashboards & AI-driven insights</td>
+          <td class="px-6 py-4 text-center">✘ Basic or no reporting features</td>
+        </tr>
+
+        <tr>
+          <td class="px-6 py-4">User Experience</td>
+          <td class="px-6 py-4 text-center">✔ Modern, clean & easy-to-use interface</td>
+          <td class="px-6 py-4 text-center">✘ Outdated, complex, hard-to-use design</td>
+        </tr>
+
+        <tr>
+          <td class="px-6 py-4">Updates & Upgrades</td>
+          <td class="px-6 py-4 text-center">✔ Free updates with latest GST & compliance</td>
+          <td class="px-6 py-4 text-center">✘ Manual upgrades, hidden costs</td>
+        </tr>
+
+        <tr>
+          <td class="px-6 py-4">Cost Efficiency</td>
+          <td class="px-6 py-4 text-center">✔ Affordable pricing designed for MSMEs</td>
+          <td class="px-6 py-4 text-center">✘ Expensive licenses & maintenance fees</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+<!-- How Your Business Grows Section -->
+<div class="relative z-10 px-6 py-20 md:py-28 max-w-7xl mx-auto">
+  <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
+    How Your Business Grows with <span class="text-[#00ffee]">FlexiERP</span>
+  </h2>
+
+  <div class="grid md:grid-cols-3 gap-8">
+
+    <!-- Cost Saving -->
+    <div class="bg-white/10 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
+      <div class="text-4xl mb-4">💰</div>
+      <h3 class="text-xl font-semibold mb-2 text-[#00ffee]">Reduce Costs</h3>
+      <p class="text-gray-200 text-sm">
+        Replace multiple tools with one all-in-one platform — saving money on licenses, staff time, and manual errors.
+      </p>
+    </div>
+
+    <!-- Efficiency -->
+    <div class="bg-white/10 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
+      <div class="text-4xl mb-4">⚡</div>
+      <h3 class="text-xl font-semibold mb-2 text-[#00ffee]">Boost Efficiency</h3>
+      <p class="text-gray-200 text-sm">
+        Automate billing, payroll, and stock alerts so your team can focus on growth instead of paperwork.
+      </p>
+    </div>
+
+    <!-- Smart Decisions -->
+    <div class="bg-white/10 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
+      <div class="text-4xl mb-4">📊</div>
+      <h3 class="text-xl font-semibold mb-2 text-[#00ffee]">Make Smarter Decisions</h3>
+      <p class="text-gray-200 text-sm">
+        Get real-time dashboards and insights to track sales, expenses, and profits — all at your fingertips.
+      </p>
+    </div>
+
+    <!-- Get Paid Faster -->
+    <div class="bg-white/10 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
+      <div class="text-4xl mb-4">💸</div>
+      <h3 class="text-xl font-semibold mb-2 text-[#00ffee]">Get Paid Faster</h3>
+      <p class="text-gray-200 text-sm">
+        Digital invoicing with automated reminders ensures quicker payments and healthier cash flow.
+      </p>
+    </div>
+
+    <!-- Expansion -->
+    <div class="bg-white/10 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
+      <div class="text-4xl mb-4">🌍</div>
+      <h3 class="text-xl font-semibold mb-2 text-[#00ffee]">Expand Easily</h3>
+      <p class="text-gray-200 text-sm">
+        Cloud-based access means you can manage multiple branches, warehouses, or users with zero hassle.
+      </p>
+    </div>
+
+    <!-- Stronger Relationships -->
+    <div class="bg-white/10 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
+      <div class="text-4xl mb-4">🤝</div>
+      <h3 class="text-xl font-semibold mb-2 text-[#00ffee]">Build Relationships</h3>
+      <p class="text-gray-200 text-sm">
+        Use the built-in CRM to track leads, customers, and vendors, improving repeat business and loyalty.
+      </p>
+    </div>
+
+    <!-- Compliance -->
+    <div class="bg-white/10 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
+      <div class="text-4xl mb-4">✅</div>
+      <h3 class="text-xl font-semibold mb-2 text-[#00ffee]">Stay Compliant</h3>
+      <p class="text-gray-200 text-sm">
+        Auto-generated GST invoices & tax-ready reports keep your business audit-ready with zero penalty risk.
+      </p>
+    </div>
+
+    <!-- Mobile -->
+    <div class="bg-white/10 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
+      <div class="text-4xl mb-4">📱</div>
+      <h3 class="text-xl font-semibold mb-2 text-[#00ffee]">Always Connected</h3>
+      <p class="text-gray-200 text-sm">
+        Manage your business on the go with mobile-friendly access — never miss a deal or update.
+      </p>
+    </div>
+
+    <!-- Future Ready -->
+    <div class="bg-white/10 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
+      <div class="text-4xl mb-4">🚀</div>
+      <h3 class="text-xl font-semibold mb-2 text-[#00ffee]">Future-Proof</h3>
+      <p class="text-gray-200 text-sm">
+        Built on modern cloud & AI-ready technology, FlexiERP grows with your business and keeps you ahead.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+
+
 
   <!-- Final CTA -->
   <div class="relative z-10 bg-[#00ffee]/10 py-12 px-6 text-center">

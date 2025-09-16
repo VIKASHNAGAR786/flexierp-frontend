@@ -1,44 +1,68 @@
-/* Base Styles */
+/* ===============================
+   Global Styles & Variables
+================================= */
+:root {
+  --primary: #2e7d32;
+  --primary-dark: #1b5e20;
+  --secondary: #66bb6a;
+  --bg-light: #f8f9fa;
+  --bg-accent: #e8f5e9;
+  --text-dark: #333;
+  --text-light: #555;
+  --radius: 12px;
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --transition: all 0.3s ease;
+}
+
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f8f9fa;
-  color: #333;
+  background: var(--bg-light);
+  color: var(--text-dark);
+  line-height: 1.6;
+  scroll-behavior: smooth;
 }
 
 .home-container {
   padding: 2rem;
   max-width: 1200px;
   margin: auto;
-  
 }
 
-/* Header Section */
+/* ===============================
+   Header Section
+================================= */
 .home-header {
   text-align: center;
-  padding: 2rem 1rem;
-  background-color: #e8f5e9;
-  border-radius: 12px;
+  padding: 3rem 1rem;
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  border-radius: var(--radius);
   margin-bottom: 3rem;
+  box-shadow: var(--shadow-md);
+  animation: fadeIn 1s ease-in-out;
 }
 
 .home-header h1 {
-  font-size: 2.8rem;
+  font-size: 3rem;
   margin-bottom: 0.5rem;
-  color: #2e7d32;
+  color: var(--primary);
+  font-weight: 700;
 }
 
 .intro-text {
   font-size: 1.2rem;
-  color: #555;
+  color: var(--text-light);
 }
 
 .highlight {
-  color: #1b5e20;
+  color: var(--primary-dark);
   font-weight: bold;
 }
 
-/* Features Section */
+/* ===============================
+   Section Titles
+================================= */
 .features-section h2,
 .how-it-works h2,
 .testimonials-section h2,
@@ -46,12 +70,32 @@ body {
 .blog-section h2,
 .cta-section h2,
 .faq-section h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  font-size: 2.2rem;
+  margin-bottom: 1.2rem;
   text-align: center;
-  color: #388e3c;
+  color: var(--primary);
+  position: relative;
 }
 
+.features-section h2::after,
+.how-it-works h2::after,
+.testimonials-section h2::after,
+.impact-section h2::after,
+.blog-section h2::after,
+.cta-section h2::after,
+.faq-section h2::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  margin: 0.5rem auto;
+  border-radius: 4px;
+  background: var(--secondary);
+}
+
+/* ===============================
+   Features Section
+================================= */
 .features-list {
   display: flex;
   gap: 2rem;
@@ -59,17 +103,19 @@ body {
   justify-content: center;
 }
 
-.features-column {
-  flex: 1 1 300px;
-}
-
 .feature-item {
   background: #fff;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
   text-align: center;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.feature-item:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: var(--shadow-md);
 }
 
 .feature-image {
@@ -77,10 +123,12 @@ body {
   max-height: 180px;
   object-fit: cover;
   border-radius: 8px;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
 }
 
-/* How It Works */
+/* ===============================
+   How It Works
+================================= */
 .steps-container {
   display: flex;
   flex-wrap: wrap;
@@ -91,70 +139,79 @@ body {
 
 .step {
   flex: 1 1 250px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  padding: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
   text-align: center;
+  transition: var(--transition);
 }
 
-.step-image {
-  width: 100%;
-  max-height: 150px;
-  object-fit: contain;
-  margin-bottom: 1rem;
+.step:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
 }
 
-/* Testimonials */
-.testimonials-container {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
+/* ===============================
+   Testimonials
+================================= */
 .testimonial {
   flex: 1 1 300px;
-  background-color: #f1f8e9;
+  background: var(--bg-accent);
   padding: 1.5rem;
-  border-radius: 10px;
+  border-radius: var(--radius);
   font-style: italic;
-  box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  transition: var(--transition);
 }
 
-/* Impact Stats */
-.impact-stats {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin-top: 2rem;
+.testimonial:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-md);
 }
 
-.stat {
-  flex: 1 1 150px;
-  text-align: center;
+.testimonial::before {
+  content: "“";
+  font-size: 3rem;
+  position: absolute;
+  top: -10px;
+  left: 15px;
+  color: var(--secondary);
+  opacity: 0.4;
 }
 
+/* ===============================
+   Impact Stats
+================================= */
 .stat h3 {
-  font-size: 2rem;
-  color: #43a047;
+  font-size: 2.5rem;
+  color: var(--primary);
+  font-weight: bold;
 }
 
-/* Blog Posts */
-.blog-container {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-  justify-content: center;
+.stat p {
+  color: var(--text-light);
+  font-size: 1.1rem;
 }
 
+/* ===============================
+   Blog Posts
+================================= */
 .blog-post {
   flex: 1 1 300px;
-  background: #ffffff;
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  background: #fff;
+  padding: 1.2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
 }
+
+.blog-post:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
 .blog-image {
   width: 100%;
   height: 180px;
@@ -164,56 +221,76 @@ body {
   clip-path: ellipse(100% 80% at 50% 20%);
 }
 
-
-/* CTA Section */
+/* ===============================
+   CTA Section
+================================= */
 .cta-section {
   text-align: center;
-  background-color: #c8e6c9;
-  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #c8e6c9, #a5d6a7);
+  padding: 2.5rem 1rem;
   margin-top: 3rem;
-  border-radius: 10px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
 }
 
 .cta-btn, .get-started-btn {
-  background-color: #2e7d32;
+  background: var(--primary);
   color: #fff;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
+  padding: 0.9rem 1.8rem;
+  font-size: 1.1rem;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: var(--transition);
+  font-weight: 600;
 }
 
 .cta-btn:hover, .get-started-btn:hover {
-  background-color: #1b5e20;
+  background: var(--primary-dark);
+  transform: scale(1.05);
 }
 
-/* FAQ Section */
-.faq-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
+/* ===============================
+   FAQ Section
+================================= */
 .faq-item {
-  background-color: #ffffff;
-  border-left: 5px solid #66bb6a;
-  padding: 1rem;
+  background: #fff;
+  border-left: 5px solid var(--secondary);
+  padding: 1.2rem;
   border-radius: 6px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
 }
 
-/* Footer */
+.faq-item:hover {
+  transform: translateX(5px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ===============================
+   Footer
+================================= */
 .home-footer {
   margin-top: 4rem;
   text-align: center;
-  background-color: #a5d6a7;
+  background: var(--secondary);
   padding: 2rem 1rem;
-  border-radius: 10px;
+  border-radius: var(--radius);
+  color: #fff;
+  font-weight: 500;
 }
 
-/* Responsive Design */
+/* ===============================
+   Animations
+================================= */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===============================
+   Responsive Design
+================================= */
 @media (max-width: 768px) {
   .features-list,
   .testimonials-container,
@@ -225,6 +302,10 @@ body {
   }
 
   .home-header h1 {
+    font-size: 2.2rem;
+  }
+
+  .stat h3 {
     font-size: 2rem;
   }
 }
