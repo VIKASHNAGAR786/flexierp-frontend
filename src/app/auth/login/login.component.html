@@ -17,6 +17,7 @@
   <main class="flex flex-1 items-center justify-center px-6 py-10">
     <div
       class="grid grid-cols-1 md:grid-cols-2 w-full max-w-6xl bg-white/70 backdrop-blur-lg rounded-2xl shadow-2xl overflow-hidden">
+      
       <!-- Left Section -->
       <div
         class="flex flex-col justify-center items-center space-y-6 p-10 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
@@ -41,13 +42,21 @@
       <!-- Right Section (Login Form) -->
       <div class="flex flex-col justify-center p-10">
         <h2 class="text-xl text-gray-700 font-semibold mb-6">Login to Continue</h2>
-        <form class="space-y-4">
+        <form class="space-y-4" (ngSubmit)="login()">
           <input type="text" placeholder="Your Email / Phone Number"
             class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2"
+            [(ngModel)]="loginData.email"
+            name="email"
+            required
             [ngStyle]="{'focus:ring-color': themeColor}" />
+
           <input type="password" placeholder="Password"
             class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2"
+            [(ngModel)]="loginData.password"
+            name="password"
+            required
             [ngStyle]="{'focus:ring-color': themeColor}" />
+
           <div class="flex items-center justify-between text-sm text-gray-600">
             <label class="flex items-center space-x-2">
               <input type="checkbox" class="rounded border-gray-300" />
@@ -55,9 +64,11 @@
             </label>
             <a href="#" class="text-blue-600 hover:underline">Forgot Password?</a>
           </div>
+
           <button type="submit"
             class="w-full text-white py-3 rounded-lg font-bold transition transform hover:scale-[1.02] shadow-lg"
-            [ngStyle]="{'background-color': themeColor}" (mouseover)="themeColor = themeHover"
+            [ngStyle]="{'background-color': themeColor}"
+            (mouseover)="themeColor = themeHover"
             (mouseleave)="themeColor = '#2563eb'">
             Login
           </button>
@@ -72,26 +83,21 @@
 
         <!-- Social Login -->
         <div class="flex justify-center space-x-6">
-          <!-- Apple -->
           <button
             class="w-12 h-12 rounded-full bg-gradient-to-br from-gray-900 to-black flex items-center justify-center text-white text-xl shadow-lg hover:scale-110 hover:shadow-2xl transition transform active:scale-95">
             <i class="fab fa-apple"></i>
           </button>
-
-          <!-- Facebook -->
           <button
             class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white text-xl shadow-lg hover:scale-110 hover:shadow-2xl transition transform active:scale-95">
             <i class="fab fa-facebook-f"></i>
           </button>
-
-          <!-- Google -->
           <button
             class="w-12 h-12 rounded-full bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center text-white text-xl shadow-lg hover:scale-110 hover:shadow-2xl transition transform active:scale-95">
             <i class="fab fa-google"></i>
           </button>
         </div>
-
       </div>
+
     </div>
   </main>
 </div>

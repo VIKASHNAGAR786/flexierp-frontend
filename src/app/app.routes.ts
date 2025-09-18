@@ -17,11 +17,14 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { SuppliersComponent } from './components/suppliers/suppliers.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
+  // Default redirect to login
+  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
+
+  // Auth routes
   { path: 'auth/signup', component: SignupComponent },
   { path: 'auth/login', component: LoginComponent },
 
-  // ✅ Protected routes
+  // Protected routes
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] },
   { path: 'customers', component: CustomersComponent, canActivate: [AuthGuard] },
@@ -33,5 +36,7 @@ export const routes: Routes = [
   { path: 'accounts', component: AccountsComponent, canActivate: [AuthGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
 
-  { path: '**', redirectTo: '' },
+  // Wildcard route (any unknown path goes to login)
+  { path: '**', redirectTo: 'auth/login' },
 ];
+

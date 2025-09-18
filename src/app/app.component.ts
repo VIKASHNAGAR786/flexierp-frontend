@@ -4,10 +4,11 @@ import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AlertComponent } from './components/alert/alert.component';
 import { DesignComponent } from './components/design/design.component';
-import { WheelComponent } from './components/wheel/wheel.component';
 import { ColorserviceService } from './services/colorservice.service';
 import * as AOS from 'aos';
 import { HeaderComponent } from "./components/header/header.component";
+import { UserinfowithloginService } from './services/userinfowithlogin.service';
+import { LoginComponent } from "./auth/login/login.component";
 
 @Component({
   selector: 'app-root',
@@ -18,50 +19,21 @@ import { HeaderComponent } from "./components/header/header.component";
     NavbarComponent,
     AlertComponent,
     DesignComponent,
-    // WheelComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoginComponent
 ],
   styleUrls: ['./app.component.css'],
-  template: `
-  <!-- Top Navbar -->
-<header>
-  <app-header></app-header>
-</header>
-    <!-- Animated Background Layer -->
-    <app-design></app-design>
-
-    <!-- Sidebar + Navigation -->
-    <app-navbar></app-navbar>
-
-    <!-- Main Content Wrapper (Pushes content to the right of sidebar) -->
-    <div class="pt-20 md:pt-6 md:pl-64 min-h-screen bg-slate-100 text-gray-900 dark:bg-slate-900 dark:text-white transition-colors">
-      <main class="p-4">
-        <div class="relative z-10">
-        <router-outlet></router-outlet>
-        </div>
-      </main>
-    </div>
-
-    <!-- Floating Color Wheel -->
-    <!-- <app-wheel></app-wheel> -->
-
-    <!-- Global Alert -->
-    <app-alert></app-alert>
-
-    <!-- Footer -->
-    <footer class="text-white text-center py-3" [ngStyle]="{ 'background-color': selectedColor || '#198754' }">
-      <div class="container">
-        <p class="mb-1">🌱 <strong>AgriMandi</strong> - Empowering Farmers with Technology</p>
-        <p class="mb-0">&copy; {{ currentYear }} AgriMandi. All rights reserved.</p>
-      </div>
-    </footer>
-  `
+  templateUrl: './app.component.html'   // ✅ now points to external file
 })
 export class AppComponent implements OnInit {
   selectedColor: string = '';
   currentYear: number = new Date().getFullYear();
+  isLoggedIn: boolean = false;
 
-  constructor(private colorService: ColorserviceService) {}
+  constructor(
+    private colorService: ColorserviceService,
+    private userService: UserinfowithloginService
+  ) {}
 
   ngOnInit() {
     if (typeof window !== 'undefined') {
@@ -71,6 +43,13 @@ export class AppComponent implements OnInit {
     this.colorService.selectedColor$.subscribe(color => {
       this.selectedColor = color;
     });
+
+    this.isLoggedIn = this.userService.isLoggedIn();
+
+    // Optional live updates
+    // this.userService.loginStatus$.subscribe(status => {
+    //   this.isLoggedIn = status;
+    // });
   }
-public title = 'flexierp-frontend';
+   public title = 'flexierp-frontend';
 }

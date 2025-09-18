@@ -1,0 +1,40 @@
+<ng-container *ngIf="isLoggedIn; else loginOnly">
+  <!-- Top Navbar -->
+  <header>
+    <app-header></app-header>
+  </header>
+
+  <!-- Animated Background Layer -->
+  <app-design></app-design>
+
+  <!-- Sidebar + Navigation -->
+  <app-navbar></app-navbar>
+
+  <!-- Main Content Wrapper (Pushes content to the right of sidebar) -->
+  <div class="pt-20 md:pt-6 md:pl-64 min-h-screen bg-slate-100 text-gray-900 dark:bg-slate-900 dark:text-white transition-colors">
+    <main class="p-4">
+      <div class="relative z-10">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+  </div>
+
+  <!-- Floating Color Wheel -->
+  <!-- <app-wheel></app-wheel> -->
+
+  <!-- Global Alert -->
+  <app-alert></app-alert>
+
+  <!-- Footer -->
+  <footer class="text-white text-center py-3" [ngStyle]="{ 'background-color': selectedColor || '#198754' }">
+    <div class="container">
+      <p class="mb-1">🌱 <strong>FlexiERP</strong> - Empowering Businesses with Technology</p>
+      <p class="mb-0">&copy; {{ currentYear }} FlexiERP. All rights reserved.</p>
+    </div>
+  </footer>
+</ng-container>
+
+<!-- If not logged in -->
+<ng-template #loginOnly>
+  <router-outlet></router-outlet>
+</ng-template>

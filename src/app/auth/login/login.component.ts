@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  imports: [FormsModule, AlertComponent, CommonModule],
+  imports: [FormsModule, CommonModule],
 })
 export class LoginComponent {
   loginData: LoginRequest = {
@@ -31,24 +31,25 @@ export class LoginComponent {
 
   ) {}
 
-   themeColor = '#2563eb'; // Tailwind blue-600 (you can change it here)
+  themeColor = '#2563eb'; // Tailwind blue-600 (you can change it here)
   themeHover = '#1d4ed8'; // Tailwind blue-700
   
   login() {
-    this.loginService.login(this.loginData).subscribe({
-      next: () => {
-        this.alertService.showAlert('Login successful!', 'success');
-        const userRole = this.userInfo.getUserRole();
-        if (userRole === 'FARMER') {
-          this.router.navigate(['components/product']);
-        } else {
-          this.router.navigate(['/buyer']);
-        }
-      },
-      error: () => {
-        this.alertService.showAlert('Login failed! Please check your credentials.', 'error');
-      }
-    });
+    // this.loginService.login(this.loginData).subscribe({
+    //   next: () => {
+    //     this.alertService.showAlert('Login successful!', 'success');
+    //     const userRole = this.userInfo.getUserRole();
+    //     if (userRole === 'FARMER') {
+    //       this.router.navigate(['components/product']);
+    //     } else {
+    //       this.router.navigate(['/buyer']);
+    //     }
+    //   },
+    //   error: () => {
+    //     this.alertService.showAlert('Login failed! Please check your credentials.', 'error');
+    //   }
+    // });
+    this.alertService.showAlert('Login failed! Please check your credentials.', 'error');
   }
 
   testSuccess() {
