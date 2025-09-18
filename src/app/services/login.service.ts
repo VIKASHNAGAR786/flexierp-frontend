@@ -1,9 +1,10 @@
-// login.service.ts
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
+import { UserinfowithloginService } from './userinfowithlogin.service';
 
 export interface LoginRequest {
   email: string;
@@ -19,6 +20,7 @@ export interface LoginResponse {
   password: string;
   id: number;
   email: string;
+  lang: string;
 }
 
 @Injectable({
@@ -26,69 +28,81 @@ export interface LoginResponse {
 })
 export class LoginService {
   private readonly apiUrl = environment.AccountApiUrl + 'Login/login';
-  private readonly tokenKey = 'auth_token';
-  private readonly expiryKey = 'auth_token_expiry';
   private readonly expiryDays = 7;
 
   constructor(
     private http: HttpClient,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private userInfo: UserinfowithloginService
   ) {}
 
-  login(logindata: LoginRequest): Observable<LoginResponse> {
-    return new Observable<LoginResponse>((observer) => {
-      this.http.post<LoginResponse>(this.apiUrl, logindata).subscribe({
-        next: (response: LoginResponse) => {
-          if (isPlatformBrowser(this.platformId)) {
-            const expiryDate = new Date();
-            expiryDate.setDate(expiryDate.getDate() + this.expiryDays);
-            localStorage.setItem(this.tokenKey, response.token);
-            localStorage.setItem(this.expiryKey, expiryDate.getTime().toString());
-            localStorage.setItem('user_name', response.name);
-            localStorage.setItem('user_role', response.role);
-            localStorage.setItem('user_email', response.email);
-            localStorage.setItem('nameid', response.id.toString());
-          }
-          observer.next(response);
-          observer.complete();
-        },
-        error: (err) => observer.error(err)
-      });
-    });
+  /** Check if running in browser */
+  private isBrowser(): boolean {
+    return isPlatformBrowser(this.platformId);
   }
 
-  isLoggedIn(): boolean {
-    if (!isPlatformBrowser(this.platformId)) return false;
+  /** Perform login and save data */
+  login(logindata: LoginRequest): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(this.apiUrl, logindata).pipe(
+      tap(response => {
+        if (!this.isBrowser()) return;
 
-    const token = localStorage.getItem(this.tokenKey);
-    const expiry = localStorage.getItem(this.expiryKey);
-    const now = new Date().getTime();
+        const expiryDate = new Date();
+        expiryDate.setDate(expiryDate.getDate() + this.expiryDays);
+
+        const storageData: Record<string, string> = {
+          'auth_token': response.token,
+          'auth_token_expiry': expiryDate.getTime().toString(),
+          'user_name': response.name,
+          'user_role': response.role,
+          'user_email': response.email,
+          'nameid': response.id.toString(),
+          'lang' : 'en'
+        };
+
+        Object.entries(storageData).forEach(([key, value]) =>
+          localStorage.setItem(key, value)
+        );
+
+        this.userInfo.refresh(); // Refresh cached data
+      })
+    );
+  }
+
+  /** Check if logged in */
+  isLoggedIn(): boolean {
+    if (!this.isBrowser()) return false;
+
+    const token = localStorage.getItem('auth_token');
+    const expiry = localStorage.getItem('auth_token_expiry');
+    const now = Date.now();
 
     if (!token || !expiry || now > +expiry) {
-      this.logout(); // Clear expired data
+      this.logout();
       return false;
     }
-
     return true;
   }
 
+  /** Get token */
   getToken(): string | null {
-    if (!this.isLoggedIn()) return null;
-    return localStorage.getItem(this.tokenKey);
+    return this.isLoggedIn() ? localStorage.getItem('auth_token') : null;
   }
 
+  /** Logout user */
   logout(): void {
-    if (!isPlatformBrowser(this.platformId)) return;
+    if (!this.isBrowser()) return;
 
-    const keys = [
-      this.tokenKey,
-      this.expiryKey,
+    const keysToRemove = [
+      'auth_token',
+      'auth_token_expiry',
       'user_name',
       'user_role',
       'user_email',
       'nameid'
     ];
 
-    keys.forEach((key) => localStorage.removeItem(key));
+    keysToRemove.forEach(key => localStorage.removeItem(key));
+    this.userInfo.clear(); // Clear cached data
   }
 }

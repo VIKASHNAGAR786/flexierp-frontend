@@ -6,10 +6,10 @@
 
 
   "build": {
-  "frontendDist": "../dist/FlexiErp-Frontend/browser",
-  "devUrl": "http://localhost:4200",
+  "beforeBuildCommand": "ng build --configuration production",
   "beforeDevCommand": "ng serve",
-  "beforeBuildCommand": "ng build --configuration production"
+  "frontendDist": "../dist/browser",
+  "devUrl": "http://localhost:4200"
 },
 
 
