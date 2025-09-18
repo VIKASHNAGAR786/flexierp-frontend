@@ -1,0 +1,41 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+  "productName": "flexierp-frontend",
+  "version": "0.1.0",
+  "identifier": "com.flexierp.app",
+
+
+  "build": {
+  "frontendDist": "../dist/FlexiErp-Frontend/browser",
+  "devUrl": "http://localhost:4200",
+  "beforeDevCommand": "ng serve",
+  "beforeBuildCommand": "ng build --configuration production"
+},
+
+
+  "app": {
+    "windows": [
+      {
+        "title": "flexierp",
+        "width": 800,
+        "height": 600,
+        "resizable": true,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  }
+}
