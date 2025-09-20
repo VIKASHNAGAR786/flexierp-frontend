@@ -1,37 +1,40 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-interface BackendResponse {
-  success: boolean;
+export interface Alert {
+  id: number; // unique ID for each alert
   message: string;
+  type: 'success' | 'error' | 'warning' | 'info';
 }
-@Injectable({
-  providedIn: 'root',
-})
 
+@Injectable({ providedIn: 'root' })
 export class AlertService {
-  private alertSubject = new BehaviorSubject<{ message: string; type: 'success' | 'error' | null }>({ message: '', type: null });
-  alert$ = this.alertSubject.asObservable();
+  private alertsSubject = new BehaviorSubject<Alert[]>([]);
+  public alerts$ = this.alertsSubject.asObservable();
+  private counter = 0;
 
-  // Show alert with message and type
-  showAlert(message: string, type: 'success' | 'error') {
-    console.log('🔴 Emitting alert:', { message, type });
-    this.alertSubject.next({ message, type });
+  // Show a new alert
+  showAlert(message: string, type: 'success' | 'error' | 'warning' | 'info') {
+    const id = this.counter++;
+    const newAlert: Alert = { id, message, type };
+    const currentAlerts = this.alertsSubject.value;
+    this.alertsSubject.next([...currentAlerts, newAlert]);
 
-    // Clear alert after 3 seconds
-    setTimeout(() => {
-      console.log('🟢 Hiding alert');
-      this.alertSubject.next({ message: '', type: null });  // Clears alert after 3 seconds
-    }, 3000);
+    // Auto remove after 4 seconds
+    setTimeout(() => this.removeAlert(id), 4000);
   }
 
-  // This method will be used to show messages from the backend (success or error)
-  handleBackendResponse(response: BackendResponse) {
+  // Remove alert by ID
+  removeAlert(id: number) {
+    const updatedAlerts = this.alertsSubject.value.filter(alert => alert.id !== id);
+    this.alertsSubject.next(updatedAlerts);
+  }
+
+  // Handle backend responses
+  handleBackendResponse(response: { success: boolean; message: string }) {
     if (response.success) {
-      // If the backend indicates success
       this.showAlert(response.message, 'success');
     } else {
-      // If the backend indicates failure
       this.showAlert(response.message || 'Something went wrong!', 'error');
     }
   }

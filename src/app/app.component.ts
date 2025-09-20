@@ -8,7 +8,6 @@ import { ColorserviceService } from './services/colorservice.service';
 import * as AOS from 'aos';
 import { HeaderComponent } from "./components/header/header.component";
 import { UserinfowithloginService } from './services/userinfowithlogin.service';
-import { LoginComponent } from "./auth/login/login.component";
 
 @Component({
   selector: 'app-root',
@@ -19,9 +18,8 @@ import { LoginComponent } from "./auth/login/login.component";
     NavbarComponent,
     AlertComponent,
     DesignComponent,
-    HeaderComponent,
-    LoginComponent
-],
+    HeaderComponent
+  ],
   styleUrls: ['./app.component.css'],
   templateUrl: './app.component.html'   // ✅ now points to external file
 })

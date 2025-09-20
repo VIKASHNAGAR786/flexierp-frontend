@@ -19,7 +19,8 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent {
   loginData: LoginRequest = {
     email: '',
-    password: ''
+    password: '',
+    username: ''
   };
 
   constructor(
@@ -29,34 +30,32 @@ export class LoginComponent {
     @Inject(PLATFORM_ID) private platformId: Object,
     private userInfo: UserinfowithloginService,
 
-  ) {}
+  ) { }
 
   themeColor = '#2563eb'; // Tailwind blue-600 (you can change it here)
   themeHover = '#1d4ed8'; // Tailwind blue-700
-  
+
   login() {
-    // this.loginService.login(this.loginData).subscribe({
-    //   next: () => {
-    //     this.alertService.showAlert('Login successful!', 'success');
-    //     const userRole = this.userInfo.getUserRole();
-    //     if (userRole === 'FARMER') {
-    //       this.router.navigate(['components/product']);
-    //     } else {
-    //       this.router.navigate(['/buyer']);
-    //     }
-    //   },
-    //   error: () => {
-    //     this.alertService.showAlert('Login failed! Please check your credentials.', 'error');
-    //   }
-    // });
-    this.alertService.showAlert('Login failed! Please check your credentials.', 'error');
-  }
+  this.loginService.login(this.loginData).subscribe({
+    next: () => {
+      this.alertService.showAlert('Login successful!', 'success');
 
-  testSuccess() {
-    this.alertService.showAlert('Test success alert!', 'success');
-  }
+      const roleId = '1'; // will return "1" or "2"
 
-  testError() {
-    this.alertService.showAlert('Test error alert!', 'error');
-  }
+      if (roleId === '1') {
+        // Farmer
+        this.router.navigate(['components/product']);
+      } else if (roleId === '2') {
+        // Buyer
+        this.router.navigate(['/buyer']);
+      } else {
+        this.router.navigate(['/']);
+      }
+    },
+    error: () => {
+      this.alertService.showAlert('Login failed! Please check your credentials.', 'error');
+    }
+  });
+}
+
 }

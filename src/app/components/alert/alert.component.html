@@ -1,4 +1,41 @@
-<!-- <div *ngFor="let msg of displayMessages" class="alert" [ngClass]="msg.type">
-    {{ msg.text }}
+<div class="fixed top-20 right-5 sm:right-10 flex flex-col gap-3 z-[9999]">
+  <div *ngFor="let alert of alerts"
+       class="rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 transform scale-95 animate-[slideFade_0.5s_ease-out_1] w-[90%] sm:w-[400px] cursor-pointer"
+       [ngClass]="getAlertClasses(alert.type)"
+       (click)="closeAlert(alert.id!)"> <!-- Click anywhere to close -->
+
+    <!-- Message Content with Icon -->
+    <div class="d-flex justify-between items-center px-5 py-4 gap-3">
+      <div class="d-flex items-center gap-3 flex-1">
+        <!-- Icon -->
+        <span class="text-2xl sm:text-3xl" [ngStyle]="{'color': getIconColor(alert.type)}">
+          <ng-container [ngSwitch]="alert.type">
+            <i *ngSwitchCase="'success'" class="bi bi-check-circle-fill"></i>
+            <i *ngSwitchCase="'error'" class="bi bi-x-circle-fill"></i>
+            <i *ngSwitchCase="'warning'" class="bi bi-exclamation-triangle-fill"></i>
+            <i *ngSwitchCase="'info'" class="bi bi-info-circle-fill"></i>
+          </ng-container>
+        </span>
+
+        <!-- Message Text -->
+        <span class="fw-bold tracking-wide text-base sm:text-lg text-white drop-shadow-lg">
+          {{ alert.message }}
+        </span>
+      </div>
+
+      <!-- Close Button -->
+      <button type="button"
+              class="btn-close btn-close-white ms-3 hover:scale-110 transition-transform"
+              aria-label="Close"
+              (click)="closeAlert(alert.id!); $event.stopPropagation()"> <!-- prevent double close -->
+      </button>
+    </div>
+
+    <!-- Timer Line -->
+    <div class="h-1 w-full rounded-full bg-white/30">
+      <div class="h-1 rounded-full transition-all duration-50"
+           [ngStyle]="{'width.%': progressMap[alert.id!], 'background-color': getProgressColor(alert.type)}">
+      </div>
+    </div>
   </div>
-   -->
+</div>

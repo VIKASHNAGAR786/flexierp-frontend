@@ -9,25 +9,35 @@ import { UserinfowithloginService } from './userinfowithlogin.service';
 export interface LoginRequest {
   email: string;
   password: string;
+  username?: "";
 }
 
 export interface LoginResponse {
-  userName: string;
-  name: string;
-  role: string;
-  isActive: boolean;
-  token: string;
-  password: string;
   id: number;
+  fullName: string;
+  username: string;
   email: string;
-  lang: string;
+  passwordHash: string;
+  mobileNo: string;
+  gender: string;
+  dateOfBirth: string;
+  address: string;
+  city: string;
+  state: string;
+  country: string;
+  profileImageUrl: string;
+  roleID: number;
+  lastLoginAt: string;
+  isActive: boolean;
+  isEmailVerified: boolean;
+  token: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  private readonly apiUrl = environment.AccountApiUrl + 'Login/login';
+  private readonly apiUrl = environment.AccountApiUrl + 'login';
   private readonly expiryDays = 7;
 
   constructor(
@@ -53,11 +63,11 @@ export class LoginService {
         const storageData: Record<string, string> = {
           'auth_token': response.token,
           'auth_token_expiry': expiryDate.getTime().toString(),
-          'user_name': response.name,
-          'user_role': response.role,
+          'user_name': response.fullName,
+          'user_role': response.roleID.toString(),
           'user_email': response.email,
           'nameid': response.id.toString(),
-          'lang' : 'en'
+          'lang': 'en'
         };
 
         Object.entries(storageData).forEach(([key, value]) =>

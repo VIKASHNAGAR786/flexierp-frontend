@@ -1,46 +1,80 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AlertService } from '../../services/alert.service';
+import { AlertService, Alert } from '../../services/alert.service';
 
 @Component({
   selector: 'app-alert',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <div
-      *ngIf="alertData.message"
-      class="fixed z-[9999] right-5 top-[90px] max-w-sm w-auto px-6 py-4 rounded-lg shadow-2xl text-white transition-all duration-300 animate-fade-top"
-      [ngClass]="{
-        'bg-green-600': alertData.type === 'success',
-        'bg-red-600': alertData.type === 'error',
-        'bg-yellow-500': alertData.type === 'warning',
-        'bg-blue-600': alertData.type === 'info'
-      }"
-    >
-      <span class="font-semibold tracking-wide text-sm sm:text-base">
-        {{ alertData.message }}
-      </span>
-    </div>
-  `,
-  styles: [`
-    @keyframes fadeTop {
-      0% { opacity: 0; transform: translateY(-20px); }
-      10% { opacity: 1; transform: translateY(0); }
-      90% { opacity: 1; transform: translateY(0); }
-      100% { opacity: 0; transform: translateY(-20px); }
-    }
-    .animate-fade-top {
-      animation: fadeTop 4s ease-in-out forwards;
-    }
-  `]
+  templateUrl: './alert.component.html'
 })
 export class AlertComponent {
-  alertData = { message: '', type: 'success' as 'success' | 'error' | 'warning' | 'info' | null };
+  alerts: Alert[] = [];
+  progressMap: { [id: number]: number } = {};
+  timers: { [id: number]: any } = {};
 
   constructor(private alertService: AlertService) {
-    this.alertService.alert$.subscribe((data) => {
-      console.log('🟡 Alert received:', data);
-      this.alertData = data;
+    // Subscribe to alert array
+    this.alertService.alerts$.subscribe(alerts => {
+      this.alerts = alerts;
+
+      // Start timer for new alerts
+      alerts.forEach(alert => {
+        if (!this.timers[alert.id]) this.startTimer(alert.id);
+      });
     });
   }
+
+  startTimer(id: number) {
+    this.progressMap[id] = 100;
+    const duration = 4000; // 4 seconds
+    const interval = 50;
+    const step = (interval / duration) * 100;
+
+    this.timers[id] = setInterval(() => {
+      this.progressMap[id] -= step;
+      if (this.progressMap[id] <= 0) {
+        this.progressMap[id] = 0;
+        clearInterval(this.timers[id]);
+        this.closeAlert(id);
+      }
+    }, interval);
+  }
+
+  closeAlert(id: number) {
+    clearInterval(this.timers[id]);
+    delete this.timers[id];
+    delete this.progressMap[id];
+    this.alertService.removeAlert(id);
+  }
+
+  getAlertClasses(type: string) {
+    switch(type) {
+      case 'success': return ['bg-gradient-to-r', 'from-green-600', 'to-green-700'];
+      case 'error': return ['bg-gradient-to-r', 'from-red-600', 'to-red-700'];
+      case 'warning': return ['bg-gradient-to-r', 'from-yellow-500', 'to-yellow-600'];
+      case 'info': return ['bg-gradient-to-r', 'from-blue-600', 'to-blue-700'];
+      default: return ['bg-gray-600'];
+    }
+  }
+
+  getProgressColor(type: string): string {
+    switch(type) {
+      case 'success': return '#34D399'; // green
+      case 'error': return '#F87171';   // red
+      case 'warning': return '#FBBF24'; // yellow
+      case 'info': return '#60A5FA';    // blue
+      default: return '#ffffff';
+    }
+  }
+
+  getIconColor(type: string): string {
+  switch(type) {
+    case 'success': return '#10B981'; // green
+    case 'error': return '#EF4444';   // red
+    case 'warning': return '#F59E0B'; // yellow/orange
+    case 'info': return '#3B82F6';    // blue
+    default: return '#FFFFFF';        // fallback
+  }
+}
 }
