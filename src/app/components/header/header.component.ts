@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserinfowithloginService } from '../../services/userinfowithlogin.service';
 
 @Component({
   selector: 'app-header',
@@ -6,7 +7,14 @@ import { Component } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  constructor(
+    private userInfo: UserinfowithloginService
+  ) { }
+  public username: string = 'Guest';  
+  ngOnInit() {
+    this.username = this.userInfo.getUserName() || 'Guest';
+  }
 onLogout() {
   // TODO: Implement logout logic here
   console.log('Logout clicked');

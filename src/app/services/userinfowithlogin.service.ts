@@ -1,6 +1,7 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -125,19 +126,26 @@ export class UserinfowithloginService {
     this.loadFromLocalStorage();
   }
 
-  /** Logout user */
-  logout(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage.removeItem('auth_token');
-      localStorage.removeItem('user_name');
-      localStorage.removeItem('user_role');
-      localStorage.removeItem('user_email');
-      localStorage.removeItem('nameid');
-      localStorage.removeItem('lang');
-    }
-    this.clear();
-    this.router.navigate(['/auth/login']);
+  private loggedInSource = new BehaviorSubject<boolean>(false);
+  loggedIn$ = this.loggedInSource.asObservable();
+
+  setLoggedIn(state: boolean) {
+    this.loggedInSource.next(state);
   }
+
+  /** Logout user */
+  // logout(): void {
+  //   if (isPlatformBrowser(this.platformId)) {
+  //     localStorage.removeItem('auth_token');
+  //     localStorage.removeItem('user_name');
+  //     localStorage.removeItem('user_role');
+  //     localStorage.removeItem('user_email');
+  //     localStorage.removeItem('nameid');
+  //     localStorage.removeItem('lang');
+  //   }
+  //   this.clear();
+  //   this.router.navigate(['/auth/login']);
+  // }
 
   /** Clear cache (optional, used in logout) */
   clear(): void {

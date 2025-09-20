@@ -9,6 +9,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { ColorserviceService } from '../../services/colorservice.service';
+import { UserinfowithloginService } from '../../services/userinfowithlogin.service';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class NavbarComponent implements OnInit {
 
   // Navigation Links
   coreLinks = [
-    { label: 'Dashboard', path: '/', icon: 'bi bi-speedometer2' },
+    { label: 'Dashboard', path: '/dashboard', icon: 'bi bi-speedometer2' },
     { label: 'Inventory', path: '/inventory', icon: 'bi bi-box-seam' },
     { label: 'Sales', path: '/sales', icon: 'bi bi-cash-coin' },
     { label: 'Purchases', path: '/purchases', icon: 'bi bi-cart-check' },
@@ -50,8 +51,13 @@ export class NavbarComponent implements OnInit {
   constructor(
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object,
-    private colorService: ColorserviceService
-  ) {}
+    private colorService: ColorserviceService,
+    private userInfo: UserinfowithloginService
+  ){
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => this.checkLoginStatus());
+  }
 
   ngOnInit(): void {
     // Update theme color
@@ -60,24 +66,33 @@ export class NavbarComponent implements OnInit {
     });
 
     // Check login status on navigation
-    this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe(() => {
-        if (isPlatformBrowser(this.platformId)) {
-          this.isLoggedIn = !!localStorage.getItem('token'); // or use authService
-        }
-      });
+    this.checkLoginStatus();
   }
 
   toggleSidebar(): void {
     this.sidebarVisible = !this.sidebarVisible;
   }
 
-  logout(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage.clear();
-    }
-    this.isLoggedIn = false;
-    this.router.navigate(['/auth/login']);
+  logout() {
+  if (isPlatformBrowser(this.platformId)) {
+    localStorage.clear();
   }
+
+  // Clear in-memory cached data
+  this.userInfo.clear();
+
+  this.isLoggedIn = false;
+
+  this.router.navigate(['/auth/login']).then(() => {
+    window.location.reload(); // refresh the entire page
+  });
+}
+
+checkLoginStatus() {
+  if (isPlatformBrowser(this.platformId)) {
+    this.userInfo.refresh(); // ✅ Always load latest from localStorage
+    this.isLoggedIn = !!this.userInfo.getToken();
+  }
+}
+
 }

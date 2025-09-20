@@ -17,26 +17,31 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { SuppliersComponent } from './components/suppliers/suppliers.component';
 
 export const routes: Routes = [
-  // Default redirect to login
-  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
+  // Default redirect
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 
-  // Auth routes
-  { path: 'auth/signup', component: SignupComponent },
+  // Auth routes (login/signup)
   { path: 'auth/login', component: LoginComponent },
+  { path: 'auth/signup', component: SignupComponent },
 
-  // Protected routes
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] },
-  { path: 'customers', component: CustomersComponent, canActivate: [AuthGuard] },
-  { path: 'suppliers', component: SuppliersComponent, canActivate: [AuthGuard] },
-  { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] },
-  { path: 'sales', component: SalesComponent, canActivate: [AuthGuard] },
-  { path: 'purchases', component: PurchasesComponent, canActivate: [AuthGuard] },
-  { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] },
-  { path: 'accounts', component: AccountsComponent, canActivate: [AuthGuard] },
-  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+  // Protected routes (require login)
+  {
+    path: '',
+    canActivate: [AuthGuard], // Ensure all child routes are protected
+    children: [
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'inventory', component: InventoryComponent },
+      { path: 'customers', component: CustomersComponent },
+      { path: 'suppliers', component: SuppliersComponent },
+      { path: 'products', component: ProductsComponent },
+      { path: 'sales', component: SalesComponent },
+      { path: 'purchases', component: PurchasesComponent },
+      { path: 'reports', component: ReportsComponent },
+      { path: 'accounts', component: AccountsComponent },
+      { path: 'settings', component: SettingsComponent },
+    ]
+  },
 
-  // Wildcard route (any unknown path goes to login)
-  { path: '**', redirectTo: 'auth/login' },
+  // Wildcard route (any unknown path goes to dashboard)
+  { path: '**', redirectTo: 'dashboard' },
 ];
-

@@ -39,18 +39,9 @@ export class LoginComponent {
   this.loginService.login(this.loginData).subscribe({
     next: () => {
       this.alertService.showAlert('Login successful!', 'success');
-
-      const roleId = '1'; // will return "1" or "2"
-
-      if (roleId === '1') {
-        // Farmer
-        this.router.navigate(['components/product']);
-      } else if (roleId === '2') {
-        // Buyer
-        this.router.navigate(['/buyer']);
-      } else {
-        this.router.navigate(['/']);
-      }
+      this.userInfo.setLoggedIn(true); // Notify AppComponent
+      this.router.navigate(['/dashboard']);
+      //window.location.reload();
     },
     error: () => {
       this.alertService.showAlert('Login failed! Please check your credentials.', 'error');

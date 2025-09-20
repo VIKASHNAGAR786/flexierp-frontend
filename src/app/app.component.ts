@@ -31,9 +31,14 @@ export class AppComponent implements OnInit {
   constructor(
     private colorService: ColorserviceService,
     private userService: UserinfowithloginService
-  ) {}
+  ) {
+    this.userService.loggedIn$.subscribe(state => {
+      this.isLoggedIn = state;
+      // You can re-render navbar/sidebar automatically
+    });
+  }
 
-  ngOnInit() {
+  ngOnInit() {debugger
     if (typeof window !== 'undefined') {
       AOS.init();
     }
@@ -43,11 +48,7 @@ export class AppComponent implements OnInit {
     });
 
     this.isLoggedIn = this.userService.isLoggedIn();
-
-    // Optional live updates
-    // this.userService.loginStatus$.subscribe(status => {
-    //   this.isLoggedIn = status;
-    // });
   }
+  
    public title = 'flexierp-frontend';
 }
