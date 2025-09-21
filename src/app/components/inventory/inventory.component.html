@@ -1,0 +1,34 @@
+<!-- Fixed Tabs -->
+<div class="fixed top-[64px] left-0 right-0 z-[9999] bg-gradient-to-r from-slate-900 to-slate-800 shadow-md">
+  <div class="px-4 py-3 flex space-x-6 justify-center md:justify-start md:ml-64">
+    <!-- Add Product Tab -->
+    <a
+      class="px-4 py-2 rounded-md font-medium transition cursor-pointer"
+      [ngClass]="{
+        'bg-[#00ffee] text-black': activeTab === 'add',
+        'text-[#00ffee]': activeTab !== 'add'
+      }"
+      (click)="switchTab('add')"
+    >
+      Add Product
+    </a>
+
+    <!-- Product List Tab -->
+    <a
+      class="px-4 py-2 rounded-md font-medium transition cursor-pointer"
+      [ngClass]="{
+        'bg-[#00ffee] text-black': activeTab === 'list',
+        'text-[#00ffee]': activeTab !== 'list'
+      }"
+      (click)="switchTab('list')"
+    >
+      Product List
+    </a>
+  </div>
+</div>
+
+<!-- Tab Content -->
+<div class="tab-content p-4 mt-36 bg-slate-900 text-white rounded-lg shadow-lg border border-slate-700">
+  <app-add-product *ngIf="activeTab === 'add'" (productAdded)="onProductAdded($event)"></app-add-product>
+  <app-product-list *ngIf="activeTab === 'list'" [products]="products"></app-product-list>
+</div>

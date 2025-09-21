@@ -1,0 +1,13 @@
+.nav-link {
+  cursor: pointer;        /* 👆 Changes cursor to hand */
+  transition: background 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+  background-color: #f0f0f0; /* subtle hover effect */
+}
+
+.nav-pills .nav-link.active {
+  background-color: #007bff; /* active tab color */
+  color: white;
+}

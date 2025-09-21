@@ -1,0 +1,49 @@
+<div class="overflow-x-auto bg-slate-900 rounded-lg shadow-lg relative">
+  <table class="min-w-full text-white border-collapse">
+    <!-- Fixed Thead relative to viewport -->
+    <thead class="bg-gradient-to-r from-slate-900 to-slate-800 text-[#00ffee] uppercase text-sm md:text-base tracking-wide sticky top-0 z-50">
+      <tr>
+        <th class="px-4 py-2 border-b border-slate-700">ID</th>
+        <th class="px-4 py-2 border-b border-slate-700">Code</th>
+        <th class="px-4 py-2 border-b border-slate-700">Barcode</th>
+        <th class="px-4 py-2 border-b border-slate-700">Name</th>
+        <th class="px-4 py-2 border-b border-slate-700">Category</th>
+        <th class="px-4 py-2 border-b border-slate-700">Description</th>
+        <th class="px-4 py-2 border-b border-slate-700">Reorder Qty</th>
+        <th class="px-4 py-2 border-b border-slate-700">Packed Weight</th>
+        <th class="px-4 py-2 border-b border-slate-700">Packed HxWxD</th>
+        <th class="px-4 py-2 border-b border-slate-700">Refrigerated</th>
+        <th class="px-4 py-2 border-b border-slate-700">Location</th>
+        <th class="px-4 py-2 border-b border-slate-700">Warehouse</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-slate-700">
+      <tr *ngFor="let product of products" class="hover:bg-slate-700 transition">
+        <td class="px-4 py-2 text-center">{{ product.productID }}</td>
+        <td class="px-4 py-2 text-center">{{ product.productCode }}</td>
+        <td class="px-4 py-2 text-center">{{ product.barcode }}</td>
+        <td class="px-4 py-2">{{ product.productName }}</td>
+        <td class="px-4 py-2">{{ product.productCategory }}</td>
+        <td class="px-4 py-2">{{ product.productDescription }}</td>
+        <td class="px-4 py-2 text-center font-bold" [class.text-red-500]="product.reorderQuantity >= product.stock">{{ product.reorderQuantity }}</td>
+        <td class="px-4 py-2 text-center">{{ product.packedWeight }} kg</td>
+        <td class="px-4 py-2 text-center">{{ product.packedHeight }}x{{ product.packedWidth }}x{{ product.packedDepth }}</td>
+        <td class="px-4 py-2 text-center">
+          <span *ngIf="product.refrigerated" class="text-[#00ffee] font-bold">Yes</span>
+          <span *ngIf="!product.refrigerated">No</span>
+        </td>
+        <td class="px-4 py-2">
+          {{ product.location?.locationName }}<br/>
+          {{ product.location?.locationAddress }}
+        </td>
+        <td class="px-4 py-2">
+          {{ product.warehouse?.warehouseName }}<br/>
+          <span *ngIf="product.warehouse?.isRefrigerated" class="text-[#00ffee] font-bold">Refrigerated</span>
+        </td>
+      </tr>
+      <tr *ngIf="products.length === 0">
+        <td colspan="12" class="text-center py-4 text-gray-400">No products available.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
