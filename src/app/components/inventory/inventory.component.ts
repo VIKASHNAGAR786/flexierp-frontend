@@ -38,7 +38,12 @@ export class InventoryComponent {
       warehouseID: 1,
       warehouseName: 'Warehouse A',
       isRefrigerated: false
-    }
+    },
+     // Financial Fields
+    purchasePrice: 200,    // Cost price
+    sellingPrice: 250,     // Retail price
+    taxRate: 18,           // 18% GST
+    discount: 5            // 5% discount
   },
   {
     productID: 2,
@@ -63,7 +68,12 @@ export class InventoryComponent {
       warehouseID: 2,
       warehouseName: 'Warehouse B',
       isRefrigerated: false
-    }
+    },
+     // Financial Fields
+    purchasePrice: 200,    // Cost price
+    sellingPrice: 250,     // Retail price
+    taxRate: 18,           // 18% GST
+    discount: 5            // 5% discount
   },
   {
     productID: 3,
@@ -88,7 +98,12 @@ export class InventoryComponent {
       warehouseID: 3,
       warehouseName: 'Warehouse C',
       isRefrigerated: true
-    }
+    },
+     // Financial Fields
+    purchasePrice: 200,    // Cost price
+    sellingPrice: 250,     // Retail price
+    taxRate: 18,           // 18% GST
+    discount: 5            // 5% discount
   },
   {
     productID: 3,
@@ -113,7 +128,12 @@ export class InventoryComponent {
       warehouseID: 3,
       warehouseName: 'Warehouse C',
       isRefrigerated: true
-    }
+    },
+     // Financial Fields
+    purchasePrice: 200,    // Cost price
+    sellingPrice: 250,     // Retail price
+    taxRate: 18,           // 18% GST
+    discount: 5            // 5% discount
   },
   {
     productID: 3,
@@ -138,7 +158,12 @@ export class InventoryComponent {
       warehouseID: 3,
       warehouseName: 'Warehouse C',
       isRefrigerated: true
-    }
+    },
+     // Financial Fields
+    purchasePrice: 200,    // Cost price
+    sellingPrice: 250,     // Retail price
+    taxRate: 18,           // 18% GST
+    discount: 5            // 5% discount
   },
   {
     productID: 3,
@@ -163,8 +188,14 @@ export class InventoryComponent {
       warehouseID: 3,
       warehouseName: 'Warehouse C',
       isRefrigerated: true
-    }
-  }
+    },
+     // Financial Fields
+    purchasePrice: 200,    // Cost price
+    sellingPrice: 250,     // Retail price
+    taxRate: 18,           // 18% GST
+    discount: 5            // 5% discount
+  },
+  
 ];
 
   switchTab(tab: string) {

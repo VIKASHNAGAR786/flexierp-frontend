@@ -1,7 +1,5 @@
-// login.component.ts
 import { Component, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AlertComponent } from '../../components/alert/alert.component';
 import { Router } from '@angular/router';
 import { AlertService } from '../../services/alert.service';
 import { LoginService, LoginRequest } from '../../services/login.service';
@@ -23,30 +21,40 @@ export class LoginComponent {
     username: ''
   };
 
+  themeColor = '#2563eb'; // Tailwind blue-600
+  themeHover = '#1d4ed8'; // Tailwind blue-700
+
+  // Loading flag to disable button
+  isLoading = false;
+
   constructor(
     private loginService: LoginService,
     private alertService: AlertService,
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object,
     private userInfo: UserinfowithloginService,
-
   ) { }
 
-  themeColor = '#2563eb'; // Tailwind blue-600 (you can change it here)
-  themeHover = '#1d4ed8'; // Tailwind blue-700
-
-  login() {
-  this.loginService.login(this.loginData).subscribe({
-    next: () => {
-      this.alertService.showAlert('Login successful!', 'success');
-      this.userInfo.setLoggedIn(true); // Notify AppComponent
-      this.router.navigate(['/dashboard']);
-      //window.location.reload();
-    },
-    error: () => {
-      this.alertService.showAlert('Login failed! Please check your credentials.', 'error');
+  async login() {
+    if (!this.loginData.email || !this.loginData.password) {
+      this.alertService.showAlert('Please fill in all fields!', 'error');
+      return;
     }
-  });
-}
 
+    this.isLoading = true;
+
+    try {
+      // Using async/await for the API call
+      const response = await this.loginService.login(this.loginData).toPromise();
+
+      // If login succeeds
+      this.alertService.showAlert('Login successful!', 'success');
+      this.userInfo.setLoggedIn(true);
+      this.router.navigate(['/dashboard']);
+    } catch (error) {
+      this.alertService.showAlert('Login failed! Please check your credentials.', 'error');
+    } finally {
+      this.isLoading = false; // Re-enable button regardless of success or failure
+    }
+  }
 }

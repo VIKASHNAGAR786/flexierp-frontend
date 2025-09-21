@@ -55,11 +55,12 @@
          name="password"
          required />
 
-  <button type="submit"
-          class="w-full text-white py-3 rounded-lg font-bold transition transform hover:scale-[1.02] shadow-lg"
-          [ngStyle]="{'background-color': themeColor}">
-    Login
-  </button>
+ <button type="submit"
+        [disabled]="isLoading"
+        class="w-full text-white py-3 rounded-lg font-bold transition transform hover:scale-[1.02] shadow-lg disabled:opacity-50"
+        [ngStyle]="{'background-color': themeColor}">
+  {{ isLoading ? 'Logging in...' : 'Login' }}
+</button>
 </form>
 
         <!-- OR Divider -->

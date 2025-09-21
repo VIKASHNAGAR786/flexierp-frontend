@@ -1,5 +1,6 @@
-<!-- Search Bar -->
-<div class="flex justify-between items-center mb-4">
+<!-- Search Bar + Actions -->
+<div class="flex justify-between items-center mb-4 gap-2 flex-wrap">
+  <!-- Search Input -->
   <input
     type="text"
     [(ngModel)]="searchTerm"
@@ -8,10 +9,27 @@
   />
 
   <!-- Rows per page dropdown -->
-  <select [(ngModel)]="itemsPerPage" class="px-3 py-2 rounded bg-slate-800 text-white border border-slate-600">
+  <select [(ngModel)]="itemsPerPage"
+    class="px-3 py-2 rounded bg-slate-800 text-white border border-slate-600">
     <option *ngFor="let size of pageSizes" [value]="size">{{ size }} per page</option>
   </select>
+
+  <!-- Export Buttons -->
+  <div class="flex gap-2">
+    <button (click)="exportToPdf()"
+      class="flex items-center gap-1 px-3 py-2 bg-red-600 hover:bg-red-700 rounded text-white">
+      <i class="fas fa-file-pdf"></i>
+      PDF
+    </button>
+
+    <button (click)="exportToExcel()"
+      class="flex items-center gap-1 px-3 py-2 bg-green-600 hover:bg-green-700 rounded text-white">
+      <i class="fas fa-file-excel"></i>
+      Excel
+    </button>
+  </div>
 </div>
+
 
 <!-- Table -->
 <div class="overflow-x-auto overflow-y-auto bg-slate-900 rounded-lg shadow-lg relative max-h-[500px]">
@@ -31,6 +49,11 @@
         <th class="px-4 py-2 border-b border-slate-700">Refrigerated</th>
         <th class="px-4 py-2 border-b border-slate-700">Location</th>
         <th class="px-4 py-2 border-b border-slate-700">Warehouse</th>
+        <!-- Financial Columns -->
+        <th class="px-4 py-2 border-b border-slate-700">Purchase Price</th>
+        <th class="px-4 py-2 border-b border-slate-700">Selling Price</th>
+        <th class="px-4 py-2 border-b border-slate-700">Tax Rate</th>
+        <th class="px-4 py-2 border-b border-slate-700">Discount</th>
       </tr>
     </thead>
 
@@ -61,9 +84,14 @@
           {{ product.warehouse?.warehouseName }}<br />
           <span *ngIf="product.warehouse?.isRefrigerated" class="text-[#00ffee] font-bold">Refrigerated</span>
         </td>
+        <!-- Financial Columns -->
+        <td class="px-4 py-2 text-center">{{ product.purchasePrice | currency }}</td>
+        <td class="px-4 py-2 text-center">{{ product.sellingPrice | currency }}</td>
+        <td class="px-4 py-2 text-center">{{ product.taxRate }}%</td>
+        <td class="px-4 py-2 text-center">{{ product.discount }}%</td>
       </tr>
       <tr *ngIf="filteredProducts.length === 0">
-        <td colspan="12" class="text-center py-4 text-gray-400">No products available.</td>
+        <td colspan="16" class="text-center py-4 text-gray-400">No products available.</td>
       </tr>
     </tbody>
   </table>

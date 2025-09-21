@@ -12,37 +12,48 @@ export class ProductListComponent {
   @Input() products: any[] = [];
 
   searchTerm: string = '';
-currentPage: number = 1;
-itemsPerPage: number = 5;
-pageSizes: number[] = [5, 10, 20];
-filteredProducts: any[] = [];
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+  pageSizes: number[] = [5, 10, 20];
+  filteredProducts: any[] = [];
 
-ngOnInit() {
-  this.applyFilter();
-}
+  ngOnInit() {
+    this.applyFilter();
+  }
 
-ngOnChanges() {
-  this.applyFilter();
-}
+  ngOnChanges() {
+    this.applyFilter();
+  }
 
-applyFilter() {
-  this.filteredProducts = this.products.filter(p =>
-    Object.values(p).some(val =>
-      String(val).toLowerCase().includes(this.searchTerm.toLowerCase())
-    )
-  );
-  this.currentPage = 1; // reset to first page
-}
+  applyFilter() {
+    this.filteredProducts = this.products.filter(p =>
+      Object.values(p).some(val =>
+        String(val).toLowerCase().includes(this.searchTerm.toLowerCase())
+      )
+    );
+    this.currentPage = 1; // reset to first page
+  }
 
-get totalPages(): number {
-  return Math.ceil(this.filteredProducts.length / this.itemsPerPage) || 1;
-}
+  get totalPages(): number {
+    return Math.ceil(this.filteredProducts.length / this.itemsPerPage) || 1;
+  }
 
-nextPage() {
-  if (this.currentPage < this.totalPages) this.currentPage++;
-}
+  nextPage() {
+    if (this.currentPage < this.totalPages) this.currentPage++;
+  }
 
-prevPage() {
-  if (this.currentPage > 1) this.currentPage--;
-}
+  prevPage() {
+    if (this.currentPage > 1) this.currentPage--;
+  }
+
+  exportToPdf() {
+    // Implement PDF export logic here
+    console.log('Exporting to PDF...');
+  }
+
+    exportToExcel() {
+    // Implement PDF export logic here
+    console.log('Exporting to PDF...');
+  }
+
 }
