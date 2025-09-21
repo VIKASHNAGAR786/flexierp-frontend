@@ -9,6 +9,9 @@ body {
   color: #333;
   scroll-behavior: smooth;
   overflow-x: hidden;
+    padding: 0;
+  height: 100%;
+
 }
 
 main {
