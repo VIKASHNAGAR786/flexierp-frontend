@@ -40,6 +40,7 @@
         <th class="px-4 py-2 border-b border-slate-700">ID</th>
         <th class="px-4 py-2 border-b border-slate-700">Code</th>
         <th class="px-4 py-2 border-b border-slate-700">Barcode</th>
+        <th class="px-4 py-2"><input type="checkbox" (change)="toggleAll($event)" /></th>
         <th class="px-4 py-2 border-b border-slate-700">Name</th>
         <th class="px-4 py-2 border-b border-slate-700">Category</th>
         <th class="px-4 py-2 border-b border-slate-700">Description</th>
@@ -63,7 +64,25 @@
           class="hover:bg-slate-700 transition">
         <td class="px-4 py-2 text-center">{{ product.productID }}</td>
         <td class="px-4 py-2 text-center">{{ product.productCode }}</td>
-        <td class="px-4 py-2 text-center">{{ product.barcode }}</td>
+  <td class="px-4 py-2 cursor-pointer 
+           bg-slate-800 text-[#00ffee] font-semibold 
+           rounded hover:bg-slate-700 hover:text-white 
+           transition duration-200 ease-in-out shadow-sm 
+           flex justify-center items-center gap-2 text-center"
+    (click)="showBarcode(product.barcode)"
+    [attr.data-tippy-content]="'Click to view barcode for ' + product.productName">
+  <i class="fas fa-barcode"></i>
+  <span>{{ product.barcode }}</span>
+</td>
+
+ <td class="px-4 py-2 text-center">
+    <input type="checkbox" [value]="product.barcode" (change)="toggleSelection($event)" />
+  </td>
+
+
+
+
+
         <td class="px-4 py-2">{{ product.productName }}</td>
         <td class="px-4 py-2">{{ product.productCategory }}</td>
         <td class="px-4 py-2">{{ product.productDescription }}</td>
@@ -96,6 +115,17 @@
     </tbody>
   </table>
 </div>
+<!-- Generate Bar Code PDF Button -->
+<div class="flex justify-center mt-4">
+  <button (click)="generateBarcodePDF()"
+          [disabled]="selectedBarcodes.length === 0"
+          class="px-4 py-2 rounded text-black 
+                 bg-[#00ffee] hover:bg-[#00ddcc] 
+                 disabled:bg-gray-400 disabled:cursor-not-allowed">
+    Generate Bar Code PDF
+  </button>
+</div>
+
 
 <!-- Pagination Controls -->
 <div class="flex justify-between items-center mt-4 text-white">
@@ -104,4 +134,9 @@
   <span>Page {{ currentPage }} of {{ totalPages }}</span>
   <button (click)="nextPage()" [disabled]="currentPage === totalPages"
     class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50">Next</button>
+</div>
+
+<div *ngIf="barcode" class="mt-4">
+  <h3>Barcode for: {{ barcodeText }}</h3>
+  <img [src]="barcode" alt="Barcode" />
 </div>

@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ProductCategoryDTO } from '../../../DTO/DTO';
+import { InventoryService } from '../../../services/inventory.service';
 
 @Component({
   selector: 'app-add-product',
@@ -10,6 +12,10 @@ import { FormsModule } from '@angular/forms';
 })
 export class AddProductComponent {
   @Output() productAdded = new EventEmitter<any>();
+  constructor(private inventoryService: InventoryService) {}
+   ngOnInit(): void {
+    this.loadCategories();
+  }
 
  newProduct = {
   productID: 0,
@@ -78,5 +84,21 @@ export class AddProductComponent {
   taxRate: 0,         // e.g., 18% GST
   discount: 0         // Discount amount or %
     };
+  }
+
+  categories: ProductCategoryDTO[] = [];
+   loadCategories(): void {
+    this.inventoryService.GetCategories().subscribe({
+      next: (data) => {
+        if (data) {
+          this.categories = data;
+        } else {
+          this.categories = [];
+        }
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
   }
 }

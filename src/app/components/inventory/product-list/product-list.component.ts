@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { BarcodeService } from '../../../services/barcode.service';
+import tippy from 'tippy.js';
+import 'tippy.js/dist/tippy.css';
 
 @Component({
   selector: 'app-product-list',
@@ -8,7 +11,20 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule, FormsModule],
   templateUrl: './product-list.component.html'
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit {
+  constructor(private barcodeService: BarcodeService) {}
+
+  ngOnInit(): void {
+   // this.getBarcode();
+    this.applyFilter();
+
+  }
+  ngAfterViewInit() {
+  this.initTooltips();
+}
+
+selectedBarcodes: string[] = [];
+  barcode: string | null = null;
   @Input() products: any[] = [];
 
   searchTerm: string = '';
@@ -17,9 +33,6 @@ export class ProductListComponent {
   pageSizes: number[] = [5, 10, 20];
   filteredProducts: any[] = [];
 
-  ngOnInit() {
-    this.applyFilter();
-  }
 
   ngOnChanges() {
     this.applyFilter();
@@ -32,6 +45,7 @@ export class ProductListComponent {
       )
     );
     this.currentPage = 1; // reset to first page
+    setTimeout(() => this.initTooltips(), 0); // Re-initialize tooltips
   }
 
   get totalPages(): number {
@@ -55,5 +69,71 @@ export class ProductListComponent {
     // Implement PDF export logic here
     console.log('Exporting to PDF...');
   }
+
+
+  getBarcode(text: string): void {
+  this.barcodeService.generateBarcode(text, 'code128', 0.3, 20)
+    .subscribe({
+      next: (blob) => {
+        // Convert Blob to Object URL for <img> tag
+        this.barcode = URL.createObjectURL(blob);
+        console.log('Barcode generated successfully', this.barcode);
+      },
+      error: (err) => console.error('Error fetching barcode', err)
+    });
+}
+
+barcodeText: string = ''; // variable to store clicked barcode
+
+showBarcode(barcode: string) {
+  this.barcodeText = barcode;
+  // You can also call your barcode service here if needed
+  this.getBarcode(barcode);
+}
+
+toggleAll(event: any) {
+  const checked = event.target.checked;
+  if (checked) {
+    this.selectedBarcodes = this.filteredProducts.map(p => p.barcode);
+  } else {
+    this.selectedBarcodes = [];
+  }
+  setTimeout(() => this.initTooltips(), 0);
+}
+
+toggleSelection(event: any) {
+  const value = event.target.value;
+  if (event.target.checked) {
+    this.selectedBarcodes.push(value);
+  } else {
+    this.selectedBarcodes = this.selectedBarcodes.filter(b => b !== value);
+  }
+  setTimeout(() => this.initTooltips(), 0);
+}
+
+generateBarcodePDF() {
+    if (this.selectedBarcodes.length === 0) return;
+
+    this.barcodeService.generateBarcodePDF(this.selectedBarcodes).subscribe({
+      next: (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'barcodes.pdf';
+        link.click();
+      },
+      error: (err) => console.error('Error generating PDF', err)
+    });
+  }
+
+initTooltips() {
+  // Destroy any existing tooltips to avoid duplicates
+  tippy('[data-tippy-content]', {
+    // Optional: you can set default options here
+    delay: [100, 100],
+    arrow: true,
+    theme: 'light',
+  });
+}
 
 }
