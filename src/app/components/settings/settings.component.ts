@@ -3,49 +3,31 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { ProductCategory } from '../../MODEL/MODEL';
 import { InventoryService } from '../../services/inventory.service';
 import { CommonModule } from '@angular/common';
+import { InventorySettingsComponent } from "./inventory-settings/inventory-settings.component";
+import { SaleSettingsComponent } from "./sale-settings/sale-settings.component";
+
+interface Tab {
+  id: string;
+  label: string;
+  component: any;
+}
 
 @Component({
   selector: 'app-settings',
-  imports: [CommonModule, FormsModule,ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, InventorySettingsComponent, SaleSettingsComponent],
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent {
-  categoryForm: FormGroup;
-  isSubmitting = false;
-  successMessage = '';
-  errorMessage = '';
+  activeTab: string = 'inventory';
 
-  constructor(private fb: FormBuilder, private inventoryService: InventoryService) {
-    this.categoryForm = this.fb.group({
-      categoryName: ['', Validators.required],
-      description: ['']
-    });
-  }
+  // Array of tabs
+  tabs: Tab[] = [
+    { id: 'inventory', label: 'Inventory Settings', component: InventorySettingsComponent },
+    { id: 'sale', label: 'Sale Settings', component: SaleSettingsComponent }
+  ];
 
-  submitCategory() {
-    if (this.categoryForm.invalid) return;
-
-    this.isSubmitting = true;
-    this.successMessage = '';
-    this.errorMessage = '';
-
-    const categoryData: ProductCategory = {
-      categoryName: this.categoryForm.value.categoryName,
-      description: this.categoryForm.value.description
-    };
-
-    this.inventoryService.saveProductCategory(categoryData).subscribe({
-      next: (res) => {
-        this.successMessage = 'Category added successfully!';
-        this.categoryForm.reset();
-        this.isSubmitting = false;
-      },
-      error: (err) => {
-        this.errorMessage = 'Failed to add category. Please try again.';
-        console.error(err);
-        this.isSubmitting = false;
-      }
-    });
+  switchTab(tabId: string) {
+    this.activeTab = tabId;
   }
 }
