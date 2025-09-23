@@ -14,7 +14,7 @@ interface Tab {
 
 @Component({
   selector: 'app-settings',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, InventorySettingsComponent, SaleSettingsComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css']
 })
