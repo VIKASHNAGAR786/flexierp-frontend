@@ -106,5 +106,12 @@ def generate_barcode_pdf(barcodes: list[str]):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("barcode_service:app", host="127.0.0.1", port=5001, reload=False)
+    
 # for running this service directly
 # python -m uvicorn barcode_service:app --reload --host 127.0.0.1 --port 5001
+# for building executable
+# python -m PyInstaller --onefile barcode_service.py
