@@ -1,58 +1,57 @@
-<!-- Search Bar + Actions -->
+<!-- 🔍 Search Bar + Actions -->
 <div class="flex justify-between items-center mb-4 gap-2 flex-wrap">
   <!-- Search Input -->
   <input
     type="text"
-    [(ngModel)]="searchTerm"
+    [(ngModel)]="filter.searchTerm"
+    (ngModelChange)="applyFilter()"
     placeholder="Search products..."
     class="px-4 py-2 rounded-lg bg-slate-800 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-[#00ffee] w-1/3"
   />
 
-   <!-- Date Range -->
+  <!-- 📅 Date Range -->
   <div class="flex gap-2">
     <input
       type="date"
-      [(ngModel)]="dateFrom"
+      [(ngModel)]="filter.startDate"
+      (ngModelChange)="applyFilter()"
       class="px-3 py-2 rounded bg-slate-800 text-white border border-slate-600"
     />
     <input
       type="date"
-      [(ngModel)]="dateTo"
+      [(ngModel)]="filter.endDate"
+      (ngModelChange)="applyFilter()"
       class="px-3 py-2 rounded bg-slate-800 text-white border border-slate-600"
     />
-    <button (click)="applyDateFilter()"
-      class="px-3 py-2 bg-blue-600 hover:bg-blue-700 rounded text-white">
-      Filter
-    </button>
   </div>
 
-  <!-- Rows per page dropdown -->
-  <select [(ngModel)]="itemsPerPage"
-    class="px-3 py-2 rounded bg-slate-800 text-white border border-slate-600">
+  <!-- 📑 Rows per page dropdown -->
+  <select
+    [(ngModel)]="filter.pageSize"
+    (change)="applyFilter()"
+    class="px-3 py-2 rounded bg-slate-800 text-white border border-slate-600"
+  >
     <option *ngFor="let size of pageSizes" [value]="size">{{ size }} per page</option>
   </select>
 
-  <!-- Export Buttons -->
+  <!-- 📤 Export Buttons -->
   <div class="flex gap-2">
     <button (click)="exportToPdf()"
       class="flex items-center gap-1 px-3 py-2 bg-red-600 hover:bg-red-700 rounded text-white">
-      <i class="fas fa-file-pdf"></i>
-      PDF
+      <i class="fas fa-file-pdf"></i> PDF
     </button>
 
     <button (click)="exportToExcel()"
       class="flex items-center gap-1 px-3 py-2 bg-green-600 hover:bg-green-700 rounded text-white">
-      <i class="fas fa-file-excel"></i>
-      Excel
+      <i class="fas fa-file-excel"></i> Excel
     </button>
   </div>
 </div>
 
-
-<!-- Table -->
+<!-- 📋 Table -->
 <div class="overflow-x-auto overflow-y-auto bg-slate-900 rounded-lg shadow-lg relative max-h-[500px]">
   <table class="min-w-full text-white border-collapse">
-    <!-- Thead -->
+    <!-- Table Header -->
     <thead class="bg-gradient-to-r from-slate-900 to-slate-800 text-[#00ffee] uppercase text-sm md:text-base tracking-wide sticky top-0 z-50">
       <tr>
         <th class="px-4 py-2 border-b border-slate-700">ID</th>
@@ -76,30 +75,26 @@
       </tr>
     </thead>
 
-    <!-- Body -->
+    <!-- Table Body -->
     <tbody class="divide-y divide-slate-700">
-      <tr *ngFor="let product of filteredProducts | slice:(currentPage-1)*itemsPerPage:(currentPage)*itemsPerPage"
+      <tr *ngFor="let product of filteredProducts 
+                  | slice:(filter.pageNo-1)*filter.pageSize:(filter.pageNo)*filter.pageSize"
           class="hover:bg-slate-700 transition">
         <td class="px-4 py-2 text-center">{{ product.productID }}</td>
         <td class="px-4 py-2 text-center">{{ product.productCode }}</td>
-  <td class="px-4 py-2 cursor-pointer 
-           bg-slate-800 text-[#00ffee] font-semibold 
-           rounded hover:bg-slate-700 hover:text-white 
-           transition duration-200 ease-in-out shadow-sm 
-           flex justify-center items-center gap-2 text-center"
-    (click)="showBarcode(product.barcode)"
-    [attr.data-tippy-content]="'Click to view barcode for ' + product.productName">
-  <i class="fas fa-barcode"></i>
-  <span>{{ product.barcode }}</span>
-</td>
 
- <td class="px-4 py-2 text-center">
-    <input type="checkbox" [value]="product.barcode" (change)="toggleSelection($event)" />
-  </td>
+        <!-- Barcode with Tooltip -->
+        <td class="px-4 py-2 cursor-pointer bg-slate-800 text-[#00ffee] font-semibold rounded hover:bg-slate-700 hover:text-white transition duration-200 ease-in-out shadow-sm flex justify-center items-center gap-2 text-center"
+            (click)="showBarcode(product.barcode)"
+            [attr.data-tippy-content]="'Click to view barcode for ' + product.productName">
+          <i class="fas fa-barcode"></i>
+          <span>{{ product.barcode }}</span>
+        </td>
 
-
-
-
+        <!-- Checkbox -->
+        <td class="px-4 py-2 text-center">
+          <input type="checkbox" [value]="product.barcode" (change)="toggleSelection($event)" />
+        </td>
 
         <td class="px-4 py-2">{{ product.productName }}</td>
         <td class="px-4 py-2">{{ product.productCategory }}</td>
@@ -127,13 +122,16 @@
         <td class="px-4 py-2 text-center">{{ product.taxRate }}%</td>
         <td class="px-4 py-2 text-center">{{ product.discount }}%</td>
       </tr>
+
+      <!-- Empty State -->
       <tr *ngIf="filteredProducts.length === 0">
         <td colspan="16" class="text-center py-4 text-gray-400">No products available.</td>
       </tr>
     </tbody>
   </table>
 </div>
-<!-- Generate Bar Code PDF Button -->
+
+<!-- 📦 Generate Barcode PDF -->
 <div class="flex justify-center mt-4">
   <button (click)="generateBarcodePDF()"
           [disabled]="selectedBarcodes.length === 0"
@@ -144,16 +142,16 @@
   </button>
 </div>
 
-
-<!-- Pagination Controls -->
+<!-- 📄 Pagination Controls -->
 <div class="flex justify-between items-center mt-4 text-white">
-  <button (click)="prevPage()" [disabled]="currentPage === 1"
+  <button (click)="prevPage()" [disabled]="filter.pageNo === 1"
     class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50">Previous</button>
-  <span>Page {{ currentPage }} of {{ totalPages }}</span>
-  <button (click)="nextPage()" [disabled]="currentPage === totalPages"
+  <span>Page {{ filter.pageNo }} of {{ totalPages }}</span>
+  <button (click)="nextPage()" [disabled]="filter.pageNo === totalPages"
     class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50">Next</button>
 </div>
 
+<!-- 🎯 Barcode Preview -->
 <div *ngIf="barcode" class="mt-4">
   <h3>Barcode for: {{ barcodeText }}</h3>
   <img [src]="barcode" alt="Barcode" />
