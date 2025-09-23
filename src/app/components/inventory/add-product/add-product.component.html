@@ -14,7 +14,7 @@
                 <div class="relative w-full max-w-sm">
                     <input type="text" placeholder="Enter Product Code" [(ngModel)]="newProduct.productCode"
                         name="productCode"
-                        class="w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200" />
+                        class="input-style" />
                     <span class="absolute inset-y-0 right-3 flex items-center text-gray-400">
                         <i class="fas fa-barcode"></i>
                     </span>
@@ -26,7 +26,7 @@
                 <label
                     class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">Barcode</label>
                 <input type="text" placeholder="Enter Barcode" [(ngModel)]="newProduct.barcode" name="barcode"
-                    class="w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200" />
+                    class="input-style" />
             </div>
 
             <!-- Product Name -->
@@ -36,7 +36,7 @@
                     Name</label>
                 <input type="text" placeholder="Enter Product Name" [(ngModel)]="newProduct.productName"
                     name="productName" required
-                    class="w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200" />
+                    class="input-style" />
             </div>
 
             <!-- Product Category -->
@@ -77,7 +77,7 @@
                     Quantity</label>
                 <input type="number" placeholder="Enter Reorder Quantity" [(ngModel)]="newProduct.reorderQuantity"
                     name="reorderQuantity"
-                    class="w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200" />
+                    class="input-style" />
             </div>
 
             <!-- Purchase Price -->
@@ -87,7 +87,7 @@
                     Price</label>
                 <input type="number" placeholder="Enter Purchase Price" [(ngModel)]="newProduct.purchasePrice"
                     name="purchasePrice"
-                    class="w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200" />
+                    class="input-style" />
             </div>
 
             <!-- Selling Price -->
@@ -97,7 +97,7 @@
                     Price</label>
                 <input type="number" placeholder="Enter Selling Price" [(ngModel)]="newProduct.sellingPrice"
                     name="sellingPrice"
-                    class="w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200" />
+                    class="input-style" />
             </div>
 
             <!-- Tax Rate -->
@@ -107,7 +107,7 @@
                     Rate (%)</label>
                 <input type="number" placeholder="Enter Tax Rate" [(ngModel)]="newProduct.taxRate" name="taxRate"
                     step="0.01"
-                    class="w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200" />
+                    class="input-style" />
             </div>
 
             <!-- Discount -->
@@ -116,7 +116,7 @@
                     class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">Discount</label>
                 <input type="number" placeholder="Enter Discount" [(ngModel)]="newProduct.discount" name="discount"
                     step="0.01"
-                    class="w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200" />
+                    class="input-style" />
             </div>
 
         </div>
@@ -137,11 +137,7 @@
                     Packed Weight
                 </label>
                 <input type="number" step="0.01" placeholder="Enter Packed Weight" [(ngModel)]="newProduct.packedWeight"
-                    name="packedWeight" class="w-full px-4 py-2 text-gray-900 dark:text-white 
-           bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600 
-           rounded-lg shadow-sm focus:outline-none focus:ring-2 
-           focus:ring-green-500 focus:border-green-500 
-           transition-all duration-200" />
+                    name="packedWeight" class="input-style" />
             </div>
 
             <!-- Packed Height -->
@@ -151,11 +147,7 @@
                     Packed Height
                 </label>
                 <input type="number" step="0.01" placeholder="Enter Packed Height" [(ngModel)]="newProduct.packedHeight"
-                    name="packedHeight" class="w-full px-4 py-2 text-gray-900 dark:text-white 
-           bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600 
-           rounded-lg shadow-sm focus:outline-none focus:ring-2 
-           focus:ring-green-500 focus:border-green-500 
-           transition-all duration-200" />
+                    name="packedHeight" class="input-style" />
             </div>
 
             <!-- Packed Width -->
@@ -165,11 +157,7 @@
                     Packed Width
                 </label>
                 <input type="number" step="0.01" placeholder="Enter Packed Width" [(ngModel)]="newProduct.packedWidth"
-                    name="packedWidth" class="w-full px-4 py-2 text-gray-900 dark:text-white 
-           bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600 
-           rounded-lg shadow-sm focus:outline-none focus:ring-2 
-           focus:ring-green-500 focus:border-green-500 
-           transition-all duration-200" />
+                    name="packedWidth" class="input-style" />
             </div>
 
             <!-- Packed Depth -->
@@ -179,11 +167,7 @@
                     Packed Depth
                 </label>
                 <input type="number" step="0.01" placeholder="Enter Packed Depth" [(ngModel)]="newProduct.packedDepth"
-                    name="packedDepth" class="w-full px-4 py-2 text-gray-900 dark:text-white 
-           bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600 
-           rounded-lg shadow-sm focus:outline-none focus:ring-2 
-           focus:ring-green-500 focus:border-green-500 
-           transition-all duration-200" />
+                    name="packedDepth" class="input-style" />
             </div>
 
             <!-- Refrigerated Checkbox -->
@@ -212,11 +196,7 @@
                     Warehouse ID
                 </label>
                 <input type="number" placeholder="Enter Warehouse ID" [(ngModel)]="newProduct.warehouse.warehouseID"
-                    name="warehouseID" class="w-full px-4 py-2 text-gray-900 dark:text-white 
-           bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600 
-           rounded-lg shadow-sm focus:outline-none focus:ring-2 
-           focus:ring-green-500 focus:border-green-500 
-           transition-all duration-200" />
+                    name="warehouseID" class="input-style" />
             </div>
 
             <!-- Warehouse Name -->
@@ -226,11 +206,7 @@
                     Warehouse Name
                 </label>
                 <input type="text" placeholder="Enter Warehouse Name" [(ngModel)]="newProduct.warehouse.warehouseName"
-                    name="warehouseName" class="w-full px-4 py-2 text-gray-900 dark:text-white 
-           bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600 
-           rounded-lg shadow-sm focus:outline-none focus:ring-2 
-           focus:ring-green-500 focus:border-green-500 
-           transition-all duration-200" />
+                    name="warehouseName" class="input-style" />
             </div>
 
             <!-- Warehouse Refrigerated Checkbox -->

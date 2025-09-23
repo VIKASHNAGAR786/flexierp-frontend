@@ -1,17 +1,24 @@
-<div class="flex flex-col items-center justify-center min-h-[60vh] text-center text-white px-4 py-10">
+<!-- Fixed Tabs -->
+<div class="fixed top-[64px] left-0 right-0 z-[9999] bg-gradient-to-r from-slate-900 to-slate-800 shadow-md">
+  <div class="px-4 py-3 flex space-x-6 justify-center md:justify-start md:ml-64">
+    <!-- Add Product Tab -->
+    <a
+      class="px-4 py-2 rounded-md font-medium transition cursor-pointer"
+      [ngClass]="{
+        'bg-[#00ffee] text-black': activeTab === 'add',
+        'text-[#00ffee]': activeTab !== 'add'
+      }"
+      (click)="switchTab('add')"
+    >
+      Make Sale
+    </a>
 
-  <div class="text-[#00ffee] text-6xl md:text-7xl mb-6 animate-pulse">
-    🚧
+    <!-- Product List Tab -->
+    
   </div>
+</div>
 
-  <h2 class="text-2xl md:text-3xl font-bold mb-4">This Module is Coming Soon!</h2>
-
-  <p class="text-slate-400 max-w-xl mb-6">
-    We're working hard to bring you this feature. Stay tuned — it'll be worth the wait.
-  </p>
-
-  <button routerLink="/" class="bg-[#00ffee] text-black px-6 py-2 rounded-full font-semibold hover:bg-[#00ddcc] transition">
-    Back to Dashboard
-  </button>
-
+<!-- Tab Content -->
+<div class="tab-content p-4 mt-36 bg-slate-900 text-white rounded-lg shadow-lg border border-slate-700">
+  <app-add-sale *ngIf="activeTab === 'add'" (productAdded)="MakeSale($event)"></app-add-sale>
 </div>

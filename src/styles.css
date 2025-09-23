@@ -61,3 +61,16 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+
+/* input or label style  */
+
+.label-style {
+  @apply mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md;
+}
+
+.input-style {
+  @apply w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-slate-800 border
+         border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2
+         focus:ring-green-500 focus:border-green-500 transition-all duration-200;
+}
