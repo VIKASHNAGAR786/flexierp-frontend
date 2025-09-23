@@ -4,8 +4,8 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { UserinfowithloginService } from './userinfowithlogin.service';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { ProductCategory } from '../MODEL/MODEL';
-import { ProductCategoryDTO } from '../DTO/DTO';
+import { PaginationFilter, ProductCategory, ProductModel } from '../MODEL/MODEL';
+import { ProductCategoryDTO, ProductDTO } from '../DTO/DTO';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +31,8 @@ export class InventoryService {
 
   private GetCategoriesUrl = environment.BASE_URL + '/Inventrory/GetCategories';
   private AddCategoriesUrl = environment.BASE_URL + '/Inventrory/AddCategory';
+  private AddproductUrl = environment.BASE_URL + '/Inventrory/AddProduct';
+ private GetProductsUrl = environment.BASE_URL + '/Inventrory/GetProducts';
 
   saveProductCategory(categorydata: ProductCategory): Observable<any> {
     const headers = this.getAuthHeaders();
@@ -44,4 +46,25 @@ export class InventoryService {
     : of(null);
 }
 
+ AddProduct(product: ProductModel): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return headers ? this.http.post(this.AddproductUrl, product, { headers }) : of(null);
+  }
+
+  GetProducts(filter: PaginationFilter): Observable<ProductDTO[] | null> {
+    const headers = this.getAuthHeaders();
+    if (!headers) return of(null);
+
+    // Send filter as query parameters
+    const params = {
+      pageNo: filter.pageNo.toString(),
+      pageSize: filter.pageSize.toString(),
+      searchTerm: filter.searchTerm || '',
+      startDate: filter.startDate || '',
+      endDate: filter.endDate || ''
+    };
+
+    return this.http.get<ProductDTO[]>(this.GetProductsUrl, { headers, params });
+  }
+  
 }

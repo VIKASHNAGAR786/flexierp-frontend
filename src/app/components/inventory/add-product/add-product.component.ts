@@ -1,100 +1,94 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ProductCategoryDTO } from '../../../DTO/DTO';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { InventoryService } from '../../../services/inventory.service';
+import { ProductCategoryDTO } from '../../../DTO/DTO';
+import { AlertService } from '../../../services/alert.service';
 
 @Component({
   selector: 'app-add-product',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './add-product.component.html'
 })
 export class AddProductComponent {
   @Output() productAdded = new EventEmitter<any>();
-  constructor(private inventoryService: InventoryService) {}
-   ngOnInit(): void {
+  productForm!: FormGroup;
+  categories: ProductCategoryDTO[] = [];
+
+  constructor(
+    private fb: FormBuilder,
+     private inventoryService: InventoryService,
+      private alertService: AlertService) {}
+
+  ngOnInit(): void {
+    this.productForm = this.fb.group({
+      productName: ['', Validators.required],
+      productCategory: [0, Validators.required],
+      productType: [''],
+      packedDate: [null],
+      packedWeight: [null],
+      packedHeight: [null],
+      packedWidth: [null],
+      packedDepth: [null],
+      isPerishable: [false],
+      purchasePrice: [0],
+      sellingPrice: [0],
+      taxRate: [0],
+      discount: [0],
+      productDescription: [''],
+      reorderQuantity: [0],
+      warehouseID: [0],
+      warehouseName: [''],
+      warehouseRefrigerated: [false],
+    });
+
     this.loadCategories();
   }
 
- newProduct = {
-  productID: 0,
-  productCode: '',
-  barcode: '',
-  productName: '',
-  productDescription: '',
-  productCategory: '',
-  reorderQuantity: 0,
-  packedWeight: 0,
-  packedHeight: 0,
-  packedWidth: 0,
-  packedDepth: 0,
-  refrigerated: false,
-  location: {
-    locationID: 0,
-    locationName: '',
-    locationAddress: ''
-  },
-  warehouse: {
-    warehouseID: 0,
-    warehouseName: '',
-    isRefrigerated: false
-  },
-  // Financial Fields
-  purchasePrice: 0,   // Cost Price
-  sellingPrice: 0,    // Retail Price
-  taxRate: 0,         // e.g., 18% GST
-  discount: 0         // Discount amount or %
-};
-
-
   addProduct() {
-    if (!this.newProduct.productName) {
-      alert('Product Name is required!');
+    if (this.productForm.invalid) {
+      this.alertService.showAlert('⚠️ Please fill required fields.', 'warning');
       return;
     }
-    this.productAdded.emit({ ...this.newProduct });
-    // Reset form
-    this.newProduct = {
-      productID: 0,
-      productCode: '',
-      barcode: '',
-      productName: '',
-      productDescription: '',
-      productCategory: '',
-      reorderQuantity: 0,
-      packedWeight: 0,
-      packedHeight: 0,
-      packedWidth: 0,
-      packedDepth: 0,
-      refrigerated: false,
-      location: {
-        locationID: 0,
-        locationName: '',
-        locationAddress: ''
+
+    const product = this.productForm.value; // <-- automatically matches ProductModel
+    this.inventoryService.AddProduct(product).subscribe({
+      next: (res) => {
+        this.alertService.showAlert('✅ Product added successfully!', 'success');
+        this.productAdded.emit(res);
+        this.productForm.reset({
+          productName: '',
+          productCategory: 0,
+          productType: '',
+          packedDate: null,
+          packedWeight: null,
+          packedHeight: null,
+          packedWidth: null,
+          packedDepth: null,
+          isPerishable: false,
+          createdBy: 1,
+          purchasePrice: 0,
+          sellingPrice: 0,
+          taxRate: 0,
+          discount: 0,
+          productDescription: '',
+          reorderQuantity: 0,
+          warehouseID: 0,
+          warehouseName: '',
+          warehouseRefrigerated: false,
+        });
       },
-      warehouse: {
-        warehouseID: 0,
-        warehouseName: '',
-        isRefrigerated: false
-      },
-      // Financial Fields
-  purchasePrice: 0,   // Cost Price
-  sellingPrice: 0,    // Retail Price
-  taxRate: 0,         // e.g., 18% GST
-  discount: 0         // Discount amount or %
-    };
+      error: (err) => {
+        this.alertService.showAlert('Failed to add product.', 'error');
+      }
+    });
   }
 
-  categories: ProductCategoryDTO[] = [];
-   loadCategories(): void {
+  loadCategories(): void {
     this.inventoryService.GetCategories().subscribe({
       next: (data) => {
-        if (data) {
-          this.categories = data;
-        } else {
-          this.categories = [];
-        }
+        this.categories = data || [];
       },
       error: (err) => {
         console.error(err);

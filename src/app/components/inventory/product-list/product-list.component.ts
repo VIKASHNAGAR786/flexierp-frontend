@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewChecked } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BarcodeService } from '../../../services/barcode.service';
-import tippy from 'tippy.js';
+import tippy, { Instance } from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 import { PaginationFilter } from '../../../MODEL/MODEL';
+import { InventoryService } from '../../../services/inventory.service';
+import { ProductDTO } from '../../../DTO/DTO';
 
 @Component({
   selector: 'app-product-list',
@@ -12,75 +14,75 @@ import { PaginationFilter } from '../../../MODEL/MODEL';
   imports: [CommonModule, FormsModule],
   templateUrl: './product-list.component.html'
 })
-export class ProductListComponent implements OnInit , OnChanges
-{
-  constructor(private barcodeService: BarcodeService) {}
-
-  @Input() products: any[] = [];
-  allProducts: any[] = [];
-  filteredProducts: any[] = [];
-
-  // ✅ unified filter object
-  filter: PaginationFilter = {
-  startDate: new Date().toISOString().split('T')[0], // today in YYYY-MM-DD format
-  endDate: new Date().toISOString().split('T')[0],   // today in YYYY-MM-DD format
-  searchTerm: '',
-  pageNo: 1,
-  pageSize: 5
-};
-  pageSizes: number[] = [5, 10, 20];
+export class ProductListComponent implements OnInit, AfterViewChecked {
+  @Input() products: ProductDTO[] = [];
   selectedBarcodes: string[] = [];
   barcode: string | null = null;
   barcodeText: string = '';
+  totalRecords: number = 0;
+
+  readonly today: string;
+  filter: PaginationFilter;
+  pageSizes: number[] = [10, 20, 50];
+
+  private tooltips: Instance[] = [];
+
+  constructor(
+    private barcodeService: BarcodeService,
+    private inventoryService: InventoryService
+  ) {
+    const now = new Date();
+    const yyyy = now.getFullYear();
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const dd = String(now.getDate()).padStart(2, '0');
+
+    this.today = `${yyyy}-${mm}-${dd}`;
+    this.filter = {
+      startDate: this.today,
+      endDate: this.today,
+      searchTerm: '',
+      pageNo: 1,
+      pageSize: 5
+    };
+  }
 
   ngOnInit(): void {
-    this.allProducts = this.products;
-    this.filteredProducts = [...this.allProducts];
-    this.applyFilter();
+    this.getProductData();
   }
 
-  ngOnChanges() {
-    this.applyFilter();
+  ngAfterViewChecked(): void {
+    this.initTooltips();
   }
 
-  // 🔹 Apply all filters: search + date + pagination
-  applyFilter() {
-    // const term = this.filter.searchTerm.toLowerCase();
-
-    // this.filteredProducts = this.allProducts.filter(p => {
-    //   // Search filter
-    //   const matchesSearch = Object.values(p).some(val =>
-    //     String(val).toLowerCase().includes(term)
-    //   );
-
-    //   // Date filter
-    //   const from = this.filter.startDate ? new Date(this.filter.startDate) : null;
-    //   const to = this.filter.endDate ? new Date(this.filter.endDate) : null;
-    //   const packedDate = p.packedDate ? new Date(p.packedDate) : null;
-
-    //   const matchesDate =
-    //     (!from || (packedDate && packedDate >= from)) &&
-    //     (!to || (packedDate && packedDate <= to));
-    //     console.log(from, to, packedDate, matchesDate, this.filter);
-    //   return matchesSearch && matchesDate;
-    // });
-
-    console.log(this.filter);
-    this.filter.pageNo = 1; // reset to first page
-    setTimeout(() => this.initTooltips(), 0);
+  getProductData() {
+    this.inventoryService.GetProducts(this.filter).subscribe({
+      next: (data) => {
+        if (data) {
+          this.products = data;
+          this.totalRecords = data.length > 0 ? data[0].totalRecords : 0;
+        }
+      },
+      error: (err) => console.error(err)
+    });
   }
 
   // 🔹 Pagination
   get totalPages(): number {
-    return Math.ceil(this.filteredProducts.length / this.filter.pageSize) || 1;
+    return Math.ceil(this.totalRecords / this.filter.pageSize) || 1;
   }
 
   nextPage() {
-    if (this.filter.pageNo < this.totalPages) this.filter.pageNo++;
+    if (this.filter.pageNo < this.totalPages) {
+      this.filter.pageNo++;
+      this.getProductData();
+    }
   }
 
   prevPage() {
-    if (this.filter.pageNo > 1) this.filter.pageNo--;
+    if (this.filter.pageNo > 1) {
+      this.filter.pageNo--;
+      this.getProductData();
+    }
   }
 
   // 🔹 Export
@@ -106,10 +108,7 @@ export class ProductListComponent implements OnInit , OnChanges
   // 🔹 Selection
   toggleAll(event: any) {
     const checked = event.target.checked;
-    this.selectedBarcodes = checked
-      ? this.filteredProducts.map(p => p.barcode)
-      : [];
-    setTimeout(() => this.initTooltips(), 0);
+    this.selectedBarcodes = checked ? this.products.map(p => p.barCode) : [];
   }
 
   toggleSelection(event: any) {
@@ -119,11 +118,10 @@ export class ProductListComponent implements OnInit , OnChanges
     } else {
       this.selectedBarcodes = this.selectedBarcodes.filter(b => b !== value);
     }
-    setTimeout(() => this.initTooltips(), 0);
   }
 
   generateBarcodePDF() {
-    if (this.selectedBarcodes.length === 0) return;
+    if (!this.selectedBarcodes.length) return;
 
     this.barcodeService.generateBarcodePDF(this.selectedBarcodes).subscribe({
       next: (blob) => {
@@ -139,10 +137,19 @@ export class ProductListComponent implements OnInit , OnChanges
 
   // 🔹 Tooltips
   initTooltips() {
-    tippy('[data-tippy-content]', {
-      delay: [100, 100],
-      arrow: true,
-      theme: 'light',
+    // Destroy existing tooltips
+    this.tooltips.forEach(t => t.destroy());
+    this.tooltips = [];
+
+    // Initialize new tooltips
+    const elements = document.querySelectorAll('[data-tippy-content]');
+    elements.forEach(el => {
+      const tip = tippy(el as HTMLElement, {
+        delay: [100, 100],
+        arrow: true,
+        theme: 'light',
+      });
+      this.tooltips.push(tip);
     });
   }
 }
