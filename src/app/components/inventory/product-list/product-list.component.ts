@@ -42,7 +42,7 @@ export class ProductListComponent implements OnInit, AfterViewChecked {
       endDate: this.today,
       searchTerm: '',
       pageNo: 1,
-      pageSize: 5
+      pageSize: 10
     };
   }
 
