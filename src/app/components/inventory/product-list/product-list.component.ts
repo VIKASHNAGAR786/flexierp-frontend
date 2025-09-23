@@ -13,10 +13,14 @@ import 'tippy.js/dist/tippy.css';
 })
 export class ProductListComponent implements OnInit {
   constructor(private barcodeService: BarcodeService) {}
-
+dateFrom: string = '';
+dateTo: string = '';
+allProducts: any[] = [];   // keep original list
   ngOnInit(): void {
    // this.getBarcode();
-    this.applyFilter();
+   this.allProducts = this.products; // assume products come from service
+   this.filteredProducts = [...this.allProducts];
+   this.applyFilter();
 
   }
   ngAfterViewInit() {
@@ -133,6 +137,23 @@ initTooltips() {
     delay: [100, 100],
     arrow: true,
     theme: 'light',
+  });
+}
+
+applyDateFilter() {
+  if (!this.dateFrom && !this.dateTo) {
+    this.filteredProducts = [...this.allProducts]; // reset if no filter
+    return;
+  }
+
+  const from = this.dateFrom ? new Date(this.dateFrom) : null;
+  const to = this.dateTo ? new Date(this.dateTo) : null;
+
+  this.filteredProducts = this.allProducts.filter(p => {
+    const packedDate = new Date(p.packedDate); // make sure `packedDate` exists
+    if (from && packedDate < from) return false;
+    if (to && packedDate > to) return false;
+    return true;
   });
 }
 
