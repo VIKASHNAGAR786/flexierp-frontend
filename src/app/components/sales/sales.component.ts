@@ -2,10 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AddSaleComponent } from "./add-sale/add-sale.component";
+import { ScanBarcodeComponent } from './add-sale/scan-barcode/scan-barcode.component';
 
 @Component({
   selector: 'app-sales',
-  imports: [CommonModule, FormsModule, AddSaleComponent],
+  standalone:true,
+  imports: [CommonModule, FormsModule, AddSaleComponent, ScanBarcodeComponent],
   templateUrl: './sales.component.html',
   styleUrl: './sales.component.css'
 })

@@ -1,139 +1,135 @@
 <form (ngSubmit)="submitSale()" class="space-y-6 text-white">
 
-   <div class="grid grid-cols-1 gap-6">
+  <div class="grid grid-cols-1 gap-6">
 
-  <!-- 🔹 Scan Section -->
-  <div class="bg-slate-800 p-6 rounded-xl shadow-lg space-y-4">
-    <h3 class="text-xl font-extrabold text-[#00ffee] mb-4 uppercase tracking-wide drop-shadow-md">
-      Scan / Enter Barcode
-    </h3>
+    <!-- for barcode scan  -->
+    <app-scan-barcode></app-scan-barcode>
 
-    <div class="flex flex-col">
-      <label
-        class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
-        Barcode
-      </label>
-      <input type="text" placeholder="Scan or Enter Barcode" [(ngModel)]="saleProduct.barcode" name="barcode"
-        class="w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-slate-800 border 
-               border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 
-               focus:ring-green-500 focus:border-green-500 transition-all duration-200" />
-    </div>
+    <!-- 🔹 Product Detail Section -->
+    <div class="bg-slate-800 p-6 rounded-xl shadow-lg space-y-4">
+      <h3 class="text-xl font-extrabold text-[#00ffee] mb-4 uppercase tracking-wide drop-shadow-md">
+        Product Details
+      </h3>
 
-    <button type="button" (click)="submitSale()"
-      class="w-full md:w-auto bg-[#00ffee] text-black px-6 py-2 rounded font-bold hover:bg-white transition">
-      Fetch Product
-    </button>
-  </div>
-
-  <!-- 🔹 Product Detail Section -->
-  <div class="bg-slate-800 p-6 rounded-xl shadow-lg space-y-4">
-    <h3 class="text-xl font-extrabold text-[#00ffee] mb-4 uppercase tracking-wide drop-shadow-md">
-      Product Details
-    </h3>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
         <!-- Barcode -->
         <div class="flex flex-col">
           <label class="label-style">Barcode</label>
-          <input type="text" [(ngModel)]="saleProduct.barcode" placeholder="Enter Barcode" class="input-style" />
+          <input type="text" [(ngModel)]="saleProduct.barcode" name="barcode"
+            placeholder="Enter Barcode" class="input-style" />
         </div>
 
-      <!-- Product Code -->
-      <div class="flex flex-col">
-        <label class="label-style">Product Code</label>
-        <input type="text" [(ngModel)]="saleProduct.productCode" placeholder="Enter Code" class="input-style" />
+        <!-- Product Code -->
+        <div class="flex flex-col">
+          <label class="label-style">Product Code</label>
+          <input type="text" [(ngModel)]="saleProduct.productCode" name="productCode"
+            placeholder="Enter Code" class="input-style" />
+        </div>
+
+        <!-- Product Name -->
+        <div class="flex flex-col">
+          <label class="label-style">Product Name</label>
+          <input type="text" [(ngModel)]="saleProduct.productName" name="productName"
+            placeholder="Enter Name" class="input-style" />
+        </div>
+
+        <!-- Category -->
+        <div class="flex flex-col">
+          <label class="label-style">Category</label>
+          <input type="text" [(ngModel)]="saleProduct.categoryName" name="categoryName"
+            placeholder="Category" class="input-style" />
+        </div>
+
+        <!-- Product Type -->
+        <div class="flex flex-col">
+          <label class="label-style">Product Type</label>
+          <input type="text" [(ngModel)]="saleProduct.productType" name="productType"
+            placeholder="Type" class="input-style" />
+        </div>
+
+        <!-- Packed Date -->
+        <div class="flex flex-col">
+          <label class="label-style">Packed Date</label>
+          <input type="date" [(ngModel)]="saleProduct.packedDate" name="packedDate"
+            class="input-style" />
+        </div>
+
+        <!-- Dimensions -->
+        <div class="flex flex-col">
+          <label class="label-style">Weight (g)</label>
+          <input type="number" [(ngModel)]="saleProduct.packedWeight" name="packedWeight"
+            placeholder="0" class="input-style" />
+        </div>
+
+        <div class="flex flex-col">
+          <label class="label-style">Height (cm)</label>
+          <input type="number" [(ngModel)]="saleProduct.packedHeight" name="packedHeight"
+            placeholder="0" class="input-style" />
+        </div>
+
+        <div class="flex flex-col">
+          <label class="label-style">Depth (cm)</label>
+          <input type="number" [(ngModel)]="saleProduct.packedDepth" name="packedDepth"
+            placeholder="0" class="input-style" />
+        </div>
+
+        <div class="flex flex-col">
+          <label class="label-style">Width (cm)</label>
+          <input type="number" [(ngModel)]="saleProduct.packedWidth" name="packedWidth"
+            placeholder="0" class="input-style" />
+        </div>
+
+        <!-- Boolean Switches -->
+        <div class="flex items-center gap-3">
+          <input type="checkbox" [(ngModel)]="saleProduct.isPerishable" name="isPerishable"
+            class="w-4 h-4" />
+          <label class="text-white">Perishable</label>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <input type="checkbox" [(ngModel)]="saleProduct.status" name="status"
+            class="w-4 h-4" />
+          <label class="text-white">Active</label>
+        </div>
+
       </div>
 
-      <!-- Product Name -->
-      <div class="flex flex-col">
-        <label class="label-style">Product Name</label>
-        <input type="text" [(ngModel)]="saleProduct.productName" placeholder="Enter Name" class="input-style" />
+      <!-- 🔹 Financial / Pricing Section -->
+      <h4 class="text-lg font-bold text-[#00ffee] mt-6">Pricing</h4>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex flex-col">
+          <label class="label-style">Purchase Price</label>
+          <input type="number" [(ngModel)]="saleProduct.purchasePrice" name="purchasePrice"
+            placeholder="0.00" class="input-style" />
+        </div>
+
+        <div class="flex flex-col">
+          <label class="label-style">Selling Price</label>
+          <input type="number" [(ngModel)]="saleProduct.sellingPrice" name="sellingPrice"
+            placeholder="0.00" class="input-style" />
+        </div>
+
+        <div class="flex flex-col">
+          <label class="label-style">Tax Rate (%)</label>
+          <input type="number" [(ngModel)]="saleProduct.taxRate" name="taxRate"
+            placeholder="0.00" class="input-style" />
+        </div>
+
+        <div class="flex flex-col">
+          <label class="label-style">Discount</label>
+          <input type="number" [(ngModel)]="saleProduct.discount" name="discount"
+            placeholder="0.00" class="input-style" />
+        </div>
       </div>
 
-      <!-- Category -->
-      <div class="flex flex-col">
-        <label class="label-style">Category</label>
-        <input type="text" [(ngModel)]="saleProduct.categoryName" placeholder="Category" class="input-style" />
-      </div>
-
-      <!-- Product Type -->
-      <div class="flex flex-col">
-        <label class="label-style">Product Type</label>
-        <input type="text" [(ngModel)]="saleProduct.productType" placeholder="Type" class="input-style" />
-      </div>
-
-      <!-- Packed Date -->
-      <div class="flex flex-col">
-        <label class="label-style">Packed Date</label>
-        <input type="date" [(ngModel)]="saleProduct.packedDate" class="input-style" />
-      </div>
-
-      <!-- Dimensions -->
-      <div class="flex flex-col">
-        <label class="label-style">Weight (g)</label>
-        <input type="number" [(ngModel)]="saleProduct.packedWeight" placeholder="0" class="input-style" />
-      </div>
-
-      <div class="flex flex-col">
-        <label class="label-style">Height (cm)</label>
-        <input type="number" [(ngModel)]="saleProduct.packedHeight" placeholder="0" class="input-style" />
-      </div>
-
-      <div class="flex flex-col">
-        <label class="label-style">Depth (cm)</label>
-        <input type="number" [(ngModel)]="saleProduct.packedDepth" placeholder="0" class="input-style" />
-      </div>
-
-      <div class="flex flex-col">
-        <label class="label-style">Width (cm)</label>
-        <input type="number" [(ngModel)]="saleProduct.packedWidth" placeholder="0" class="input-style" />
-      </div>
-
-      <!-- Boolean Switches -->
-      <div class="flex items-center gap-3">
-        <input type="checkbox" [(ngModel)]="saleProduct.isPerishable" class="w-4 h-4" />
-        <label class="text-white">Perishable</label>
-      </div>
-
-      <div class="flex items-center gap-3">
-        <input type="checkbox" [(ngModel)]="saleProduct.status" class="w-4 h-4" />
-        <label class="text-white">Active</label>
-      </div>
-
+      <!-- Save Product Button -->
+      <button type="button" (click)="saveProduct()"
+        class="w-full md:w-auto bg-[#00ffee] text-black px-6 py-2 rounded font-bold hover:bg-white transition">
+        Save Product
+      </button>
     </div>
-
-    <!-- 🔹 Financial / Pricing Section -->
-    <h4 class="text-lg font-bold text-[#00ffee] mt-6">Pricing</h4>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="flex flex-col">
-        <label class="label-style">Purchase Price</label>
-        <input type="number" [(ngModel)]="saleProduct.purchasePrice" placeholder="0.00" class="input-style" />
-      </div>
-
-      <div class="flex flex-col">
-        <label class="label-style">Selling Price</label>
-        <input type="number" [(ngModel)]="saleProduct.sellingPrice" placeholder="0.00" class="input-style" />
-      </div>
-
-      <div class="flex flex-col">
-        <label class="label-style">Tax Rate (%)</label>
-        <input type="number" [(ngModel)]="saleProduct.taxRate" placeholder="0.00" class="input-style" />
-      </div>
-
-      <div class="flex flex-col">
-        <label class="label-style">Discount</label>
-        <input type="number" [(ngModel)]="saleProduct.discount" placeholder="0.00" class="input-style" />
-      </div>
-    </div>
-
-    <!-- Save Button -->
-    <button type="button" (click)="submitSale()"
-      class="w-full md:w-auto bg-[#00ffee] text-black px-6 py-2 rounded font-bold hover:bg-white transition">
-      Save Product
-    </button>
   </div>
-</div>
 
 
     <!-- Cart Section -->
@@ -181,71 +177,77 @@
     </div>
 
     <!-- Customer & Payment Info -->
-<div class="bg-slate-800 p-6 rounded-xl shadow-lg space-y-4">
-    <h3 class="text-xl font-extrabold text-[#00ffee] mb-4 uppercase tracking-wide drop-shadow-md">
-        Customer & Payment
-    </h3>
+    <div class="bg-slate-800 p-6 rounded-xl shadow-lg space-y-4">
+        <h3 class="text-xl font-extrabold text-[#00ffee] mb-4 uppercase tracking-wide drop-shadow-md">
+            Customer & Payment
+        </h3>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <!-- Customer Name -->
-        <div class="flex flex-col">
-            <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
-                Customer Name
-            </label>
-            <input type="text" [(ngModel)]="customer.name" name="customerName" placeholder="Enter Customer Name"
-                class="input-style" />
-        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Customer Name -->
+            <div class="flex flex-col">
+                <label
+                    class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
+                    Customer Name
+                </label>
+                <input type="text" [(ngModel)]="customer.name" name="customerName" placeholder="Enter Customer Name"
+                    class="input-style" />
+            </div>
 
-        <!-- Customer Email -->
-        <div class="flex flex-col">
-            <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
-                Email
-            </label>
-            <input type="email" [(ngModel)]="customer.email" name="customerEmail" placeholder="Enter Email"
-                class="input-style" />
-        </div>
+            <!-- Customer Email -->
+            <div class="flex flex-col">
+                <label
+                    class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
+                    Email
+                </label>
+                <input type="email" [(ngModel)]="customer.email" name="customerEmail" placeholder="Enter Email"
+                    class="input-style" />
+            </div>
 
-        <!-- Customer Phone -->
-        <div class="flex flex-col">
-            <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
-                Phone
-            </label>
-            <input type="tel" [(ngModel)]="customer.phone" name="customerPhone" placeholder="Enter Phone Number"
-                class="input-style" />
-        </div>
+            <!-- Customer Phone -->
+            <div class="flex flex-col">
+                <label
+                    class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
+                    Phone
+                </label>
+                <input type="tel" [(ngModel)]="customer.phone" name="customerPhone" placeholder="Enter Phone Number"
+                    class="input-style" />
+            </div>
 
-        <!-- Customer Address -->
-        <div class="flex flex-col">
-            <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
-                Address
-            </label>
-            <textarea [(ngModel)]="customer.address" name="customerAddress" rows="2" placeholder="Enter Address"
-                class="input-style resize-none"></textarea>
-        </div>
+            <!-- Customer Address -->
+            <div class="flex flex-col">
+                <label
+                    class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
+                    Address
+                </label>
+                <textarea [(ngModel)]="customer.address" name="customerAddress" rows="2" placeholder="Enter Address"
+                    class="input-style resize-none"></textarea>
+            </div>
 
-        <!-- Payment Method -->
-        <div class="flex flex-col">
-            <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
-                Payment Method
-            </label>
-            <select [(ngModel)]="paymentMethod" name="paymentMethod"
-                class="w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200">
-                <option value="Cash">Cash</option>
-                <option value="UPI">UPI</option>
-                <option value="Card">Card</option>
-            </select>
-        </div>
+            <!-- Payment Method -->
+            <div class="flex flex-col">
+                <label
+                    class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
+                    Payment Method
+                </label>
+                <select [(ngModel)]="paymentMethod" name="paymentMethod"
+                    class="w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200">
+                    <option value="Cash">Cash</option>
+                    <option value="UPI">UPI</option>
+                    <option value="Card">Card</option>
+                </select>
+            </div>
 
-        <!-- Additional Notes -->
-        <div class="flex flex-col md:col-span-2">
-            <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
-                Notes
-            </label>
-            <textarea [(ngModel)]="customer.notes" name="customerNotes" rows="3" placeholder="Additional notes"
-                class="input-style resize-none"></textarea>
+            <!-- Additional Notes -->
+            <div class="flex flex-col md:col-span-2">
+                <label
+                    class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
+                    Notes
+                </label>
+                <textarea [(ngModel)]="customer.notes" name="customerNotes" rows="3" placeholder="Additional notes"
+                    class="input-style resize-none"></textarea>
+            </div>
         </div>
     </div>
-</div>
 
 
     <!-- Action Buttons -->

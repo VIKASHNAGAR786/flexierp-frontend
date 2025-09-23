@@ -23,6 +23,7 @@
     "@angular/ssr": "^19.1.8",
     "@fortawesome/fontawesome-free": "^7.0.1",
     "@ngneat/tailwind": "^7.0.3",
+    "@zxing/ngx-scanner": "^20.0.0",
     "aos": "^2.3.4",
     "bootstrap": "^5.3.6",
     "bootstrap-icons": "^1.13.1",

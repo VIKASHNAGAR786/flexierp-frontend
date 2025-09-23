@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ScanBarcodeComponent } from "./scan-barcode/scan-barcode.component";
 
 @Component({
   selector: 'app-add-sale',
-  imports: [CommonModule, FormsModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule, ScanBarcodeComponent],
   templateUrl: './add-sale.component.html',
   styleUrl: './add-sale.component.css'
 })
@@ -70,37 +72,59 @@ export class AddSaleComponent {
     this.updateGrandTotal();
   }
 
-  // Recalculate grand total
-  updateGrandTotal() {
-    this.grandTotal = this.cart.reduce((sum, item) => sum + item.total, 0);
-  }
-
   // Submit sale (dummy)
-  submitSale() {
-    console.log('🛒 Sale Submitted:', {
-      customer: this.customer,
-      paymentMethod: this.paymentMethod,
-      cart: this.cart,
-      grandTotal: this.grandTotal
-    });
-
-    alert('Sale submitted successfully!');
-    this.clearSale();
-  }
-
-  // Clear the screen
-  clearSale() {
-    this.saleProduct = {
-      barcode: '',
-      name: '',
+  saveProduct() {
+  // Add current product to cart
+  if (this.saleProduct.productName && this.saleProduct.sellingPrice) {
+    const item = {
+      name: this.saleProduct.productName,
       qty: 1,
-      price: 100,
-      discount: 0,
-      tax: 0
+      price: this.saleProduct.sellingPrice,
+      discount: this.saleProduct.discount || 0,
+      tax: this.saleProduct.taxRate || 0,
+      total: this.calculateTotal(this.saleProduct)
     };
-    this.cart = [];
-    this.customer = { name: '' };
-    this.paymentMethod = 'Cash';
-    this.grandTotal = 0;
+    this.cart.push(item);
+    this.updateGrandTotal();
+
+    // Reset product form
+    this.saleProduct = {};
   }
+}
+
+submitSale() {
+  // Final submission with customer + cart
+  const saleData = {
+    customer: this.customer,
+    cart: this.cart,
+    paymentMethod: this.paymentMethod,
+    grandTotal: this.grandTotal
+  };
+
+  console.log("Submitting Sale:", saleData);
+  // TODO: send to API
+}
+
+clearSale() {
+  this.saleProduct = {};
+  this.customer = {};
+  this.cart = [];
+  this.grandTotal = 0;
+}
+
+calculateTotal(product: any) {
+  let total = product.sellingPrice || 0;
+  if (product.discount) {
+    total -= (total * product.discount) / 100;
+  }
+  if (product.taxRate) {
+    total += (total * product.taxRate) / 100;
+  }
+  return total;
+}
+
+updateGrandTotal() {
+  this.grandTotal = this.cart.reduce((sum, item) => sum + item.total, 0);
+}
+
 }

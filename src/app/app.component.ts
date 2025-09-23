@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  ngOnInit() {debugger
+  ngOnInit() {
     if (typeof window !== 'undefined') {
       AOS.init();
     }
