@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, AfterViewChecked, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { Component, Input, OnInit, AfterViewChecked, ViewChild, ElementRef, NgZone, ChangeDetectorRef, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BarcodeService } from '../../../services/barcode.service';
 import tippy, { Instance } from 'tippy.js';
@@ -14,8 +14,9 @@ import { ProductDTO } from '../../../DTO/DTO';
   imports: [CommonModule, FormsModule],
   templateUrl: './product-list.component.html'
 })
-export class ProductListComponent implements OnInit, AfterViewChecked {
+export class ProductListComponent implements OnInit, AfterViewInit {
    @ViewChild('productTable', { static: false }) productTable!: ElementRef;
+  @ViewChildren('tooltipTarget') tooltipTargets!: QueryList<ElementRef>;
   @Input() products: ProductDTO[] = [];
   selectedBarcodes: string[] = [];
   barcode: string | null = null;
@@ -31,7 +32,9 @@ export class ProductListComponent implements OnInit, AfterViewChecked {
   constructor(
     private barcodeService: BarcodeService,
     private inventoryService: InventoryService,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private cdr: ChangeDetectorRef
+
   ) {
     const now = new Date();
     const yyyy = now.getFullYear();
@@ -52,8 +55,13 @@ export class ProductListComponent implements OnInit, AfterViewChecked {
     this.getProductData();
   }
 
-  ngAfterViewChecked(): void {
+ ngAfterViewInit(): void {
+    // Run once after view init
+    this.tooltipTargets.changes.subscribe(() => {
+      this.initTooltips();
+    });
   }
+
 
   getProductData() {
     this.inventoryService.GetProducts(this.filter).subscribe({
@@ -61,7 +69,7 @@ export class ProductListComponent implements OnInit, AfterViewChecked {
         if (data) {
           this.products = data;
           this.totalRecords = data.length > 0 ? data[0].totalRecords : 0;
-          setTimeout(() => this.initTooltips(), 0); // initialize after DOM renders
+         this.cdr.detectChanges(); // force Angular to render table rows
         }
       },
       error: (err) => console.error(err)
@@ -138,23 +146,19 @@ export class ProductListComponent implements OnInit, AfterViewChecked {
   }
 
   // 🔹 Tooltips
-  initTooltips() {
-    if (!this.productTable) return;
-
+   initTooltips() {
     // Destroy old tooltips
     this.tooltips.forEach(t => t.destroy());
     this.tooltips = [];
 
-    // Run outside Angular to avoid change detection issues
     this.ngZone.runOutsideAngular(() => {
-      const elements = this.productTable.nativeElement.querySelectorAll('[data-tippy-content]');
-      elements.forEach((el: HTMLElement) => {
-        const tip = tippy(el, {
+      this.tooltipTargets.forEach(el => {
+        const tip = tippy(el.nativeElement, {
           delay: [100, 100],
           arrow: true,
           theme: 'light',
         });
-        this.tooltips.push(tip);
+        this.tooltips.push(Array.isArray(tip) ? tip[0] : tip);
       });
     });
   }

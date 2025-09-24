@@ -108,8 +108,32 @@ def generate_barcode_pdf(barcodes: list[str]):
         raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
+    import socket
+    import time
     import uvicorn
-    uvicorn.run("barcode_service:app", host="127.0.0.1", port=5001, reload=False)
+
+    def is_port_open(host: str, port: int) -> bool:
+        """Check if a port is open."""
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.settimeout(1)
+            return s.connect_ex((host, port)) == 0
+
+    # Wait until Angular dev server (4200) is running
+    print("🔍 Checking if Angular (port 4200) is running...")
+    retries = 10
+    while retries > 0:
+        if is_port_open("127.0.0.1", 4200):
+            print("✅ Angular is running on port 4200. Starting FastAPI service...")
+            uvicorn.run("barcode_service:app", host="127.0.0.1", port=5001, reload=False)
+            break
+        else:
+            print("⏳ Angular not running on port 4200, retrying...")
+            time.sleep(3)
+            retries -= 1
+
+    if retries == 0:
+        print("❌ Angular was not detected on port 4200. Exiting without starting FastAPI.")
+
     
 # for running this service directly
 # python -m uvicorn barcode_service:app --reload --host 127.0.0.1 --port 5001
