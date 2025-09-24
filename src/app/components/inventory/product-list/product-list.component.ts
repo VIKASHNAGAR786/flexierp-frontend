@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, AfterViewChecked } from '@angular/core';
+import { Component, Input, OnInit, AfterViewChecked, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BarcodeService } from '../../../services/barcode.service';
 import tippy, { Instance } from 'tippy.js';
@@ -15,6 +15,7 @@ import { ProductDTO } from '../../../DTO/DTO';
   templateUrl: './product-list.component.html'
 })
 export class ProductListComponent implements OnInit, AfterViewChecked {
+   @ViewChild('productTable', { static: false }) productTable!: ElementRef;
   @Input() products: ProductDTO[] = [];
   selectedBarcodes: string[] = [];
   barcode: string | null = null;
@@ -29,7 +30,8 @@ export class ProductListComponent implements OnInit, AfterViewChecked {
 
   constructor(
     private barcodeService: BarcodeService,
-    private inventoryService: InventoryService
+    private inventoryService: InventoryService,
+    private ngZone: NgZone
   ) {
     const now = new Date();
     const yyyy = now.getFullYear();
@@ -51,7 +53,6 @@ export class ProductListComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
-    this.initTooltips();
   }
 
   getProductData() {
@@ -60,6 +61,7 @@ export class ProductListComponent implements OnInit, AfterViewChecked {
         if (data) {
           this.products = data;
           this.totalRecords = data.length > 0 ? data[0].totalRecords : 0;
+          setTimeout(() => this.initTooltips(), 0); // initialize after DOM renders
         }
       },
       error: (err) => console.error(err)
@@ -137,19 +139,23 @@ export class ProductListComponent implements OnInit, AfterViewChecked {
 
   // 🔹 Tooltips
   initTooltips() {
-    // Destroy existing tooltips
+    if (!this.productTable) return;
+
+    // Destroy old tooltips
     this.tooltips.forEach(t => t.destroy());
     this.tooltips = [];
 
-    // Initialize new tooltips
-    const elements = document.querySelectorAll('[data-tippy-content]');
-    elements.forEach(el => {
-      const tip = tippy(el as HTMLElement, {
-        delay: [100, 100],
-        arrow: true,
-        theme: 'light',
+    // Run outside Angular to avoid change detection issues
+    this.ngZone.runOutsideAngular(() => {
+      const elements = this.productTable.nativeElement.querySelectorAll('[data-tippy-content]');
+      elements.forEach((el: HTMLElement) => {
+        const tip = tippy(el, {
+          delay: [100, 100],
+          arrow: true,
+          theme: 'light',
+        });
+        this.tooltips.push(tip);
       });
-      this.tooltips.push(tip);
     });
   }
 }
