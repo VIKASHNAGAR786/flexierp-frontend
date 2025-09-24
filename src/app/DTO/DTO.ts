@@ -25,3 +25,23 @@ export interface ProductDTO {
   fullName: string;
   totalRecords: number;
 }
+
+export interface ProductByBarcodeDTO {
+  productID: number;
+  productCode: string;
+  barCode: string;
+  productName: string;
+  categoryName: string;
+  productType: string;
+  packedDate?: string;      // ISO date string, optional
+  packedWeight?: number;
+  packedHeight?: number;
+  packedDepth?: number;
+  packedWidth?: number;
+  isPerishable?: boolean;
+  purchasePrice?: number;
+  sellingPrice?: number;
+  taxRate?: number;
+  discount?: number;
+}
+
