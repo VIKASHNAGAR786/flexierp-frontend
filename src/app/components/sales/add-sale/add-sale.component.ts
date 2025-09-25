@@ -7,6 +7,7 @@ import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ProductByBarcodeDTO } from '../../../DTO/DTO';
 import { AlertService } from '../../../services/alert.service';
+import { Customer, Sale, SaleDetail } from '../../../MODEL/MODEL';
 
 @Component({
   selector: 'app-add-sale',
@@ -19,8 +20,10 @@ export class AddSaleComponent {
 
   saleProduct: ProductByBarcodeDTO | any = {};
 
+  saledata : Sale | any = {};
   cart: any[] = [];
-  customer: any = { name: '' };
+  customer: Customer | any = {};
+  saledetails: SaleDetail[] | any = [];
   paymentMethod: string = 'Cash';
   grandTotal: number = 0;
 
@@ -95,6 +98,11 @@ export class AddSaleComponent {
   };
 
   this.cart.push(newItem);
+  const detail: SaleDetail = {
+    productID: this.saleProduct.productID,
+    createdBy: 2 // or whoever is logged in
+  };
+  this.saledetails.push(detail);
   this.updateGrandTotal();
 
   // Reset for next scan
@@ -154,6 +162,26 @@ export class AddSaleComponent {
     if (product.discount) total -= (total * product.discount) / 100;
     if (product.tax) total += (total * product.tax) / 100;
     return total;
+  }
+
+  MakeTheSale() : void {
+    const sale : Sale = {
+      saleDetails: this.saledetails,
+      customer: this.customer,
+      totalItems: this.cart.length,
+      totalAmount: this.cart.reduce((sum, item) => sum + item.total, 0),
+      totalDiscount: this.cart.reduce((sum, item) => sum + (item.discountAmt || 0), 0),
+      orderDate: new Date()
+    };
+    this.saleservice.InsertSale(sale)
+      .subscribe({
+      next: (res) => {
+        this.alertservice.showAlert('✅ Record Save successfully!', 'success');
+      },
+      error: (err) => {
+        this.alertservice.showAlert('Record Not Save', 'error');
+      }
+    });
   }
 
   updateGrandTotal() {

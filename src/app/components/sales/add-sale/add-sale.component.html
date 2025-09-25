@@ -197,7 +197,7 @@
                     class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
                     Customer Name
                 </label>
-                <input type="text" [(ngModel)]="customer.name" name="customerName" placeholder="Enter Customer Name"
+                <input type="text" [(ngModel)]="customer.customerName" name="customerName" placeholder="Enter Customer Name"
                     class="input-style" />
             </div>
 
@@ -207,7 +207,7 @@
                     class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
                     Email
                 </label>
-                <input type="email" [(ngModel)]="customer.email" name="customerEmail" placeholder="Enter Email"
+                <input type="email" [(ngModel)]="customer.email" name="email" placeholder="Enter Email"
                     class="input-style" />
             </div>
 
@@ -217,7 +217,7 @@
                     class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
                     Phone
                 </label>
-                <input type="tel" [(ngModel)]="customer.phone" name="customerPhone" placeholder="Enter Phone Number"
+                <input type="tel" [(ngModel)]="customer.phoneNo" name="phoneNo" placeholder="Enter Phone Number"
                     class="input-style" />
             </div>
 
@@ -227,7 +227,7 @@
                     class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
                     Address
                 </label>
-                <textarea [(ngModel)]="customer.address" name="customerAddress" rows="2" placeholder="Enter Address"
+                <textarea [(ngModel)]="customer.customerAddress" name="customerAddress" rows="2" placeholder="Enter Address"
                     class="input-style resize-none"></textarea>
             </div>
 
@@ -237,7 +237,7 @@
                     class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
                     Payment Method
                 </label>
-                <select [(ngModel)]="paymentMethod" name="paymentMethod"
+                <select [(ngModel)]="customer.paymentMethod" name="paymentMethod"
                     class="w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200">
                     <option value="Cash">Cash</option>
                     <option value="UPI">UPI</option>
@@ -251,7 +251,7 @@
                     class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
                     Notes
                 </label>
-                <textarea [(ngModel)]="customer.notes" name="customerNotes" rows="3" placeholder="Additional notes"
+                <textarea [(ngModel)]="customer.customerNotes" name="customerNotes" rows="3" placeholder="Additional notes"
                     class="input-style resize-none"></textarea>
             </div>
         </div>
@@ -260,7 +260,7 @@
 
     <!-- Action Buttons -->
     <div class="flex flex-col md:flex-row gap-4">
-        <button type="submit"
+        <button type="submit" (click)="MakeTheSale()"
             class="w-full md:w-1/2 bg-[#00ffee] text-black px-6 py-3 rounded-lg font-bold hover:bg-white transition">
             Submit Sale
         </button>

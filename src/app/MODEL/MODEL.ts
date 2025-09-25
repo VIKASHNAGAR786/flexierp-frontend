@@ -33,3 +33,26 @@ export interface ProductModel {
   warehouseRefrigerated: boolean;
 }
 
+export interface Customer {
+  customerName: string;
+  customerAddress: string;
+  phoneNo: string;
+  email: string;
+  paymentMode?: number; // nullable
+}
+
+export interface SaleDetail {
+  productID: number;
+  createdBy?: number; // nullable
+}
+
+export interface Sale {
+  customerID?: number; // nullable if new customer
+  customer?: Customer; // optional
+  totalItems: number;
+  totalAmount: number;
+  totalDiscount: number;
+  orderDate?: Date; // nullable
+  saleDetails: SaleDetail[];
+}
+

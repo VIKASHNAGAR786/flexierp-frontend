@@ -1,24 +1,31 @@
 <!-- Fixed Tabs -->
 <div class="fixed top-[64px] left-0 right-0 z-[9999] bg-gradient-to-r from-slate-900 to-slate-800 shadow-md">
   <div class="px-4 py-3 flex space-x-6 justify-center md:justify-start md:ml-64">
-    <!-- Add Product Tab -->
-    <a
-      class="px-4 py-2 rounded-md font-medium transition cursor-pointer"
-      [ngClass]="{
-        'bg-[#00ffee] text-black': activeTab === 'add',
-        'text-[#00ffee]': activeTab !== 'add'
-      }"
-      (click)="switchTab('add')"
-    >
-      Make Sale
-    </a>
-
-    <!-- Product List Tab -->
-    
+    <ng-container *ngFor="let tab of tabs">
+      <a
+        class="px-4 py-2 rounded-md font-medium transition-all cursor-pointer relative group"
+        [ngClass]="{
+          'bg-[#00ffee] text-black': activeTab === tab.key,
+          'text-[#00ffee] hover:text-white': activeTab !== tab.key
+        }"
+        (click)="switchTab(tab.key)"
+      >
+        {{ tab.label }}
+        <!-- Animated underline indicator -->
+        <span
+          class="absolute left-0 bottom-0 w-full h-1 bg-[#00ffee] rounded-md scale-x-0 group-hover:scale-x-100 transition-transform origin-left"
+          [class.scale-x-100]="activeTab === tab.key"
+        ></span>
+      </a>
+    </ng-container>
   </div>
 </div>
 
 <!-- Tab Content -->
 <div class="tab-content p-4 mt-36 bg-slate-900 text-white rounded-lg shadow-lg border border-slate-700">
-  <app-add-sale *ngIf="activeTab === 'add'" (productAdded)="MakeSale($event)"></app-add-sale>
+  <ng-container *ngFor="let tab of tabs">
+    <ng-container *ngIf="activeTab === tab.key">
+      <ng-container *ngComponentOutlet="tab.component"></ng-container>
+    </ng-container>
+  </ng-container>
 </div>
