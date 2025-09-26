@@ -127,3 +127,22 @@
   <h3>Barcode for: {{ barcodeText }}</h3>
   <img [src]="barcode" alt="Barcode" />
 </div>
+
+
+<!-- for the big loader -->
+ <div *ngIf="reportIsLoading" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+  <div class="text-center space-y-4">
+
+    <!-- Animated FLEXIERP text -->
+    <h1 class="text-5xl font-extrabold text-[#00ffee] animate-bounce">FLEXIERP</h1>
+
+    <!-- Bouncing dots -->
+    <div class="flex justify-center space-x-2">
+      <span class="w-4 h-4 bg-[#00ffee] rounded-full animate-bounce delay-100"></span>
+      <span class="w-4 h-4 bg-[#00ffee] rounded-full animate-bounce delay-200"></span>
+      <span class="w-4 h-4 bg-[#00ffee] rounded-full animate-bounce delay-300"></span>
+    </div>
+
+    <p class="text-white text-lg font-semibold animate-pulse">Loading report, please wait...</p>
+  </div>
+</div>

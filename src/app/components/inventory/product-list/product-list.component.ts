@@ -26,6 +26,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   readonly today: string;
   filter: PaginationFilter;
   pageSizes: number[] = [10, 20, 50];
+  reportIsLoading: boolean = false;
 
   private tooltips: Instance[] = [];
 
@@ -97,13 +98,17 @@ export class ProductListComponent implements OnInit, AfterViewInit {
 
   // 🔹 Export
   exportToPdf() {
-     this.inventoryService.getProductReportPdf(this.filter).subscribe(blob => {
-  if (blob) this.inventoryService.downloadFile(blob, 'ProductReport.pdf');
-});
-    }
+    this.reportIsLoading = true;
+    this.inventoryService.getProductReportPdf(this.filter).subscribe(blob => {
+      this.reportIsLoading = false;
+      if (blob) this.inventoryService.downloadFile(blob, 'ProductReport.pdf');
+    });
+  }
 
   exportToExcel() {
+    this.reportIsLoading = true;
     this.inventoryService.getProductReportExcel(this.filter).subscribe(blob => {
+      this.reportIsLoading = false;
       if (blob) this.inventoryService.downloadFile(blob, 'ProductReport.xlsx');
     });
   }
