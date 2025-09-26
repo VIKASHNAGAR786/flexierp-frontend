@@ -4,13 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InventorySettingsComponent } from '../settings/inventory-settings/inventory-settings.component';
 import { SaleSettingsComponent } from '../settings/sale-settings/sale-settings.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
+import { Tab } from '../../MODEL/MODEL';
 
-
-interface Tab {
-  id: string;
-  label: string;
-  component: any;
-}
 
 @Component({
   selector: 'app-customers',

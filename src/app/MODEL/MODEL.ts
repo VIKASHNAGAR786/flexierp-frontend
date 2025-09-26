@@ -1,3 +1,9 @@
+export interface Tab {
+  id: string;
+  label: string;
+  component: any;
+}
+
 export interface PaginationFilter {
   startDate: string | null;
   endDate: string | null;
