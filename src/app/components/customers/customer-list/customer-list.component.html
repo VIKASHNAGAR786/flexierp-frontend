@@ -1,0 +1,96 @@
+<!-- 🔍 Search Bar + Pagination Controls -->
+<div class="flex justify-between items-center mb-4 gap-2 flex-wrap">
+  <input type="text" [(ngModel)]="filter.searchTerm" (ngModelChange)="onSearchChange()"
+    placeholder="Search customer..."
+    class="px-4 py-2 rounded-lg bg-slate-800 text-white border border-slate-600 w-1/3" />
+
+  <!-- Date Filters -->
+  <div class="flex gap-2 flex-wrap items-center">
+    <!-- Start Date -->
+    <div class="relative w-44 md:w-52">
+      <input type="date" [(ngModel)]="filter.startDate" (ngModelChange)="onSearchChange()"
+        class="w-full px-10 py-2 rounded-lg bg-slate-800 text-white border border-slate-600 focus:ring-2 focus:ring-[#00ffee]" />
+      <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#00ffee]">
+        <i class="fas fa-calendar-alt"></i>
+      </span>
+      <button *ngIf="filter.startDate" (click)="filter.startDate=''; onSearchChange()" type="button"
+        class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-red-500">
+        <i class="fas fa-times-circle"></i>
+      </button>
+    </div>
+
+    <!-- End Date -->
+    <div class="relative w-44 md:w-52">
+      <input type="date" [(ngModel)]="filter.endDate" (ngModelChange)="onSearchChange()"
+        class="w-full px-10 py-2 rounded-lg bg-slate-800 text-white border border-slate-600 focus:ring-2 focus:ring-[#00ffee]" />
+      <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#00ffee]">
+        <i class="fas fa-calendar-alt"></i>
+      </span>
+      <button *ngIf="filter.endDate" (click)="filter.endDate=''; onSearchChange()" type="button"
+        class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-red-500">
+        <i class="fas fa-times-circle"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Page Size -->
+  <select [(ngModel)]="filter.pageSize" (change)="onPageSizeChange()"
+    class="px-3 py-2 rounded bg-slate-800 text-white border border-slate-600">
+    <option *ngFor="let size of pageSizes" [value]="size">{{ size }} per page</option>
+  </select>
+</div>
+
+<!-- 📋 Customers Table -->
+<!-- 📋 Customers Table -->
+<div class="relative overflow-x-auto overflow-y-auto bg-slate-900 rounded-lg shadow-lg max-h-[500px]">
+
+  <!-- Loader Overlay -->
+  <div *ngIf="isLoading" class="absolute inset-0 flex items-center justify-center bg-black/40 z-50 rounded-lg">
+    <div class="w-12 h-12 border-4 border-[#00ffee] border-t-transparent rounded-full animate-spin"></div>
+  </div>
+
+  <table class="min-w-full text-white border-collapse" [class.opacity-50]="isLoading">
+    <thead class="bg-gradient-to-r from-slate-900 to-slate-800 text-[#00ffee] uppercase text-sm sticky top-0 z-40">
+      <tr>
+        <th class="px-4 py-2 border-b border-slate-700">Sr.No</th>
+        <th class="px-4 py-2 border-b border-slate-700">Customer Name</th>
+        <th class="px-4 py-2 border-b border-slate-700">Address</th>
+        <th class="px-4 py-2 border-b border-slate-700">Phone</th>
+        <th class="px-4 py-2 border-b border-slate-700">Email</th>
+        <th class="px-4 py-2 border-b border-slate-700">Total Items</th>
+        <th class="px-4 py-2 border-b border-slate-700">Payment Mode</th>
+        <th class="px-4 py-2 border-b border-slate-700">Remark</th>
+        <th class="px-4 py-2 border-b border-slate-700">Created Date</th>
+        <th class="px-4 py-2 border-b border-slate-700">Created By</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-slate-700">
+      <tr *ngFor="let c of customers" class="hover:bg-slate-700 transition">
+        <td class="px-4 py-2 text-center">{{ c.srNo }}</td>
+        <td class="px-4 py-2">{{ c.customerName }}</td>
+        <td class="px-4 py-2">{{ c.customerAddress }}</td>
+        <td class="px-4 py-2">{{ c.phoneNo }}</td>
+        <td class="px-4 py-2">{{ c.email }}</td>
+        <td class="px-4 py-2 text-center">{{ c.totalItems }}</td>
+        <td class="px-4 py-2">{{ c.paymentMode }}</td>
+        <td class="px-4 py-2">{{ c.remark }}</td>
+        <td class="px-4 py-2 text-center">{{ c.createdDate | date:'short' }}</td>
+        <td class="px-4 py-2 text-center">{{ c.fullName }}</td>
+      </tr>
+
+      <tr *ngIf="!isLoading && customers.length === 0">
+        <td colspan="10" class="text-center py-4 text-gray-400">No customers found.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- 📄 Pagination Controls -->
+<div class="flex justify-between items-center mt-4 text-white">
+  <button (click)="prevPage()" [disabled]="filter.pageNo === 1"
+    class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50">Previous</button>
+  <span>Page {{ filter.pageNo }} of {{ totalPages }}</span>
+  <button (click)="nextPage()" [disabled]="filter.pageNo === totalPages"
+    class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50">Next</button>
+</div>

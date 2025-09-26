@@ -8,11 +8,12 @@ import { of } from 'rxjs';
 import { ProductByBarcodeDTO } from '../../../DTO/DTO';
 import { AlertService } from '../../../services/alert.service';
 import { Customer, Sale, SaleDetail } from '../../../MODEL/MODEL';
+import { OldCustomerPopupComponent } from "../old-customer-popup/old-customer-popup.component";
 
 @Component({
   selector: 'app-add-sale',
   standalone: true,
-  imports: [CommonModule, FormsModule, ScanBarcodeComponent],
+  imports: [CommonModule, FormsModule, ScanBarcodeComponent, OldCustomerPopupComponent],
   templateUrl: './add-sale.component.html',
   styleUrls: ['./add-sale.component.css']
 })
@@ -138,18 +139,6 @@ export class AddSaleComponent {
     }
   }
 
-  submitSale() {
-    const saleData = {
-      customer: this.customer,
-      cart: this.cart,
-      paymentMethod: this.paymentMethod,
-      grandTotal: this.grandTotal
-    };
-
-    console.log("Submitting Sale:", saleData);
-    // TODO: send to API
-  }
-
   clearSale() {
     this.saleProduct = {};
     this.customer = {};
@@ -177,6 +166,7 @@ export class AddSaleComponent {
       .subscribe({
       next: (res) => {
         this.alertservice.showAlert('✅ Record Save successfully!', 'success');
+        this.clearSale();
       },
       error: (err) => {
         this.alertservice.showAlert('Record Not Save', 'error');
@@ -187,4 +177,12 @@ export class AddSaleComponent {
   updateGrandTotal() {
     this.grandTotal = this.cart.reduce((sum, item) => sum + item.total, 0);
   }
+
+
+   showOldCustomer = false;
+
+  openOldCustomerSale() {
+    this.showOldCustomer = true;
+  }
+  
 }

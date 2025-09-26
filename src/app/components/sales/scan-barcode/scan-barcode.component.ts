@@ -29,9 +29,12 @@ export class ScanBarcodeComponent {
 
   formats: BarcodeFormat[] = [
     BarcodeFormat.CODE_128,
-    BarcodeFormat.QR_CODE,
-    BarcodeFormat.EAN_13
   ];
+  constraints: MediaTrackConstraints = {
+  width: { ideal: 640 },
+  height: { ideal: 480 },
+  facingMode: 'environment'
+};
 
   // When barcode is scanned
   onCodeResult(resultString: string) {

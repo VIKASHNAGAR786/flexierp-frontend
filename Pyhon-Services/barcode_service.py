@@ -22,7 +22,7 @@ app.add_middleware(
 )
 
 # Supported barcode types
-SUPPORTED_BARCODES = ["code128", "ean13", "ean8", "upc", "isbn13"]
+SUPPORTED_BARCODES = ["code128"]
 
 @app.get("/barcode/png/{text}")
 def generate_barcode_png(

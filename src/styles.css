@@ -74,3 +74,14 @@ body {
          border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2
          focus:ring-green-500 focus:border-green-500 transition-all duration-200;
 }
+
+@keyframes scan {
+  0% { top: 0%; }
+  50% { top: 100%; }
+  100% { top: 0%; }
+}
+
+.animate-scan {
+  animation: scan 2s linear infinite;
+}
+

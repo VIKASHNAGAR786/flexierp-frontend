@@ -45,3 +45,41 @@ export interface ProductByBarcodeDTO {
   discount?: number;
 }
 
+export interface SaleDTO {
+  srNo: number;
+  saleID: number;
+  customerName: string;
+  totalItems: number;
+  totalAmount: number;
+  totalDiscount: number;
+  orderDate: Date;
+  fullName: string;
+  totalRows: number;
+}
+
+export interface OldCustomerDTO {
+    srNo: number;
+    customerID: number;
+    customerName: string;
+    phoneNo: string;
+    email: string;
+    remark: string;
+    totalRecords: number;
+}
+
+export interface CustomerWithSalesDTO {
+    srNo: number;
+    customerID: number;
+    customerName: string;
+    customerAddress: string;
+    phoneNo: string;
+    email: string;
+    totalItems: number;
+    paymentMode: string;
+    remark: string;
+    createdDate: string;  // Use string if coming from API (ISO date), otherwise Date
+    fullName: string;
+    totalRecords: number;
+}
+
+

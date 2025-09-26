@@ -1,18 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
-
-interface SaleReport {
-  saleNo: number;
-  customerName: string;
-  totalItems: number;
-  totalAmount: number;
-  totalDiscount: number;
-  orderDate: string;
-  createdBy: string;
-  paymentMode: string;
-}
+import { SaleDTO } from '../../../DTO/DTO';
+import { finalize } from 'rxjs/operators';
+import { SaleserviceService } from '../../../services/saleservice.service';
+import { PaginationFilter } from '../../../MODEL/MODEL';
 
 @Component({
   selector: 'app-sale-report',
@@ -21,50 +13,79 @@ interface SaleReport {
   templateUrl: './sale-report.component.html',
   styleUrls: ['./sale-report.component.css']
 })
-
-export class SaleReportComponent {
-  filter = {
-    searchTerm: '',
-    startDate: '',
-    endDate: '',
-    pageNo: 1,
-    pageSize: 5
-  };
+export class SaleReportComponent implements OnInit {
+   readonly today: string;
+   filter: PaginationFilter;
 
   pageSizes = [5, 10, 20];
 
-  sales: SaleReport[] = [
-    { saleNo: 1, customerName: 'John Doe', totalItems: 3, totalAmount: 500, totalDiscount: 50, orderDate: '2025-09-01', createdBy: 'Admin', paymentMode: 'Cash' },
-    { saleNo: 2, customerName: 'Jane Smith', totalItems: 2, totalAmount: 300, totalDiscount: 20, orderDate: '2025-09-02', createdBy: 'Admin', paymentMode: 'Card' },
-    { saleNo: 3, customerName: 'Alice', totalItems: 5, totalAmount: 1000, totalDiscount: 100, orderDate: '2025-09-03', createdBy: 'Admin', paymentMode: 'Cash' },
-    { saleNo: 4, customerName: 'Bob', totalItems: 1, totalAmount: 150, totalDiscount: 10, orderDate: '2025-09-04', createdBy: 'Admin', paymentMode: 'Card' },
-    { saleNo: 5, customerName: 'Charlie', totalItems: 4, totalAmount: 700, totalDiscount: 70, orderDate: '2025-09-05', createdBy: 'Admin', paymentMode: 'Cash' },
-  ];
+  sales: SaleDTO[] = [];
+  totalRows: number = 0;
+  totalPages: number = 1;
+  loading: boolean = false;
 
-  get filteredSales() {
-    return this.sales
-      .filter(sale =>
-        sale.customerName.toLowerCase().includes(this.filter.searchTerm.toLowerCase())
-      )
-      .slice((this.filter.pageNo - 1) * this.filter.pageSize, this.filter.pageNo * this.filter.pageSize);
+  constructor(
+    private saleService: SaleserviceService
+  )
+  {
+    const now = new Date();
+    const yyyy = now.getFullYear();
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const dd = String(now.getDate()).padStart(2, '0');
+
+    this.today = `${yyyy}-${mm}-${dd}`;
+    this.filter = {
+      startDate: this.today,
+      endDate: this.today,
+      searchTerm: '',
+      pageNo: 1,
+      pageSize: 10
+    };
   }
 
-  totalPages = Math.ceil(this.sales.length / this.filter.pageSize);
+  ngOnInit() {
+    this.loadSales();
+  }
+
+  loadSales() {
+    this.loading = true;
+
+    this.saleService.GetSale(this.filter)
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe(res => {
+        if (res && res.length > 0) {
+          this.sales = res;
+          this.totalRows = res[0].totalRows; // TotalRows from API
+          this.totalPages = Math.ceil(this.totalRows / this.filter.pageSize);
+        } else {
+          this.sales = [];
+          this.totalRows = 0;
+          this.totalPages = 1;
+        }
+      });
+  }
 
   prevPage() {
-    if (this.filter.pageNo > 1) this.filter.pageNo--;
+    if (this.filter.pageNo > 1) {
+      this.filter.pageNo--;
+      this.loadSales();
+    }
   }
 
   nextPage() {
-    if (this.filter.pageNo < this.totalPages) this.filter.pageNo++;
+    if (this.filter.pageNo < this.totalPages) {
+      this.filter.pageNo++;
+      this.loadSales();
+    }
   }
 
-  getSaleData() {
-    this.totalPages = Math.ceil(
-      this.sales.filter(sale =>
-        sale.customerName.toLowerCase().includes(this.filter.searchTerm.toLowerCase())
-      ).length / this.filter.pageSize
-    );
-    if (this.filter.pageNo > this.totalPages) this.filter.pageNo = this.totalPages;
+  onSearchChange() {
+    this.filter.pageNo = 1; // Reset page
+    this.loadSales();
+  }
+
+  onPageSizeChange() {
+    this.filter.pageNo = 1;
+    this.loadSales();
   }
 }

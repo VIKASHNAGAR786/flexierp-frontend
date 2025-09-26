@@ -1,17 +1,41 @@
-<div class="flex flex-col items-center justify-center min-h-[60vh] text-center text-white px-4 py-10">
-
-  <div class="text-[#00ffee] text-6xl md:text-7xl mb-6 animate-pulse">
-    🚧
+<!-- Fixed Tabs -->
+<div class="fixed top-[64px] left-0 right-0 z-[9999] bg-gradient-to-r from-slate-900 to-slate-800 shadow-lg border-b border-slate-700">
+  <div class="px-4 py-3 flex space-x-4 md:space-x-6 justify-center md:justify-start md:ml-64">
+    <a
+      *ngFor="let tab of tabs"
+      class="px-5 py-2 rounded-full font-semibold text-sm md:text-base transition-all duration-300 cursor-pointer relative overflow-hidden"
+      [ngClass]="{
+        'bg-[#00ffee] text-black shadow-md': activeTab === tab.id,
+        'text-[#00ffee] hover:bg-slate-700 hover:text-[#00ffee]': activeTab !== tab.id
+      }"
+      (click)="switchTab(tab.id)"
+    >
+      <span class="relative z-10">{{ tab.label }}</span>
+      <!-- Animated underline effect for active tab -->
+      <span
+        *ngIf="activeTab === tab.id"
+        class="absolute left-0 bottom-0 w-full h-1 bg-[#00ffee] rounded-full animate-slide-in"
+      ></span>
+    </a>
   </div>
-
-  <h2 class="text-2xl md:text-3xl font-bold mb-4">This Module is Coming Soon!</h2>
-
-  <p class="text-slate-400 max-w-xl mb-6">
-    We're working hard to bring you this feature. Stay tuned — it'll be worth the wait.
-  </p>
-
-  <button routerLink="/" class="bg-[#00ffee] text-black px-6 py-2 rounded-full font-semibold hover:bg-[#00ddcc] transition">
-    Back to Dashboard
-  </button>
-
 </div>
+
+<!-- Tab Content -->
+<div class="tab-content p-6 mt-36 bg-slate-900 text-white rounded-xl shadow-xl border border-slate-700 transition-all duration-300">
+  <ng-container *ngFor="let tab of tabs">
+    <ng-container *ngIf="activeTab === tab.id">
+      <ng-container *ngComponentOutlet="tab.component"></ng-container>
+    </ng-container>
+  </ng-container>
+</div>
+
+<!-- Optional: Add some animation -->
+<style>
+  @keyframes slide-in {
+    0% { width: 0; opacity: 0; }
+    100% { width: 100%; opacity: 1; }
+  }
+  .animate-slide-in {
+    animation: slide-in 0.3s ease-out forwards;
+  }
+</style>

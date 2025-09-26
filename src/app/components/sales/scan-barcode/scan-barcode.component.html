@@ -34,15 +34,29 @@
     </select>
 
     <!-- ZXing Scanner -->
-    <zxing-scanner
-  [device]="selectedDevice"
-  [formats]="formats"
-  (camerasFound)="availableDevices = $event"
-  (scanSuccess)="onCodeResult($event)"
-  [torch]="false"
-  [autofocusEnabled]="true"
-  class="w-full rounded-lg overflow-hidden shadow-lg"
-></zxing-scanner>
+  <div class="relative w-full h-80 rounded-lg overflow-hidden shadow-lg">
+  <!-- ZXing Scanner -->
+  <zxing-scanner
+    [device]="selectedDevice"
+    [formats]="formats"
+    [tryHarder]="true"   
+    (camerasFound)="availableDevices = $event"
+    (scanSuccess)="onCodeResult($event)"
+    [torch]="false"
+    [autofocusEnabled]="true"
+    class="w-full h-full"
+  ></zxing-scanner>
+
+  <!-- Overlay: Dark semi-transparent background -->
+  <div class="absolute inset-0 bg-black/50 pointer-events-none"></div>
+
+  <!-- Scanner Box -->
+  <div class="absolute top-1/2 left-1/2 w-3/5 h-1/3 transform -translate-x-1/2 -translate-y-1/2 border-2 border-green-400 rounded-lg overflow-hidden">
+    <!-- Scanning Line -->
+    <div class="absolute top-0 left-0 w-full h-1 bg-green-400 animate-scan"></div>
+  </div>
+</div>
+
 
   </div>
   
