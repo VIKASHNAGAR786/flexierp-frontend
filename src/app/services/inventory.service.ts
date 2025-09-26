@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { UserinfowithloginService } from './userinfowithlogin.service';
 import { Observable, of } from 'rxjs';
@@ -32,7 +32,10 @@ export class InventoryService {
   private GetCategoriesUrl = environment.BASE_URL + '/Inventrory/GetCategories';
   private AddCategoriesUrl = environment.BASE_URL + '/Inventrory/AddCategory';
   private AddproductUrl = environment.BASE_URL + '/Inventrory/AddProduct';
- private GetProductsUrl = environment.BASE_URL + '/Inventrory/GetProducts';
+   private GetProductsUrl = environment.BASE_URL + '/Inventrory/GetProducts';
+
+ private GetProductReportPdfUrl = environment.BASE_URL + '/Inventrory/GetProductReportPdf';
+ private GetProductReportExcelUrl = environment.BASE_URL + '/Inventrory/GetProductReportExcel';
 
   saveProductCategory(categorydata: ProductCategory): Observable<any> {
     const headers = this.getAuthHeaders();
@@ -56,15 +59,56 @@ export class InventoryService {
     if (!headers) return of(null);
 
     // Send filter as query parameters
-    const params = {
-      pageNo: filter.pageNo.toString(),
-      pageSize: filter.pageSize.toString(),
-      searchTerm: filter.searchTerm || '',
-      startDate: filter.startDate || '',
-      endDate: filter.endDate || ''
-    };
+    let params = new HttpParams()
+      .set('pageNo', filter.pageNo.toString())
+      .set('pageSize', filter.pageSize.toString())
+      .set('searchTerm', filter.searchTerm || '')
+      .set('startDate', filter.startDate || '')
+      .set('endDate', filter.endDate || '');
+
 
     return this.http.get<ProductDTO[]>(this.GetProductsUrl, { headers, params });
   }
   
+   getProductReportPdf(filter: PaginationFilter): Observable<Blob | null> {
+    const headers = this.getAuthHeaders();
+    if (!headers) return of(null);
+
+    let params = new HttpParams()
+      .set('pageNo', filter.pageNo.toString())
+      .set('pageSize', filter.pageSize.toString())
+      .set('searchTerm', filter.searchTerm || '')
+      .set('startDate', filter.startDate || '')
+      .set('endDate', filter.endDate || '');
+
+    return this.http.get(this.GetProductReportPdfUrl, { headers, params, responseType: 'blob' });
+  }
+
+  // --- Get Excel Report ---
+  getProductReportExcel(filter: PaginationFilter): Observable<Blob | null> {
+    const headers = this.getAuthHeaders();
+    if (!headers) return of(null);
+
+    let params = new HttpParams()
+      .set('pageNo', filter.pageNo.toString())
+      .set('pageSize', filter.pageSize.toString())
+      .set('searchTerm', filter.searchTerm || '')
+      .set('startDate', filter.startDate || '')
+      .set('endDate', filter.endDate || '');
+
+    return this.http.get(this.GetProductReportExcelUrl, { headers, params, responseType: 'blob' });
+  }
+
+  // --- Utility to download blob as file ---
+  downloadFile(blob: Blob, fileName: string) {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }
+
+
+
 }

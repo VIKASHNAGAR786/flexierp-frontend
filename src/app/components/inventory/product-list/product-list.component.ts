@@ -96,8 +96,17 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   }
 
   // 🔹 Export
-  exportToPdf() { console.log('Export PDF with filter', this.filter); }
-  exportToExcel() { console.log('Export Excel with filter', this.filter); }
+  exportToPdf() {
+     this.inventoryService.getProductReportPdf(this.filter).subscribe(blob => {
+  if (blob) this.inventoryService.downloadFile(blob, 'ProductReport.pdf');
+});
+    }
+
+  exportToExcel() {
+    this.inventoryService.getProductReportExcel(this.filter).subscribe(blob => {
+      if (blob) this.inventoryService.downloadFile(blob, 'ProductReport.xlsx');
+    });
+  }
 
   // 🔹 Barcode
   getBarcode(text: string): void {
