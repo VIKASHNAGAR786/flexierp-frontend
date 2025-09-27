@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProductCategory, WarehouseModel } from '../../../MODEL/MODEL';
 import { InventoryService } from '../../../services/inventory.service';
+import { WarehouseDTO } from '../../../DTO/DTO';
 
 @Component({
   selector: 'app-inventory-settings',
@@ -10,14 +11,22 @@ import { InventoryService } from '../../../services/inventory.service';
   templateUrl: './inventory-settings.component.html',
   styleUrl: './inventory-settings.component.css'
 })
-export class InventorySettingsComponent {
-categoryForm: FormGroup;
+export class InventorySettingsComponent implements OnInit {
+
+    ngOnInit(): void {
+      if (this.activeTab === 'warehouse') {
+        this.loadWarehouses();
+      }
+  }
+
+  categoryForm: FormGroup;
   warehouseForm: FormGroup;
   isSubmitting = false;
   successMessage = '';
   errorMessage = '';
   showCategoryForm = false;
   showWarehouseForm = false;
+  warehouses: WarehouseDTO[] = [];
 
 
   constructor(private fb: FormBuilder, private inventoryService: InventoryService) {
@@ -58,7 +67,7 @@ categoryForm: FormGroup;
     });
   }
 
-   submitWarehouse() {
+  submitWarehouse() {
     if (this.warehouseForm.invalid) return;
 
     this.isSubmitting = true;
@@ -84,5 +93,28 @@ categoryForm: FormGroup;
       }
     });
   }
-    
+
+
+
+  loadWarehouses(): void {
+    this.inventoryService.GetWarehouses().subscribe({
+      next: (data) => {
+        this.warehouses = data || [];
+      },
+      error: (err) => console.error(err)
+    });
+  }
+
+  private _activeTab = 'category';
+
+get activeTab(): 'category' | 'warehouse' {
+  return this._activeTab as 'category' | 'warehouse';
+}
+
+set activeTab(value: 'category' | 'warehouse') {
+  this._activeTab = value;
+  if (value === 'warehouse') {
+    this.loadWarehouses();
+  }
+}
 }

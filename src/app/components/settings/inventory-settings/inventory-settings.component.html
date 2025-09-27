@@ -1,156 +1,96 @@
-<!-- Toggle Button -->
-<div class="flex justify-center mt-6">
-  <button
-    (click)="showCategoryForm = !showCategoryForm"
-    class="px-6 py-2 bg-[#00ffee] text-black font-bold rounded-md shadow hover:bg-[#00e6d5] transition"
-  >
-    {{ showCategoryForm ? 'Hide Form' : 'Add New Category' }}
-  </button>
-</div>
 
-<!-- Form Container -->
-<div *ngIf="showCategoryForm" class="p-6 mt-6 bg-slate-900 text-white rounded-lg shadow-lg border border-slate-700 w-full max-w-md mx-auto transition-all duration-300">
-  <h2 class="text-2xl font-semibold mb-6 text-[#00ffee] text-center">
-    Add New Category
-  </h2>
+<!-- Container -->
+<div class="flex h-screen bg-slate-900 text-white">
 
-  <form [formGroup]="categoryForm" (ngSubmit)="submitCategory()" class="space-y-4">
-    <!-- Category Name -->
-    <div>
-      <label for="categoryName" class="block text-sm font-medium text-gray-300 mb-1">
-        Category Name *
-      </label>
-      <input
-        type="text"
-        id="categoryName"
-        formControlName="categoryName"
-        class="w-full px-4 py-2 rounded-md bg-slate-800 border border-slate-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-[#00ffee] focus:border-[#00ffee] outline-none transition"
-        placeholder="Enter category name"
-        [ngClass]="{
-          'border-red-500': categoryForm.get('categoryName')?.invalid && categoryForm.get('categoryName')?.touched
-        }"
-      />
-      <div class="text-red-400 text-sm mt-1" *ngIf="categoryForm.get('categoryName')?.invalid && categoryForm.get('categoryName')?.touched">
-        Category Name is required.
-      </div>
-    </div>
-
-    <!-- Description -->
-    <div>
-      <label for="description" class="block text-sm font-medium text-gray-300 mb-1">
-        Description
-      </label>
-      <textarea
-        id="description"
-        formControlName="description"
-        rows="3"
-        class="w-full px-4 py-2 rounded-md bg-slate-800 border border-slate-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-[#00ffee] focus:border-[#00ffee] outline-none transition"
-        placeholder="Enter description (optional)"
-      ></textarea>
-    </div>
-
-    <!-- Submit Button -->
-    <button
-      type="submit"
-      class="w-full py-2 px-4 rounded-md font-medium bg-[#00ffee] text-black hover:bg-[#00e6d5] transition shadow-md"
-      [disabled]="isSubmitting"
-    >
-      {{ isSubmitting ? '⏳ Saving...' : ' Add Category' }}
+  <!-- Vertical Tabs (Fixed Sidebar) -->
+  <div class="w-48 bg-slate-800 border-r border-slate-700 flex flex-col h-screen sticky top-0">
+    <button (click)="activeTab='category'"
+      [ngClass]="activeTab==='category' ? 'bg-slate-700 text-[#00ffee]' : 'text-white'"
+      class="w-full py-4 px-4 text-left hover:bg-slate-700 transition">
+      Category
     </button>
-  </form>
-
-  <!-- Success / Error Messages -->
-  <div *ngIf="successMessage" class="mt-4 p-3 rounded-md text-center bg-green-900 text-green-400 border border-green-700">
-    {{ successMessage }}
+    <button (click)="activeTab='warehouse'"
+      [ngClass]="activeTab==='warehouse' ? 'bg-slate-700 text-[#00ffee]' : 'text-white'"
+      class="w-full py-4 px-4 text-left hover:bg-slate-700 transition">
+      Warehouse
+    </button>
   </div>
-  <div *ngIf="errorMessage" class="mt-4 p-3 rounded-md text-center bg-red-900 text-red-400 border border-red-700">
-    {{ errorMessage }}
-  </div>
-</div>
 
-
-<!-- warehouse form  -->
-
-<!-- Toggle Button -->
-<div class="flex justify-center mt-6">
-  <button
-    (click)="showWarehouseForm = !showWarehouseForm"
-    class="px-6 py-2 bg-[#00ffee] text-black font-bold rounded-md shadow hover:bg-[#00e6d5] transition"
-  >
-    {{ showWarehouseForm ? 'Hide Form' : 'Add New Warehouse' }}
-  </button>
-</div>
-
-<!-- Form Container -->
-<div *ngIf="showWarehouseForm" class="p-6 mt-6 bg-slate-900 text-white rounded-lg shadow-lg border border-slate-700 w-full max-w-md mx-auto transition-all duration-300">
-  <h2 class="text-2xl font-semibold mb-6 text-[#00ffee] text-center">
-    Add New Warehouse
-  </h2>
-
-  <form [formGroup]="warehouseForm" (ngSubmit)="submitWarehouse()" class="space-y-4">
+  <!-- Scrollable Tab Content -->
+  <div class="flex-1 p-6 overflow-y-auto h-screen">
     
-    <!-- Warehouse Name -->
-    <div>
-      <label for="warehouseName" class="block text-sm font-medium text-gray-300 mb-1">
-        Warehouse Name *
-      </label>
-      <input
-        type="text"
-        id="warehouseName"
-        formControlName="warehouseName"
-        class="w-full px-4 py-2 rounded-md bg-slate-800 border border-slate-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-[#00ffee] focus:border-[#00ffee] outline-none transition"
-        placeholder="Enter warehouse name"
-        [ngClass]="{
-          'border-red-500': warehouseForm.get('warehouseName')?.invalid && warehouseForm.get('warehouseName')?.touched
-        }"
-      />
-      <div class="text-red-400 text-sm mt-1" *ngIf="warehouseForm.get('warehouseName')?.invalid && warehouseForm.get('warehouseName')?.touched">
-        Warehouse Name is required.
+    <!-- Category Content -->
+    <div *ngIf="activeTab==='category'" class="bg-slate-900 p-6 rounded-xl shadow-md mb-6">
+      <h2 class="text-2xl font-semibold mb-6 text-[#00ffee] text-center drop-shadow-md">Add New Category</h2>
+      <form [formGroup]="categoryForm" (ngSubmit)="submitCategory()" class="space-y-5">
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-1">Category Name *</label>
+          <input type="text" formControlName="categoryName" class="input-style" placeholder="Enter category name"
+            [ngClass]="{'border-red-500': categoryForm.get('categoryName')?.invalid && categoryForm.get('categoryName')?.touched}" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-1">Description</label>
+          <textarea formControlName="description" rows="3" class="input-style" placeholder="Enter description (optional)"></textarea>
+        </div>
+        <button type="submit" class="w-full py-2 px-4 rounded-lg font-medium bg-[#00ffee] text-black hover:bg-[#00e6d5] transition shadow-md"
+          [disabled]="isSubmitting">
+          {{ isSubmitting ? '⏳ Saving...' : 'Add Category' }}
+        </button>
+      </form>
+    </div>
+
+    <!-- Warehouse Content -->
+    <div *ngIf="activeTab==='warehouse'" class="bg-slate-900 p-6 rounded-xl shadow-md">
+      <h2 class="text-2xl font-semibold mb-6 text-[#00ffee] text-center drop-shadow-md">Add New Warehouse</h2>
+      <form [formGroup]="warehouseForm" (ngSubmit)="submitWarehouse()" class="space-y-5">
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-1">Warehouse Name *</label>
+          <input type="text" formControlName="warehouseName" class="input-style" placeholder="Enter warehouse name"
+            [ngClass]="{'border-red-500': warehouseForm.get('warehouseName')?.invalid && warehouseForm.get('warehouseName')?.touched}" />
+        </div>
+
+        <div class="flex items-center space-x-3">
+          <input type="checkbox" formControlName="isRefrigerated"
+            class="h-5 w-5 text-[#00ffee] bg-slate-800 border-slate-600 rounded focus:ring-[#00ffee] focus:ring-2" />
+          <label class="text-sm font-medium text-gray-300">Is Refrigerated?</label>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-1">Remark</label>
+          <textarea formControlName="remark" rows="3" class="input-style" placeholder="Enter remark (optional)"></textarea>
+        </div>
+
+        <button type="submit" class="w-full py-2 px-4 rounded-lg font-medium bg-[#00ffee] text-black hover:bg-[#00e6d5] transition shadow-md"
+          [disabled]="isSubmitting">
+          {{ isSubmitting ? '⏳ Saving...' : 'Add Warehouse' }}
+        </button>
+      </form>
+
+      <!-- Warehouse List -->
+      <div *ngIf="warehouses.length > 0" class="mt-8">
+        <h3 class="text-xl font-semibold text-[#00ffee] mb-3 text-center drop-shadow-md">Available Warehouses</h3>
+        <div class="overflow-x-auto max-h-64 border border-slate-700 rounded-lg shadow-inner">
+          <table class="min-w-full text-white border-collapse">
+            <thead class="bg-slate-800 sticky top-0 z-10">
+              <tr>
+                <th class="px-4 py-2 border-b border-slate-700 text-center">Sr.No</th>
+                <th class="px-4 py-2 border-b border-slate-700">Warehouse Name</th>
+                <th class="px-4 py-2 border-b border-slate-700">Remark</th>
+                <th class="px-4 py-2 border-b border-slate-700 text-center">Created Date</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-700">
+              <tr *ngFor="let warehouse of warehouses; let i = index" class="hover:bg-slate-700 transition">
+                <td class="px-4 py-2 text-center">{{ i + 1 }}</td>
+                <td class="px-4 py-2">{{ warehouse.warehouseName }}</td>
+                <td class="px-4 py-2">{{ warehouse.remark }}</td>
+                <td class="px-4 py-2 text-center">{{ warehouse.createdDate | date:'short' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
-    <!-- Is Refrigerated -->
-    <div class="flex items-center space-x-3">
-      <input
-        type="checkbox"
-        id="isRefrigerated"
-        formControlName="isRefrigerated"
-        class="h-5 w-5 text-[#00ffee] bg-slate-800 border-slate-600 rounded focus:ring-[#00ffee] focus:ring-2"
-      />
-      <label for="isRefrigerated" class="text-sm font-medium text-gray-300">
-        Is Refrigerated?
-      </label>
-    </div>
-
-    <!-- Remark -->
-    <div>
-      <label for="remark" class="block text-sm font-medium text-gray-300 mb-1">
-        Remark
-      </label>
-      <textarea
-        id="remark"
-        formControlName="remark"
-        rows="3"
-        class="w-full px-4 py-2 rounded-md bg-slate-800 border border-slate-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-[#00ffee] focus:border-[#00ffee] outline-none transition"
-        placeholder="Enter remark (optional)"
-      ></textarea>
-    </div>
-
-    <!-- Submit Button -->
-    <button
-      type="submit"
-      class="w-full py-2 px-4 rounded-md font-medium bg-[#00ffee] text-black hover:bg-[#00e6d5] transition shadow-md"
-      [disabled]="isSubmitting"
-    >
-      {{ isSubmitting ? '⏳ Saving...' : ' Add Warehouse' }}
-    </button>
-  </form>
-
-  <!-- Success / Error Messages -->
-  <div *ngIf="successMessage" class="mt-4 p-3 rounded-md text-center bg-green-900 text-green-400 border border-green-700">
-    {{ successMessage }}
-  </div>
-  <div *ngIf="errorMessage" class="mt-4 p-3 rounded-md text-center bg-red-900 text-red-400 border border-red-700">
-    {{ errorMessage }}
   </div>
 </div>
