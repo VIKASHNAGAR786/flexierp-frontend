@@ -199,6 +199,7 @@
  @if(showOldCustomer){
 <app-old-customer-popup 
   *ngIf="showOldCustomer" 
+   (customerSelected)="onCustomerSelected($event)"
   (close)="showOldCustomer = false">
 </app-old-customer-popup>
  }
@@ -265,7 +266,7 @@
                     class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
                     Notes
                 </label>
-                <textarea [(ngModel)]="customer.customerNotes" name="customerNotes" rows="3" placeholder="Additional notes"
+                <textarea [(ngModel)]="customer.remark" name="remark" rows="3" placeholder="Additional notes"
                     class="input-style resize-none"></textarea>
             </div>
         </div>

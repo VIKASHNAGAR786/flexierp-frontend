@@ -184,5 +184,12 @@ export class AddSaleComponent {
   openOldCustomerSale() {
     this.showOldCustomer = true;
   }
-  
+
+  // binding cutomer ID
+onCustomerSelected(customer: any) {
+  this.customer = customer;
+  this.saledata.customerID = customer.customerID;
+  console.log('Selected customer:', customer);
+}
+
 }

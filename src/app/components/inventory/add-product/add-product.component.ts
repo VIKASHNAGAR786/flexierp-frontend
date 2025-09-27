@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { InventoryService } from '../../../services/inventory.service';
-import { ProductCategoryDTO } from '../../../DTO/DTO';
+import { ProductCategoryDTO, WarehouseDTO } from '../../../DTO/DTO';
 import { AlertService } from '../../../services/alert.service';
 
 @Component({
@@ -15,11 +15,12 @@ export class AddProductComponent {
   @Output() productAdded = new EventEmitter<any>();
   productForm!: FormGroup;
   categories: ProductCategoryDTO[] = [];
-
+  warehouses: WarehouseDTO[] = [];
   constructor(
     private fb: FormBuilder,
-     private inventoryService: InventoryService,
-      private alertService: AlertService) {}
+    private inventoryService: InventoryService,
+    private alertService: AlertService
+  ) {}
 
   ngOnInit(): void {
     this.productForm = this.fb.group({
@@ -44,6 +45,7 @@ export class AddProductComponent {
     });
 
     this.loadCategories();
+    this.loadWarehouses();
   }
 
   addProduct() {
@@ -89,6 +91,17 @@ export class AddProductComponent {
     this.inventoryService.GetCategories().subscribe({
       next: (data) => {
         this.categories = data || [];
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+  }
+
+  loadWarehouses(): void {
+    this.inventoryService.GetWarehouses().subscribe({
+      next: (data) => {
+        this.warehouses = data || [];
       },
       error: (err) => {
         console.error(err);

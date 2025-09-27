@@ -75,6 +75,16 @@ body {
          focus:ring-green-500 focus:border-green-500 transition-all duration-200;
 }
 
+.dropdown-style {
+  @apply w-full appearance-none px-4 py-3 pr-10 text-gray-900 dark:text-white bg-white
+   dark:bg-slate-900 border border-gray-300 dark:border-gray-600 rounded-xl shadow-md focus:outline-none 
+   focus:ring-2 focus:ring-[#00ffee] focus:border-[#00ffee] transition-all duration-300 ease-in-out;
+}
+
+.dropdown-style svg {
+  @apply w-5 h-5 text-gray-500 dark:text-gray-400 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none;
+}
+
 @keyframes scan {
   0% { top: 0%; }
   50% { top: 100%; }

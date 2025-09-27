@@ -14,7 +14,7 @@ import { PurchasesComponent } from './components/purchases/purchases.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { SalesComponent } from './components/sales/sales.component';
 import { SettingsComponent } from './components/settings/settings.component';
-import { SuppliersComponent } from './components/suppliers/suppliers.component';
+import { VendorsComponent } from './components/vendors/vendors.component';
 
 export const routes: Routes = [
   // Default redirect
@@ -32,13 +32,13 @@ export const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'inventory', component: InventoryComponent },
       { path: 'customers', component: CustomersComponent },
-      { path: 'suppliers', component: SuppliersComponent },
       { path: 'products', component: ProductsComponent },
       { path: 'sales', component: SalesComponent },
       { path: 'purchases', component: PurchasesComponent },
       { path: 'reports', component: ReportsComponent },
       { path: 'accounts', component: AccountsComponent },
       { path: 'settings', component: SettingsComponent },
+      { path: 'vendors', component: VendorsComponent },
     ]
   },
 

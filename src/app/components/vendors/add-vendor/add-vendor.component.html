@@ -1,0 +1,91 @@
+<div class="grid grid-cols-1 gap-6">
+
+  <!-- 🔹 Provider Info Card -->
+  <div class="bg-slate-800 p-6 rounded-xl shadow-lg space-y-4">
+
+    <h3 class="text-xl font-extrabold text-[#00ffee] mb-4 uppercase tracking-wide drop-shadow-md">
+      Provider Details
+    </h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+      <div class="flex flex-col">
+        <label class="label-style">Provider Name</label>
+        <input type="text" [(ngModel)]="provider.providerName" name="ProviderName"
+          class="input-style" placeholder="Enter Provider Name" />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="label-style">Provider Type</label>
+        <input type="text" [(ngModel)]="provider.providerType" name="ProviderType"
+          class="input-style" placeholder="Enter Type" />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="label-style">Contact Person</label>
+        <input type="text" [(ngModel)]="provider.contactPerson" name="ContactPerson"
+          class="input-style" placeholder="Enter Contact Person" />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="label-style">Contact Email</label>
+        <input type="email" [(ngModel)]="provider.contactEmail" name="ContactEmail"
+          class="input-style" placeholder="Enter Email" />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="label-style">Contact Phone</label>
+        <input type="text" [(ngModel)]="provider.contactPhone" name="ContactPhone"
+          class="input-style" placeholder="Enter Phone" />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="label-style">Payment Terms</label>
+        <input type="text" [(ngModel)]="provider.paymentTerms" name="PaymentTerms"
+          class="input-style" placeholder="e.g., Net 30" />
+      </div>
+
+      <div class="flex flex-col col-span-2">
+        <label class="label-style">Provider Address</label>
+        <textarea [(ngModel)]="provider.providerAddress" name="ProviderAddress" rows="2"
+          class="input-style" placeholder="Enter Address"></textarea>
+      </div>
+
+      <div class="flex flex-col">
+        <label class="label-style">City</label>
+        <input type="text" [(ngModel)]="provider.city" name="City" class="input-style" placeholder="City" />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="label-style">State</label>
+        <input type="text" [(ngModel)]="provider.state" name="State" class="input-style" placeholder="State" />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="label-style">Country</label>
+        <input type="text" [(ngModel)]="provider.country" name="Country" class="input-style" placeholder="Country" />
+      </div>
+
+    </div>
+
+    <!-- 🔹 Action Buttons -->
+    <div class="flex justify-end mt-4 gap-4">
+      <button 
+  type="submit"
+  (click)="submitProvider()"
+  [disabled]="isSubmitting"
+  class="px-6 py-2 rounded font-bold transition
+         bg-[#00ffee] text-black hover:bg-white 
+         disabled:opacity-50 disabled:cursor-not-allowed">
+
+  {{ isSubmitting ? 'Saving...' : 'Save Provider' }}
+</button>
+
+      <button type="button" 
+        class="bg-gray-500 text-white px-6 py-2 rounded font-bold hover:bg-gray-600 transition">
+        Clear
+      </button>
+    </div>
+  </div>
+
+</div>

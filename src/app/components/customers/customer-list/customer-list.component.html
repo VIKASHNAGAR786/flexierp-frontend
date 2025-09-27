@@ -44,11 +44,6 @@
 <!-- 📋 Customers Table -->
 <div class="relative overflow-x-auto overflow-y-auto bg-slate-900 rounded-lg shadow-lg max-h-[500px]">
 
-  <!-- Loader Overlay -->
-  <div *ngIf="isLoading" class="absolute inset-0 flex items-center justify-center bg-black/40 z-50 rounded-lg">
-    <div class="w-12 h-12 border-4 border-[#00ffee] border-t-transparent rounded-full animate-spin"></div>
-  </div>
-
   <table class="min-w-full text-white border-collapse" [class.opacity-50]="isLoading">
     <thead class="bg-gradient-to-r from-slate-900 to-slate-800 text-[#00ffee] uppercase text-sm sticky top-0 z-40">
       <tr>
@@ -64,6 +59,16 @@
         <th class="px-4 py-2 border-b border-slate-700">Created By</th>
       </tr>
     </thead>
+
+     <!-- Loader row just below the thead -->
+    <tbody *ngIf="isLoading">
+      <tr>
+        <td colspan="12" class="py-8 text-center">
+          <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#00ffee]"></div>
+        </td>
+      </tr>
+    </tbody>
+
     <tbody class="divide-y divide-slate-700">
       <tr *ngFor="let c of customers" class="hover:bg-slate-700 transition">
         <td class="px-4 py-2 text-center">{{ c.srNo }}</td>

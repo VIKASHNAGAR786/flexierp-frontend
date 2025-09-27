@@ -39,7 +39,9 @@
       </tr>
     </thead>
     <tbody class="overflow-y-auto">
-      <tr *ngFor="let customer of getFilteredCustomers()" class="hover:bg-slate-700 cursor-pointer">
+      <tr *ngFor="let customer of getFilteredCustomers()" 
+      class="hover:bg-slate-700 cursor-pointer"
+      (click)="selectCustomer(customer)">
         <td class="p-4 border border-slate-700 truncate">{{ customer.customerName }}</td>
         <td class="p-4 border border-slate-700 truncate">{{ customer.phoneNo }}</td>
         <td class="p-4 border border-slate-700 truncate">{{ customer.email }}</td>

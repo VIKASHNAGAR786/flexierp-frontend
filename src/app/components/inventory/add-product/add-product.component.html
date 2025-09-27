@@ -15,27 +15,26 @@
 
       <!-- Product Category -->
       <div class="flex flex-col space-y-2">
-  <label
-    class="text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
-    Product Category
-  </label>
+        <label class="text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
+          Product Category
+        </label>
 
-  <div class="relative">
-    <select formControlName="productCategory"
-      class="w-full appearance-none px-4 py-3 pr-10 text-gray-900 dark:text-white bg-white dark:bg-slate-900 border border-gray-300 dark:border-gray-600 rounded-xl shadow-md focus:outline-none focus:ring-2 focus:ring-[#00ffee] focus:border-[#00ffee] transition-all duration-300 ease-in-out">
-      <option [ngValue]="null" disabled>-- Select Category --</option>
-      <option *ngFor="let cat of categories" [ngValue]="cat.categoryID">
-        {{ cat.categoryName }} <span *ngIf="cat.description"> - {{ cat.description }}</span>
-      </option>
-    </select>
+        <div class="relative">
+          <select formControlName="productCategory" class="dropdown-style">
+            <option [ngValue]="null" disabled>-- Select Category --</option>
+            <option *ngFor="let cat of categories" [ngValue]="cat.categoryID">
+              {{ cat.categoryName }} <span *ngIf="cat.description"> - {{ cat.description }}</span>
+            </option>
+          </select>
 
-    <!-- Custom dropdown arrow -->
-    <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none"
-      fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-    </svg>
-  </div>
-</div>
+          <!-- Custom dropdown arrow -->
+          <svg
+            class="w-5 h-5 text-gray-500 dark:text-gray-400 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none"
+            fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+      </div>
 
 
       <!-- Product Description -->
@@ -143,27 +142,30 @@
     </h3>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="flex flex-col">
+      <div class="flex flex-col relative">
         <label class="mb-1 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
-          Warehouse ID
+          Warehouse
         </label>
-        <input type="number" placeholder="Enter Warehouse ID" formControlName="warehouseID" class="input-style" />
-      </div>
 
-      <div class="flex flex-col">
-        <label class="mb-1 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
-          Warehouse Name
-        </label>
-        <input type="text" placeholder="Enter Warehouse Name" formControlName="warehouseName" class="input-style" />
-      </div>
+        <div class="relative">
+          <select formControlName="warehouseName" class="dropdown-style">
+            <option value="" disabled selected>Select Warehouse</option>
+            <option *ngFor="let w of warehouses" [value]="w.warehouseName">
+              {{ w.warehouseName }} - {{ w.remark }}
+            </option>
+          </select>
 
-      <div class="flex items-center gap-3 md:col-span-2">
-        <input type="checkbox" formControlName="warehouseRefrigerated" class="w-5 h-5 accent-[#00ffee]" />
-        <label class="text-sm md:text-base font-extrabold text-[#00ffee] drop-shadow-md">
-          Warehouse Refrigerated
-        </label>
+          <!-- Arrow -->
+          <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" stroke-width="2"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
       </div>
     </div>
+
   </div>
 
   <!-- Submit Button -->

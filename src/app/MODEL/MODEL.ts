@@ -18,6 +18,13 @@ export interface ProductCategory {
   createdBy?: number;         // optional
 }
 
+export interface WarehouseModel {
+  warehouseName: string;
+  isRefrigerated: boolean;
+  remark?: string; // optional, since it can be NULL
+}
+
+
 export interface ProductModel {
   productName: string;
   productCategory: number;
@@ -45,6 +52,7 @@ export interface Customer {
   phoneNo: string;
   email: string;
   paymentMode?: number; // nullable
+  remark?: string;
 }
 
 export interface SaleDetail {
@@ -60,5 +68,18 @@ export interface Sale {
   totalDiscount: number;
   orderDate?: Date; // nullable
   saleDetails: SaleDetail[];
+}
+
+export interface ProviderModel {
+  providerName: string;
+  providerType: string;
+  contactPerson?: string;
+  contactEmail: string;
+  contactPhone: string;
+  providerAddress: string;
+  city: string;
+  state: string;
+  country: string;
+  paymentTerms?: string;
 }
 

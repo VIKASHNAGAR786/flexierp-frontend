@@ -14,6 +14,7 @@ import { SaleserviceService } from '../../../services/saleservice.service';
 })
 export class OldCustomerPopupComponent implements OnInit {
   @Output() close = new EventEmitter<void>();
+   @Output() customerSelected = new EventEmitter<any>();
 
   oldCustomers: OldCustomerDTO[] = [];
   searchTerm: string = '';
@@ -64,4 +65,10 @@ export class OldCustomerPopupComponent implements OnInit {
       c.remark.toLowerCase().includes(term) // if you want to include remark
     );
   }
+
+   selectCustomer(customer: any) {
+    this.customerSelected.emit(customer);
+    this.closePopup(); // optionally close popup after selection
+  }
+
 }

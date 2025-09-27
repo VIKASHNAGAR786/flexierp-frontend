@@ -27,7 +27,8 @@ export class InventoryComponent {
     // Array of tabs
     tabs: Tab[] = [
       { id: 'addproduct', label: 'Add Product', component: AddProductComponent },
-      { id: 'productlist', label: 'Product List', component: ProductListComponent }
+      { id: 'productlist', label: 'Product List', component: ProductListComponent },
+      { id: 'soldproduct', label: 'Sold Products', component: ProductListComponent },
     ];
   
     switchTab(tabId: string) {

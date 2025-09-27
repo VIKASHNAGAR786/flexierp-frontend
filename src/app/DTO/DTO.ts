@@ -81,5 +81,33 @@ export interface CustomerWithSalesDTO {
     fullName: string;
     totalRecords: number;
 }
+export interface ProviderDTO {
+  srNo: number;
+  providerID: number;
+  providerName: string;
+  providerType: string;
+  contactPerson: string;
+  contactEmail: string;
+  contactPhone: string;
+  providerAddress: string;
+  city: string;
+  state: string;
+  country: string;
+  paymentTerms: string;
+  createdBy: number;
+  createdDate: string;
+  createdByName: string;
+  totalRows: number;
+}
+
+export interface WarehouseDTO {
+  warehouseID?: number;
+  warehouseName?: string;
+  isRefrigerated?: boolean;
+  createdBy?: number;
+  remark?: string;
+  createdDate?: string; // Use string for date from API or Date type if you parse it
+}
+
 
 
