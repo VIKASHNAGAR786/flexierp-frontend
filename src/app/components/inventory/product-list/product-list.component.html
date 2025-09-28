@@ -19,18 +19,18 @@
   </select>
 
   <!-- 📤 Export Buttons -->
-  <div class="flex gap-2">
-    <button (click)="exportToPdf()"
-      class="flex items-center gap-1 px-3 py-2 bg-red-600 hover:bg-red-700 rounded text-white">
-      <i class="fas fa-file-pdf"></i> PDF
-    </button>
-    <button (click)="exportToExcel()"
-      class="flex items-center gap-1 px-3 py-2 bg-green-600 hover:bg-green-700 rounded text-white">
-      <i class="fas fa-file-excel"></i> Excel
-    </button>
-  </div>
+<div class="flex gap-2" *ngIf="products.length > 0">
+  <button (click)="exportToPdf()"
+    class="flex items-center gap-1 px-3 py-2 bg-red-600 hover:bg-red-700 rounded text-white">
+    <i class="fas fa-file-pdf"></i> PDF
+  </button>
+  <button (click)="exportToExcel()"
+    class="flex items-center gap-1 px-3 py-2 bg-green-600 hover:bg-green-700 rounded text-white">
+    <i class="fas fa-file-excel"></i> Excel
+  </button>
 </div>
 
+ 
 <!-- 📋 Product Table -->
 <div #productTable class="overflow-x-auto overflow-y-auto bg-slate-900 rounded-lg shadow-lg relative max-h-[500px]">
   <table class="min-w-full text-white border-collapse">

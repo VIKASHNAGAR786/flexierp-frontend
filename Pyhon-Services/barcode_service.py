@@ -134,7 +134,8 @@ if __name__ == "__main__":
     if retries == 0:
         print("❌ Angular was not detected on port 4200. Exiting without starting FastAPI.")
 
-    
+#pip install 
+# pip install fastapi uvicorn python-barcode fpdf2 pillow   
 # for running this service directly
 # python -m uvicorn barcode_service:app --reload --host 127.0.0.1 --port 5001
 # for building executable
