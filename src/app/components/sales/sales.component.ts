@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Type } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-//import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { AddSaleComponent } from "./add-sale/add-sale.component";
 import { ScanBarcodeComponent } from './scan-barcode/scan-barcode.component';
 import { SaleReportComponent } from "./sale-report/sale-report.component";
