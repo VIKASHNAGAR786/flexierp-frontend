@@ -205,82 +205,140 @@
  }
  </div>
 
+  <form #saleForm="ngForm" (ngSubmit)="MakeTheSale()" class="space-y-6">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    
     <!-- Customer Name -->
     <div class="flex flex-col">
-                <label
-                    class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
-                    Customer Name
-                </label>
-                <input type="text" [(ngModel)]="customer.customerName" name="customerName" placeholder="Enter Customer Name"
-                    class="input-style" />
-            </div>
-
-            <!-- Customer Email -->
-            <div class="flex flex-col">
-                <label
-                    class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
-                    Email
-                </label>
-                <input type="email" [(ngModel)]="customer.email" name="email" placeholder="Enter Email"
-                    class="input-style" />
-            </div>
-
-            <!-- Customer Phone -->
-            <div class="flex flex-col">
-                <label
-                    class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
-                    Phone
-                </label>
-                <input type="tel" [(ngModel)]="customer.phoneNo" name="phoneNo" placeholder="Enter Phone Number"
-                    class="input-style" />
-            </div>
-
-            <!-- Customer Address -->
-            <div class="flex flex-col">
-                <label
-                    class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
-                    Address
-                </label>
-                <textarea [(ngModel)]="customer.customerAddress" name="customerAddress" rows="2" placeholder="Enter Address"
-                    class="input-style resize-none"></textarea>
-            </div>
-
-            <!-- Payment Method -->
-            <div class="flex flex-col">
-                <label
-                    class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
-                    Payment Method
-                </label>
-                <select [(ngModel)]="customer.paymentMode" name="paymentMode"
-                    class="w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200">
-                    <option value="1">Cash</option>
-                    <option value="2">UPI</option>
-                    <option value="3">Card</option>
-                </select>
-            </div>
-
-            <!-- Additional Notes -->
-            <div class="flex flex-col md:col-span-2">
-                <label
-                    class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
-                    Notes
-                </label>
-                <textarea [(ngModel)]="customer.remark" name="remark" rows="3" placeholder="Additional notes"
-                    class="input-style resize-none"></textarea>
-            </div>
-        </div>
+      <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
+        Customer Name
+      </label>
+      <input
+        type="text"
+        [(ngModel)]="customer.customerName"
+        name="customerName"
+        placeholder="Enter Customer Name"
+        required
+        minlength="3"
+        #customerName="ngModel"
+        class="input-style"
+      />
+      <span *ngIf="customerName.invalid && customerName.touched" class="text-red-500 text-xs">
+        Name is required (min 3 chars).
+      </span>
     </div>
 
-
-    <!-- Action Buttons -->
-    <div class="flex flex-col md:flex-row gap-4">
-        <button type="submit" (click)="MakeTheSale()"
-            class="w-full md:w-1/2 bg-[#00ffee] text-black px-6 py-3 rounded-lg font-bold hover:bg-white transition">
-            Submit Sale
-        </button>
-        <button type="button" (click)="clearSale()"
-            class="w-full md:w-1/2 bg-gray-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-gray-600 transition">
-            Clear Screen
-        </button>
+    <!-- Customer Email -->
+    <div class="flex flex-col">
+      <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
+        Email
+      </label>
+      <input
+        type="email"
+        [(ngModel)]="customer.email"
+        name="email"
+        placeholder="Enter Email"
+        required
+        email
+        #email="ngModel"
+        class="input-style"
+      />
+      <span *ngIf="email.invalid && email.touched" class="text-red-500 text-xs">
+        Valid email is required.
+      </span>
     </div>
+
+    <!-- Customer Phone -->
+    <div class="flex flex-col">
+      <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
+        Phone
+      </label>
+      <input
+        type="tel"
+        [(ngModel)]="customer.phoneNo"
+        name="phoneNo"
+        placeholder="Enter Phone Number"
+        required
+        pattern="^[0-9]{10}$"
+        #phoneNo="ngModel"
+        class="input-style"
+      />
+      <span *ngIf="phoneNo.invalid && phoneNo.touched" class="text-red-500 text-xs">
+        Enter a valid 10-digit phone number.
+      </span>
+    </div>
+
+    <!-- Customer Address -->
+    <div class="flex flex-col">
+      <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
+        Address
+      </label>
+      <textarea
+        [(ngModel)]="customer.customerAddress"
+        name="customerAddress"
+        rows="2"
+        placeholder="Enter Address"
+        required
+        #customerAddress="ngModel"
+        class="input-style resize-none"
+      ></textarea>
+      <span *ngIf="customerAddress.invalid && customerAddress.touched" class="text-red-500 text-xs">
+        Address is required.
+      </span>
+    </div>
+
+    <!-- Payment Method -->
+    <div class="flex flex-col">
+      <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
+        Payment Method
+      </label>
+      <select
+        [(ngModel)]="customer.paymentMode"
+        name="paymentMode"
+        required
+        #paymentMode="ngModel"
+        class="w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
+      >
+        <option value="" disabled selected>Select a payment method</option>
+        <option value="1">Cash</option>
+        <option value="2">UPI</option>
+        <option value="3">Card</option>
+      </select>
+      <span *ngIf="paymentMode.invalid && paymentMode.touched" class="text-red-500 text-xs">
+        Payment method is required.
+      </span>
+    </div>
+
+    <!-- Additional Notes -->
+    <div class="flex flex-col md:col-span-2">
+      <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
+        Notes
+      </label>
+      <textarea
+        [(ngModel)]="customer.remark"
+        name="remark"
+        rows="3"
+        placeholder="Additional notes"
+        class="input-style resize-none"
+      ></textarea>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="flex flex-col md:flex-row gap-4">
+    <button
+      type="submit"
+      [disabled]="saleForm.invalid"
+      class="w-full md:w-1/2 bg-[#00ffee] text-black px-6 py-3 rounded-lg font-bold hover:bg-white transition disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+      Submit Sale
+    </button>
+    <button
+      type="button"
+      (click)="clearSale()"
+      class="w-full md:w-1/2 bg-gray-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-gray-600 transition"
+    >
+      Clear Screen
+    </button>
+  </div>
+</form>
