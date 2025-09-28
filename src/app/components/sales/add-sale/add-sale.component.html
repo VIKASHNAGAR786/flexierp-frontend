@@ -12,127 +12,144 @@
   </div>
 
   <!-- 🔹 Product Detail Section -->
-  <div class="bg-slate-800 p-6 rounded-xl shadow-lg space-y-4">
-    <h3 class="text-xl font-extrabold text-[#00ffee] mb-4 uppercase tracking-wide drop-shadow-md">
-      Product Details
-    </h3>
+  <form #productForm="ngForm" (ngSubmit)="addToCart()" class="bg-slate-800 p-6 rounded-xl shadow-lg space-y-4">
+  <h3 class="text-xl font-extrabold text-[#00ffee] mb-4 uppercase tracking-wide drop-shadow-md">
+    Product Details
+  </h3>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-      <!-- Barcode -->
-      <div class="flex flex-col">
-        <label class="label-style">Barcode</label>
-        <input type="text" [(ngModel)]="saleProduct.barCode" name="barCode" placeholder="Enter Barcode"
-          class="input-style" readonly />
-      </div>
-
-      <!-- Product Code -->
-      <div class="flex flex-col">
-        <label class="label-style">Product Code</label>
-        <input type="text" [(ngModel)]="saleProduct.productCode" name="productCode" placeholder="Enter Code"
-          class="input-style" readonly />
-      </div>
-
-      <!-- Product Name -->
-      <div class="flex flex-col">
-        <label class="label-style">Product Name</label>
-        <input type="text" [(ngModel)]="saleProduct.productName" name="productName" placeholder="Enter Name"
-          class="input-style" readonly />
-      </div>
-
-      <!-- Category -->
-      <div class="flex flex-col">
-        <label class="label-style">Category</label>
-        <input type="text" [(ngModel)]="saleProduct.categoryName" name="categoryName" placeholder="Category"
-          class="input-style" readonly />
-      </div>
-
-      <!-- Product Type -->
-      <div class="flex flex-col">
-        <label class="label-style">Product Type</label>
-        <input type="text" [(ngModel)]="saleProduct.productType" name="productType" placeholder="Type"
-          class="input-style" readonly />
-      </div>
-
-      <!-- Packed Date -->
-      <div class="flex flex-col">
-        <label class="label-style">Packed Date</label>
-        <input type="date" [(ngModel)]="saleProduct.packedDate" name="packedDate" class="input-style" readonly />
-      </div>
-
-      <!-- Dimensions -->
-      <div class="flex flex-col">
-        <label class="label-style">Weight (g)</label>
-        <input type="number" [(ngModel)]="saleProduct.packedWeight" name="packedWeight" placeholder="0"
-          class="input-style" readonly />
-      </div>
-
-      <div class="flex flex-col">
-        <label class="label-style">Height (cm)</label>
-        <input type="number" [(ngModel)]="saleProduct.packedHeight" name="packedHeight" placeholder="0"
-          class="input-style" readonly />
-      </div>
-
-      <div class="flex flex-col">
-        <label class="label-style">Depth (cm)</label>
-        <input type="number" [(ngModel)]="saleProduct.packedDepth" name="packedDepth" placeholder="0"
-          class="input-style" readonly />
-      </div>
-
-      <div class="flex flex-col">
-        <label class="label-style">Width (cm)</label>
-        <input type="number" [(ngModel)]="saleProduct.packedWidth" name="packedWidth" placeholder="0"
-          class="input-style" readonly />
-      </div>
-
-      <!-- Boolean Switches -->
-      <div class="flex items-center gap-3">
-        <input type="checkbox" [(ngModel)]="saleProduct.isPerishable" name="isPerishable" class="w-4 h-4" />
-        <label class="text-white">Perishable</label>
-      </div>
-
-      <div class="flex items-center gap-3">
-        <input type="checkbox" [(ngModel)]="saleProduct.status" name="status" class="w-4 h-4" disabled />
-        <label class="text-white">Active</label>
-      </div>
-
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <!-- Barcode -->
+    <div class="flex flex-col">
+      <label class="label-style">Barcode</label>
+      <input type="text" [(ngModel)]="saleProduct.barCode" name="barCode" class="input-style" readonly />
     </div>
 
-    <!-- 🔹 Financial / Pricing Section -->
-    <h4 class="text-lg font-bold text-[#00ffee] mt-6">Pricing</h4>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="flex flex-col">
-        <label class="label-style">Purchase Price</label>
-        <input type="number" [(ngModel)]="saleProduct.purchasePrice" name="purchasePrice" placeholder="0.00"
-          class="input-style" readonly />
-      </div>
-
-      <div class="flex flex-col">
-        <label class="label-style">Selling Price</label>
-        <input type="number" [(ngModel)]="saleProduct.sellingPrice" name="sellingPrice" placeholder="0.00"
-          class="input-style" readonly />
-      </div>
-
-      <div class="flex flex-col">
-        <label class="label-style">Tax Rate (%)</label>
-        <input type="number" [(ngModel)]="saleProduct.taxRate" name="taxRate" placeholder="0.00" class="input-style"
-          readonly />
-      </div>
-
-      <div class="flex flex-col">
-        <label class="label-style">Discount</label>
-        <input type="number" [(ngModel)]="saleProduct.discount" name="discount" placeholder="0.00" class="input-style"
-          readonly />
-      </div>
+    <!-- Product Code -->
+    <div class="flex flex-col">
+      <label class="label-style">Product Code</label>
+      <input type="text" [(ngModel)]="saleProduct.productCode" name="productCode" class="input-style" readonly />
     </div>
 
-    <!-- Save Product Button -->
-    <button type="button" (click)="addToCart()"
-      class="w-full md:w-auto bg-[#00ffee] text-black px-6 py-2 rounded font-bold hover:bg-white transition">
-      Add To Cart
-    </button>
+    <!-- Product Name -->
+    <div class="flex flex-col">
+      <label class="label-style">Product Name</label>
+      <input type="text" [(ngModel)]="saleProduct.productName" name="productName" class="input-style" readonly />
+    </div>
+
+    <!-- Category -->
+    <div class="flex flex-col">
+      <label class="label-style">Category</label>
+      <input type="text" [(ngModel)]="saleProduct.categoryName" name="categoryName" class="input-style" readonly />
+    </div>
+
+    <!-- Product Type -->
+    <div class="flex flex-col">
+      <label class="label-style">Product Type</label>
+      <input type="text" [(ngModel)]="saleProduct.productType" name="productType" class="input-style" readonly />
+    </div>
+
+    <!-- Packed Date -->
+    <div class="flex flex-col">
+      <label class="label-style">Packed Date</label>
+      <input type="date" [(ngModel)]="saleProduct.packedDate" name="packedDate" class="input-style" readonly />
+    </div>
+
+    <!-- Dimensions -->
+    <div class="flex flex-col">
+      <label class="label-style">Weight (g)</label>
+      <input type="number" [(ngModel)]="saleProduct.packedWeight" name="packedWeight" class="input-style" readonly />
+    </div>
+
+    <div class="flex flex-col">
+      <label class="label-style">Height (cm)</label>
+      <input type="number" [(ngModel)]="saleProduct.packedHeight" name="packedHeight" class="input-style" readonly />
+    </div>
+
+    <div class="flex flex-col">
+      <label class="label-style">Depth (cm)</label>
+      <input type="number" [(ngModel)]="saleProduct.packedDepth" name="packedDepth" class="input-style" readonly />
+    </div>
+
+    <div class="flex flex-col">
+      <label class="label-style">Width (cm)</label>
+      <input type="number" [(ngModel)]="saleProduct.packedWidth" name="packedWidth" class="input-style" readonly />
+    </div>
+
+    <!-- Boolean Switches -->
+    <div class="flex items-center gap-3">
+      <input type="checkbox" [(ngModel)]="saleProduct.isPerishable" name="isPerishable" class="w-4 h-4" />
+      <label class="text-white">Perishable</label>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <input type="checkbox" [(ngModel)]="saleProduct.status" name="status" class="w-4 h-4" disabled />
+      <label class="text-white">Active</label>
+    </div>
   </div>
-</div>
+
+  <!-- 🔹 Financial / Pricing Section -->
+  <h4 class="text-lg font-bold text-[#00ffee] mt-6">Pricing</h4>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="flex flex-col">
+      <label class="label-style">Purchase Price</label>
+      <input type="number" [(ngModel)]="saleProduct.purchasePrice" name="purchasePrice" class="input-style" readonly />
+    </div>
+
+    <div class="flex flex-col">
+      <label class="label-style">Selling Price</label>
+      <input type="number" [(ngModel)]="saleProduct.sellingPrice" name="sellingPrice" class="input-style" readonly />
+    </div>
+
+    <div class="flex flex-col">
+      <label class="label-style">Tax Rate (%)</label>
+      <input type="number" [(ngModel)]="saleProduct.taxRate" name="taxRate" class="input-style" readonly />
+    </div>
+
+    <div class="flex flex-col">
+      <label class="label-style">Discount</label>
+      <input
+        type="number"
+        [(ngModel)]="saleProduct.discount"
+        name="discount"
+        placeholder="0.00"
+        min="0"
+        max="100"
+        #discount="ngModel"
+        class="input-style"
+      />
+      <span *ngIf="discount.invalid && discount.touched" class="text-red-500 text-xs">
+        Discount must be between 0 and 100.
+      </span>
+    </div>
+
+    <!-- Quantity (Required for sale) -->
+    <div class="flex flex-col md:col-span-2">
+      <label class="label-style">Quantity</label>
+      <input
+        type="number"
+        [(ngModel)]="saleProduct.quantity"
+        name="quantity"
+        placeholder="Enter Quantity"
+        required
+        min="1"
+        #quantity="ngModel"
+        class="input-style"
+      />
+      <span *ngIf="quantity.invalid && quantity.touched" class="text-red-500 text-xs">
+        Quantity must be at least 1.
+      </span>
+    </div>
+  </div>
+
+  <!-- Save Product Button -->
+  <button
+    type="submit"
+    [disabled]="productForm.invalid"
+    class="w-full md:w-auto bg-[#00ffee] text-black px-6 py-2 rounded font-bold hover:bg-white transition disabled:opacity-50 disabled:cursor-not-allowed"
+  >
+    Add To Cart
+  </button>
+</form>
 
 
 <!-- Cart Section -->
@@ -279,7 +296,8 @@
 
     <!-- Action Buttons -->
     <div class="flex flex-col md:flex-row gap-4">
-      <button type="submit" [disabled]="saleForm.invalid"
+      <button type="submit" 
+      [disabled]="saleForm.invalid || cart.length === 0"
         class="w-full md:w-1/2 bg-[#00ffee] text-black px-6 py-3 rounded-lg font-bold hover:bg-white transition disabled:opacity-50 disabled:cursor-not-allowed">
         Submit Sale
       </button>
