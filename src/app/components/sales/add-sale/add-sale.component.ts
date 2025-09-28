@@ -62,6 +62,7 @@ export class AddSaleComponent {
       });
   }
 
+  editfromcartdata: ProductByBarcodeDTO[] = [];
   // -------------------------------
  addToCart() {
   if (!this.saleProduct.productID || !this.saleProduct.productName) {
@@ -105,6 +106,7 @@ export class AddSaleComponent {
   };
   this.saledetails.push(detail);
   this.updateGrandTotal();
+  this.editfromcartdata.push(this.saleProduct);
 
   // Reset for next scan
   this.saleProduct = {
@@ -115,6 +117,7 @@ export class AddSaleComponent {
     discount: 0,
     tax: 0
   };
+  
 }
 
 
@@ -190,6 +193,20 @@ onCustomerSelected(customer: any) {
   this.customer = customer;
   this.saledata.customerID = customer.customerID;
   console.log('Selected customer:', customer);
+}
+
+// Add this property to track currently edited index
+editingIndex: number | null = null;
+
+// Call this when Edit button is clicked
+editCartItem(index: number) {
+  this.editingIndex = index;
+  const item = this.cart[index];
+  // Prefill saleProduct so the form can show existing values
+  this.saleProduct = this.editfromcartdata[index];
+   this.updateGrandTotal();
+  console.log(this.saleProduct);
+  this.removeFromCart(index); // Remove item from cart for editing
 }
 
 }
