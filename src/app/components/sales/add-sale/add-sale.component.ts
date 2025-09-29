@@ -1,3 +1,4 @@
+
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -10,9 +11,7 @@ import { AlertService } from '../../../services/alert.service';
 import { Customer, generateReceiptpdf, Sale, SaleDetail } from '../../../MODEL/MODEL';
 import { OldCustomerPopupComponent } from "../old-customer-popup/old-customer-popup.component";
 import { BarcodeService } from '../../../services/barcode.service';
-import { debug } from 'console';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-
 
 @Component({
   selector: 'app-add-sale',
@@ -24,12 +23,15 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export class AddSaleComponent {
 
   saleProduct: ProductByBarcodeDTO | any = {};
-
   saledata: Sale | any = {};
   cart: any[] = [];
-  customer: Customer | any = {};
+
+  // ✅ FIX: Initialize customer with paymentMode = '' so placeholder shows
+  customer: Customer | any = {
+    paymentMode: ''
+  };
+
   saledetails: SaleDetail[] | any = [];
-  paymentMethod: string = 'Cash';
   grandTotal: number = 0;
   receiptPdfData: generateReceiptpdf | any = {};
   barcode: string = '';
@@ -72,6 +74,7 @@ export class AddSaleComponent {
   }
 
   editfromcartdata: ProductByBarcodeDTO[] = [];
+
   // -------------------------------
   addToCart() {
     if (!this.saleProduct.productID || !this.saleProduct.productName) {
@@ -91,12 +94,10 @@ export class AddSaleComponent {
     const existingItem = this.cart.find(item => item.productID === this.saleProduct.productID);
 
     if (existingItem) {
-      // Instead of increasing qty → just alert
       this.alertservice.showAlert(`"${this.saleProduct.productName}" is already in the cart.`, 'warning');
       return;
     }
 
-    // 🔹 If not exists → add as new item
     const newItem = {
       productID: this.saleProduct.productID,
       name: name,
@@ -111,7 +112,7 @@ export class AddSaleComponent {
     this.cart.push(newItem);
     const detail: SaleDetail = {
       productID: this.saleProduct.productID,
-      createdBy: 2 // or whoever is logged in
+      createdBy: 2
     };
     this.saledetails.push(detail);
     this.updateGrandTotal();
@@ -126,9 +127,7 @@ export class AddSaleComponent {
       discount: 0,
       tax: 0
     };
-
   }
-
 
   removeFromCart(index: number) {
     this.cart.splice(index, 1);
@@ -153,7 +152,7 @@ export class AddSaleComponent {
 
   clearSale() {
     this.saleProduct = {};
-    this.customer = {};
+    this.customer = { paymentMode: '' }; // reset with empty paymentMode
     this.cart = [];
     this.grandTotal = 0;
   }
@@ -168,17 +167,18 @@ export class AddSaleComponent {
   MakeTheSale(): void {
     const sale: Sale = {
       saleDetails: this.saledetails,
-      customer: this.customer,
+      customer: this.customer, // ✅ includes paymentMode now
       totalItems: this.cart.length,
       totalAmount: this.cart.reduce((sum, item) => sum + item.total, 0),
       totalDiscount: this.cart.reduce((sum, item) => sum + (item.discountAmt || 0), 0),
       orderDate: new Date()
     };
+
     this.saleservice.InsertSale(sale)
       .subscribe({
         next: (res) => {
           this.alertservice.showAlert('✅ Record Save successfully!', 'success');
-          this.generateReceipt(this.barcode); // Generate receipt after successful sale
+          this.generateReceipt(this.barcode);
           this.clearSale();
         },
         error: (err) => {
@@ -191,52 +191,49 @@ export class AddSaleComponent {
     this.grandTotal = this.cart.reduce((sum, item) => sum + item.total, 0);
   }
 
-
   showOldCustomer = false;
 
   openOldCustomerSale() {
     this.showOldCustomer = true;
   }
 
-  // binding cutomer ID
+  // binding customer ID
   onCustomerSelected(customer: any) {
     this.customer = customer;
     this.saledata.customerID = customer.customerID;
     console.log('Selected customer:', customer);
   }
 
-  // Add this property to track currently edited index
   editingIndex: number | null = null;
 
-  // Call this when Edit button is clicked
   editCartItem(index: number) {
     this.editingIndex = index;
     const item = this.cart[index];
-    // Prefill saleProduct so the form can show existing values
     this.saleProduct = this.editfromcartdata[index];
     this.updateGrandTotal();
     console.log(this.saleProduct);
-    this.removeFromCart(index); // Remove item from cart for editing
+    this.removeFromCart(index);
   }
+
   showPdfPopup: boolean = false;
-  pdfUrl: SafeResourceUrl | null = null; // store blob URL
-  async generateReceipt(barcode: string) {debugger
+  pdfUrl: SafeResourceUrl | null = null;
+
+  async generateReceipt(barcode: string) {
     try {
       this.receiptPdfData.barcode = barcode;
       this.receiptPdfData.customer = this.customer;
       this.receiptPdfData.cart = this.cart;
 
       const blob = await firstValueFrom(this.pythonservice.generateReceiptPDF(this.receiptPdfData));
-      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(blob)); // store blob URL
-      this.showPdfPopup = true; // show popup
-      // If you want, you can revoke the URL later after some delay
-      // setTimeout(() => window.URL.revokeObjectURL(url), 10000);
-
+      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(blob));
+      this.showPdfPopup = true;
     } catch (error) {
       console.error('Error generating receipt PDF:', error);
     }
   }
+
   closePdfPopup() {
     this.showPdfPopup = false;
   }
 }
+

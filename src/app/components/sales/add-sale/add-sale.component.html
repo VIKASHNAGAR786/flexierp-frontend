@@ -274,22 +274,32 @@
         </span>
       </div>
 
-      <!-- Payment Method -->
-      <div class="flex flex-col">
-        <label class="label-style">
-          Payment Method
-        </label>
-        <select [(ngModel)]="customer.paymentMode" name="paymentMode" required #paymentMode="ngModel" 
-          class="dropdown-style">
-          <option value="" disabled selected>Select a payment method</option>
-          <option value="1">Cash</option>
-          <option value="2">UPI</option>
-          <option value="3">Card</option>
-        </select>
-        <span *ngIf="paymentMode.invalid && paymentMode.touched" class="text-red-500 text-xs">
-          Payment method is required.
-        </span>
-      </div>
+     <!-- Payment Method -->
+<div class="flex flex-col">
+  <label for="paymentMode" class="label-style">
+    PAYMENT METHOD
+  </label>
+
+  <select
+    id="paymentMode"
+    [(ngModel)]="customer.paymentMode"
+    name="paymentMode"
+    required
+    #paymentMode="ngModel"
+    class="dropdown-style"
+    [ngClass]="{'text-gray-400': customer.paymentMode === ''}"
+  >
+    <option value="" disabled hidden>Select a payment method</option>
+    <option value="1">Cash</option>
+    <option value="2">UPI</option>
+    <option value="3">Card</option>
+  </select>
+
+  <span *ngIf="paymentMode.invalid && paymentMode.touched" class="text-red-500 text-xs">
+    Payment method is required.
+  </span>
+</div>
+
 
       <!-- Additional Notes -->
       <div class="flex flex-col md:col-span-2">
