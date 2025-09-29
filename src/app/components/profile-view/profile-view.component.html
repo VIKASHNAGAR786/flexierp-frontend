@@ -1,4 +1,4 @@
-<div class="max-w-6xl mx-auto p-6 space-y-10 text-white">
+<div class="max-w-8xl mx-auto p-6 space-y-10 text-white">
     <!-- Profile Header -->
     <div
         class="relative rounded-2xl overflow-hidden shadow-lg border border-slate-700 bg-gradient-to-r from-slate-800/70 to-slate-900/70 backdrop-blur-md">
@@ -28,7 +28,7 @@
                     <h2 class="text-3xl font-bold text-[#00ffee]">Company Profile</h2>
                     <p class="text-slate-400 text-sm">Manage details that appear on invoices & official docs</p>
                 </div>
-                <button
+                <button (click)="editingProfile()"
                     class="px-4 py-2 bg-[#00ffee] text-slate-900 rounded-lg font-semibold hover:bg-[#00ddcc] transition">
                     Edit Profile
                 </button>
@@ -189,5 +189,75 @@
                 <span class="text-slate-400 text-xs">1 week ago</span>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- Edit Profile Modal -->
+<div *ngIf="showwditprofile" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-slate-900 text-white rounded-2xl shadow-lg border border-slate-700 w-full max-w-3xl p-6 relative">
+        <button (click)="closeEdit()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+            <i class="bi bi-x-lg text-2xl"></i>
+        </button>
+        <h2 class="text-2xl font-bold mb-4 text-[#00ffee]">Edit Company Profile</h2>
+        <form (ngSubmit)="saveProfile()" class="space-y-6 max-h-[80vh] overflow-y-auto pr-2">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="label-style">Company Name</label>
+                    <input type="text" [(ngModel)]="editableProfile.companyName" name="companyName" required
+                        class="input-style" />
+                </div>
+
+                <div>
+                    <label class="label-style">GST / Tax ID</label>
+                    <input type="text" [(ngModel)]="editableProfile.gstId" name="gstId"
+                        class="input-style" />
+                </div>
+
+                <div>
+                    <label class="label-style">Contact No.</label>
+                    <input type="text" [(ngModel)]="editableProfile.contactNo" name="contactNo"
+                        class="input-style" />
+                </div>
+
+                <div>
+                    <label class="label-style">WhatsApp No.</label>
+                    <input type="text" [(ngModel)]="editableProfile.whatsappNo" name="whatsappNo"
+                        class="input-style" />
+                </div>
+                <div class="md:col-span-2">
+                    <label class="label-style">Email</label>
+                    <input type="email" [(ngModel)]="editableProfile.email" name="email" required
+                        class="input-style" />
+                </div>
+                <div class="md:col-span-2">
+                    <label class="label-style">Address</label>
+                    <textarea [(ngModel)]="editableProfile.address" name="address" rows="3"
+                        class="input-style"></textarea>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="label-style">Invoice Prefix</label>
+                    <input type="text" [(ngModel)]="editableProfile.invoicePrefix" name="invoicePrefix"
+                        class="input-style" />
+                </div>
+                <div>
+                    <label class="label-style">Default Terms & Conditions</label>
+                    <textarea [(ngModel)]="editableProfile.termsConditions" name="termsConditions" rows="3"
+                        class="input-style"></textarea>
+                </div>
+            </div>
+            <div class="flex justify-end space-x-4">
+                <button type="button" (click)="closeEdit()"
+                    class="px-4 py-2 bg-slate-700 text-slate-300 rounded-lg hover:bg-slate-600 transition">
+                    Cancel
+                </button>
+                <button type="submit"
+                    class="px-4 py-2 bg-[#00ffee] text-slate-900 rounded-lg font-semibold hover:bg-[#00ddcc] transition">
+                    Save Changes
+                </button>
+            </div>
+        </form>
     </div>
 </div>
