@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException,Response, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 import barcode
@@ -6,6 +6,10 @@ from barcode.writer import ImageWriter
 from io import BytesIO
 from fpdf import FPDF # fpdf2
 from PIL import Image
+from models import GenerateReceiptPDF
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfgen import canvas
+import datetime
 
 app = FastAPI(
     title="Barcode Generator API",
@@ -68,71 +72,107 @@ def generate_barcode_png(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Barcode generation failed: {str(e)}")
 
-@app.post("/barcode/pdf")
-def generate_barcode_pdf(barcodes: list[str]):
-    try:
-        pdf = FPDF()
-        pdf.set_auto_page_break(auto=True, margin=15)
-        pdf.add_page()
+@app.post("/generate-receipt")
+async def generate_receipt(data: GenerateReceiptPDF):
+    buffer = BytesIO()
+    pdf = canvas.Canvas(buffer, pagesize=A4)
+    width, height = A4
 
-        x, y = 10, 10
-        for code in barcodes:
-            # Generate barcode in memory
-            ean = barcode.get("code128", code, writer=ImageWriter())
-            buffer = BytesIO()
-            ean.write(buffer)
-            buffer.seek(0)
+    # ----- Generate barcode image -----
+    barcode_class = barcode.get_barcode_class('code128')
+    barcode_img_buffer = BytesIO()
+    ean = barcode_class(data.barcode, writer=ImageWriter())
+    ean.write(barcode_img_buffer)
+    barcode_img_buffer.seek(0)
+    barcode_img = Image.open(barcode_img_buffer)
 
-            # Open with PIL
-            img = Image.open(buffer)
+    # Convert PIL Image to ReportLab format
+    from reportlab.lib.utils import ImageReader
+    barcode_reader = ImageReader(barcode_img)
 
-            # Save to temporary in-memory BytesIO in PNG format
-            temp_img = BytesIO()
-            img.save(temp_img, format="PNG")
-            temp_img.seek(0)
+    # ----- Company Info (Hardcoded) -----
+    pdf.setFont("Helvetica-Bold", 14)
+    pdf.drawString(50, height - 40, "🏢 My Company Pvt. Ltd.")
+    pdf.setFont("Helvetica", 10)
+    pdf.drawString(50, height - 55, "123, Main Street, City, Country")
+    pdf.drawString(50, height - 70, "Phone: +91 1234567890 | Email: info@mycompany.com")
 
-            # Add image to PDF
-            pdf.image(temp_img, x=x, y=y, w=50, h=20)  # fpdf2 detects PIL automatically
+    # Header
+    pdf.setFont("Helvetica-Bold", 16)
+    pdf.drawString(50, height - 100, "🧾 Invoice / Receipt")
+    pdf.setFont("Helvetica", 10)
+    pdf.drawString(50, height - 120, f"Invoice No: {data.barcode}")
+    pdf.drawString(300, height - 120, f"Date: {datetime.datetime.now().strftime('%d-%m-%Y %H:%M')}")
 
-            y += 30
-            if y > 250:
-                y = 10
-                pdf.add_page()
+    # Draw Barcode below header
+    pdf.drawImage(barcode_reader, 400, height - 150, width=150, height=50)
 
-        output = BytesIO()
-        pdf.output(output)
-        output.seek(0)
-        return StreamingResponse(output, media_type="application/pdf")
+    # Customer Details
+    y = height - 200
+    if data.customer:
+        pdf.setFont("Helvetica-Bold", 12)
+        pdf.drawString(50, y, "Customer Information")
+        pdf.setFont("Helvetica", 10)
+        y -= 20
+        pdf.drawString(60, y, f"Name: {data.customer.customerName}")
+        y -= 15
+        pdf.drawString(60, y, f"Address: {data.customer.customerAddress}")
+        y -= 15
+        pdf.drawString(60, y, f"Phone: {data.customer.phoneNo}")
+        y -= 15
+        pdf.drawString(60, y, f"Email: {data.customer.email}")
+        y -= 15
+        if data.customer.paymentMode is not None:
+            pdf.drawString(60, y, f"Payment Mode: {data.customer.paymentMode}")
+            y -= 15
+        if data.customer.remark:
+            pdf.drawString(60, y, f"Remark: {data.customer.remark}")
+            y -= 15
 
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    # Cart Table Header
+    y -= 20
+    pdf.setFont("Helvetica-Bold", 11)
+    pdf.drawString(50, y, "Product")
+    pdf.drawString(200, y, "Qty")
+    pdf.drawString(250, y, "Price")
+    pdf.drawString(320, y, "Discount")
+    pdf.drawString(400, y, "Tax")
+    pdf.drawString(470, y, "Total")
+    y -= 10
+    pdf.line(50, y, 550, y)
 
-if __name__ == "__main__":
-    import socket
-    import time
-    import uvicorn
+    # Cart Items
+    pdf.setFont("Helvetica", 10)
+    grand_total = 0
+    for item in data.cart:
+        y -= 20
+        if y < 100:  # New Page if space ends
+            pdf.showPage()
+            y = height - 100
+        pdf.drawString(50, y, item.name)
+        pdf.drawString(200, y, str(item.qty))
+        pdf.drawString(250, y, f"{item.sellingPrice:.2f}")
+        pdf.drawString(320, y, f"{item.discountAmt:.2f}")
+        pdf.drawString(400, y, f"{item.taxAmt:.2f}")
+        pdf.drawString(470, y, f"{item.total:.2f}")
+        grand_total += item.total
 
-    def is_port_open(host: str, port: int) -> bool:
-        """Check if a port is open."""
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.settimeout(1)
-            return s.connect_ex((host, port)) == 0
+    # Grand Total
+    y -= 30
+    pdf.setFont("Helvetica-Bold", 12)
+    pdf.drawString(400, y, "Grand Total:")
+    pdf.drawString(500, y, f"{grand_total:.2f}")
 
-    # Wait until Angular dev server (4200) is running
-    print("🔍 Checking if Angular (port 4200) is running...")
-    retries = 10
-    while retries > 0:
-        if is_port_open("127.0.0.1", 4200):
-            print("✅ Angular is running on port 4200. Starting FastAPI service...")
-            uvicorn.run("barcode_service:app", host="127.0.0.1", port=5001, reload=False)
-            break
-        else:
-            print("⏳ Angular not running on port 4200, retrying...")
-            time.sleep(3)
-            retries -= 1
+    pdf.showPage()
+    pdf.save()
 
-    if retries == 0:
-        print("❌ Angular was not detected on port 4200. Exiting without starting FastAPI.")
+    buffer.seek(0)
+    return Response(
+        buffer.getvalue(),
+        media_type="application/pdf",
+        headers={"Content-Disposition": f"inline; filename=invoice_{data.barcode}.pdf"}
+    )
+
 
 #pip install 
 # pip install fastapi uvicorn python-barcode fpdf2 pillow   

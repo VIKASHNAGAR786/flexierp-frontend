@@ -83,3 +83,21 @@ export interface ProviderModel {
   paymentTerms?: string;
 }
 
+export interface cart {
+  productID: number;
+  name: string;
+  qty: number;
+  total: number;
+  weight: number;
+  discountAmt: number;
+  taxAmt: number;
+  sellingPrice: number;
+}
+
+
+export interface generateReceiptpdf {
+   barcode: string;
+   customer?: Customer; // optional
+   cart: cart[];
+
+}

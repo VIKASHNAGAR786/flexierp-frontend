@@ -3,3 +3,4 @@ uvicorn
 python-barcode
 fpdf2
 pillow
+reportlab
