@@ -88,4 +88,13 @@ export class SaleReportComponent implements OnInit {
     this.filter.pageNo = 1;
     this.loadSales();
   }
+  exportToExcel() {
+    console.log("Excel export triggered ✅");
+    // TODO: Implement with XLSX
+  }
+
+  exportToPDF() {
+    console.log("PDF export triggered ✅");
+    // TODO: Implement with jsPDF
+  }
 }
