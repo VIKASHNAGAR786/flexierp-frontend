@@ -73,8 +73,8 @@
               <td class="px-4 py-2 text-center">{{ sale.srNo }}</td>
               <td class="px-4 py-2">{{ sale.customerName }}</td>
               <td class="px-4 py-2 text-center">{{ sale.totalItems }}</td>
-              <td class="px-4 py-2 text-center">{{ sale.totalAmount | currency }}</td>
-              <td class="px-4 py-2 text-center">{{ sale.totalDiscount | currency }}</td>
+              <td class="px-4 py-2 text-center">{{ sale.totalAmount | currency:'INR':'symbol':'1.2-2' }}</td>
+              <td class="px-4 py-2 text-center">{{ sale.totalDiscount | currency:'INR':'symbol':'1.2-2' }}</td>
               <td class="px-4 py-2 text-center">{{ sale.orderDate | date:'short' }}</td>
               <td class="px-4 py-2 text-center">{{ sale.fullName }}</td>
           </tr>
