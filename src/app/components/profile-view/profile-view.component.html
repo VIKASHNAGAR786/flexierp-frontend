@@ -1,263 +1,314 @@
-<div class="max-w-8xl mx-auto p-6 space-y-10 text-white">
-    <!-- Profile Header -->
-    <div
-        class="relative rounded-2xl overflow-hidden shadow-lg border border-slate-700 bg-gradient-to-r from-slate-800/70 to-slate-900/70 backdrop-blur-md">
-        <!-- Banner -->
-        <div class="h-28 bg-gradient-to-r from-[#00ffee]/40 to-[#00b7ff]/30"></div>
+<div class="max-w-7xl mx-auto p-6 space-y-12 text-white">
 
-        <!-- User Info -->
-        <div class="px-6 pb-6 -mt-12 flex items-center gap-6">
-            <img src="assets/user-avatar.png" alt="User Avatar"
-                class="w-24 h-24 rounded-full border-4 border-slate-900 shadow-md" />
-            <div>
-                <h2 class="text-2xl font-bold text-[#00ffee]">John Doe</h2>
-                <p class="text-slate-300">john.e.com</p>
-                <p class="text-slate-400">+91 98765 43210</p>
-            </div>
-        </div>
+  <!-- Profile Header -->
+  <div class="relative rounded-3xl overflow-hidden shadow-lg border border-slate-800/50 
+              bg-slate-900/80 backdrop-blur-xl">
+    <!-- Banner -->
+    <div class="h-32 bg-gradient-to-r from-[#00ffee]/40 to-[#00b7ff]/30"></div>
+
+    <!-- User Info -->
+    <div class="px-6 pb-6 -mt-16 flex items-center gap-8">
+      <img src="assets/user-avatar.png" alt="User Avatar"
+           class="w-28 h-28 rounded-full border-4 border-slate-900 shadow-lg hover:ring-2 hover:ring-[#00ffee] transition" />
+      <div>
+        <h2 class="text-3xl font-bold text-[#00ffee]">John Doe</h2>
+        <p class="text-slate-300 text-sm">john.e.com</p>
+        <p class="text-slate-400 text-sm">+91 98765 43210</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile Information Card -->
+  <div class="rounded-3xl bg-slate-900/80 backdrop-blur-xl p-8 border border-slate-800/50 shadow-lg">
+    <h3 class="text-2xl font-bold text-[#00ffee] mb-6">Profile Information</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label class="text-slate-400 text-sm">Full Name</label>
+        <p class="text-lg font-medium">John Doe</p>
+      </div>
+      <div>
+        <label class="text-slate-400 text-sm">Email</label>
+        <p class="text-lg font-medium">john.e.com</p>
+      </div>
+      <div>
+        <label class="text-slate-400 text-sm">Phone</label>
+        <p class="text-lg font-medium">+91 98765 43210</p>
+      </div>
+      <div>
+        <label class="text-slate-400 text-sm">Role</label>
+        <p class="text-lg font-medium">Administrator</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Company Profile -->
+  <div class="rounded-3xl bg-slate-900/80 backdrop-blur-xl p-8 border border-slate-800/50 shadow-lg space-y-10">
+    <div class="flex items-center justify-between border-b border-slate-700 pb-4">
+      <div>
+        <h2 class="text-2xl font-bold text-[#00ffee]">Company Profile</h2>
+        <p class="text-slate-400 text-sm">Details used on invoices & official docs</p>
+      </div>
+      <button (click)="editingProfile()"
+              class="px-5 py-2 bg-gradient-to-r from-[#00ffee] to-[#00b7ff] text-slate-900 rounded-lg font-semibold hover:scale-[1.02] hover:shadow-lg transition">
+        Edit Profile
+      </button>
     </div>
 
-    <!-- Profile Sections -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Company Details -->
-        <div class="max-w-5xl mx-auto p-8 bg-slate-900 text-white rounded-2xl shadow-lg space-y-8">
+    <!-- Company Info -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+      <!-- Logo -->
+      <div class="flex flex-col items-center space-y-3">
+        <img src="assets/company-logo.png" alt="Company Logo"
+             class="w-32 h-32 rounded-xl border border-slate-700 shadow-md object-cover" />
+        <button class="px-3 py-1 text-sm bg-[#00ffee] text-slate-900 rounded-lg hover:bg-[#00ddcc] transition">
+          Change Logo
+        </button>
+      </div>
 
-            <!-- Profile Header -->
-            <div class="flex items-center justify-between border-b border-slate-700 pb-4">
-                <div>
-                    <h2 class="text-3xl font-bold text-[#00ffee]">Company Profile</h2>
-                    <p class="text-slate-400 text-sm">Manage details that appear on invoices & official docs</p>
-                </div>
-                <button (click)="editingProfile()"
-                    class="px-4 py-2 bg-[#00ffee] text-slate-900 rounded-lg font-semibold hover:bg-[#00ddcc] transition">
-                    Edit Profile
-                </button>
-            </div>
-
-            <!-- Company Details -->
-            <div class="space-y-4">
-                <h3 class="text-xl font-semibold text-[#00ffee]">Company Information</h3>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-
-                    <!-- Logo Section -->
-                    <div class="flex flex-col items-center space-y-3">
-                        <img src="https://via.placeholder.com/120x120.png?text=Logo" alt="Company Logo"
-                            class="w-32 h-32 rounded-xl border border-slate-600 shadow-md object-cover" />
-                        <button
-                            class="px-3 py-1 text-sm bg-[#00ffee] text-slate-900 rounded-lg hover:bg-[#00ddcc] transition">
-                            Change Logo
-                        </button>
-                    </div>
-
-                    <!-- Company Details -->
-                    <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                        <div>
-                            <label class="text-slate-400 text-sm">Company Name</label>
-                            <p class="text-lg font-medium">Flexi ERP Pvt. Ltd.</p>
-                        </div>
-
-                        <div>
-                            <label class="text-slate-400 text-sm">GST / Tax ID</label>
-                            <p class="text-lg font-medium">29ABCDE1234F2Z5</p>
-                        </div>
-
-                        <div>
-                            <label class="text-slate-400 text-sm">Contact No.</label>
-                            <p class="text-lg font-medium">+91 98765 43210</p>
-                        </div>
-
-                        <div>
-                            <label class="text-slate-400 text-sm">WhatsApp No.</label>
-                            <p class="text-lg font-medium">+91 98765 43210</p>
-                        </div>
-
-                        <div class="md:col-span-2">
-                            <label class="text-slate-400 text-sm">Email</label>
-                            <p class="text-lg font-medium">info.com</p>
-                        </div>
-
-                        <div class="md:col-span-2">
-                            <label class="text-slate-400 text-sm">Address</label>
-                            <p class="text-lg font-medium">
-                                123 Business Park, Jaipur, Rajasthan, India - 302019
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Invoice Preferences -->
-            <div class="space-y-4">
-                <h3 class="text-xl font-semibold text-[#00ffee]">Invoice Preferences</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="text-slate-400 text-sm">Invoice Prefix</label>
-                        <p class="text-lg font-medium">INV-2025</p>
-                    </div>
-                    <div>
-                        <label class="text-slate-400 text-sm">Default Terms & Conditions</label>
-                        <p class="text-lg font-medium">Goods once sold will not be returned.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Activity Logs -->
-            <div class="space-y-4">
-                <h3 class="text-xl font-semibold text-[#00ffee]">Activity & Log History</h3>
-                <div class="bg-slate-800 rounded-xl p-4 space-y-3 max-h-64 overflow-y-auto">
-
-                    <div class="flex justify-between items-center border-b border-slate-700 pb-2">
-                        <span>✅ Company details updated</span>
-                        <span class="text-xs text-slate-400">28 Sep 2025, 10:45 AM</span>
-                    </div>
-
-                    <div class="flex justify-between items-center border-b border-slate-700 pb-2">
-                        <span>📄 New Invoice Prefix added</span>
-                        <span class="text-xs text-slate-400">20 Sep 2025, 03:15 PM</span>
-                    </div>
-
-                    <div class="flex justify-between items-center border-b border-slate-700 pb-2">
-                        <span>📧 Email changed from <i>support.com</i></span>
-                        <span class="text-xs text-slate-400">12 Sep 2025, 06:30 PM</span>
-                    </div>
-
-                </div>
-            </div>
+      <!-- Details -->
+      <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="text-slate-400 text-sm">Company Name</label>
+          <p class="text-lg font-medium">Flexi ERP Pvt. Ltd.</p>
         </div>
-
-        <!-- Preferences -->
-        <div
-            class="bg-slate-900/70 rounded-2xl shadow-lg border border-slate-700 p-6 hover:shadow-cyan-500/10 transition">
-            <h3 class="text-lg font-semibold mb-6 flex items-center gap-2">
-                ⚙️ <span>Preferences</span>
-            </h3>
-            <div class="space-y-6">
-                <div class="flex items-center justify-between">
-                    <span>🌙 Dark Mode</span>
-                    <input type="checkbox" class="w-5 h-5 accent-[#00ffee]" />
-                </div>
-                <div class="flex items-center justify-between">
-                    <span>📧 Email Notifications</span>
-                    <input type="checkbox" class="w-5 h-5 accent-[#00ffee]" checked />
-                </div>
-                <div class="flex items-center justify-between">
-                    <span>📲 SMS Alerts</span>
-                    <input type="checkbox" class="w-5 h-5 accent-[#00ffee]" />
-                </div>
-            </div>
+        <div>
+          <label class="text-slate-400 text-sm">GST / Tax ID</label>
+          <p class="text-lg font-medium">29ABCDE1234F2Z5</p>
         </div>
+        <div>
+          <label class="text-slate-400 text-sm">Contact No.</label>
+          <p class="text-lg font-medium">+91 98765 43210</p>
+        </div>
+        <div>
+          <label class="text-slate-400 text-sm">WhatsApp No.</label>
+          <p class="text-lg font-medium">+91 98765 43210</p>
+        </div>
+        <div class="md:col-span-2">
+          <label class="text-slate-400 text-sm">Email</label>
+          <p class="text-lg font-medium">info&#64;flexierp.com</p>
+        </div>
+        <div class="md:col-span-2">
+          <label class="text-slate-400 text-sm">Address</label>
+          <p class="text-lg font-medium">
+            123 Business Park, Jaipur, Rajasthan, India - 302019
+          </p>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Log History -->
-    <div class="bg-slate-900/70 rounded-2xl shadow-lg border border-slate-700 p-6 hover:shadow-cyan-500/10 transition">
-        <h3 class="text-lg font-semibold mb-6 flex items-center gap-2">
-            📜 <span>Log History</span>
-        </h3>
-        <div class="relative border-l-2 border-slate-700 pl-6 space-y-6">
-            <div class="relative">
-                <div
-                    class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 border border-[#00ffee] flex items-center justify-center">
-                    <span class="text-[#00ffee] text-xs">✔</span>
-                </div>
-                <p>Logged in from Chrome (Windows)</p>
-                <span class="text-slate-400 text-xs">Today, 09:45 AM</span>
-            </div>
-            <div class="relative">
-                <div
-                    class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 border border-[#00ffee] flex items-center justify-center">
-                    <span class="text-[#00ffee] text-xs">✎</span>
-                </div>
-                <p>Updated Company Name</p>
-                <span class="text-slate-400 text-xs">Yesterday, 04:22 PM</span>
-            </div>
-            <div class="relative">
-                <div
-                    class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 border border-[#00ffee] flex items-center justify-center">
-                    <span class="text-[#00ffee] text-xs">⬇</span>
-                </div>
-                <p>Downloaded Invoice #INV-1021</p>
-                <span class="text-slate-400 text-xs">2 days ago</span>
-            </div>
-            <div class="relative">
-                <div
-                    class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 border border-[#00ffee] flex items-center justify-center">
-                    <span class="text-[#00ffee] text-xs">🔑</span>
-                </div>
-                <p>Password Changed</p>
-                <span class="text-slate-400 text-xs">1 week ago</span>
-            </div>
-        </div>
+  <!-- Preferences + Log History + Activity History -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+  <!-- Preferences -->
+  <div class="rounded-3xl bg-slate-900/80 backdrop-blur-xl p-6 border border-slate-800/50 shadow-lg">
+    <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+      ⚙️ <span>Preferences</span>
+    </h3>
+    <div class="space-y-4 text-sm">
+      <div class="flex items-center justify-between">
+        <span>🌙 Dark Mode</span>
+        <input type="checkbox" class="w-4 h-4 accent-[#00ffee]" />
+      </div>
+      <div class="flex items-center justify-between">
+        <span>📧 Email Notifications</span>
+        <input type="checkbox" class="w-4 h-4 accent-[#00ffee]" checked />
+      </div>
+      <div class="flex items-center justify-between">
+        <span>📲 SMS Alerts</span>
+        <input type="checkbox" class="w-4 h-4 accent-[#00ffee]" />
+      </div>
     </div>
+  </div>
+
+  <!-- Log History -->
+  <div class="rounded-3xl bg-slate-900/80 backdrop-blur-xl p-6 border border-slate-800/50 shadow-lg">
+    <h3 class="text-lg font-semibold mb-6 flex items-center gap-2">
+      📑 <span>Log History</span>
+    </h3>
+    <div class="relative border-l-2 border-slate-700 pl-6 space-y-6">
+      <div class="relative pl-10">
+        <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
+                    border border-[#00ffee] flex items-center justify-center">
+          <span class="text-[#00ffee] text-xs">✔</span>
+        </div>
+        <p class="text-white">Logged in from Chrome (Windows)</p>
+        <span class="text-slate-400 text-xs">Today, 09:45 AM</span>
+      </div>
+      <div class="relative pl-10">
+        <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
+                    border border-[#00ffee] flex items-center justify-center">
+          <span class="text-[#00ffee] text-xs">✎</span>
+        </div>
+        <p class="text-white">Updated Company Name</p>
+        <span class="text-slate-400 text-xs">Yesterday, 04:22 PM</span>
+      </div>
+      <div class="relative pl-10">
+        <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
+                    border border-[#00ffee] flex items-center justify-center">
+          <span class="text-[#00ffee] text-xs">⬇</span>
+        </div>
+        <p class="text-white">Downloaded Invoice #INV-1021</p>
+        <span class="text-slate-400 text-xs">2 days ago</span>
+      </div>
+      <div class="relative pl-10">
+        <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
+                    border border-[#00ffee] flex items-center justify-center">
+          <span class="text-[#00ffee] text-xs">🔑</span>
+        </div>
+        <p class="text-white">Password Changed</p>
+        <span class="text-slate-400 text-xs">1 week ago</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Activity History -->
+  <div class="rounded-3xl bg-slate-900/80 backdrop-blur-xl p-6 border border-slate-800/50 shadow-lg">
+    <h3 class="text-lg font-semibold mb-6 flex items-center gap-2">
+      📜 <span>Activity History</span>
+    </h3>
+    <div class="relative border-l-2 border-slate-700 pl-6 space-y-6">
+      <div class="relative pl-10">
+        <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
+                    border border-[#00ffee] flex items-center justify-center">
+          <span class="text-[#00ffee] text-xs">✅</span>
+        </div>
+        <p class="text-white">Company details updated</p>
+        <span class="text-slate-400 text-xs">28 Sep 2025, 10:45 AM</span>
+      </div>
+      <div class="relative pl-10">
+        <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
+                    border border-[#00ffee] flex items-center justify-center">
+          <span class="text-[#00ffee] text-xs">📄</span>
+        </div>
+        <p class="text-white">New Invoice Prefix added</p>
+        <span class="text-slate-400 text-xs">20 Sep 2025, 03:15 PM</span>
+      </div>
+      <div class="relative pl-10">
+        <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
+                    border border-[#00ffee] flex items-center justify-center">
+          <span class="text-[#00ffee] text-xs">📧</span>
+        </div>
+        <p class="text-white">Email changed from <i>support.com</i></p>
+        <span class="text-slate-400 text-xs">12 Sep 2025, 06:30 PM</span>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- Edit Profile Modal -->
-<div *ngIf="showwditprofile" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-slate-900 text-white rounded-2xl shadow-lg border border-slate-700 w-full max-w-3xl p-6 relative">
-        <button (click)="closeEdit()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
-            <i class="bi bi-x-lg text-2xl"></i>
+<div *ngIf="showwditprofile" 
+     class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn">
+  
+  <div class="bg-slate-900 text-white rounded-2xl shadow-2xl border border-slate-700 
+              w-full max-w-3xl p-8 relative transform animate-scaleIn">
+
+    <!-- Close Button -->
+    <button (click)="closeEdit()" 
+            class="absolute top-4 right-4 text-slate-400 hover:text-white hover:bg-slate-700/40 
+                   rounded-full p-2 transition">
+      <i class="bi bi-x-lg text-xl"></i>
+    </button>
+
+    <!-- Title -->
+    <h2 class="text-2xl font-bold mb-6 text-[#00ffee] border-b border-slate-700 pb-3">
+      ✨ Edit Company Profile
+    </h2>
+
+    <!-- Form -->
+    <form (ngSubmit)="saveProfile()" 
+          class="space-y-8 max-h-[75vh] overflow-y-auto pr-2 custom-scroll">
+
+      <!-- Company Info -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="label-style">🏢 Company Name</label>
+          <input type="text" [(ngModel)]="editableProfile.companyName" name="companyName" required
+                 class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30" />
+        </div>
+
+        <div>
+          <label class="label-style">🧾 GST / Tax ID</label>
+          <input type="text" [(ngModel)]="editableProfile.gstId" name="gstId"
+                 class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30" />
+        </div>
+
+        <div>
+          <label class="label-style">📞 Contact No.</label>
+          <input type="text" [(ngModel)]="editableProfile.contactNo" name="contactNo"
+                 class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30" />
+        </div>
+
+        <div>
+          <label class="label-style">💬 WhatsApp No.</label>
+          <input type="text" [(ngModel)]="editableProfile.whatsappNo" name="whatsappNo"
+                 class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30" />
+        </div>
+
+        <div class="md:col-span-2">
+          <label class="label-style">📧 Email</label>
+          <input type="email" [(ngModel)]="editableProfile.email" name="email" required
+                 class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30" />
+        </div>
+
+        <div class="md:col-span-2">
+          <label class="label-style">📍 Address</label>
+          <textarea [(ngModel)]="editableProfile.address" name="address" rows="3"
+                    class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30"></textarea>
+        </div>
+      </div>
+
+      <!-- Extra Info -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="label-style">🧾 Invoice Prefix</label>
+          <input type="text" [(ngModel)]="editableProfile.invoicePrefix" name="invoicePrefix"
+                 class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30" />
+        </div>
+
+        <div>
+          <label class="label-style">📜 Default Terms & Conditions</label>
+          <textarea [(ngModel)]="editableProfile.termsConditions" name="termsConditions" rows="3"
+                    class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30"></textarea>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex justify-end space-x-4 pt-4">
+        <button type="button" (click)="closeEdit()"
+                class="px-5 py-2 rounded-lg bg-slate-700/70 text-slate-300 hover:bg-slate-600 
+                       transition shadow-md">
+          Cancel
         </button>
-        <h2 class="text-2xl font-bold mb-4 text-[#00ffee]">Edit Company Profile</h2>
-        <form (ngSubmit)="saveProfile()" class="space-y-6 max-h-[80vh] overflow-y-auto pr-2">
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label class="label-style">Company Name</label>
-                    <input type="text" [(ngModel)]="editableProfile.companyName" name="companyName" required
-                        class="input-style" />
-                </div>
-
-                <div>
-                    <label class="label-style">GST / Tax ID</label>
-                    <input type="text" [(ngModel)]="editableProfile.gstId" name="gstId"
-                        class="input-style" />
-                </div>
-
-                <div>
-                    <label class="label-style">Contact No.</label>
-                    <input type="text" [(ngModel)]="editableProfile.contactNo" name="contactNo"
-                        class="input-style" />
-                </div>
-
-                <div>
-                    <label class="label-style">WhatsApp No.</label>
-                    <input type="text" [(ngModel)]="editableProfile.whatsappNo" name="whatsappNo"
-                        class="input-style" />
-                </div>
-                <div class="md:col-span-2">
-                    <label class="label-style">Email</label>
-                    <input type="email" [(ngModel)]="editableProfile.email" name="email" required
-                        class="input-style" />
-                </div>
-                <div class="md:col-span-2">
-                    <label class="label-style">Address</label>
-                    <textarea [(ngModel)]="editableProfile.address" name="address" rows="3"
-                        class="input-style"></textarea>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label class="label-style">Invoice Prefix</label>
-                    <input type="text" [(ngModel)]="editableProfile.invoicePrefix" name="invoicePrefix"
-                        class="input-style" />
-                </div>
-                <div>
-                    <label class="label-style">Default Terms & Conditions</label>
-                    <textarea [(ngModel)]="editableProfile.termsConditions" name="termsConditions" rows="3"
-                        class="input-style"></textarea>
-                </div>
-            </div>
-            <div class="flex justify-end space-x-4">
-                <button type="button" (click)="closeEdit()"
-                    class="px-4 py-2 bg-slate-700 text-slate-300 rounded-lg hover:bg-slate-600 transition">
-                    Cancel
-                </button>
-                <button type="submit"
-                    class="px-4 py-2 bg-[#00ffee] text-slate-900 rounded-lg font-semibold hover:bg-[#00ddcc] transition">
-                    Save Changes
-                </button>
-            </div>
-        </form>
-    </div>
+        <button type="submit"
+                class="px-5 py-2 rounded-lg bg-gradient-to-r from-[#00ffee] to-[#00b7ff] 
+                       text-slate-900 font-semibold hover:scale-[1.03] hover:shadow-lg transition">
+          💾 Save Changes
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
+
+<!-- Animations & Custom Scroll -->
+<style>
+  .animate-fadeIn { animation: fadeIn 0.3s ease-in-out; }
+  .animate-scaleIn { animation: scaleIn 0.3s ease-in-out; }
+  @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+  @keyframes scaleIn { from {transform: scale(0.95);} to {transform: scale(1);} }
+
+  .input-style {
+    @apply w-full px-4 py-2 rounded-lg bg-slate-800/70 border border-slate-700 
+           text-white placeholder-slate-400 transition focus:outline-none;
+  }
+  .label-style {
+    @apply block text-sm font-medium text-slate-400 mb-1;
+  }
+
+  .custom-scroll::-webkit-scrollbar { width: 6px; }
+  .custom-scroll::-webkit-scrollbar-thumb {
+    background: linear-gradient(#00ffee, #00b7ff);
+    border-radius: 10px;
+  }
+</style>
