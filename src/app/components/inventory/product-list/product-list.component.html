@@ -90,8 +90,8 @@
           <span *ngIf="!product.isPerishable">No</span>
         </td>
         <td class="px-4 py-2">{{ product.fullName }}</td>
-        <td class="px-4 py-2 text-center">{{ product.purchasePrice | currency }}</td>
-        <td class="px-4 py-2 text-center">{{ product.sellingPrice | currency }}</td>
+        <td class="px-4 py-2 text-center">{{ product.purchasePrice | currency:'INR':'symbol':'1.2-2' }}</td>
+        <td class="px-4 py-2 text-center">{{ product.sellingPrice | currency:'INR':'symbol':'1.2-2' }}</td>
         <td class="px-4 py-2 text-center">{{ product.taxRate }}%</td>
         <td class="px-4 py-2 text-center">{{ product.discount }}%</td>
       </tr>
