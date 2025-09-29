@@ -4,13 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AddSaleComponent } from "./add-sale/add-sale.component";
 import { ScanBarcodeComponent } from './scan-barcode/scan-barcode.component';
 import { SaleReportComponent } from "./sale-report/sale-report.component";
-
-
-interface Tab {
-  key: string;
-  label: string;
-  component: Type<any>;
-}
+import { Tab } from '../../MODEL/MODEL';
 
 @Component({
   selector: 'app-sales',
@@ -22,8 +16,8 @@ interface Tab {
 export class SalesComponent {
   // 🔹 Tabs array (future-proof)
   tabs: Tab[] = [
-    { key: 'add', label: 'Make Sale', component: AddSaleComponent },
-    { key: 'report', label: 'Sale Report', component: SaleReportComponent }
+    { id: 'add', label: 'Make Sale', component: AddSaleComponent },
+    { id: 'report', label: 'Sale Report', component: SaleReportComponent }
     // 🔹 Add more tabs here easily
   ];
 

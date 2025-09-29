@@ -12,7 +12,7 @@
   <!-- Actions -->
   <div class="flex items-center gap-4 ml-auto">
 
-    <!-- Theme Toggle (optional) -->
+    <!-- Theme Toggle -->
     <button class="hidden md:flex items-center justify-center p-2 rounded-full hover:bg-slate-800 transition text-[#00ffee]">
       <i class="bi bi-moon-stars-fill text-lg"></i>
     </button>
@@ -24,17 +24,23 @@
     </button>
 
     <!-- User Dropdown -->
-    <div class="relative group">
-      <button class="flex items-center gap-2 px-3 py-2 bg-slate-800/70 rounded-full hover:bg-slate-700 transition border border-slate-600 shadow-sm">
+    <div class="relative">
+      <button 
+        (click)="toggleDropdown()" 
+        class="flex items-center gap-2 px-3 py-2 bg-slate-800/70 rounded-full hover:bg-slate-700 transition border border-slate-600 shadow-sm"
+      >
         <img src="assets/user-avatar.png" alt="User" class="w-8 h-8 rounded-full shadow-md border border-[#00ffee]" />
         <span class="hidden md:inline text-sm font-medium text-[#00ffee]">{{ username }}</span>
         <i class="bi bi-chevron-down text-sm text-slate-400"></i>
       </button>
 
       <!-- Dropdown -->
-      <div class="absolute right-0 mt-2 w-48 bg-slate-900 border border-slate-700 text-white rounded-lg shadow-xl opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-200 z-50 backdrop-blur-sm">
-        <a routerLink="/components/profileview" class="block px-4 py-2 hover:bg-slate-800">👤 Profile</a>
-        <a routerLink="/settings" class="block px-4 py-2 hover:bg-slate-800">⚙️ Settings</a>
+      <div 
+        *ngIf="isDropdownOpen" 
+        class="absolute right-0 mt-2 w-48 bg-slate-900 border border-slate-700 text-white rounded-lg shadow-xl transition duration-200 z-50 backdrop-blur-sm"
+      >
+        <a (click)="openProfile()" class="block px-4 py-2 hover:bg-slate-800">👤 Profile</a>
+        <a (click)="openSettings()" class="block px-4 py-2 hover:bg-slate-800">⚙️ Settings</a>
         <button (click)="onLogout()" class="block w-full text-left px-4 py-2 hover:bg-slate-800">🚪 Logout</button>
       </div>
     </div>

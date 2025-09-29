@@ -276,11 +276,11 @@
 
       <!-- Payment Method -->
       <div class="flex flex-col">
-        <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
+        <label class="label-style">
           Payment Method
         </label>
-        <select [(ngModel)]="customer.paymentMode" name="paymentMode" required #paymentMode="ngModel"
-          class="w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200">
+        <select [(ngModel)]="customer.paymentMode" name="paymentMode" required #paymentMode="ngModel" 
+          class="dropdown-style">
           <option value="" disabled selected>Select a payment method</option>
           <option value="1">Cash</option>
           <option value="2">UPI</option>
@@ -293,7 +293,7 @@
 
       <!-- Additional Notes -->
       <div class="flex flex-col md:col-span-2">
-        <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
+        <label class="label-style">
           Notes
         </label>
         <textarea [(ngModel)]="customer.remark" name="remark" rows="3" placeholder="Additional notes"

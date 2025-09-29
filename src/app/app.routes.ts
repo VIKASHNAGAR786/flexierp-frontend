@@ -15,6 +15,7 @@ import { ReportsComponent } from './components/reports/reports.component';
 import { SalesComponent } from './components/sales/sales.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { VendorsComponent } from './components/vendors/vendors.component';
+import { ProfileViewComponent } from './components/profile-view/profile-view.component';
 
 export const routes: Routes = [
   // Default redirect
@@ -39,6 +40,7 @@ export const routes: Routes = [
       { path: 'accounts', component: AccountsComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'vendors', component: VendorsComponent },
+      { path: 'profileview', component: ProfileViewComponent },
     ]
   },
 
