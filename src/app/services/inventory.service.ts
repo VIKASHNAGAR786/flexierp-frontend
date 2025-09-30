@@ -35,6 +35,7 @@ export class InventoryService {
   private AddWarehouseUrl = environment.BASE_URL + '/Inventrory/AddWarehouse';
   private AddproductUrl = environment.BASE_URL + '/Inventrory/AddProduct';
   private GetProductsUrl = environment.BASE_URL + '/Inventrory/GetProducts';
+  private GetSoldProductsUrl = environment.BASE_URL + '/Inventrory/GetSoldProductsList';
   private GetProductReportPdfUrl = environment.BASE_URL + '/Inventrory/GetProductReportPdf';
   private GetProductReportExcelUrl = environment.BASE_URL + '/Inventrory/GetProductReportExcel';
   private AddProviderUrl = environment.BASE_URL + '/Inventrory/AddProvider';
@@ -142,6 +143,22 @@ export class InventoryService {
       .set('endDate', filter.endDate || '');
 
     return this.http.get<ProviderDTO[]>(this.GetProvidersUrl, { headers, params });
+  }
+
+  GetSoldProducts(filter: PaginationFilter): Observable<ProductDTO[] | null> {
+    const headers = this.getAuthHeaders();
+    if (!headers) return of(null);
+
+    // Send filter as query parameters
+    let params = new HttpParams()
+      .set('pageNo', filter.pageNo.toString())
+      .set('pageSize', filter.pageSize.toString())
+      .set('searchTerm', filter.searchTerm || '')
+      .set('startDate', filter.startDate || '')
+      .set('endDate', filter.endDate || '');
+
+
+    return this.http.get<ProductDTO[]>(this.GetSoldProductsUrl, { headers, params });
   }
 
 

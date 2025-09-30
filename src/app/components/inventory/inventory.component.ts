@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { AddProductComponent } from '../inventory/add-product/add-product.component';
 import { ProductListComponent } from '../inventory/product-list/product-list.component';
 import { Tab } from '../../MODEL/MODEL';
+import { SoldProductComponent } from './sold-product/sold-product.component';
 
 @Component({
   selector: 'app-inventory',
@@ -28,7 +29,7 @@ export class InventoryComponent {
     tabs: Tab[] = [
       { id: 'addproduct', label: 'Add Product', component: AddProductComponent },
       { id: 'productlist', label: 'Product List', component: ProductListComponent },
-      { id: 'soldproduct', label: 'Sold Products', component: ProductListComponent },
+      { id: 'soldproduct', label: 'Sold Products', component: SoldProductComponent },
     ];
   
     switchTab(tabId: string) {

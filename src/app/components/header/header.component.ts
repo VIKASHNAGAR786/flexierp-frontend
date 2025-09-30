@@ -1,7 +1,7 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { UserinfowithloginService } from '../../services/userinfowithlogin.service';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +12,8 @@ import { CommonModule } from '@angular/common';
 export class HeaderComponent implements OnInit {
   constructor(
     private router: Router,
-    private userInfo: UserinfowithloginService
+    private userInfo: UserinfowithloginService,
+     @Inject(PLATFORM_ID) private platformId: Object,
   ) { }
   public username: string = 'Guest';
   ngOnInit() {
@@ -26,8 +27,15 @@ export class HeaderComponent implements OnInit {
     }
   }
   onLogout() {
-    // TODO: Implement logout logic here
-    console.log('Logout clicked');
+   if (isPlatformBrowser(this.platformId)) {
+    localStorage.clear();
+  }
+
+  // Clear in-memory cached data
+  this.userInfo.clear();
+  this.router.navigate(['/auth/login']).then(() => {
+    window.location.reload(); // refresh the entire page
+  });
   }
 
   isDropdownOpen = false;
