@@ -13,6 +13,7 @@ export class UserinfowithloginService {
     role: string | null;
     email: string | null;
     id: number | null;
+    mobileNo: string | null;
     lang: string | null;
   } | null = null;
 
@@ -29,7 +30,8 @@ export class UserinfowithloginService {
         role: localStorage.getItem('user_role'),
         email: localStorage.getItem('user_email'),
         id: this.parseId(localStorage.getItem('nameid')),
-        lang: localStorage.getItem('lang')
+        lang: localStorage.getItem('lang'),
+        mobileNo: localStorage.getItem('mobile_no')
       };
     }
   }
@@ -63,6 +65,9 @@ export class UserinfowithloginService {
     return this.cachedData?.email ?? null;
   }
 
+  getUserMobileNo(): string | null {
+    return this.cachedData?.mobileNo ?? null;
+  }
   /** Get ID */
   getUserId(): number | null {
     return this.cachedData?.id ?? null;

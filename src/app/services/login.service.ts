@@ -67,7 +67,8 @@ export class LoginService {
           'user_role': response.roleID.toString(),
           'user_email': response.email,
           'nameid': response.id.toString(),
-          'lang': 'en'
+          'lang': 'en',
+          'mobile_no': response.mobileNo
         };
 
         Object.entries(storageData).forEach(([key, value]) =>
