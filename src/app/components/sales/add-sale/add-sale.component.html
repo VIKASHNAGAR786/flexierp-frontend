@@ -51,7 +51,13 @@
     <!-- Packed Date -->
     <div class="flex flex-col">
       <label class="label-style">Packed Date</label>
-      <input type="date" [(ngModel)]="saleProduct.packedDate" name="packedDate" class="input-style" readonly />
+      <input 
+  type="date" 
+  [ngModel]="saleProduct.packedDate | date:'yyyy-MM-dd'" 
+  (ngModelChange)="saleProduct.packedDate = $event" 
+  name="packedDate" 
+  class="input-style" readonly />
+
     </div>
 
     <!-- Dimensions -->

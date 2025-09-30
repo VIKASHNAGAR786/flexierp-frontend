@@ -58,6 +58,7 @@ export class AddSaleComponent {
       .subscribe((product: ProductByBarcodeDTO | null) => {
         if (product) {
           this.saleProduct = product;
+          this.saleProduct.packedDate = this.saleProduct.packedDate ? this.saleProduct.packedDate.split('T')[0] : '';
           this.barcode = this.saleProduct.barCode || '';
         } else {
           alert('Product not found');

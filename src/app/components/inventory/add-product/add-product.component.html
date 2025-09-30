@@ -37,14 +37,30 @@
       </div>
 
 
-      <!-- Product Description -->
-      <div class="flex flex-col md:col-span-2 w-full max-w-lg">
-        <label class="mb-2 text-sm md:text-base font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide">
-          Product Description
-        </label>
-        <textarea placeholder="Enter Product Description" formControlName="productDescription"
-          class="w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 h-28 resize-y"></textarea>
+      <!-- Wrapper for side-by-side -->
+      <div class="flex flex-col md:flex-row gap-6 w-full">
+
+        <!-- Product Description -->
+        <div class="flex flex-col flex-1">
+          <label
+            class="mb-2 text-sm md:text-base font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide">
+            Product Description
+          </label>
+          <textarea placeholder="Enter Product Description" formControlName="productDescription"
+            class="w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 h-28 resize-y"></textarea>
+        </div>
+
+        <!-- Packed Date -->
+        <div class="flex flex-col w-full md:w-1/3">
+          <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
+            Packed Date
+          </label>
+          <input type="date" formControlName="packedDate" class="input-style text-gray-900 dark:text-white" />
+        </div>
+
+
       </div>
+
 
       <!-- Reorder Quantity -->
       <div class="flex flex-col">

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { InventoryService } from '../../../services/inventory.service';
 import { ProductCategoryDTO, WarehouseDTO } from '../../../DTO/DTO';
@@ -8,7 +8,7 @@ import { AlertService } from '../../../services/alert.service';
 @Component({
   selector: 'app-add-product',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './add-product.component.html'
 })
 export class AddProductComponent {
