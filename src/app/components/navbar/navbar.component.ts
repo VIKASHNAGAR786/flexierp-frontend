@@ -34,6 +34,7 @@ export class NavbarComponent implements OnInit {
     { label: 'Dashboard', path: '/dashboard', icon: 'bi bi-speedometer2' },
     { label: 'Inventory', path: '/inventory', icon: 'bi bi-box-seam' },
     { label: 'Sales', path: '/sales', icon: 'bi bi-cash-coin' },
+    { label: 'Accounting', path: '/accounts', icon: 'bi bi-bank' },
     { label: 'Customers', path: '/customers', icon: 'bi bi-people' },
     { label: 'Vendors', path: '/vendors', icon: 'bi bi-truck' },
     { label: 'Settings', path: '/settings', icon: 'bi bi-gear' },
@@ -42,7 +43,6 @@ export class NavbarComponent implements OnInit {
   futureLinks = [
     { label: 'Reports', path: '/reports', icon: 'bi bi-graph-up-arrow' },
     { label: 'Purchases', path: '/purchases', icon: 'bi bi-cart-check' },
-    { label: 'Accounting', path: '/accounts', icon: 'bi bi-bank' },
     { label: 'HR Management', icon: 'bi bi-people-fill', badge: 'Planned', badgeClass: 'bg-yellow-500 text-black' },
     { label: 'Payroll System', icon: 'bi bi-wallet2', badge: 'Planned', badgeClass: 'bg-yellow-500 text-black' },
     { label: 'Support Tickets', icon: 'bi bi-headset', badge: 'Beta Soon', badgeClass: 'bg-gray-500 text-white' },
