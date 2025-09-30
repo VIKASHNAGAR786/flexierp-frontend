@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserinfowithloginService } from '../../services/userinfowithlogin.service';
 import { CommonService } from '../../services/common.service';
-import { PaginationFilter } from '../../MODEL/MODEL';
-import { UserLoginHistoryDTO } from '../../DTO/DTO';
+import { PaginationFilter, UpdateCompanyInfo } from '../../MODEL/MODEL';
+import { CompanyInfoDTO, UserLoginHistoryDTO } from '../../DTO/DTO';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-profile-view',
@@ -15,7 +16,8 @@ import { UserLoginHistoryDTO } from '../../DTO/DTO';
 export class ProfileViewComponent implements OnInit {
   constructor(
     private userInfo: UserinfowithloginService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private alertservice: AlertService
   ) { }
   // Dummy data - later connect with backend
   username = '';
@@ -28,6 +30,7 @@ export class ProfileViewComponent implements OnInit {
     this.phone = this.userInfo.getUserMobileNo() || '+91 00000 00000';
 
     this.loadHistory();
+    this.GetCompanyInfo();
   }
   showwditprofile = false;
 
@@ -49,7 +52,27 @@ export class ProfileViewComponent implements OnInit {
   pageSize: number = 20;
   totalRecords: number = 0;
   loading: boolean = false;
+  companyInfo: CompanyInfoDTO = {
+    comInfoId: 0,
+    companyName: '',
+    contactNo: '',
+    whatsAppNo: '',
+    email: '',
+    address: '',
+    fullName: '',
+    createdDate: '',
+    companyLogo: ''
+  };
 
+  updatecompany: UpdateCompanyInfo = {
+    company_Name : '',
+    contact_No : '',
+    whatsApp_No : '',
+    email : '',
+    address : '',
+    row_id : 1,
+    companyLogo : ''
+  };
   loadHistory(): void {
     const filter: PaginationFilter = {
       pageNo: this.pageNo,
@@ -66,4 +89,25 @@ export class ProfileViewComponent implements OnInit {
       error: (err) => console.error('Failed to load login history', err)
     });
   }
+
+  GetCompanyInfo(): void {
+    this.commonService.GetCompanyInfo().subscribe({
+      next: (data) => {
+        if (data) this.companyInfo = data;
+      },
+      error: (err) => console.error('Failed to load company info', err)
+    });
+  }
+
+  UpdateCompanyInfo(): void {
+    this.updatecompany.row_id = this.companyInfo.comInfoId;
+    this.commonService.UpdateCompanyInfo(this.updatecompany).subscribe({
+      next: (data) => {
+        if (data) 
+          this.alertservice.showAlert("Record Update Succefully", "success");
+      },
+      error: (err) => this.alertservice.showAlert('Failed to load company info', "error")
+    });
+  }
+
 }

@@ -69,28 +69,25 @@
       <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label class="text-slate-400 text-sm">Company Name</label>
-          <p class="text-lg font-medium">Flexi ERP Pvt. Ltd.</p>
+          <p class="text-lg font-medium">{{ companyInfo.companyName }}</p>
         </div>
-        <div>
-          <label class="text-slate-400 text-sm">GST / Tax ID</label>
-          <p class="text-lg font-medium">29ABCDE1234F2Z5</p>
-        </div>
+       
         <div>
           <label class="text-slate-400 text-sm">Contact No.</label>
-          <p class="text-lg font-medium">+91 98765 43210</p>
+          <p class="text-lg font-medium">{{ companyInfo.contactNo }}</p>
         </div>
         <div>
           <label class="text-slate-400 text-sm">WhatsApp No.</label>
-          <p class="text-lg font-medium">+91 98765 43210</p>
+          <p class="text-lg font-medium">{{ companyInfo.whatsAppNo }}</p>
         </div>
         <div class="md:col-span-2">
           <label class="text-slate-400 text-sm">Email</label>
-          <p class="text-lg font-medium">info&#64;flexierp.com</p>
+          <p class="text-lg font-medium">{{ companyInfo.email }}</p>
         </div>
         <div class="md:col-span-2">
           <label class="text-slate-400 text-sm">Address</label>
           <p class="text-lg font-medium">
-            123 Business Park, Jaipur, Rajasthan, India - 302019
+            {{ companyInfo.address }}
           </p>
         </div>
       </div>
@@ -214,55 +211,36 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label class="label-style">🏢 Company Name</label>
-          <input type="text" [(ngModel)]="editableProfile.companyName" name="companyName" required
-                 class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30" />
-        </div>
-
-        <div>
-          <label class="label-style">🧾 GST / Tax ID</label>
-          <input type="text" [(ngModel)]="editableProfile.gstId" name="gstId"
+          <input type="text" [(ngModel)]="updatecompany.company_Name" name="companyName" required
                  class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30" />
         </div>
 
         <div>
           <label class="label-style">📞 Contact No.</label>
-          <input type="text" [(ngModel)]="editableProfile.contactNo" name="contactNo"
+          <input type="text" [(ngModel)]="updatecompany.contact_No" name="contactNo"
                  class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30" />
         </div>
 
         <div>
           <label class="label-style">💬 WhatsApp No.</label>
-          <input type="text" [(ngModel)]="editableProfile.whatsappNo" name="whatsappNo"
+          <input type="text" [(ngModel)]="updatecompany.whatsApp_No" name="whatsappNo"
                  class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30" />
         </div>
 
         <div class="md:col-span-2">
           <label class="label-style">📧 Email</label>
-          <input type="email" [(ngModel)]="editableProfile.email" name="email" required
+          <input type="email" [(ngModel)]="updatecompany.email" name="email" required
                  class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30" />
         </div>
 
         <div class="md:col-span-2">
           <label class="label-style">📍 Address</label>
-          <textarea [(ngModel)]="editableProfile.address" name="address" rows="3"
+          <textarea [(ngModel)]="updatecompany.address" name="address" rows="3"
                     class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30"></textarea>
         </div>
       </div>
 
-      <!-- Extra Info -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label class="label-style">🧾 Invoice Prefix</label>
-          <input type="text" [(ngModel)]="editableProfile.invoicePrefix" name="invoicePrefix"
-                 class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30" />
-        </div>
-
-        <div>
-          <label class="label-style">📜 Default Terms & Conditions</label>
-          <textarea [(ngModel)]="editableProfile.termsConditions" name="termsConditions" rows="3"
-                    class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30"></textarea>
-        </div>
-      </div>
+      
 
       <!-- Buttons -->
       <div class="flex justify-end space-x-4 pt-4">
@@ -271,7 +249,8 @@
                        transition shadow-md">
           Cancel
         </button>
-        <button type="submit"
+        <button (click)="UpdateCompanyInfo()"
+        type="submit"
                 class="px-5 py-2 rounded-lg bg-gradient-to-r from-[#00ffee] to-[#00b7ff] 
                        text-slate-900 font-semibold hover:scale-[1.03] hover:shadow-lg transition">
           💾 Save Changes

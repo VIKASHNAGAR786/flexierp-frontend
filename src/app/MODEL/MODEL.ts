@@ -101,3 +101,14 @@ export interface generateReceiptpdf {
    cart: cart[];
 
 }
+
+export interface UpdateCompanyInfo
+{
+    company_Name?: string;
+    contact_No?: string;
+    whatsApp_No?: string;
+    email?: string;
+    address?: string;
+    row_id?: number;
+    companyLogo?: string;
+}

@@ -4,8 +4,8 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { UserinfowithloginService } from './userinfowithlogin.service';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { PaginationFilter, ProductCategory, ProductModel, ProviderModel, WarehouseModel } from '../MODEL/MODEL';
-import { ProductCategoryDTO, ProductDTO, ProviderDTO, UserLoginHistoryDTO, WarehouseDTO } from '../DTO/DTO';
+import { PaginationFilter, ProductCategory, ProductModel, ProviderModel, UpdateCompanyInfo, WarehouseModel } from '../MODEL/MODEL';
+import { CompanyInfoDTO, ProductCategoryDTO, ProductDTO, ProviderDTO, UserLoginHistoryDTO, WarehouseDTO } from '../DTO/DTO';
 
 @Injectable({
   providedIn: 'root'
@@ -30,19 +30,21 @@ export class CommonService {
 
   private readonly logouturl = environment.AccountApiUrl + 'logout';
   private readonly GetUserLoginHistoryUrl = environment.AccountApiUrl + 'GetUserLoginHistory';
+  private readonly GetCompanyInfoUrl = environment.AccountApiUrl + 'GetCompanyInfo';
+  private readonly UpdateCompanyInfoUrl = environment.AccountApiUrl + 'UpdateCompanyInfo';
 
   logout(): Observable<string> {
-  const headers = this.getAuthHeaders();
+    const headers = this.getAuthHeaders();
 
-  if (headers) {
-    // Send empty body {} and pass headers correctly
-    return this.http.patch<string>(this.logouturl, {}, { headers });
+    if (headers) {
+      // Send empty body {} and pass headers correctly
+      return this.http.patch<string>(this.logouturl, {}, { headers });
+    }
+
+    return of(""); // No token, return empty observable
   }
 
-  return of(""); // No token, return empty observable
-}
-
-GetUserLoginHistory(filter: PaginationFilter): Observable<UserLoginHistoryDTO[] | null> {
+  GetUserLoginHistory(filter: PaginationFilter): Observable<UserLoginHistoryDTO[] | null> {
     const headers = this.getAuthHeaders();
     if (!headers) return of(null);
 
@@ -54,4 +56,23 @@ GetUserLoginHistory(filter: PaginationFilter): Observable<UserLoginHistoryDTO[] 
     return this.http.get<UserLoginHistoryDTO[]>(this.GetUserLoginHistoryUrl, { headers, params });
   }
 
+  GetCompanyInfo(): Observable<CompanyInfoDTO | null> {
+    const headers = this.getAuthHeaders();
+
+    if (headers) {
+      // Send empty body {} and pass headers correctly
+      return this.http.get<CompanyInfoDTO>(this.GetCompanyInfoUrl, { headers });
+    }
+
+    return of(null); // No token, return empty observable
+  }
+
+  UpdateCompanyInfo(updateCompanyInfo: UpdateCompanyInfo): Observable<string> {
+    const headers = this.getAuthHeaders();
+
+    if (headers) {
+      return this.http.post<string>(this.UpdateCompanyInfoUrl,updateCompanyInfo, { headers });
+    }
+    return of("");
+  }
 }

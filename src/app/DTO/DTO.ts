@@ -122,4 +122,17 @@ export interface UserLoginHistoryDTO {
   totalRecords: number;
 }
 
+export interface CompanyInfoDTO {
+  comInfoId: number;
+  companyName: string;
+  contactNo: string;
+  whatsAppNo: string;
+  email: string;
+  address: string;
+  fullName: string;
+  createdDate: string;
+  companyLogo: string;
+}
+
+
 
