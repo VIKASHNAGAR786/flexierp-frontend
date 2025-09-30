@@ -201,6 +201,7 @@ export class AddSaleComponent {
   // binding customer ID
   onCustomerSelected(customer: any) {
     this.customer = customer;
+    this.customer.paymentMode = "";
     this.saledata.customerID = customer.customerID;
     console.log('Selected customer:', customer);
   }
