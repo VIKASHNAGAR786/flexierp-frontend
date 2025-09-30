@@ -38,6 +38,9 @@ export class InventoryService {
   private GetSoldProductsUrl = environment.BASE_URL + '/Inventrory/GetSoldProductsList';
   private GetProductReportPdfUrl = environment.BASE_URL + '/Inventrory/GetProductReportPdf';
   private GetProductReportExcelUrl = environment.BASE_URL + '/Inventrory/GetProductReportExcel';
+
+   private GetSoldProductReportPdfUrl = environment.BASE_URL + '/Inventrory/GetSoldProductReportPdf';
+  private GetSoldProductReportExcelUrl = environment.BASE_URL + '/Inventrory/GetSoldProductReportExcel';
   private AddProviderUrl = environment.BASE_URL + '/Inventrory/AddProvider';
   private GetProvidersUrl = environment.BASE_URL + '/Inventrory/GetProviders';
 
@@ -159,6 +162,35 @@ export class InventoryService {
 
 
     return this.http.get<ProductDTO[]>(this.GetSoldProductsUrl, { headers, params });
+  }
+
+  getSoldProductReportPdf(filter: PaginationFilter): Observable<Blob | null> {
+    const headers = this.getAuthHeaders();
+    if (!headers) return of(null);
+
+    let params = new HttpParams()
+      .set('pageNo', filter.pageNo.toString())
+      .set('pageSize', filter.pageSize.toString())
+      .set('searchTerm', filter.searchTerm || '')
+      .set('startDate', filter.startDate || '')
+      .set('endDate', filter.endDate || '');
+
+    return this.http.get(this.GetSoldProductReportPdfUrl, { headers, params, responseType: 'blob' });
+  }
+
+  // --- Get Excel Report ---
+  getSoldProductReportExcel(filter: PaginationFilter): Observable<Blob | null> {
+    const headers = this.getAuthHeaders();
+    if (!headers) return of(null);
+
+    let params = new HttpParams()
+      .set('pageNo', filter.pageNo.toString())
+      .set('pageSize', filter.pageSize.toString())
+      .set('searchTerm', filter.searchTerm || '')
+      .set('startDate', filter.startDate || '')
+      .set('endDate', filter.endDate || '');
+
+    return this.http.get(this.GetSoldProductReportExcelUrl, { headers, params, responseType: 'blob' });
   }
 
 

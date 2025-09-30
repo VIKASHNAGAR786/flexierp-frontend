@@ -100,7 +100,7 @@ export class SoldProductComponent {
   // 🔹 Export
   exportToPdf() {
     this.reportIsLoading = true;
-    this.inventoryService.getProductReportPdf(this.filter).subscribe(blob => {
+    this.inventoryService.getSoldProductReportPdf(this.filter).subscribe(blob => {
       this.reportIsLoading = false;
       if (blob) this.inventoryService.downloadFile(blob, 'ProductReport.pdf');
     });
@@ -108,7 +108,7 @@ export class SoldProductComponent {
 
   exportToExcel() {
     this.reportIsLoading = true;
-    this.inventoryService.getProductReportExcel(this.filter).subscribe(blob => {
+    this.inventoryService.getSoldProductReportExcel(this.filter).subscribe(blob => {
       this.reportIsLoading = false;
       if (blob) this.inventoryService.downloadFile(blob, 'ProductReport.xlsx');
     });
