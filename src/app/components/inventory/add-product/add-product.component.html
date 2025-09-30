@@ -21,11 +21,13 @@
 
         <div class="relative">
           <select formControlName="productCategory" class="dropdown-style">
-            <option [ngValue]="null" disabled>-- Select Category --</option>
-            <option *ngFor="let cat of categories" [ngValue]="cat.categoryID">
-              {{ cat.categoryName }} <span *ngIf="cat.description"> - {{ cat.description }}</span>
-            </option>
-          </select>
+          <option [ngValue]="null" disabled selected>-- Select Category --</option>
+          <option *ngFor="let cat of categories" [ngValue]="cat.categoryID">
+            {{ cat.categoryName }}
+            <span *ngIf="cat.description"> - {{ cat.description }}</span>
+          </option>
+        </select>
+
 
           <!-- Custom dropdown arrow -->
           <svg
@@ -61,22 +63,21 @@
 
       </div>
 
-
       <!-- Reorder Quantity -->
       <div class="flex flex-col">
         <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
           Reorder Quantity
         </label>
-        <input type="number" placeholder="Enter Reorder Quantity" formControlName="reorderQuantity"
-          class="input-style" />
+        <input type="number" min="0" placeholder="Enter Reorder Quantity"
+              formControlName="reorderQuantity" class="input-style" />
       </div>
-
       <!-- Purchase Price -->
       <div class="flex flex-col">
         <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
           Purchase Price
         </label>
-        <input type="number" placeholder="Enter Purchase Price" formControlName="purchasePrice" class="input-style" />
+        <input type="number" min="0" placeholder="Enter Purchase Price"
+              formControlName="purchasePrice" class="input-style" />
       </div>
 
       <!-- Selling Price -->
@@ -84,7 +85,8 @@
         <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
           Selling Price
         </label>
-        <input type="number" placeholder="Enter Selling Price" formControlName="sellingPrice" class="input-style" />
+        <input type="number" min="0" placeholder="Enter Selling Price"
+              formControlName="sellingPrice" class="input-style" />
       </div>
 
       <!-- Tax Rate -->
@@ -92,7 +94,8 @@
         <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
           Tax Rate (%)
         </label>
-        <input type="number" placeholder="Enter Tax Rate" step="0.01" formControlName="taxRate" class="input-style" />
+        <input type="number" min="0" step="0.01" placeholder="Enter Tax Rate"
+         formControlName="taxRate" class="input-style" />
       </div>
 
       <!-- Discount -->
@@ -100,7 +103,8 @@
         <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
           Discount
         </label>
-        <input type="number" placeholder="Enter Discount" step="0.01" formControlName="discount" class="input-style" />
+        <input type="number" min="0" step="0.01" placeholder="Enter Discount"
+         formControlName="discount" class="input-style" />
       </div>
     </div>
   </div>
@@ -116,7 +120,7 @@
         <label class="mb-1 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
           Packed Weight
         </label>
-        <input type="number" step="0.01" placeholder="Enter Packed Weight" formControlName="packedWeight"
+        <input type="number" min="0" step="0.01" placeholder="Enter Packed Weight" formControlName="packedWeight"
           class="input-style" />
       </div>
 
@@ -124,7 +128,7 @@
         <label class="mb-1 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
           Packed Height
         </label>
-        <input type="number" step="0.01" placeholder="Enter Packed Height" formControlName="packedHeight"
+        <input type="number" min="0" step="0.01" placeholder="Enter Packed Height" formControlName="packedHeight"
           class="input-style" />
       </div>
 
@@ -132,7 +136,7 @@
         <label class="mb-1 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
           Packed Width
         </label>
-        <input type="number" step="0.01" placeholder="Enter Packed Width" formControlName="packedWidth"
+        <input type="number" min="0" step="0.01" placeholder="Enter Packed Width" formControlName="packedWidth"
           class="input-style" />
       </div>
 
@@ -140,7 +144,7 @@
         <label class="mb-1 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
           Packed Depth
         </label>
-        <input type="number" step="0.01" placeholder="Enter Packed Depth" formControlName="packedDepth"
+        <input type="number" min="0" step="0.01" placeholder="Enter Packed Depth" formControlName="packedDepth"
           class="input-style" />
       </div>
 

@@ -23,26 +23,29 @@ export class AddProductComponent {
   ) {}
 
   ngOnInit(): void {
+
     this.productForm = this.fb.group({
       productName: ['', Validators.required],
-      productCategory: [0, Validators.required],
+      productCategory: [null, Validators.required],
       productType: [''],
       packedDate: [null],
-      packedWeight: [null],
-      packedHeight: [null],
-      packedWidth: [null],
-      packedDepth: [null],
+      packedWeight: [null, [Validators.required, Validators.min(0)]],
+      packedHeight: [null, [Validators.required, Validators.min(0)]],
+      packedWidth: [null,  [Validators.required, Validators.min(0)]],
+      packedDepth: [null,  [Validators.required, Validators.min(0)]],
       isPerishable: [false],
-      purchasePrice: [0],
-      sellingPrice: [0],
-      taxRate: [0],
-      discount: [0],
+      purchasePrice: [null, [Validators.required, Validators.min(0)]],  // 👈 no negative
+      sellingPrice: [null, [Validators.required, Validators.min(0)]],   // 👈 no negative
+      taxRate: [null, [Validators.min(0)]],                             // 👈 no negative
+      discount: [null, [Validators.min(0)]],                            // 👈 no negative
       productDescription: [''],
-      reorderQuantity: [0],
-      warehouseID: [0],
+      reorderQuantity: [null, [Validators.min(0)]],                     // 👈 no negative
+      warehouseID: [null],
       warehouseName: [''],
       warehouseRefrigerated: [false],
-    });
+});
+
+   
 
     this.loadCategories();
     this.loadWarehouses();
@@ -61,7 +64,7 @@ export class AddProductComponent {
         this.productAdded.emit(res);
         this.productForm.reset({
           productName: '',
-          productCategory: 0,
+          productCategory: '',
           productType: '',
           packedDate: null,
           packedWeight: null,
@@ -86,6 +89,7 @@ export class AddProductComponent {
       }
     });
   }
+
 
   loadCategories(): void {
     this.inventoryService.GetCategories().subscribe({
