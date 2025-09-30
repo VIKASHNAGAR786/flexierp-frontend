@@ -10,6 +10,8 @@ import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { ColorserviceService } from '../../services/colorservice.service';
 import { UserinfowithloginService } from '../../services/userinfowithlogin.service';
+import { CommonService } from '../../services/common.service';
+import { AlertService } from '../../services/alert.service';
 
 
 @Component({
@@ -17,7 +19,7 @@ import { UserinfowithloginService } from '../../services/userinfowithlogin.servi
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
   encapsulation: ViewEncapsulation.Emulated,
-   imports: [
+  imports: [
     CommonModule,
     RouterModule
   ],
@@ -36,7 +38,7 @@ export class NavbarComponent implements OnInit {
     { label: 'Vendors', path: '/vendors', icon: 'bi bi-truck' },
     { label: 'Settings', path: '/settings', icon: 'bi bi-gear' },
   ];
-  
+
   futureLinks = [
     { label: 'Reports', path: '/reports', icon: 'bi bi-graph-up-arrow' },
     { label: 'Purchases', path: '/purchases', icon: 'bi bi-cart-check' },
@@ -52,8 +54,10 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object,
     private colorService: ColorserviceService,
-    private userInfo: UserinfowithloginService
-  ){
+    private userInfo: UserinfowithloginService,
+    private commonservice: CommonService,
+    private alertservices: AlertService
+  ) {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => this.checkLoginStatus());
@@ -74,25 +78,36 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-  if (isPlatformBrowser(this.platformId)) {
-    localStorage.clear();
+    this.commonservice.logout().subscribe({
+      next: (res) => {
+        this.alertservices.showAlert("Server logout successful", "success");
+      },
+      error: (err) => {
+        this.alertservices.showAlert("Server logout failed", "error");
+      },
+      complete: () => {
+
+        if (isPlatformBrowser(this.platformId)) {
+          localStorage.clear();
+        }
+
+        // Clear in-memory cached data
+        this.userInfo.clear();
+
+        this.isLoggedIn = false;
+        // Navigate to login page after API call completes
+        this.router.navigate(['/auth/login']).then(() => {
+          window.location.reload(); // refresh the entire page
+        });
+      }
+    });
   }
 
-  // Clear in-memory cached data
-  this.userInfo.clear();
-
-  this.isLoggedIn = false;
-
-  this.router.navigate(['/auth/login']).then(() => {
-    window.location.reload(); // refresh the entire page
-  });
-}
-
-checkLoginStatus() {
-  if (isPlatformBrowser(this.platformId)) {
-    this.userInfo.refresh(); // ✅ Always load latest from localStorage
-    this.isLoggedIn = !!this.userInfo.getToken();
+  checkLoginStatus() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.userInfo.refresh(); // ✅ Always load latest from localStorage
+      this.isLoggedIn = !!this.userInfo.getToken();
+    }
   }
-}
 
 }

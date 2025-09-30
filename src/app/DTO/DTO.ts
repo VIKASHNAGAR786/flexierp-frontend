@@ -109,5 +109,17 @@ export interface WarehouseDTO {
   createdDate?: string; // Use string for date from API or Date type if you parse it
 }
 
+export interface UserLoginHistoryDTO {
+  historyID: number;
+  username: string;
+  email: string;
+  loginTime: string;
+  logoutTime: string;
+  status: string;
+  ipAddress: string;
+  deviceInfo: string;
+  failureReason: string;
+  totalRecords: number;
+}
 
 

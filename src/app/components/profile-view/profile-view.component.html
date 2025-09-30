@@ -8,7 +8,7 @@
 
     <!-- User Info -->
     <div class="px-6 pb-6 -mt-16 flex items-center gap-8">
-      <img src="assets/user-avatar.png" alt="User Avatar"
+      <img src="assets/profile.png" alt="User Avatar"
            class="w-28 h-28 rounded-full border-4 border-slate-900 shadow-lg hover:ring-2 hover:ring-[#00ffee] transition" />
       <div>
         <h2 class="text-3xl font-bold text-[#00ffee]">{{ username }}</h2>
@@ -121,46 +121,36 @@
     </div>
   </div>
 
-  <!-- Log History -->
-  <div class="rounded-3xl bg-slate-900/80 backdrop-blur-xl p-6 border border-slate-800/50 shadow-lg">
-    <h3 class="text-lg font-semibold mb-6 flex items-center gap-2">
-      📑 <span>Log History</span>
-    </h3>
-    <div class="relative border-l-2 border-slate-700 pl-6 space-y-6">
-      <div class="relative pl-10">
-        <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
-                    border border-[#00ffee] flex items-center justify-center">
-          <span class="text-[#00ffee] text-xs">✔</span>
-        </div>
-        <p class="text-white">Logged in from Chrome (Windows)</p>
-        <span class="text-slate-400 text-xs">Today, 09:45 AM</span>
+ <!-- Log History -->
+<div class="rounded-3xl bg-slate-900/80 backdrop-blur-xl p-6 border border-slate-800/50 shadow-lg">
+  <h3 class="text-lg font-semibold mb-6 flex items-center gap-2">
+    📑 <span>Log History</span>
+  </h3>
+
+  <!-- Scrollable container -->
+  <div class="relative border-l-2 border-slate-700 pl-6 space-y-6 max-h-96 overflow-y-auto">
+    <div *ngFor="let log of historyList" class="relative pl-10">
+      <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
+                  border border-[#00ffee] flex items-center justify-center">
+        <!-- Icon based on login/logout -->
+        <span class="text-[#00ffee] text-xs">
+          {{ log.logoutTime !== 'N/A' ? '🔒' : (log.status === 'Success' ? '✔' : '❌') }}
+        </span>
       </div>
-      <div class="relative pl-10">
-        <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
-                    border border-[#00ffee] flex items-center justify-center">
-          <span class="text-[#00ffee] text-xs">✎</span>
-        </div>
-        <p class="text-white">Updated Company Name</p>
-        <span class="text-slate-400 text-xs">Yesterday, 04:22 PM</span>
-      </div>
-      <div class="relative pl-10">
-        <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
-                    border border-[#00ffee] flex items-center justify-center">
-          <span class="text-[#00ffee] text-xs">⬇</span>
-        </div>
-        <p class="text-white">Downloaded Invoice #INV-1021</p>
-        <span class="text-slate-400 text-xs">2 days ago</span>
-      </div>
-      <div class="relative pl-10">
-        <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
-                    border border-[#00ffee] flex items-center justify-center">
-          <span class="text-[#00ffee] text-xs">🔑</span>
-        </div>
-        <p class="text-white">Password Changed</p>
-        <span class="text-slate-400 text-xs">1 week ago</span>
-      </div>
+      <p class="text-white">
+        {{ log.username }} 
+        {{ log.logoutTime !== 'N/A' ? 'logged out' : 'logged in' }} 
+        from {{ log.deviceInfo }}
+      </p>
+      <span class="text-slate-400 text-xs">
+        {{ log.logoutTime !== 'N/A' ? (log.logoutTime | date:'medium') : (log.loginTime | date:'medium') }}
+      </span>
     </div>
   </div>
+</div>
+
+
+
 
   <!-- Activity History -->
   <div class="rounded-3xl bg-slate-900/80 backdrop-blur-xl p-6 border border-slate-800/50 shadow-lg">
