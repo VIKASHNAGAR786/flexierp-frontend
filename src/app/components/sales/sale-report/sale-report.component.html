@@ -52,7 +52,7 @@
 
   <!-- 📤 Export Buttons -->
   <div class="flex gap-2" *ngIf="sales.length > 0">
-    <button (click)="exportToPDF()"
+    <button (click)="exportToPdf()"
       class="flex items-center gap-1 px-3 py-2 bg-red-600 hover:bg-red-700 rounded text-white">
       <i class="fas fa-file-pdf"></i> PDF
     </button>
@@ -101,4 +101,22 @@
   <span>Page {{ filter.pageNo }} of {{ totalPages }}</span>
   <button (click)="nextPage()" [disabled]="filter.pageNo === totalPages"
       class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50">Next</button>
+</div>
+
+<!-- for the big loader -->
+ <div *ngIf="reportIsLoading" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+  <div class="text-center space-y-4">
+
+    <!-- Animated FLEXIERP text -->
+    <h1 class="text-5xl font-extrabold text-[#00ffee] animate-bounce">FLEXIERP</h1>
+
+    <!-- Bouncing dots -->
+    <div class="flex justify-center space-x-2">
+      <span class="w-4 h-4 bg-[#00ffee] rounded-full animate-bounce delay-100"></span>
+      <span class="w-4 h-4 bg-[#00ffee] rounded-full animate-bounce delay-200"></span>
+      <span class="w-4 h-4 bg-[#00ffee] rounded-full animate-bounce delay-300"></span>
+    </div>
+
+    <p class="text-white text-lg font-semibold animate-pulse">Loading report, please wait...</p>
+  </div>
 </div>

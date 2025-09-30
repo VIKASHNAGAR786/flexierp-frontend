@@ -23,6 +23,7 @@ export class SaleReportComponent implements OnInit {
   totalRows: number = 0;
   totalPages: number = 1;
   loading: boolean = false;
+  reportIsLoading: boolean = false;
 
   constructor(
     private saleService: SaleserviceService
@@ -88,13 +89,21 @@ export class SaleReportComponent implements OnInit {
     this.filter.pageNo = 1;
     this.loadSales();
   }
-  exportToExcel() {
-    console.log("Excel export triggered ✅");
-    // TODO: Implement with XLSX
+
+  exportToPdf() {
+    this.reportIsLoading = true;
+    this.saleService.GetSalesReportPdf(this.filter).subscribe(blob => {
+      this.reportIsLoading = false;
+      if (blob) this.saleService.downloadFile(blob, 'ProductReport.pdf');
+    });
   }
 
-  exportToPDF() {
-    console.log("PDF export triggered ✅");
-    // TODO: Implement with jsPDF
+  exportToExcel() {
+    this.reportIsLoading = true;
+    this.saleService.GetSalesReportExcel(this.filter).subscribe(blob => {
+      this.reportIsLoading = false;
+      if (blob) this.saleService.downloadFile(blob, 'ProductReport.xlsx');
+    });
   }
+
 }

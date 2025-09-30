@@ -17,7 +17,7 @@ export class VendorsListComponent {
    readonly today: string;
    filter: PaginationFilter;
 
-  pageSizes = [5, 10, 20];
+  pageSizes = [20, 30, 50];
 
   providers: ProviderDTO[] = [];
   totalRows: number = 0;
@@ -39,7 +39,7 @@ export class VendorsListComponent {
       endDate: this.today,
       searchTerm: '',
       pageNo: 1,
-      pageSize: 10
+      pageSize: this.pageSizes[0]
     };
   }
 

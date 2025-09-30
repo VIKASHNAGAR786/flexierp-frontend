@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { UserinfowithloginService } from './userinfowithlogin.service';
 import { Observable, of } from 'rxjs';
@@ -20,6 +20,8 @@ export class SaleserviceService {
   private GetProductByBarcodeUrl = environment.BASE_URL + '/Sale/GetProductByBarcode';
   private InsertSaleUrl = environment.BASE_URL + '/Sale/InsertSale';
   private GetSaleUrl = environment.BASE_URL + '/Sale/GetSales';
+  private GetSalesReportPdfUrl = environment.BASE_URL + '/Sale/GetSalesReportPdf';
+  private GetSalesReportExcelUrl = environment.BASE_URL + '/Sale/GetSalesReportExcel';
   private getOldCustomersUrl = environment.BASE_URL + '/Sale/GetOldCustomers';
   private getCustomersWithSalesUrl = environment.BASE_URL + '/Sale/GetCustomersWithSales';
   private getAuthHeaders(): HttpHeaders | null {
@@ -94,6 +96,45 @@ export class SaleserviceService {
     };
 
     return this.http.get<CustomerWithSalesDTO[]>(this.getCustomersWithSalesUrl, { headers, params });
+  }
+
+  GetSalesReportPdf(filter: PaginationFilter): Observable<Blob | null> {
+      const headers = this.getAuthHeaders();
+      if (!headers) return of(null);
+  
+      let params = new HttpParams()
+        .set('pageNo', filter.pageNo.toString())
+        .set('pageSize', filter.pageSize.toString())
+        .set('searchTerm', filter.searchTerm || '')
+        .set('startDate', filter.startDate || '')
+        .set('endDate', filter.endDate || '');
+  
+      return this.http.get(this.GetSalesReportPdfUrl, { headers, params, responseType: 'blob' });
+    }
+  
+    // --- Get Excel Report ---
+    GetSalesReportExcel(filter: PaginationFilter): Observable<Blob | null> {
+      const headers = this.getAuthHeaders();
+      if (!headers) return of(null);
+  
+      let params = new HttpParams()
+        .set('pageNo', filter.pageNo.toString())
+        .set('pageSize', filter.pageSize.toString())
+        .set('searchTerm', filter.searchTerm || '')
+        .set('startDate', filter.startDate || '')
+        .set('endDate', filter.endDate || '');
+  
+      return this.http.get(this.GetSalesReportExcelUrl, { headers, params, responseType: 'blob' });
+    }
+    
+  // --- Utility to download blob as file ---
+  downloadFile(blob: Blob, fileName: string) {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    a.click();
+    window.URL.revokeObjectURL(url);
   }
 
 }
