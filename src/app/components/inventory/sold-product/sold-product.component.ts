@@ -102,7 +102,7 @@ export class SoldProductComponent {
     this.reportIsLoading = true;
     this.inventoryService.getSoldProductReportPdf(this.filter).subscribe(blob => {
       this.reportIsLoading = false;
-      if (blob) this.inventoryService.downloadFile(blob, 'ProductReport.pdf');
+      if (blob) this.inventoryService.downloadFile(blob, 'SoldProductReport.pdf');
     });
   }
 
@@ -110,7 +110,7 @@ export class SoldProductComponent {
     this.reportIsLoading = true;
     this.inventoryService.getSoldProductReportExcel(this.filter).subscribe(blob => {
       this.reportIsLoading = false;
-      if (blob) this.inventoryService.downloadFile(blob, 'ProductReport.xlsx');
+      if (blob) this.inventoryService.downloadFile(blob, 'SoldProductReport.xlsx');
     });
   }
 
