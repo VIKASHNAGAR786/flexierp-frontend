@@ -6,6 +6,7 @@ import { CommonService } from '../../services/common.service';
 import { PaginationFilter, UpdateCompanyInfo } from '../../MODEL/MODEL';
 import { CompanyInfoDTO, UserLoginHistoryDTO } from '../../DTO/DTO';
 import { AlertService } from '../../services/alert.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-profile-view',
@@ -65,14 +66,15 @@ export class ProfileViewComponent implements OnInit {
   };
 
   updatecompany: UpdateCompanyInfo = {
-    company_Name : '',
-    contact_No : '',
-    whatsApp_No : '',
-    email : '',
-    address : '',
-    row_id : 1,
-    companyLogo : ''
-  };
+  company_Name : '',
+  contact_No : '',
+  whatsApp_No : '',
+  email : '',
+  address : '',
+  row_id : 0,
+  file: null
+};
+private baseurl = environment.BASE_URL + '/Documents/';
   loadHistory(): void {
     const filter: PaginationFilter = {
       pageNo: this.pageNo,
@@ -94,6 +96,9 @@ export class ProfileViewComponent implements OnInit {
     this.commonService.GetCompanyInfo().subscribe({
       next: (data) => {
         if (data) this.companyInfo = data;
+       if (this.companyInfo.companyLogo) {
+        this.companyInfo.companyLogo = this.baseurl + this.companyInfo.companyLogo;
+       }
       },
       error: (err) => console.error('Failed to load company info', err)
     });
@@ -109,5 +114,24 @@ export class ProfileViewComponent implements OnInit {
       error: (err) => this.alertservice.showAlert('Failed to load company info', "error")
     });
   }
+
+  logoPreview: string | ArrayBuffer | null = null;
+
+onFileSelected(event: any) {
+  const file = event.target.files[0];
+  if (file) {
+    this.updatecompany.file = file;
+
+    // Preview image before uploading
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.logoPreview = e.target.result;
+    };
+    reader.readAsDataURL(file);
+
+    // 🔹 Call API immediately after file is chosen
+    this.UpdateCompanyInfo();
+  }
+}
 
 }

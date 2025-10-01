@@ -110,5 +110,5 @@ export interface UpdateCompanyInfo
     email?: string;
     address?: string;
     row_id?: number;
-    companyLogo?: string;
+    file?: File | null;  // <-- this will now receive uploaded file
 }

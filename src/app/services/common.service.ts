@@ -67,12 +67,22 @@ export class CommonService {
     return of(null); // No token, return empty observable
   }
 
-  UpdateCompanyInfo(updateCompanyInfo: UpdateCompanyInfo): Observable<string> {
-    const headers = this.getAuthHeaders();
+  UpdateCompanyInfo(updateCompanyInfo: any): Observable<string> {
+  const headers = this.getAuthHeaders(); // should NOT set Content-Type manually
 
-    if (headers) {
-      return this.http.post<string>(this.UpdateCompanyInfoUrl,updateCompanyInfo, { headers });
-    }
-    return of("");
+  const formData = new FormData();
+  formData.append("Company_Name", updateCompanyInfo.company_Name ?? "");
+  formData.append("Contact_No", updateCompanyInfo.contact_No ?? "");
+  formData.append("WhatsApp_No", updateCompanyInfo.whatsApp_No ?? "");
+  formData.append("Email", updateCompanyInfo.email ?? "");
+  formData.append("Address", updateCompanyInfo.address ?? "");
+  formData.append("row_id", updateCompanyInfo.row_id?.toString() ?? "0");
+
+  if (updateCompanyInfo.file) {
+    formData.append("file", updateCompanyInfo.file); // <-- actual file
   }
+
+  return this.http.post<string>(this.UpdateCompanyInfoUrl, formData, { headers: headers ?? undefined });
+}
+
 }

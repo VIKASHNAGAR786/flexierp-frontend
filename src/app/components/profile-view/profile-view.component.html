@@ -9,7 +9,7 @@
     <!-- User Info -->
     <div class="px-6 pb-6 -mt-16 flex items-center gap-8">
       <img src="assets/profile.png" alt="User Avatar"
-           class="w-28 h-28 rounded-full border-4 border-slate-900 shadow-lg hover:ring-2 hover:ring-[#00ffee] transition" />
+        class="w-28 h-28 rounded-full border-4 border-slate-900 shadow-lg hover:ring-2 hover:ring-[#00ffee] transition" />
       <div>
         <h2 class="text-3xl font-bold text-[#00ffee]">{{ username }}</h2>
         <p class="text-slate-300 text-sm">{{ email }}</p>
@@ -49,7 +49,7 @@
         <p class="text-slate-400 text-sm">Details used on invoices & official docs</p>
       </div>
       <button (click)="editingProfile()"
-              class="px-5 py-2 bg-gradient-to-r from-[#00ffee] to-[#00b7ff] text-slate-900 rounded-lg font-semibold hover:scale-[1.02] hover:shadow-lg transition">
+        class="px-5 py-2 bg-gradient-to-r from-[#00ffee] to-[#00b7ff] text-slate-900 rounded-lg font-semibold hover:scale-[1.02] hover:shadow-lg transition">
         Edit Profile
       </button>
     </div>
@@ -58,12 +58,22 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
       <!-- Logo -->
       <div class="flex flex-col items-center space-y-3">
-        <img src="assets/company-logo.png" alt="Company Logo"
-             class="w-32 h-32 rounded-xl border border-slate-700 shadow-md object-cover" />
-        <button class="px-3 py-1 text-sm bg-[#00ffee] text-slate-900 rounded-lg hover:bg-[#00ddcc] transition">
+        <!-- Show current logo -->
+        <img 
+  [src]="logoPreview || companyInfo.companyLogo" 
+  alt="Company Logo"
+  class="w-32 h-32 rounded-xl border border-slate-700 shadow-md object-cover" />
+
+        <!-- Hidden file input -->
+        <input type="file" #fileInput accept="image/*" class="hidden" (change)="onFileSelected($event)" />
+
+        <!-- Styled button -->
+        <button type="button" (click)="fileInput.click()"
+          class="px-3 py-1 text-sm bg-[#00ffee] text-slate-900 rounded-lg hover:bg-[#00ddcc] transition">
           Change Logo
         </button>
       </div>
+
 
       <!-- Details -->
       <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -71,7 +81,7 @@
           <label class="text-slate-400 text-sm">Company Name</label>
           <p class="text-lg font-medium">{{ companyInfo.companyName }}</p>
         </div>
-       
+
         <div>
           <label class="text-slate-400 text-sm">Contact No.</label>
           <p class="text-lg font-medium">{{ companyInfo.contactNo }}</p>
@@ -95,182 +105,203 @@
   </div>
 
   <!-- Preferences + Log History + Activity History -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-  <!-- Preferences -->
-  <div class="rounded-3xl bg-slate-900/80 backdrop-blur-xl p-6 border border-slate-800/50 shadow-lg">
-    <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
-      ⚙️ <span>Preferences</span>
-    </h3>
-    <div class="space-y-4 text-sm">
-      <div class="flex items-center justify-between">
-        <span>🌙 Dark Mode</span>
-        <input type="checkbox" class="w-4 h-4 accent-[#00ffee]" />
-      </div>
-      <div class="flex items-center justify-between">
-        <span>📧 Email Notifications</span>
-        <input type="checkbox" class="w-4 h-4 accent-[#00ffee]" checked />
-      </div>
-      <div class="flex items-center justify-between">
-        <span>📲 SMS Alerts</span>
-        <input type="checkbox" class="w-4 h-4 accent-[#00ffee]" />
+    <!-- Preferences -->
+    <div class="rounded-3xl bg-slate-900/80 backdrop-blur-xl p-6 border border-slate-800/50 shadow-lg">
+      <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+        ⚙️ <span>Preferences</span>
+      </h3>
+      <div class="space-y-4 text-sm">
+        <div class="flex items-center justify-between">
+          <span>🌙 Dark Mode</span>
+          <input type="checkbox" class="w-4 h-4 accent-[#00ffee]" />
+        </div>
+        <div class="flex items-center justify-between">
+          <span>📧 Email Notifications</span>
+          <input type="checkbox" class="w-4 h-4 accent-[#00ffee]" checked />
+        </div>
+        <div class="flex items-center justify-between">
+          <span>📲 SMS Alerts</span>
+          <input type="checkbox" class="w-4 h-4 accent-[#00ffee]" />
+        </div>
       </div>
     </div>
-  </div>
 
- <!-- Log History -->
-<div class="rounded-3xl bg-slate-900/80 backdrop-blur-xl p-6 border border-slate-800/50 shadow-lg">
-  <h3 class="text-lg font-semibold mb-6 flex items-center gap-2">
-    📑 <span>Log History</span>
-  </h3>
+    <!-- Log History -->
+    <div class="rounded-3xl bg-slate-900/80 backdrop-blur-xl p-6 border border-slate-800/50 shadow-lg">
+      <h3 class="text-lg font-semibold mb-6 flex items-center gap-2">
+        📑 <span>Log History</span>
+      </h3>
 
-  <!-- Scrollable container -->
-  <div class="relative border-l-2 border-slate-700 pl-6 space-y-6 max-h-96 overflow-y-auto">
-    <div *ngFor="let log of historyList" class="relative pl-10">
-      <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
+      <!-- Scrollable container -->
+      <div class="relative border-l-2 border-slate-700 pl-6 space-y-6 max-h-96 overflow-y-auto">
+        <div *ngFor="let log of historyList" class="relative pl-10">
+          <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
                   border border-[#00ffee] flex items-center justify-center">
-        <!-- Icon based on login/logout -->
-        <span class="text-[#00ffee] text-xs">
-          {{ log.logoutTime !== 'N/A' ? '🔒' : (log.status === 'Success' ? '✔' : '❌') }}
-        </span>
-      </div>
-      <p class="text-white">
-        {{ log.username }} 
-        {{ log.logoutTime !== 'N/A' ? 'logged out' : 'logged in' }} 
-        from {{ log.deviceInfo }}
-      </p>
-      <span class="text-slate-400 text-xs">
-        {{ log.logoutTime !== 'N/A' ? (log.logoutTime | date:'medium') : (log.loginTime | date:'medium') }}
-      </span>
-    </div>
-  </div>
-</div>
-
-
-
-
-  <!-- Activity History -->
-  <div class="rounded-3xl bg-slate-900/80 backdrop-blur-xl p-6 border border-slate-800/50 shadow-lg">
-    <h3 class="text-lg font-semibold mb-6 flex items-center gap-2">
-      📜 <span>Activity History</span>
-    </h3>
-    <div class="relative border-l-2 border-slate-700 pl-6 space-y-6">
-      <div class="relative pl-10">
-        <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
-                    border border-[#00ffee] flex items-center justify-center">
-          <span class="text-[#00ffee] text-xs">✅</span>
+            <!-- Icon based on login/logout -->
+            <span class="text-[#00ffee] text-xs">
+              {{ log.logoutTime !== 'N/A' ? '🔒' : (log.status === 'Success' ? '✔' : '❌') }}
+            </span>
+          </div>
+          <p class="text-white">
+            {{ log.username }}
+            {{ log.logoutTime !== 'N/A' ? 'logged out' : 'logged in' }}
+            from {{ log.deviceInfo }}
+          </p>
+          <span class="text-slate-400 text-xs">
+            {{ log.logoutTime !== 'N/A' ? (log.logoutTime | date:'medium') : (log.loginTime | date:'medium') }}
+          </span>
         </div>
-        <p class="text-white">Company details updated</p>
-        <span class="text-slate-400 text-xs">28 Sep 2025, 10:45 AM</span>
-      </div>
-      <div class="relative pl-10">
-        <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
-                    border border-[#00ffee] flex items-center justify-center">
-          <span class="text-[#00ffee] text-xs">📄</span>
-        </div>
-        <p class="text-white">New Invoice Prefix added</p>
-        <span class="text-slate-400 text-xs">20 Sep 2025, 03:15 PM</span>
-      </div>
-      <div class="relative pl-10">
-        <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
-                    border border-[#00ffee] flex items-center justify-center">
-          <span class="text-[#00ffee] text-xs">📧</span>
-        </div>
-        <p class="text-white">Email changed from <i>support.com</i></p>
-        <span class="text-slate-400 text-xs">12 Sep 2025, 06:30 PM</span>
       </div>
     </div>
+
+
+
+
+    <!-- Activity History -->
+    <div class="rounded-3xl bg-slate-900/80 backdrop-blur-xl p-6 border border-slate-800/50 shadow-lg">
+      <h3 class="text-lg font-semibold mb-6 flex items-center gap-2">
+        📜 <span>Activity History</span>
+      </h3>
+      <div class="relative border-l-2 border-slate-700 pl-6 space-y-6">
+        <div class="relative pl-10">
+          <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
+                    border border-[#00ffee] flex items-center justify-center">
+            <span class="text-[#00ffee] text-xs">✅</span>
+          </div>
+          <p class="text-white">Company details updated</p>
+          <span class="text-slate-400 text-xs">28 Sep 2025, 10:45 AM</span>
+        </div>
+        <div class="relative pl-10">
+          <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
+                    border border-[#00ffee] flex items-center justify-center">
+            <span class="text-[#00ffee] text-xs">📄</span>
+          </div>
+          <p class="text-white">New Invoice Prefix added</p>
+          <span class="text-slate-400 text-xs">20 Sep 2025, 03:15 PM</span>
+        </div>
+        <div class="relative pl-10">
+          <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
+                    border border-[#00ffee] flex items-center justify-center">
+            <span class="text-[#00ffee] text-xs">📧</span>
+          </div>
+          <p class="text-white">Email changed from <i>support.com</i></p>
+          <span class="text-slate-400 text-xs">12 Sep 2025, 06:30 PM</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-</div>
+  <!-- Edit Profile Modal -->
+  <div *ngIf="showwditprofile"
+    class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn">
 
-<!-- Edit Profile Modal -->
-<div *ngIf="showwditprofile" 
-     class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn">
-  
-  <div class="bg-slate-900 text-white rounded-2xl shadow-2xl border border-slate-700 
+    <div class="bg-slate-900 text-white rounded-2xl shadow-2xl border border-slate-700 
               w-full max-w-3xl p-8 relative transform animate-scaleIn">
 
-    <!-- Close Button -->
-    <button (click)="closeEdit()" 
-            class="absolute top-4 right-4 text-slate-400 hover:text-white hover:bg-slate-700/40 
+      <!-- Close Button -->
+      <button (click)="closeEdit()" class="absolute top-4 right-4 text-slate-400 hover:text-white hover:bg-slate-700/40 
                    rounded-full p-2 transition">
-      <i class="bi bi-x-lg text-xl"></i>
-    </button>
+        <i class="bi bi-x-lg text-xl"></i>
+      </button>
 
-    <!-- Title -->
-    <h2 class="text-2xl font-bold mb-6 text-[#00ffee] border-b border-slate-700 pb-3">
-      ✨ Edit Company Profile
-    </h2>
+      <!-- Title -->
+      <h2 class="text-2xl font-bold mb-6 text-[#00ffee] border-b border-slate-700 pb-3">
+        ✨ Edit Company Profile
+      </h2>
 
-    <!-- Form -->
-    <form (ngSubmit)="saveProfile()" 
-          class="space-y-8 max-h-[75vh] overflow-y-auto pr-2 custom-scroll">
+      <!-- Form -->
+      <form (ngSubmit)="saveProfile()" class="space-y-8 max-h-[75vh] overflow-y-auto pr-2 custom-scroll">
 
-      <!-- Company Info -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label class="label-style">🏢 Company Name</label>
-          <input type="text" [(ngModel)]="updatecompany.company_Name" name="companyName" required
-                 class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30" />
+        <!-- Company Info -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="label-style">🏢 Company Name</label>
+            <input type="text" [(ngModel)]="updatecompany.company_Name" name="companyName" required
+              class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30" />
+          </div>
+
+          <div>
+            <label class="label-style">📞 Contact No.</label>
+            <input type="text" [(ngModel)]="updatecompany.contact_No" name="contactNo"
+              class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30" />
+          </div>
+
+          <div>
+            <label class="label-style">💬 WhatsApp No.</label>
+            <input type="text" [(ngModel)]="updatecompany.whatsApp_No" name="whatsappNo"
+              class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30" />
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="label-style">📧 Email</label>
+            <input type="email" [(ngModel)]="updatecompany.email" name="email" required
+              class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30" />
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="label-style">📍 Address</label>
+            <textarea [(ngModel)]="updatecompany.address" name="address" rows="3"
+              class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30"></textarea>
+          </div>
         </div>
 
-        <div>
-          <label class="label-style">📞 Contact No.</label>
-          <input type="text" [(ngModel)]="updatecompany.contact_No" name="contactNo"
-                 class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30" />
-        </div>
 
-        <div>
-          <label class="label-style">💬 WhatsApp No.</label>
-          <input type="text" [(ngModel)]="updatecompany.whatsApp_No" name="whatsappNo"
-                 class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30" />
-        </div>
 
-        <div class="md:col-span-2">
-          <label class="label-style">📧 Email</label>
-          <input type="email" [(ngModel)]="updatecompany.email" name="email" required
-                 class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30" />
-        </div>
-
-        <div class="md:col-span-2">
-          <label class="label-style">📍 Address</label>
-          <textarea [(ngModel)]="updatecompany.address" name="address" rows="3"
-                    class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30"></textarea>
-        </div>
-      </div>
-
-      
-
-      <!-- Buttons -->
-      <div class="flex justify-end space-x-4 pt-4">
-        <button type="button" (click)="closeEdit()"
-                class="px-5 py-2 rounded-lg bg-slate-700/70 text-slate-300 hover:bg-slate-600 
+        <!-- Buttons -->
+        <div class="flex justify-end space-x-4 pt-4">
+          <button type="button" (click)="closeEdit()" class="px-5 py-2 rounded-lg bg-slate-700/70 text-slate-300 hover:bg-slate-600 
                        transition shadow-md">
-          Cancel
-        </button>
-        <button (click)="UpdateCompanyInfo()"
-        type="submit"
-                class="px-5 py-2 rounded-lg bg-gradient-to-r from-[#00ffee] to-[#00b7ff] 
+            Cancel
+          </button>
+          <button (click)="UpdateCompanyInfo()" type="submit" class="px-5 py-2 rounded-lg bg-gradient-to-r from-[#00ffee] to-[#00b7ff] 
                        text-slate-900 font-semibold hover:scale-[1.03] hover:shadow-lg transition">
-          💾 Save Changes
-        </button>
-      </div>
-    </form>
+            💾 Save Changes
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
 
-<!-- Animations & Custom Scroll -->
-<style>
-  .animate-fadeIn { animation: fadeIn 0.3s ease-in-out; }
-  .animate-scaleIn { animation: scaleIn 0.3s ease-in-out; }
-  @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
-  @keyframes scaleIn { from {transform: scale(0.95);} to {transform: scale(1);} }
+  <!-- Animations & Custom Scroll -->
+  <style>
+    .animate-fadeIn {
+      animation: fadeIn 0.3s ease-in-out;
+    }
 
-  
-  .custom-scroll::-webkit-scrollbar { width: 6px; }
-  .custom-scroll::-webkit-scrollbar-thumb {
-    background: linear-gradient(#00ffee, #00b7ff);
-    border-radius: 10px;
-  }
-</style>
+    .animate-scaleIn {
+      animation: scaleIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        transform: scale(0.95);
+      }
+
+      to {
+        transform: scale(1);
+      }
+    }
+
+
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: linear-gradient(#00ffee, #00b7ff);
+      border-radius: 10px;
+    }
+  </style>
