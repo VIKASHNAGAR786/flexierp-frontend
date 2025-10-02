@@ -68,9 +68,37 @@ export class CustomersStatementReportComponent implements OnInit {
   exportToExcel() {
    
   }
-
+    partyStatement: any
+ showPartyStatement = false;
   viewCustomerStatement(id: number) {
-    
+    this.showPartyStatement = true;
+    this.partyStatement = [
+  {
+    paidAmount: 5000,
+    balanceDue: 2000,
+    totalAmt: 7000,
+    paymentModeType: "UPI",
+    transactionType: "Sale",
+    saleDate: new Date(),
+    totalItems: 10,
+    totalDiscount: 500,
+    tax: 200,
+    transactionDate: new Date()
+  },
+  {
+    paidAmount: 1000,
+    balanceDue: 0,
+    totalAmt: 1000,
+    paymentModeType: "Cash",
+    transactionType: "Return",
+    saleDate: new Date(),
+    totalItems: 2,
+    totalDiscount: 0,
+    tax: 50,
+    transactionDate: new Date()
+  }
+];
+
   }
 
   nextPage() {
@@ -80,4 +108,6 @@ export class CustomersStatementReportComponent implements OnInit {
   prevPage() {
    
   }
+ 
+
 }

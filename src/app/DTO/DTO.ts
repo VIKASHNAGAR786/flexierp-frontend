@@ -43,6 +43,8 @@ export interface ProductByBarcodeDTO {
   sellingPrice?: number;
   taxRate?: number;
   discount?: number;
+  quantity?:number;
+  availableQuantity?: number;
 }
 
 export interface SaleDTO {

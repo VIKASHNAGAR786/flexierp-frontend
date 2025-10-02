@@ -43,6 +43,7 @@ export class AddProductComponent {
       warehouseID: [null],
       warehouseName: [''],
       warehouseRefrigerated: [false],
+      productQunatity: [null, [Validators.min(0)]], // 👈 no negative
 });
 
    

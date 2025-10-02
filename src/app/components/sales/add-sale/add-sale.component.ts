@@ -58,6 +58,9 @@ export class AddSaleComponent {
       .subscribe((product: ProductByBarcodeDTO | null) => {
         if (product) {
           this.saleProduct = product;
+          if(this.saleProduct.availableQuantity === 0) {
+           this.alertservice.showAlert("Product is out of stock", 'error');
+          }   
           this.saleProduct.packedDate = this.saleProduct.packedDate ? this.saleProduct.packedDate.split('T')[0] : '';
           this.barcode = this.saleProduct.barCode || '';
         } else {
@@ -102,7 +105,7 @@ export class AddSaleComponent {
     const newItem = {
       productID: this.saleProduct.productID,
       name: name,
-      qty: 1,
+      qty: this.saleProduct.quantity,
       total: finalPrice,
       weight: weight,
       discountAmt: discountAmt,
@@ -113,7 +116,8 @@ export class AddSaleComponent {
     this.cart.push(newItem);
     const detail: SaleDetail = {
       productID: this.saleProduct.productID,
-      createdBy: 2
+      createdBy: 2,
+      productquantity: this.saleProduct.quantity
     };
     this.saledetails.push(detail);
     this.updateGrandTotal();
@@ -219,23 +223,51 @@ export class AddSaleComponent {
 
   showPdfPopup: boolean = false;
   pdfUrl: SafeResourceUrl | null = null;
-
+pdfBlobUrl!: string; // Normal string for download/print
   async generateReceipt(barcode: string) {
-    try {
-      this.receiptPdfData.barcode = barcode;
-      this.receiptPdfData.customer = this.customer;
-      this.receiptPdfData.cart = this.cart;
+  try {
+    this.receiptPdfData.barcode = barcode;
+    this.receiptPdfData.customer = this.customer;
+    this.receiptPdfData.cart = this.cart;
 
-      const blob = await firstValueFrom(this.pythonservice.generateReceiptPDF(this.receiptPdfData));
-      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(blob));
-      this.showPdfPopup = true;
-    } catch (error) {
-      console.error('Error generating receipt PDF:', error);
-    }
+    const blob = await firstValueFrom(this.pythonservice.generateReceiptPDF(this.receiptPdfData));
+    
+    // Create both versions
+    this.pdfBlobUrl = URL.createObjectURL(blob); // raw blob URL
+    this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.pdfBlobUrl); // safe for iframe
+
+    this.showPdfPopup = true;
+  } catch (error) {
+    console.error('Error generating receipt PDF:', error);
   }
-
+}
   closePdfPopup() {
-    this.showPdfPopup = false;
+  this.showPdfPopup = false;
+  if (this.pdfBlobUrl) {
+    URL.revokeObjectURL(this.pdfBlobUrl); // cleanup
+    this.pdfBlobUrl = '';
   }
+}
+
+  downloadPdf() {
+  if (this.pdfBlobUrl) {
+    const link = document.createElement('a');
+    link.href = this.pdfBlobUrl;
+    link.download = 'party-statement.pdf';
+    link.click();
+  }
+}
+
+printPdf() {
+  if (this.pdfBlobUrl) {
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = this.pdfBlobUrl;
+    document.body.appendChild(iframe);
+    iframe.contentWindow?.focus();
+    iframe.contentWindow?.print();
+  }
+}
+
 }
 

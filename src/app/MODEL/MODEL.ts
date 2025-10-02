@@ -44,6 +44,7 @@ export interface ProductModel {
   warehouseID: number;
   warehouseName: string;
   warehouseRefrigerated: boolean;
+  productQunatity?: number | null;
 }
 
 export interface Customer {
@@ -58,6 +59,7 @@ export interface Customer {
 export interface SaleDetail {
   productID: number;
   createdBy?: number; // nullable
+  productquantity?: number; // nullable
 }
 
 export interface Sale {

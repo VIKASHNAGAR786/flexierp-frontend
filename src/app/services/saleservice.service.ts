@@ -24,6 +24,7 @@ export class SaleserviceService {
   private GetSalesReportExcelUrl = environment.BASE_URL + '/Sale/GetSalesReportExcel';
   private getOldCustomersUrl = environment.BASE_URL + '/Sale/GetOldCustomers';
   private getCustomersWithSalesUrl = environment.BASE_URL + '/Sale/GetCustomersWithSales';
+  private GetReceiptPdfUrl = environment.BASE_URL + '/Sale/GetReceiptPdf';
   private getAuthHeaders(): HttpHeaders | null {
     if (isPlatformBrowser(this.platformId)) {
       const token = this.userInfo.getToken();
@@ -136,5 +137,15 @@ export class SaleserviceService {
     a.click();
     window.URL.revokeObjectURL(url);
   }
+
+  GetReceiptPdf(saleid:number): Observable<Blob | null> {
+      const headers = this.getAuthHeaders();
+      if (!headers) return of(null);
+  
+      let params = new HttpParams()
+        .set('saleid', saleid.toString());
+  
+      return this.http.get(this.GetReceiptPdfUrl, { headers, params, responseType: 'blob' });
+    }
 
 }

@@ -5,6 +5,7 @@ import { SaleDTO } from '../../../DTO/DTO';
 import { finalize } from 'rxjs/operators';
 import { SaleserviceService } from '../../../services/saleservice.service';
 import { PaginationFilter } from '../../../MODEL/MODEL';
+import { AlertService } from '../../../services/alert.service';
 
 @Component({
   selector: 'app-sale-report',
@@ -26,7 +27,8 @@ export class SaleReportComponent implements OnInit {
   reportIsLoading: boolean = false;
 
   constructor(
-    private saleService: SaleserviceService
+    private saleService: SaleserviceService,
+    private alertservice: AlertService
   )
   {
     const now = new Date();
@@ -105,5 +107,31 @@ export class SaleReportComponent implements OnInit {
       if (blob) this.saleService.downloadFile(blob, 'ProductReport.xlsx');
     });
   }
+
+  seeReceipt(saleid: number) {
+  this.reportIsLoading = true;
+  this.saleService.GetReceiptPdf(saleid).subscribe(
+    (blob: Blob | null) => {
+      this.reportIsLoading = false;
+      if (blob && blob.size > 0) {
+        this.saleService.downloadFile(blob, 'Receipt.pdf');
+      } else {
+        console.error("Empty PDF blob received.");
+        alert("Failed to generate receipt. Please try again.");
+      }
+    },
+    (err) => {
+      this.reportIsLoading = false;
+      console.error("Error fetching receipt PDF:", err);
+      this.alertservice.showAlert("Something went wrong while generating the receipt. Please try again later.", 'error');
+    },
+    () => {
+      // Optional: you can log completion
+      console.log("Receipt PDF request completed.");
+    }
+  );
+}
+
+
 
 }

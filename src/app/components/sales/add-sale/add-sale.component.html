@@ -13,359 +13,338 @@
 
   <!-- 🔹 Product Detail Section -->
   <form #productForm="ngForm" (ngSubmit)="addToCart()" class="bg-slate-800 p-6 rounded-xl shadow-lg space-y-4">
-  <h3 class="text-xl font-extrabold text-[#00ffee] mb-4 uppercase tracking-wide drop-shadow-md">
-    Product Details
-  </h3>
+    <h3 class="text-xl font-extrabold text-[#00ffee] mb-4 uppercase tracking-wide drop-shadow-md">
+      Product Details
+    </h3>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <!-- Barcode -->
-    <div class="flex flex-col">
-      <label class="label-style">Barcode</label>
-      <input type="text" [(ngModel)]="saleProduct.barCode" name="barCode" class="input-style" readonly />
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- Barcode -->
+      <div class="flex flex-col">
+        <label class="label-style">Barcode</label>
+        <input type="text" [(ngModel)]="saleProduct.barCode" name="barCode" class="input-style" readonly />
+      </div>
+
+      <!-- Product Code -->
+      <div class="flex flex-col">
+        <label class="label-style">Product Code</label>
+        <input type="text" [(ngModel)]="saleProduct.productCode" name="productCode" class="input-style" readonly />
+      </div>
+
+      <!-- Product Name -->
+      <div class="flex flex-col">
+        <label class="label-style">Product Name</label>
+        <input type="text" [(ngModel)]="saleProduct.productName" name="productName" class="input-style" readonly />
+      </div>
+
+      <!-- Category -->
+      <div class="flex flex-col">
+        <label class="label-style">Category</label>
+        <input type="text" [(ngModel)]="saleProduct.categoryName" name="categoryName" class="input-style" readonly />
+      </div>
+
+      <!-- Product Type -->
+      <div class="flex flex-col">
+        <label class="label-style">Product Type</label>
+        <input type="text" [(ngModel)]="saleProduct.productType" name="productType" class="input-style" readonly />
+      </div>
+
+      <!-- Packed Date -->
+      <div class="flex flex-col">
+        <label class="label-style">Packed Date</label>
+        <input type="date" [ngModel]="saleProduct.packedDate | date:'yyyy-MM-dd'"
+          (ngModelChange)="saleProduct.packedDate = $event" name="packedDate" class="input-style" readonly />
+
+      </div>
+
+      <!-- Dimensions -->
+      <div class="flex flex-col">
+        <label class="label-style">Weight (g)</label>
+        <input type="number" [(ngModel)]="saleProduct.packedWeight" name="packedWeight" class="input-style" readonly />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="label-style">Height (cm)</label>
+        <input type="number" [(ngModel)]="saleProduct.packedHeight" name="packedHeight" class="input-style" readonly />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="label-style">Depth (cm)</label>
+        <input type="number" [(ngModel)]="saleProduct.packedDepth" name="packedDepth" class="input-style" readonly />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="label-style">Width (cm)</label>
+        <input type="number" [(ngModel)]="saleProduct.packedWidth" name="packedWidth" class="input-style" readonly />
+      </div>
+
+      <!-- Boolean Switches -->
+      <div class="flex items-center gap-3">
+        <input type="checkbox" [(ngModel)]="saleProduct.isPerishable" name="isPerishable" class="w-4 h-4" />
+        <label class="text-white">Perishable</label>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <input type="checkbox" [(ngModel)]="saleProduct.status" name="status" class="w-4 h-4" disabled />
+        <label class="text-white">Active</label>
+      </div>
     </div>
 
-    <!-- Product Code -->
-    <div class="flex flex-col">
-      <label class="label-style">Product Code</label>
-      <input type="text" [(ngModel)]="saleProduct.productCode" name="productCode" class="input-style" readonly />
-    </div>
+    <!-- 🔹 Financial / Pricing Section -->
+    <h4 class="text-lg font-bold text-[#00ffee] mt-6">Pricing</h4>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="flex flex-col">
+        <label class="label-style">Purchase Price</label>
+        <input type="number" [(ngModel)]="saleProduct.purchasePrice" name="purchasePrice" class="input-style"
+          readonly />
+      </div>
 
-    <!-- Product Name -->
-    <div class="flex flex-col">
-      <label class="label-style">Product Name</label>
-      <input type="text" [(ngModel)]="saleProduct.productName" name="productName" class="input-style" readonly />
-    </div>
+      <div class="flex flex-col">
+        <label class="label-style">Selling Price</label>
+        <input type="number" [(ngModel)]="saleProduct.sellingPrice" name="sellingPrice" class="input-style" readonly />
+      </div>
 
-    <!-- Category -->
-    <div class="flex flex-col">
-      <label class="label-style">Category</label>
-      <input type="text" [(ngModel)]="saleProduct.categoryName" name="categoryName" class="input-style" readonly />
-    </div>
+      <div class="flex flex-col">
+        <label class="label-style">Tax Rate (%)</label>
+        <input type="number" [(ngModel)]="saleProduct.taxRate" name="taxRate" class="input-style" readonly />
+      </div>
 
-    <!-- Product Type -->
-    <div class="flex flex-col">
-      <label class="label-style">Product Type</label>
-      <input type="text" [(ngModel)]="saleProduct.productType" name="productType" class="input-style" readonly />
-    </div>
+      <div class="flex flex-col">
+        <label class="label-style">Discount</label>
+        <input type="number" [(ngModel)]="saleProduct.discount" name="discount" placeholder="0.00" min="0" max="100"
+          #discount="ngModel" class="input-style" />
+        <span *ngIf="discount.invalid && discount.touched" class="text-red-500 text-xs">
+          Discount must be between 0 and 100.
+        </span>
+      </div>
 
-    <!-- Packed Date -->
-    <div class="flex flex-col">
-      <label class="label-style">Packed Date</label>
-      <input 
-  type="date" 
-  [ngModel]="saleProduct.packedDate | date:'yyyy-MM-dd'" 
-  (ngModelChange)="saleProduct.packedDate = $event" 
-  name="packedDate" 
-  class="input-style" readonly />
+      <div class="flex flex-col md:col-span-2">
+  <!-- Animated Red Label -->
+  <label class="label-animated">
+    Available Quantity
+  </label>
 
-    </div>
-
-    <!-- Dimensions -->
-    <div class="flex flex-col">
-      <label class="label-style">Weight (g)</label>
-      <input type="number" [(ngModel)]="saleProduct.packedWeight" name="packedWeight" class="input-style" readonly />
-    </div>
-
-    <div class="flex flex-col">
-      <label class="label-style">Height (cm)</label>
-      <input type="number" [(ngModel)]="saleProduct.packedHeight" name="packedHeight" class="input-style" readonly />
-    </div>
-
-    <div class="flex flex-col">
-      <label class="label-style">Depth (cm)</label>
-      <input type="number" [(ngModel)]="saleProduct.packedDepth" name="packedDepth" class="input-style" readonly />
-    </div>
-
-    <div class="flex flex-col">
-      <label class="label-style">Width (cm)</label>
-      <input type="number" [(ngModel)]="saleProduct.packedWidth" name="packedWidth" class="input-style" readonly />
-    </div>
-
-    <!-- Boolean Switches -->
-    <div class="flex items-center gap-3">
-      <input type="checkbox" [(ngModel)]="saleProduct.isPerishable" name="isPerishable" class="w-4 h-4" />
-      <label class="text-white">Perishable</label>
-    </div>
-
-    <div class="flex items-center gap-3">
-      <input type="checkbox" [(ngModel)]="saleProduct.status" name="status" class="w-4 h-4" disabled />
-      <label class="text-white">Active</label>
-    </div>
-  </div>
-
-  <!-- 🔹 Financial / Pricing Section -->
-  <h4 class="text-lg font-bold text-[#00ffee] mt-6">Pricing</h4>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <div class="flex flex-col">
-      <label class="label-style">Purchase Price</label>
-      <input type="number" [(ngModel)]="saleProduct.purchasePrice" name="purchasePrice" class="input-style" readonly />
-    </div>
-
-    <div class="flex flex-col">
-      <label class="label-style">Selling Price</label>
-      <input type="number" [(ngModel)]="saleProduct.sellingPrice" name="sellingPrice" class="input-style" readonly />
-    </div>
-
-    <div class="flex flex-col">
-      <label class="label-style">Tax Rate (%)</label>
-      <input type="number" [(ngModel)]="saleProduct.taxRate" name="taxRate" class="input-style" readonly />
-    </div>
-
-    <div class="flex flex-col">
-      <label class="label-style">Discount</label>
-      <input
-        type="number"
-        [(ngModel)]="saleProduct.discount"
-        name="discount"
-        placeholder="0.00"
-        min="0"
-        max="100"
-        #discount="ngModel"
-        class="input-style"
-      />
-      <span *ngIf="discount.invalid && discount.touched" class="text-red-500 text-xs">
-        Discount must be between 0 and 100.
-      </span>
-    </div>
-
-    <div class="flex flex-col md:col-span-2">
-  <label class="label-style">Available Quantity</label>
-  <input
-    type="number"
-    [(ngModel)]="saleProduct.availableQuantity"
+  <!-- Read-only Input with animated glow -->
+  <input 
+    type="number" 
+    [(ngModel)]="saleProduct.availableQuantity" 
     name="availableQuantity"
-    placeholder="Available Quantity"
-    readonly
-    class="input-style cursor-not-allowed"
+    placeholder="Available Quantity" 
+    readonly 
+    class="input-animated cursor-not-allowed"
   />
 </div>
 
-    <!-- Quantity (Required for sale) -->
-    <div class="flex flex-col md:col-span-2">
-      <label class="label-style">Quantity</label>
-      <input
-        type="number"
-        [(ngModel)]="saleProduct.quantity"
-        name="quantity"
-        placeholder="Enter Quantity"
-        required
-        min="1"
-        #quantity="ngModel"
-        class="input-style"
-      />
-      <span *ngIf="quantity.invalid && quantity.touched" class="text-red-500 text-xs">
-        Quantity must be at least 1.
-      </span>
-    </div>
-  </div>
-
-  <!-- Save Product Button -->
-  <button
-    type="submit"
-    [disabled]="productForm.invalid"
-    class="w-full md:w-auto bg-[#00ffee] text-black px-6 py-2 rounded font-bold hover:bg-white transition disabled:opacity-50 disabled:cursor-not-allowed"
-  >
-    Add To Cart
-  </button>
-</form>
 
 
-<!-- Cart Section -->
-<div class="bg-slate-800 p-6 rounded-xl shadow-lg space-y-4">
-  <h3 class="text-xl font-extrabold text-[#00ffee] mb-4 uppercase tracking-wide drop-shadow-md">
-    Cart
-  </h3>
-
-  <div class="overflow-x-auto">
-    <table class="w-full text-sm border-collapse">
-  <thead>
-    <tr class="bg-slate-700 text-[#00ffee] uppercase text-xs">
-      <th class="px-3 py-2 text-left">Product</th>
-      <th class="px-3 py-2 text-center">Qty</th>
-      <th class="px-3 py-2 text-center">Price</th>
-      <th class="px-3 py-2 text-center">Discount</th>
-      <th class="px-3 py-2 text-center">Tax</th>
-      <th class="px-3 py-2 text-center">Total</th>
-      <th class="px-3 py-2 text-center">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of cart; let i = index" class="border-b border-slate-600">
-      <td class="px-3 py-2">{{ item.name }}</td>
-      <td class="px-3 py-2 text-center">{{ item.weight}}</td>
-      <td class="px-3 py-2 text-center">{{ item.sellingPrice | number:'1.2-2' }}</td>
-      <td class="px-3 py-2 text-center">{{ item.discountAmt }}</td>
-      <td class="px-3 py-2 text-center">{{ item.taxAmt }}%</td>
-      <td class="px-3 py-2 text-center font-semibold">{{ item.total | number:'1.2-2' }}</td>
-      <td class="px-3 py-2 text-center flex justify-center gap-2">
-        <!-- Edit Button -->
-        <button type="button" (click)="editCartItem(i)" class="text-yellow-400 hover:text-yellow-600">
-          <i class="fas fa-edit"></i>
-        </button>
-
-        <!-- Delete Button -->
-        <button type="button" (click)="removeFromCart(i)" class="text-red-400 hover:text-red-600">
-          <i class="fas fa-trash"></i>
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-  </div>
-
-  <!-- Summary -->
-  <div class="flex flex-col md:flex-row justify-between items-center mt-4 text-lg font-bold">
-    <span>Total Items: {{ cart.length }}</span>
-    <span class="text-[#00ffee]">Grand Total: {{ grandTotal | number:'1.2-2' }}</span>
-  </div>
-</div>
-<!-- Customer & Payment Info -->
-<div class="bg-slate-800 p-6 rounded-xl shadow-lg space-y-4">
-  <div class="flex items-center justify-between mb-4">
-    <h3 class="text-xl font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
-      Customer & Payment
-    </h3>
-
-    <!-- 🔘 Sale to Old Customers Button -->
-    <button (click)="openOldCustomerSale()"
-      class="bg-[#00ffee] text-slate-900 font-bold px-4 py-2 rounded-lg shadow-md hover:bg-[#00ccbb] transition">
-      Sale to Old Customers
-    </button>
-    <!-- Conditional render -->
-    @if(showOldCustomer){
-    <app-old-customer-popup *ngIf="showOldCustomer" (customerSelected)="onCustomerSelected($event)"
-      (close)="showOldCustomer = false">
-    </app-old-customer-popup>
-    }
-  </div>
-
-  <form #saleForm="ngForm" (ngSubmit)="MakeTheSale()" class="space-y-6">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-      <!-- Customer Name -->
-      <div class="flex flex-col">
-        <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
-          Customer Name
-        </label>
-        <input type="text" [(ngModel)]="customer.customerName" name="customerName" placeholder="Enter Customer Name"
-          required minlength="3" #customerName="ngModel" class="input-style" />
-        <span *ngIf="customerName.invalid && customerName.touched" class="text-red-500 text-xs">
-          Name is required (min 3 chars).
-        </span>
-      </div>
-
-      <!-- Customer Email -->
-      <div class="flex flex-col">
-        <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
-          Email
-        </label>
-        <input type="email" [(ngModel)]="customer.email" name="email" placeholder="Enter Email" required email
-          #email="ngModel" class="input-style" />
-        <span *ngIf="email.invalid && email.touched" class="text-red-500 text-xs">
-          Valid email is required.
-        </span>
-      </div>
-
-      <!-- Customer Phone -->
-      <div class="flex flex-col">
-        <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
-          Phone
-        </label>
-        <input type="tel" [(ngModel)]="customer.phoneNo" name="phoneNo" placeholder="Enter Phone Number" required
-          pattern="^[0-9]{10}$" maxlength="10" #phoneNo="ngModel" class="input-style" />
-        <span *ngIf="phoneNo.invalid && phoneNo.touched" class="text-red-500 text-xs">
-          Enter a valid 10-digit phone number.
-        </span>
-      </div>
-
-
-      <!-- Customer Address -->
-      <div class="flex flex-col">
-        <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
-          Address
-        </label>
-        <textarea [(ngModel)]="customer.customerAddress" name="customerAddress" rows="2" placeholder="Enter Address"
-          required #customerAddress="ngModel" class="input-style resize-none"></textarea>
-        <span *ngIf="customerAddress.invalid && customerAddress.touched" class="text-red-500 text-xs">
-          Address is required.
-        </span>
-      </div>
-
-     <!-- Payment Method -->
-<div class="flex flex-col">
-  <label for="paymentMode" class="label-style">
-    PAYMENT METHOD
-  </label>
-
-  <select
-    id="paymentMode"
-    [(ngModel)]="customer.paymentMode"
-    name="paymentMode"
-    required
-    #paymentMode="ngModel"
-    class="dropdown-style"
-    [ngClass]="{'text-gray-400': customer.paymentMode === ''}"
-  >
-    <option value="" disabled hidden>Select a payment method</option>
-    <option value="1">Cash</option>
-    <option value="2">UPI</option>
-    <option value="3">Card</option>
-  </select>
-
-  <span *ngIf="paymentMode.invalid && paymentMode.touched" class="text-red-500 text-xs">
-    Payment method is required.
-  </span>
-</div>
-
-
-      <!-- Additional Notes -->
+      <!-- Quantity (Required for sale) -->
       <div class="flex flex-col md:col-span-2">
-        <label class="label-style">
-          Notes
-        </label>
-        <textarea [(ngModel)]="customer.remark" name="remark" rows="3" placeholder="Additional notes"
-          class="input-style resize-none"></textarea>
+        <label class="label-style">Quantity</label>
+        <input type="number" [(ngModel)]="saleProduct.quantity" name="quantity" placeholder="Enter Quantity" required
+          min="1" #quantity="ngModel" class="input-style" />
+        <span *ngIf="quantity.invalid && quantity.touched" class="text-red-500 text-xs">
+          Quantity must be at least 1.
+        </span>
       </div>
     </div>
 
-    <!-- Action Buttons -->
-    <div class="flex flex-col md:flex-row gap-4">
-      <button type="submit" 
-      [disabled]="saleForm.invalid || cart.length === 0"
-        class="w-full md:w-1/2 bg-[#00ffee] text-black px-6 py-3 rounded-lg font-bold hover:bg-white transition disabled:opacity-50 disabled:cursor-not-allowed">
-        Submit Sale
-      </button>
-      <button type="button" (click)="clearSale()"
-        class="w-full md:w-1/2 bg-gray-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-gray-600 transition">
-        Clear Screen
-      </button>
-    </div>
+    <!-- Save Product Button -->
+    <button type="submit" [disabled]="productForm.invalid"
+      class="w-full md:w-auto bg-[#00ffee] text-black px-6 py-2 rounded font-bold hover:bg-white transition disabled:opacity-50 disabled:cursor-not-allowed">
+      Add To Cart
+    </button>
   </form>
 
 
-<!-- PDF Modal -->
-<div
-  *ngIf="showPdfPopup"
-  class="fixed inset-0 bg-black/50 flex items-start justify-center z-50 pt-32"
->
-  <div class="bg-slate-900 rounded-lg shadow-xl w-[90%] md:w-[80%] lg:w-[70%] h-[80%] relative">
+  <!-- Cart Section -->
+  <div class="bg-slate-800 p-6 rounded-xl shadow-lg space-y-4">
+    <h3 class="text-xl font-extrabold text-[#00ffee] mb-4 uppercase tracking-wide drop-shadow-md">
+      Cart
+    </h3>
 
-    <!-- Close Button -->
-    <button
-      (click)="closePdfPopup()"
-      class="absolute top-2 right-2 text-white bg-red-600 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-500"
-    >
-      ✕
-    </button>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="bg-slate-700 text-[#00ffee] uppercase text-xs">
+            <th class="px-3 py-2 text-left">Product</th>
+            <th class="px-3 py-2 text-center">Qty</th>
+            <th class="px-3 py-2 text-center">Price</th>
+            <th class="px-3 py-2 text-center">Discount</th>
+            <th class="px-3 py-2 text-center">Tax</th>
+            <th class="px-3 py-2 text-center">Total</th>
+            <th class="px-3 py-2 text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cart; let i = index" class="border-b border-slate-600">
+            <td class="px-3 py-2">{{ item.name }}</td>
+            <td class="px-3 py-2 text-center">{{ item.weight}}</td>
+            <td class="px-3 py-2 text-center">{{ item.sellingPrice | number:'1.2-2' }}</td>
+            <td class="px-3 py-2 text-center">{{ item.discountAmt }}</td>
+            <td class="px-3 py-2 text-center">{{ item.taxAmt }}%</td>
+            <td class="px-3 py-2 text-center font-semibold">{{ item.total | number:'1.2-2' }}</td>
+            <td class="px-3 py-2 text-center flex justify-center gap-2">
+              <!-- Edit Button -->
+              <button type="button" (click)="editCartItem(i)" class="text-yellow-400 hover:text-yellow-600">
+                <i class="fas fa-edit"></i>
+              </button>
 
-    <!-- PDF Viewer -->
-    <iframe
-      *ngIf="pdfUrl"
-      [src]="pdfUrl"
-      class="w-full h-full rounded-lg"
-    ></iframe>
+              <!-- Delete Button -->
+              <button type="button" (click)="removeFromCart(i)" class="text-red-400 hover:text-red-600">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <!-- Summary -->
+    <div class="flex flex-col md:flex-row justify-between items-center mt-4 text-lg font-bold">
+      <span>Total Items: {{ cart.length }}</span>
+      <span class="text-[#00ffee]">Grand Total: {{ grandTotal | number:'1.2-2' }}</span>
+    </div>
   </div>
-</div>
+  <!-- Customer & Payment Info -->
+  <div class="bg-slate-800 p-6 rounded-xl shadow-lg space-y-4">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-xl font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
+        Customer & Payment
+      </h3>
+
+      <!-- 🔘 Sale to Old Customers Button -->
+      <button (click)="openOldCustomerSale()"
+        class="bg-[#00ffee] text-slate-900 font-bold px-4 py-2 rounded-lg shadow-md hover:bg-[#00ccbb] transition">
+        Sale to Old Customers
+      </button>
+      <!-- Conditional render -->
+      @if(showOldCustomer){
+      <app-old-customer-popup *ngIf="showOldCustomer" (customerSelected)="onCustomerSelected($event)"
+        (close)="showOldCustomer = false">
+      </app-old-customer-popup>
+      }
+    </div>
+
+    <form #saleForm="ngForm" (ngSubmit)="MakeTheSale()" class="space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <!-- Customer Name -->
+        <div class="flex flex-col">
+          <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
+            Customer Name
+          </label>
+          <input type="text" [(ngModel)]="customer.customerName" name="customerName" placeholder="Enter Customer Name"
+            required minlength="3" #customerName="ngModel" class="input-style" />
+          <span *ngIf="customerName.invalid && customerName.touched" class="text-red-500 text-xs">
+            Name is required (min 3 chars).
+          </span>
+        </div>
+
+        <!-- Customer Email -->
+        <div class="flex flex-col">
+          <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
+            Email
+          </label>
+          <input type="email" [(ngModel)]="customer.email" name="email" placeholder="Enter Email" required email
+            #email="ngModel" class="input-style" />
+          <span *ngIf="email.invalid && email.touched" class="text-red-500 text-xs">
+            Valid email is required.
+          </span>
+        </div>
+
+        <!-- Customer Phone -->
+        <div class="flex flex-col">
+          <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
+            Phone
+          </label>
+          <input type="tel" [(ngModel)]="customer.phoneNo" name="phoneNo" placeholder="Enter Phone Number" required
+            pattern="^[0-9]{10}$" maxlength="10" #phoneNo="ngModel" class="input-style" />
+          <span *ngIf="phoneNo.invalid && phoneNo.touched" class="text-red-500 text-xs">
+            Enter a valid 10-digit phone number.
+          </span>
+        </div>
 
 
+        <!-- Customer Address -->
+        <div class="flex flex-col">
+          <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
+            Address
+          </label>
+          <textarea [(ngModel)]="customer.customerAddress" name="customerAddress" rows="2" placeholder="Enter Address"
+            required #customerAddress="ngModel" class="input-style resize-none"></textarea>
+          <span *ngIf="customerAddress.invalid && customerAddress.touched" class="text-red-500 text-xs">
+            Address is required.
+          </span>
+        </div>
+
+        <!-- Payment Method -->
+        <div class="flex flex-col">
+          <label for="paymentMode" class="label-style">
+            PAYMENT METHOD
+          </label>
+
+          <select id="paymentMode" [(ngModel)]="customer.paymentMode" name="paymentMode" required #paymentMode="ngModel"
+            class="dropdown-style" [ngClass]="{'text-gray-400': customer.paymentMode === ''}">
+            <option value="" disabled hidden>Select a payment method</option>
+            <option value="1">Cash</option>
+            <option value="2">UPI</option>
+            <option value="3">Card</option>
+          </select>
+
+          <span *ngIf="paymentMode.invalid && paymentMode.touched" class="text-red-500 text-xs">
+            Payment method is required.
+          </span>
+        </div>
+
+
+        <!-- Additional Notes -->
+        <div class="flex flex-col md:col-span-2">
+          <label class="label-style">
+            Notes
+          </label>
+          <textarea [(ngModel)]="customer.remark" name="remark" rows="3" placeholder="Additional notes"
+            class="input-style resize-none"></textarea>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col md:flex-row gap-4">
+        <button type="submit" [disabled]="saleForm.invalid || cart.length === 0"
+          class="w-full md:w-1/2 bg-[#00ffee] text-black px-6 py-3 rounded-lg font-bold hover:bg-white transition disabled:opacity-50 disabled:cursor-not-allowed">
+          Submit Sale
+        </button>
+        <button type="button" (click)="clearSale()"
+          class="w-full md:w-1/2 bg-gray-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-gray-600 transition">
+          Clear Screen
+        </button>
+      </div>
+    </form>
+
+
+    <!-- PDF Modal -->
+    <div *ngIf="showPdfPopup" class="fixed inset-0 bg-black/50 flex items-start justify-center z-50 pt-32">
+      <div class="bg-slate-900 rounded-lg shadow-xl w-[90%] md:w-[80%] lg:w-[70%] h-[80%] relative flex flex-col">
+
+        <!-- Close Button -->
+        <button (click)="closePdfPopup()"
+          class="absolute top-2 right-2 text-white bg-red-600 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-500">
+          ✕
+        </button>
+
+        <!-- PDF Viewer -->
+        <iframe *ngIf="pdfUrl" [src]="pdfUrl" class="flex-1 w-full rounded-t-lg"></iframe>
+
+        <!-- Footer with Actions -->
+        <div class="bg-slate-800 p-3 flex justify-end gap-3 rounded-b-lg">
+          <button (click)="downloadPdf()"
+            class="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg shadow">
+            <i class="fas fa-file-pdf"></i> Download
+          </button>
+
+          <button (click)="printPdf()"
+            class="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow">
+            <i class="fas fa-print"></i> Print
+          </button>
+        </div>
+      </div>
+    </div>
