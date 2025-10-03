@@ -3,11 +3,12 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BarcodeFormat } from '@zxing/library';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { ProductlistpopupComponent } from "../productlistpopup/productlistpopup.component";
 
 @Component({
   selector: 'app-scan-barcode',
   standalone: true,
-  imports: [CommonModule, FormsModule, ZXingScannerModule],
+  imports: [CommonModule, FormsModule, ZXingScannerModule, ProductlistpopupComponent],
   templateUrl: './scan-barcode.component.html',
   styleUrls: ['./scan-barcode.component.css']
 })
@@ -17,6 +18,8 @@ export class ScanBarcodeComponent {
   @Output() barcodeScanned: EventEmitter<string> = new EventEmitter<string>();
 
   saleProduct = { barcode: '' };
+  showProductList = false;
+
   scannerEnabled: boolean = false;
 
   availableDevices: MediaDeviceInfo[] = [];
@@ -83,5 +86,17 @@ export class ScanBarcodeComponent {
   submitSale() {
     console.log('Submitting sale for barcode:', this.saleProduct.barcode);
     // Add your logic to fetch product details using the barcode
+  }
+
+  products: any[] = []; // fetched products list
+
+  onProductSelected(product: any) {
+    // If you only want barcode:
+    this.saleProduct.barcode = product.barCode;
+
+    // If you want full product details:
+    // this.saleProduct = { ...product };
+
+    console.log("Selected product:", product);
   }
 }
