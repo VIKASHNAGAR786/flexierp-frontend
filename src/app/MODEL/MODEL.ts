@@ -45,6 +45,8 @@ export interface ProductModel {
   warehouseName: string;
   warehouseRefrigerated: boolean;
   productQunatity?: number | null;
+   taxpr: number,
+  discounpr: number,
 }
 
 export interface Customer {
@@ -54,6 +56,11 @@ export interface Customer {
   email: string;
   paymentMode?: number; // nullable
   remark?: string;
+
+   paidAmt?: number;           // @paid_amt
+  balanceDue?: number;        // @balance_due
+  totalAmt?: number;          // @total_amt
+  transactionType?: string;   // @transaction_type
 }
 
 export interface SaleDetail {
@@ -113,4 +120,24 @@ export interface UpdateCompanyInfo
     address?: string;
     row_id?: number;
     file?: File | null;  // <-- this will now receive uploaded file
+}
+
+export interface CustomerLedgerModel {
+  paidamount?: number;        // decimal? → optional number
+  balancedue?: number;        // decimal? → optional number
+  totalamount: number;        // decimal → number (required)
+  paymentmode: number;        // int → number (required)
+  transactiontype?: string;   // string? → optional string
+  createby: number;           // int → number (required)
+}
+
+export interface CartItemDTO {
+  productID: number;       // Product unique ID
+  name: string;            // Product name
+  qty: number;             // Quantity
+  total: number;           // Total price after discount & tax
+  weight: number;          // Weight of the product (kg, g, etc.)
+  discountAmt: number;     // Discount amount applied
+  taxAmt: number;          // Tax amount applied
+  sellingPrice: number;    // Selling price per unit
 }

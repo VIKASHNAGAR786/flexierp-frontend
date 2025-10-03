@@ -5,7 +5,7 @@ import { UserinfowithloginService } from './userinfowithlogin.service';
 import { Observable, of } from 'rxjs';
 import { CustomerWithSalesDTO, OldCustomerDTO, ProductByBarcodeDTO, SaleDTO } from '../DTO/DTO';
 import { environment } from '../../environments/environment';
-import { PaginationFilter, Sale } from '../MODEL/MODEL';
+import { CustomerLedgerModel, PaginationFilter, Sale } from '../MODEL/MODEL';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +25,7 @@ export class SaleserviceService {
   private getOldCustomersUrl = environment.BASE_URL + '/Sale/GetOldCustomers';
   private getCustomersWithSalesUrl = environment.BASE_URL + '/Sale/GetCustomersWithSales';
   private GetReceiptPdfUrl = environment.BASE_URL + '/Sale/GetReceiptPdf';
+  private SavecustomerledgerUrl = environment.BASE_URL + '/Sale/Savecustomerledger';
   private getAuthHeaders(): HttpHeaders | null {
     if (isPlatformBrowser(this.platformId)) {
       const token = this.userInfo.getToken();
@@ -54,22 +55,22 @@ export class SaleserviceService {
 
 
   GetSale(filter: PaginationFilter): Observable<SaleDTO[] | null> {
-      const headers = this.getAuthHeaders();
-      if (!headers) return of(null);
-  
-      // Send filter as query parameters
-      const params = {
-        pageNo: filter.pageNo.toString(),
-        pageSize: filter.pageSize.toString(),
-        searchTerm: filter.searchTerm || '',
-        startDate: filter.startDate || '',
-        endDate: filter.endDate || ''
-      };
-  
-      return this.http.get<SaleDTO[]>(this.GetSaleUrl, { headers, params });
-    }
+    const headers = this.getAuthHeaders();
+    if (!headers) return of(null);
 
-// 🔹 Get Old Customers
+    // Send filter as query parameters
+    const params = {
+      pageNo: filter.pageNo.toString(),
+      pageSize: filter.pageSize.toString(),
+      searchTerm: filter.searchTerm || '',
+      startDate: filter.startDate || '',
+      endDate: filter.endDate || ''
+    };
+
+    return this.http.get<SaleDTO[]>(this.GetSaleUrl, { headers, params });
+  }
+
+  // 🔹 Get Old Customers
   getOldCustomers(filter: PaginationFilter): Observable<OldCustomerDTO[] | null> {
     const headers = this.getAuthHeaders();
     if (!headers) return of(null);
@@ -100,34 +101,34 @@ export class SaleserviceService {
   }
 
   GetSalesReportPdf(filter: PaginationFilter): Observable<Blob | null> {
-      const headers = this.getAuthHeaders();
-      if (!headers) return of(null);
-  
-      let params = new HttpParams()
-        .set('pageNo', filter.pageNo.toString())
-        .set('pageSize', filter.pageSize.toString())
-        .set('searchTerm', filter.searchTerm || '')
-        .set('startDate', filter.startDate || '')
-        .set('endDate', filter.endDate || '');
-  
-      return this.http.get(this.GetSalesReportPdfUrl, { headers, params, responseType: 'blob' });
-    }
-  
-    // --- Get Excel Report ---
-    GetSalesReportExcel(filter: PaginationFilter): Observable<Blob | null> {
-      const headers = this.getAuthHeaders();
-      if (!headers) return of(null);
-  
-      let params = new HttpParams()
-        .set('pageNo', filter.pageNo.toString())
-        .set('pageSize', filter.pageSize.toString())
-        .set('searchTerm', filter.searchTerm || '')
-        .set('startDate', filter.startDate || '')
-        .set('endDate', filter.endDate || '');
-  
-      return this.http.get(this.GetSalesReportExcelUrl, { headers, params, responseType: 'blob' });
-    }
-    
+    const headers = this.getAuthHeaders();
+    if (!headers) return of(null);
+
+    let params = new HttpParams()
+      .set('pageNo', filter.pageNo.toString())
+      .set('pageSize', filter.pageSize.toString())
+      .set('searchTerm', filter.searchTerm || '')
+      .set('startDate', filter.startDate || '')
+      .set('endDate', filter.endDate || '');
+
+    return this.http.get(this.GetSalesReportPdfUrl, { headers, params, responseType: 'blob' });
+  }
+
+  // --- Get Excel Report ---
+  GetSalesReportExcel(filter: PaginationFilter): Observable<Blob | null> {
+    const headers = this.getAuthHeaders();
+    if (!headers) return of(null);
+
+    let params = new HttpParams()
+      .set('pageNo', filter.pageNo.toString())
+      .set('pageSize', filter.pageSize.toString())
+      .set('searchTerm', filter.searchTerm || '')
+      .set('startDate', filter.startDate || '')
+      .set('endDate', filter.endDate || '');
+
+    return this.http.get(this.GetSalesReportExcelUrl, { headers, params, responseType: 'blob' });
+  }
+
   // --- Utility to download blob as file ---
   downloadFile(blob: Blob, fileName: string) {
     const url = window.URL.createObjectURL(blob);
@@ -138,14 +139,18 @@ export class SaleserviceService {
     window.URL.revokeObjectURL(url);
   }
 
-  GetReceiptPdf(saleid:number): Observable<Blob | null> {
-      const headers = this.getAuthHeaders();
-      if (!headers) return of(null);
-  
-      let params = new HttpParams()
-        .set('saleid', saleid.toString());
-  
-      return this.http.get(this.GetReceiptPdfUrl, { headers, params, responseType: 'blob' });
-    }
+  GetReceiptPdf(saleid: number): Observable<Blob | null> {
+    const headers = this.getAuthHeaders();
+    if (!headers) return of(null);
 
+    let params = new HttpParams()
+      .set('saleid', saleid.toString());
+
+    return this.http.get(this.GetReceiptPdfUrl, { headers, params, responseType: 'blob' });
+  }
+
+  Savecustomerledger(ledger: CustomerLedgerModel): Observable<number> {
+    const headers = this.getAuthHeaders();
+    return headers ? this.http.post<number>(this.SavecustomerledgerUrl, ledger, { headers }) : of(0);
+  }
 }

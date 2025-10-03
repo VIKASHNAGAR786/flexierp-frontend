@@ -11,3 +11,10 @@
   border-color: #00ffee;
   box-shadow: 0 0 0 2px rgba(0, 255, 238, 0.3);
 }
+
+input[readonly] {
+  background-color: #00f0ff; /* neon light blue */
+  color: #000; /* text color */
+  border: 1px solid #00ddee; /* optional neon border */
+  box-shadow: 0 0 5px #00f0ff; /* subtle neon glow */
+}

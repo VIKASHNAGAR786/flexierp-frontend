@@ -118,21 +118,15 @@
       </div>
 
       <div class="flex flex-col md:col-span-2">
-  <!-- Animated Red Label -->
-  <label class="label-animated">
-    Available Quantity
-  </label>
+        <!-- Animated Red Label -->
+        <label class="label-animated">
+          Available Quantity
+        </label>
 
-  <!-- Read-only Input with animated glow -->
-  <input 
-    type="number" 
-    [(ngModel)]="saleProduct.availableQuantity" 
-    name="availableQuantity"
-    placeholder="Available Quantity" 
-    readonly 
-    class="input-animated cursor-not-allowed"
-  />
-</div>
+        <!-- Read-only Input with animated glow -->
+        <input type="number" [(ngModel)]="saleProduct.availableQuantity" name="availableQuantity"
+          placeholder="Available Quantity" readonly class="input-animated cursor-not-allowed" />
+      </div>
 
 
 
@@ -167,7 +161,7 @@
           <tr class="bg-slate-700 text-[#00ffee] uppercase text-xs">
             <th class="px-3 py-2 text-left">Product</th>
             <th class="px-3 py-2 text-center">Qty</th>
-            <th class="px-3 py-2 text-center">Price</th>
+            <th class="px-3 py-2 text-center">Price(Per/Qty)</th>
             <th class="px-3 py-2 text-center">Discount</th>
             <th class="px-3 py-2 text-center">Tax</th>
             <th class="px-3 py-2 text-center">Total</th>
@@ -177,8 +171,8 @@
         <tbody>
           <tr *ngFor="let item of cart; let i = index" class="border-b border-slate-600">
             <td class="px-3 py-2">{{ item.name }}</td>
-            <td class="px-3 py-2 text-center">{{ item.weight}}</td>
-            <td class="px-3 py-2 text-center">{{ item.sellingPrice | number:'1.2-2' }}</td>
+            <td class="px-3 py-2 text-center">{{ item.qty}}</td>
+            <td class="px-3 py-2 text-center">{{ item.sellingPrice  | number:'1.2-2' }}</td>
             <td class="px-3 py-2 text-center">{{ item.discountAmt }}</td>
             <td class="px-3 py-2 text-center">{{ item.taxAmt }}%</td>
             <td class="px-3 py-2 text-center font-semibold">{{ item.total | number:'1.2-2' }}</td>
@@ -205,6 +199,7 @@
       <span class="text-[#00ffee]">Grand Total: {{ grandTotal | number:'1.2-2' }}</span>
     </div>
   </div>
+
   <!-- Customer & Payment Info -->
   <div class="bg-slate-800 p-6 rounded-xl shadow-lg space-y-4">
     <div class="flex items-center justify-between mb-4">
@@ -277,24 +272,64 @@
           </span>
         </div>
 
-        <!-- Payment Method -->
-        <div class="flex flex-col">
-          <label for="paymentMode" class="label-style">
-            PAYMENT METHOD
-          </label>
+        <!-- Payment Row -->
+       <!-- Payment Row 1 (Payment Method + Paid Amount) -->
+<div class="flex flex-row gap-6 w-full">
+  <!-- Payment Method -->
+  <div class="flex flex-col flex-1">
+    <label for="paymentMode" class="label-style">PAYMENT METHOD</label>
+    <select id="paymentMode" [(ngModel)]="customer.paymentMode" name="paymentMode" required
+      #paymentMode="ngModel" class="dropdown-style w-full"
+      [ngClass]="{'text-gray-400': customer.paymentMode === ''}">
+      <option value="" disabled hidden>Select a payment method</option>
+      <option value="1">Cash</option>
+      <option value="2">UPI</option>
+      <option value="3">Card</option>
+    </select>
+    <span *ngIf="paymentMode.invalid && paymentMode.touched" class="text-red-500 text-xs">
+      Payment method is required.
+    </span>
+  </div>
 
-          <select id="paymentMode" [(ngModel)]="customer.paymentMode" name="paymentMode" required #paymentMode="ngModel"
-            class="dropdown-style" [ngClass]="{'text-gray-400': customer.paymentMode === ''}">
-            <option value="" disabled hidden>Select a payment method</option>
-            <option value="1">Cash</option>
-            <option value="2">UPI</option>
-            <option value="3">Card</option>
-          </select>
+  <!-- Paid Amount -->
+  <div class="flex flex-col flex-1">
+  <label for="paidAmt" class="label-style">PAID AMOUNT</label>
+  <input type="number" id="paidAmt" [(ngModel)]="customer.paidAmt" name="paidAmt"
+    class="input-style w-full" required min="0" (ngModelChange)="onPaidChange($event)"
+     #paidamount="ngModel" />
 
-          <span *ngIf="paymentMode.invalid && paymentMode.touched" class="text-red-500 text-xs">
-            Payment method is required.
-          </span>
-        </div>
+  <!-- Validation -->
+  <span *ngIf="paidamount.invalid && paidamount.touched" class="text-red-500 text-xs">
+    Paid amount cannot be less than 0.
+  </span>
+</div>
+
+</div>
+
+<!-- Payment Row 2 (Balance Due + Total Amount) -->
+<div class="flex flex-row gap-6 w-full">
+  <!-- Balance Due -->
+  <div class="flex flex-col flex-1">
+  <label for="balanceDue" class="label-style">BALANCE DUE</label>
+  <input type="number" id="balanceDue" [(ngModel)]="customer.balanceDue" name="balanceDue"
+    class="input-style w-full" required min="0" (ngModelChange)="onDueChange($event)"
+    #balanceDue="ngModel" />
+
+  <!-- Validation -->
+  <span *ngIf="balanceDue.invalid && balanceDue.touched" class="text-red-500 text-xs">
+    Balance due cannot be less than 0.
+  </span>
+</div>
+
+
+  <!-- Total Amount -->
+  <div class="flex flex-col flex-1">
+    <label for="totalAmt" class="label-style">TOTAL AMOUNT</label>
+    <input type="number" id="totalAmt" [(ngModel)]="customer.totalAmt" name="totalAmt"
+      class="input-style w-full" readonly />
+  </div>
+</div>
+
 
 
         <!-- Additional Notes -->

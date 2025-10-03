@@ -36,16 +36,17 @@ export class AddProductComponent {
       isPerishable: [false],
       purchasePrice: [null, [Validators.required, Validators.min(0)]],  // 👈 no negative
       sellingPrice: [null, [Validators.required, Validators.min(0)]],   // 👈 no negative
-      taxRate: [null, [Validators.min(0)]],                             // 👈 no negative
-      discount: [null, [Validators.min(0)]],                            // 👈 no negative
+      taxpr: [null, [Validators.min(0)]],                             // 👈 no negative
+      discounpr: [null, [Validators.min(0)]],                            // 👈 no negative
       productDescription: [''],
       reorderQuantity: [null, [Validators.min(0)]],                     // 👈 no negative
       warehouseID: [null],
       warehouseName: [''],
       warehouseRefrigerated: [false],
       productQunatity: [null, [Validators.min(0)]], // 👈 no negative
+      taxRate:0,
+      discount:0,
 });
-
    
 
     this.loadCategories();
@@ -76,13 +77,16 @@ export class AddProductComponent {
           createdBy: 1,
           purchasePrice: 0,
           sellingPrice: 0,
-          taxRate: 0,
-          discount: 0,
+          taxpr: 0,
+          discounpr: 0,
           productDescription: '',
           reorderQuantity: 0,
           warehouseID: 0,
           warehouseName: '',
           warehouseRefrigerated: false,
+         taxRate:0,
+      discount:0,
+
         });
       },
       error: (err) => {
@@ -113,4 +117,35 @@ export class AddProductComponent {
       }
     });
   }
+
+  // Called when Tax Rate changes
+onTaxChange(taxpr: number) {
+  const sellingPrice = this.productForm.get('sellingPrice')?.value ?? 0;
+
+  // Ensure no negative values
+  const rate = taxpr < 0 ? 0 : taxpr;
+
+  // Calculate Tax Amount (per quantity)
+  const taxAmt = (sellingPrice  * rate) / 100;
+
+  // Update form
+  this.productForm.patchValue({
+    taxRate: taxAmt
+  });
+}
+
+onDiscountChange(discounpr: number) {
+  const sellingPrice = this.productForm.get('sellingPrice')?.value ?? 0;
+
+  const rate = discounpr < 0 ? 0 : discounpr;
+
+  // Calculate Discount Amount (per quantity)
+  const discountAmt = (sellingPrice  * rate) / 100;
+
+  // Update form
+  this.productForm.patchValue({
+    discount: discountAmt
+  });
+}
+
 }

@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
 import { firstValueFrom, of } from 'rxjs';
 import { ProductByBarcodeDTO } from '../../../DTO/DTO';
 import { AlertService } from '../../../services/alert.service';
-import { Customer, generateReceiptpdf, Sale, SaleDetail } from '../../../MODEL/MODEL';
+import { CartItemDTO, Customer, generateReceiptpdf, Sale, SaleDetail } from '../../../MODEL/MODEL';
 import { OldCustomerPopupComponent } from "../old-customer-popup/old-customer-popup.component";
 import { BarcodeService } from '../../../services/barcode.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -24,7 +24,7 @@ export class AddSaleComponent {
 
   saleProduct: ProductByBarcodeDTO | any = {};
   saledata: Sale | any = {};
-  cart: any[] = [];
+  cart: CartItemDTO[] = [];
 
   // ✅ FIX: Initialize customer with paymentMode = '' so placeholder shows
   customer: Customer | any = {
@@ -58,9 +58,9 @@ export class AddSaleComponent {
       .subscribe((product: ProductByBarcodeDTO | null) => {
         if (product) {
           this.saleProduct = product;
-          if(this.saleProduct.availableQuantity === 0) {
-           this.alertservice.showAlert("Product is out of stock", 'error');
-          }   
+          if (this.saleProduct.availableQuantity === 0) {
+            this.alertservice.showAlert("Product is out of stock", 'error');
+          }
           this.saleProduct.packedDate = this.saleProduct.packedDate ? this.saleProduct.packedDate.split('T')[0] : '';
           this.barcode = this.saleProduct.barCode || '';
         } else {
@@ -68,8 +68,8 @@ export class AddSaleComponent {
           this.saleProduct = {
             barcode: '',
             name: '',
-            qty: 1,
-            price: 100,
+            qty: 0,
+            price: 0,
             discount: 0,
             tax: 0
           };
@@ -81,15 +81,16 @@ export class AddSaleComponent {
 
   // -------------------------------
   addToCart() {
+    debugger
     if (!this.saleProduct.productID || !this.saleProduct.productName) {
       alert('Please enter valid product details');
       return;
     }
 
-    const price = this.saleProduct.sellingPrice ?? 0;
-    const discountAmt = (price * (this.saleProduct.discount ?? 0)) / 100;
+    const price = (this.saleProduct.sellingPrice ?? 0);
+    const discountAmt = (this.saleProduct.discount ?? 0) * (this.saleProduct.quantity ?? 1);
     const taxAmt = (price * (this.saleProduct.taxRate ?? 0)) / 100;
-    const finalPrice = price - discountAmt + taxAmt;
+    const finalPrice =  (this.saleProduct.sellingPrice ?? 0) * (this.saleProduct.quantity ?? 1);
 
     const weight = this.saleProduct.packedWeight;
     const name = `${this.saleProduct.productName ?? ''}${weight ? ` (${weight} kg)` : ''}`;
@@ -102,12 +103,12 @@ export class AddSaleComponent {
       return;
     }
 
-    const newItem = {
+    const newItem: CartItemDTO = {
       productID: this.saleProduct.productID,
       name: name,
       qty: this.saleProduct.quantity,
       total: finalPrice,
-      weight: weight,
+      weight: this.saleProduct.weight,
       discountAmt: discountAmt,
       taxAmt: taxAmt,
       sellingPrice: price,
@@ -127,8 +128,8 @@ export class AddSaleComponent {
     this.saleProduct = {
       barcode: '',
       name: '',
-      qty: 1,
-      price: 100,
+      qty: 0,
+      price: 0,
       discount: 0,
       tax: 0
     };
@@ -137,22 +138,6 @@ export class AddSaleComponent {
   removeFromCart(index: number) {
     this.cart.splice(index, 1);
     this.updateGrandTotal();
-  }
-
-  saveProduct() {
-    if (this.saleProduct.name && this.saleProduct.price) {
-      const item = {
-        name: this.saleProduct.name,
-        qty: 1,
-        price: this.saleProduct.price,
-        discount: this.saleProduct.discount || 0,
-        tax: this.saleProduct.tax || 0,
-        total: this.calculateTotal(this.saleProduct)
-      };
-      this.cart.push(item);
-      this.updateGrandTotal();
-      this.saleProduct = {};
-    }
   }
 
   clearSale() {
@@ -206,6 +191,8 @@ export class AddSaleComponent {
   onCustomerSelected(customer: any) {
     this.customer = customer;
     this.customer.paymentMode = "";
+    this.customer.totalAmt = this.grandTotal;
+    this.customer.paidAmt = this.grandTotal;
     this.saledata.customerID = customer.customerID;
     console.log('Selected customer:', customer);
   }
@@ -223,51 +210,62 @@ export class AddSaleComponent {
 
   showPdfPopup: boolean = false;
   pdfUrl: SafeResourceUrl | null = null;
-pdfBlobUrl!: string; // Normal string for download/print
+  pdfBlobUrl!: string; // Normal string for download/print
   async generateReceipt(barcode: string) {
-  try {
-    this.receiptPdfData.barcode = barcode;
-    this.receiptPdfData.customer = this.customer;
-    this.receiptPdfData.cart = this.cart;
+    try {
+      this.receiptPdfData.barcode = barcode;
+      this.receiptPdfData.customer = this.customer;
+      this.receiptPdfData.cart = this.cart;
 
-    const blob = await firstValueFrom(this.pythonservice.generateReceiptPDF(this.receiptPdfData));
-    
-    // Create both versions
-    this.pdfBlobUrl = URL.createObjectURL(blob); // raw blob URL
-    this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.pdfBlobUrl); // safe for iframe
+      const blob = await firstValueFrom(this.pythonservice.generateReceiptPDF(this.receiptPdfData));
 
-    this.showPdfPopup = true;
-  } catch (error) {
-    console.error('Error generating receipt PDF:', error);
+      // Create both versions
+      this.pdfBlobUrl = URL.createObjectURL(blob); // raw blob URL
+      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.pdfBlobUrl); // safe for iframe
+
+      this.showPdfPopup = true;
+    } catch (error) {
+      console.error('Error generating receipt PDF:', error);
+    }
   }
-}
   closePdfPopup() {
-  this.showPdfPopup = false;
-  if (this.pdfBlobUrl) {
-    URL.revokeObjectURL(this.pdfBlobUrl); // cleanup
-    this.pdfBlobUrl = '';
+    this.showPdfPopup = false;
+    if (this.pdfBlobUrl) {
+      URL.revokeObjectURL(this.pdfBlobUrl); // cleanup
+      this.pdfBlobUrl = '';
+    }
   }
-}
 
   downloadPdf() {
-  if (this.pdfBlobUrl) {
-    const link = document.createElement('a');
-    link.href = this.pdfBlobUrl;
-    link.download = 'party-statement.pdf';
-    link.click();
+    if (this.pdfBlobUrl) {
+      const link = document.createElement('a');
+      link.href = this.pdfBlobUrl;
+      link.download = 'party-statement.pdf';
+      link.click();
+    }
   }
-}
 
-printPdf() {
-  if (this.pdfBlobUrl) {
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = this.pdfBlobUrl;
-    document.body.appendChild(iframe);
-    iframe.contentWindow?.focus();
-    iframe.contentWindow?.print();
+  printPdf() {
+    if (this.pdfBlobUrl) {
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      iframe.src = this.pdfBlobUrl;
+      document.body.appendChild(iframe);
+      iframe.contentWindow?.focus();
+      iframe.contentWindow?.print();
+    }
   }
-}
+
+  onPaidChange(value: number) {
+    this.customer.paidAmt = value < 0 ? 0 : value;
+    this.customer.balanceDue = this.customer.totalAmt - this.customer.paidAmt;
+  }
+
+  // Called when Balance Due changes
+  onDueChange(value: number) {
+    this.customer.balanceDue = value < 0 ? 0 : value;
+    this.customer.paidAmt = this.customer.totalAmt - this.customer.balanceDue;
+  }
 
 }
 
