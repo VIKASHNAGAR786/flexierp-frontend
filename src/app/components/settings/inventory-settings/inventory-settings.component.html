@@ -36,6 +36,30 @@
           {{ isSubmitting ? '⏳ Saving...' : 'Add Category' }}
         </button>
       </form>
+      <!-- Category List -->
+      <div *ngIf="warehouses.length > 0" class="mt-8">
+        <h3 class="text-xl font-semibold text-[#00ffee] mb-3 text-center drop-shadow-md">Available Category</h3>
+        <div class="overflow-x-auto max-h-64 border border-slate-700 rounded-lg shadow-inner bg-slate-900/50 backdrop-blur-sm">
+          <table class="min-w-full text-white border-collapse">
+            <thead class="bg-slate-800/70 sticky top-0 z-10 backdrop-blur-sm">
+              <tr>
+                <th class="px-4 py-2 border-b border-slate-700 text-center">Sr.No</th>
+                <th class="px-4 py-2 border-b border-slate-700">Category Name</th>
+                <th class="px-4 py-2 border-b border-slate-700">Description</th>
+                <th class="px-4 py-2 border-b border-slate-700 text-center">Created Date</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-700">
+              <tr *ngFor="let warehouse of warehouses; let i = index" class="hover:bg-slate-700 transition">
+                <td class="px-4 py-2 text-center">{{ i + 1 }}</td>
+                <td class="px-4 py-2">{{ warehouse.warehouseName }}</td>
+                <td class="px-4 py-2">{{ warehouse.remark }}</td>
+                <td class="px-4 py-2 text-center">{{ warehouse.createdDate | date:'short' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
 
     <!-- Warehouse Content -->
