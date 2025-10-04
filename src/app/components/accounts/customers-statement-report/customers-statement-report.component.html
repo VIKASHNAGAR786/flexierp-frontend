@@ -76,13 +76,12 @@
 
 
 <!-- Party Statement Popup -->
-<!-- Party Statement Popup -->
 <div 
   *ngIf="showPartyStatement" 
   class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
 >
-  <div class="bg-slate-900 rounded-2xl shadow-2xl w-full max-w-6xl p-6 relative border border-slate-700">
-    
+  <div class="bg-slate-900 rounded-2xl shadow-2xl w-full max-w-5xl p-6 relative border border-slate-700 max-h-[90vh] overflow-y-auto">
+
     <!-- Close Button -->
     <button 
       (click)="showPartyStatement = false" 
@@ -97,7 +96,7 @@
     </h2>
 
     <!-- Party Info -->
-    <div class="flex justify-center gap-10 mb-6 text-white text-lg">
+    <div class="flex flex-col sm:flex-row justify-center gap-6 mb-6 text-white text-base sm:text-lg">
       <div>
         <span class="font-semibold text-[#00ffee]">Party Name:</span> Vikash
       </div>
@@ -107,20 +106,20 @@
     </div>
 
     <!-- Table -->
-    <div class="overflow-x-auto overflow-y-auto bg-slate-800 rounded-lg shadow-lg max-h-[500px]">
+    <div class="overflow-x-auto bg-slate-800 rounded-lg shadow-inner">
       <table class="min-w-full text-white border-collapse">
         <thead
-          class="bg-gradient-to-r from-slate-900 to-slate-800 text-[#00ffee] uppercase text-sm md:text-base tracking-wide sticky top-0 z-50"
+          class="bg-gradient-to-r from-slate-900 to-slate-800 text-[#00ffee] uppercase text-sm md:text-base tracking-wide sticky top-0 z-10"
         >
           <tr>
             <th class="px-4 py-2 border-b border-slate-700">Paid Amount</th>
             <th class="px-4 py-2 border-b border-slate-700">Balance Due</th>
             <th class="px-4 py-2 border-b border-slate-700">Total Amt</th>
-            <th class="px-4 py-2 border-b border-slate-700">Payment Mode Type</th>
+            <th class="px-4 py-2 border-b border-slate-700">Payment Mode</th>
             <th class="px-4 py-2 border-b border-slate-700">Transaction Type</th>
             <th class="px-4 py-2 border-b border-slate-700">Sale Date</th>
             <th class="px-4 py-2 border-b border-slate-700">Total Items</th>
-            <th class="px-4 py-2 border-b border-slate-700">Total Discount</th>
+            <th class="px-4 py-2 border-b border-slate-700">Discount</th>
             <th class="px-4 py-2 border-b border-slate-700">Tax</th>
             <th class="px-4 py-2 border-b border-slate-700">Transaction Date</th>
           </tr>
@@ -151,7 +150,7 @@
     </div>
 
     <!-- Footer -->
-    <div class="flex justify-between items-center mt-4">
+    <div class="flex flex-col sm:flex-row justify-between items-center mt-5 gap-3">
       <!-- PDF Export Button -->
       <button 
         (click)="exportToPdf()" 
@@ -170,6 +169,3 @@
     </div>
   </div>
 </div>
-
-
-
