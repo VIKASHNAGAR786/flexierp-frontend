@@ -35,9 +35,18 @@ export class CustomersStatementReportComponent implements OnInit {
   selectedCustomer: CustomerLedgerDto | null = null;
   customername: string = '';
   contactno: string = '';
+  startDate: string = '';
+endDate: string = '';
 
   ngOnInit(): void {
     this.getCustomerData();
+     const today = new Date();
+  const sevenDaysAgo = new Date();
+  sevenDaysAgo.setDate(today.getDate() - 7);
+
+  // Convert both dates to yyyy-MM-dd format
+  this.startDate = sevenDaysAgo.toISOString().split('T')[0];
+  this.endDate = today.toISOString().split('T')[0];
   
   }
   getCustomerData() {
@@ -52,7 +61,7 @@ export class CustomersStatementReportComponent implements OnInit {
   }
 
  exportToPdf(id: number) {
-    this.saleservice.GetCustomerledgerdetailspdf(id).subscribe(blob => {
+    this.saleservice.GetCustomerledgerdetailspdf(id,this.startDate,this.endDate).subscribe(blob => {
       if (blob) {
         this.saleservice.downloadFile(blob, 'ProductReport.pdf');
         this.alertservice.showAlert("File Downloaded Successfully Inside Download Folder", 'success');
@@ -72,7 +81,7 @@ public  partyStatement: CustomerLedgerDetailDto[] = [];
  showPartyStatement = false;
   viewCustomerStatement(id: number) {
     this.showPartyStatement = true;
-    this.saleservice.GetCustomerledgerdetails(id).subscribe({
+    this.saleservice.GetCustomerledgerdetails(id, this.startDate,this.endDate).subscribe({
       next: (data) => {
         if (data) {
           this.partyStatement = data;
@@ -95,5 +104,9 @@ public  partyStatement: CustomerLedgerDetailDto[] = [];
    
   }
  
+filterStatement(id: number) {
+ this.viewCustomerStatement(id);
+}
+
 
 }

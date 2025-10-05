@@ -106,7 +106,27 @@
       </div>
     </div>
 
+    <!-- 📅 Date Filters -->
+    <div
+      class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-6 text-white text-base bg-slate-800/60 px-6 py-3 rounded-xl shadow-md border border-[#00ffee]/30 backdrop-blur-sm">
 
+      <div class="flex flex-col">
+        <label class="text-sm font-semibold text-[#00ffee] mb-1">Start Date</label>
+        <input type="date" [(ngModel)]="startDate"
+          class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-gray-200 focus:outline-none focus:ring-2 focus:ring-[#00ffee]/50">
+      </div>
+
+      <div class="flex flex-col">
+        <label class="text-sm font-semibold text-[#00ffee] mb-1">End Date</label>
+        <input type="date" [(ngModel)]="endDate"
+          class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-gray-200 focus:outline-none focus:ring-2 focus:ring-[#00ffee]/50">
+      </div>
+
+      <button (click)="filterStatement(partyStatement[0].customerid)"
+        class="mt-4 sm:mt-0 px-5 py-2 bg-[#00ffee] text-slate-900 font-semibold rounded-lg hover:bg-[#00ffee]/80 transition shadow-md">
+        Filter
+      </button>
+    </div>
 
     <!-- Table -->
     <div class="overflow-x-auto bg-slate-800 rounded-lg shadow-inner">
@@ -140,7 +160,6 @@
             <td class="px-4 py-2 text-center">{{ record.transactiondate | date:'short' }}</td>
           </tr>
 
-          <!-- Empty State -->
           <tr *ngIf="partyStatement.length === 0">
             <td colspan="10" class="text-center py-4 text-gray-400">No records found.</td>
           </tr>
@@ -150,13 +169,11 @@
 
     <!-- Footer -->
     <div class="flex flex-col sm:flex-row justify-between items-center mt-5 gap-3">
-      <!-- PDF Export Button -->
       <button (click)="exportToPdf(partyStatement[0].customerid)"
         class="flex items-center gap-2 px-5 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition shadow-md">
         <i class="fas fa-file-pdf"></i> Export PDF
       </button>
 
-      <!-- Close Button -->
       <button (click)="showPartyStatement = false"
         class="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition shadow-md">
         Close

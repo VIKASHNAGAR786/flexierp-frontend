@@ -2,6 +2,8 @@ import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/c
 import { UserinfowithloginService } from '../../services/userinfowithlogin.service';
 import { Router } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonService } from '../../services/common.service';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +16,8 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private userInfo: UserinfowithloginService,
      @Inject(PLATFORM_ID) private platformId: Object,
+     private commonservice:CommonService,
+     private alertservice:AlertService
   ) { }
   public username: string = 'Guest';
   ngOnInit() {
@@ -27,15 +31,28 @@ export class HeaderComponent implements OnInit {
     }
   }
   onLogout() {
-   if (isPlatformBrowser(this.platformId)) {
-    localStorage.clear();
-  }
+   this.commonservice.logout().subscribe({
+      next: (res) => {
+        this.alertservice.showAlert("Server logout successful", "success");
+      },
+      error: (err) => {
+        this.alertservice.showAlert("Server logout failed", "error");
+      },
+      complete: () => {
 
-  // Clear in-memory cached data
-  this.userInfo.clear();
-  this.router.navigate(['/auth/login']).then(() => {
-    window.location.reload(); // refresh the entire page
-  });
+        if (isPlatformBrowser(this.platformId)) {
+          localStorage.clear();
+        }
+
+        // Clear in-memory cached data
+        this.userInfo.clear();
+
+        // Navigate to login page after API call completes
+        this.router.navigate(['/auth/login']).then(() => {
+          window.location.reload(); // refresh the entire page
+        });
+      }
+    });
   }
 
   isDropdownOpen = false;

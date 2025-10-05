@@ -166,23 +166,27 @@ export class SaleserviceService {
     return this.http.get<CustomerLedgerDto[]>(this.GetCustomerledgerUrl, { headers, params });
   }
 
-  GetCustomerledgerdetails(customerid: number): Observable<CustomerLedgerDetailDto[] | null> {
+  GetCustomerledgerdetails(customerid: number, startDate:string, endDate:string): Observable<CustomerLedgerDetailDto[] | null> {
      const headers = this.getAuthHeaders();
     if (!headers) return of(null);
 
     const params = {
-      customerid: customerid.toString()
+      customerid: customerid.toString(),
+      startDate: startDate || '',
+      endDate: endDate || ''
     };
 
     return this.http.get<CustomerLedgerDetailDto[]>(this.GetCustomerledgerdetailsUrl, { headers, params });
   }
 
-   GetCustomerledgerdetailspdf(customerid: number): Observable<Blob | null> {
+   GetCustomerledgerdetailspdf(customerid: number, startDate:string, endDate:string): Observable<Blob | null> {
     const headers = this.getAuthHeaders();
     if (!headers) return of(null);
 
     let params = new HttpParams()
-      .set('customerid', customerid.toString());
+      .set('customerid', customerid.toString())
+      .set('startDate', startDate || '')
+      .set('endDate', endDate || '');
 
     return this.http.get(this.GetCustomerledgerdetailspdfUrl, { headers, params, responseType: 'blob' });
   }
@@ -190,3 +194,4 @@ export class SaleserviceService {
 
 
 }
+
