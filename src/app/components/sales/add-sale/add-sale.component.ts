@@ -81,11 +81,12 @@ export class AddSaleComponent {
 
   // -------------------------------
   addToCart() {
-    debugger
     if (!this.saleProduct.productID || !this.saleProduct.productName) {
       alert('Please enter valid product details');
       return;
     }
+
+    
 
     const price = (this.saleProduct.sellingPrice ?? 0);
     const discountAmt = (this.saleProduct.discount ?? 0) * (this.saleProduct.quantity ?? 1);
@@ -124,6 +125,9 @@ export class AddSaleComponent {
     this.updateGrandTotal();
     this.editfromcartdata.push(this.saleProduct);
 
+    this.customer.paymentMode = "";
+    this.customer.totalAmt = this.grandTotal;
+    this.customer.paidAmt = this.grandTotal;
     // Reset for next scan
     this.saleProduct = {
       barcode: '',
@@ -159,6 +163,7 @@ export class AddSaleComponent {
       saleDetails: this.saledetails,
       customer: this.customer, // ✅ includes paymentMode now
       totalItems: this.cart.length,
+      customerID:this.customer.customerID,
       totalAmount: this.cart.reduce((sum, item) => sum + item.total, 0),
       totalDiscount: this.cart.reduce((sum, item) => sum + (item.discountAmt || 0), 0),
       orderDate: new Date()

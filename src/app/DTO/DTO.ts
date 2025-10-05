@@ -136,5 +136,33 @@ export interface CompanyInfoDTO {
   companyLogo: string;
 }
 
+export interface CustomerLedgerDto {
+  customerid: number;
+  customername?: string;
+  contactNo?: string;
+  email?: string;
+  customerAddress?: string;
+  totalamount: number;
+  totaldue: number;
+  lasttransactiondate?: string;
+  rowid?: number;
+}
+
+export interface CustomerLedgerDetailDto {
+  customerid: number;
+  paidamt: number;
+  transactiontype?: string;
+  totalamount: number;
+  balancedue: number;
+  transactiondate?: string;
+  saledate?: string;
+  totalitems: number;
+  totaldiscount: number;
+  paymentmode: number;
+  rowid?: number;
+  tax?: number;
+  customername: string;
+  contactno: string;
+}
 
 

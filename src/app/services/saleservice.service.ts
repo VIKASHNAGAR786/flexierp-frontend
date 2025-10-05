@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { UserinfowithloginService } from './userinfowithlogin.service';
 import { Observable, of } from 'rxjs';
-import { CustomerWithSalesDTO, OldCustomerDTO, ProductByBarcodeDTO, SaleDTO } from '../DTO/DTO';
+import { CustomerLedgerDetailDto, CustomerLedgerDto, CustomerWithSalesDTO, OldCustomerDTO, ProductByBarcodeDTO, SaleDTO } from '../DTO/DTO';
 import { environment } from '../../environments/environment';
 import { CustomerLedgerModel, PaginationFilter, Sale } from '../MODEL/MODEL';
 
@@ -25,7 +25,8 @@ export class SaleserviceService {
   private getOldCustomersUrl = environment.BASE_URL + '/Sale/GetOldCustomers';
   private getCustomersWithSalesUrl = environment.BASE_URL + '/Sale/GetCustomersWithSales';
   private GetReceiptPdfUrl = environment.BASE_URL + '/Sale/GetReceiptPdf';
-  private SavecustomerledgerUrl = environment.BASE_URL + '/Sale/Savecustomerledger';
+  private GetCustomerledgerUrl = environment.AccountApiUrl + 'GetCustomerledger';
+  private GetCustomerledgerdetailsUrl = environment.AccountApiUrl + 'GetCustomerledgerdetails';
   private getAuthHeaders(): HttpHeaders | null {
     if (isPlatformBrowser(this.platformId)) {
       const token = this.userInfo.getToken();
@@ -149,8 +150,31 @@ export class SaleserviceService {
     return this.http.get(this.GetReceiptPdfUrl, { headers, params, responseType: 'blob' });
   }
 
-  Savecustomerledger(ledger: CustomerLedgerModel): Observable<number> {
-    const headers = this.getAuthHeaders();
-    return headers ? this.http.post<number>(this.SavecustomerledgerUrl, ledger, { headers }) : of(0);
+  GetCustomerledger(filter: PaginationFilter): Observable<CustomerLedgerDto[] | null> {
+     const headers = this.getAuthHeaders();
+    if (!headers) return of(null);
+
+    const params = {
+      pageNo: filter.pageNo.toString(),
+      pageSize: filter.pageSize.toString(),
+      searchTerm: filter.searchTerm || '',
+      startDate: filter.startDate || '',
+      endDate: filter.endDate || ''
+    };
+
+    return this.http.get<CustomerLedgerDto[]>(this.GetCustomerledgerUrl, { headers, params });
   }
+
+  GetCustomerledgerdetails(customerid: number): Observable<CustomerLedgerDetailDto[] | null> {
+     const headers = this.getAuthHeaders();
+    if (!headers) return of(null);
+
+    const params = {
+      customerid: customerid.toString()
+    };
+
+    return this.http.get<CustomerLedgerDetailDto[]>(this.GetCustomerledgerdetailsUrl, { headers, params });
+  }
+
+     
 }

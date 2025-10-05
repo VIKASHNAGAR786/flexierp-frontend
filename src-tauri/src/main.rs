@@ -1,12 +1,11 @@
-use std::process::{Command, Child, Stdio};
+use std::process::{Command, Child};
 use std::sync::{Mutex, Arc};
-use std::path::PathBuf;
-use std::os::windows::process::CommandExt; // For CREATE_NO_WINDOW
-use tauri::Manager;
-use std::ffi::OsStr;
-use std::os::windows::ffi::OsStrExt;
+use std::path::{PathBuf};
 use std::fs::{OpenOptions};
 use std::io::Write;
+use std::ffi::OsStr;
+use std::os::windows::ffi::OsStrExt;
+use tauri::Manager;
 use windows_sys::Win32::UI::WindowsAndMessaging::{MessageBoxW, MB_ICONERROR, MB_OK};
 
 /// Show Windows error popup
@@ -43,18 +42,19 @@ fn main() {
 
     tauri::Builder::default()
         .setup(|app| {
-            // Get the folder where frontend exe is located
+            // Determine frontend exe folder
             let mut exe_dir = std::env::current_exe().map_err(|e| {
                 let msg = format!("Failed to determine frontend exe path: {}", e);
                 show_error("Startup Error", &msg);
                 log_error(&msg);
                 e
             })?;
-            exe_dir.pop(); // Remove frontend exe
+            exe_dir.pop(); // remove exe name
 
-            // Inside bundle → resources → backend folder
+            // Backend path inside resources folder
             let mut backend_dir = exe_dir.clone();
-            backend_dir.push("backend"); // <- publish folder placed here
+            backend_dir.push("resources");
+            backend_dir.push("backend");
 
             let mut backend_path = backend_dir.clone();
             backend_path.push("FLEXIERP.exe");
@@ -66,13 +66,9 @@ fn main() {
                 return Err(std::io::Error::new(std::io::ErrorKind::NotFound, "Backend exe missing").into());
             }
 
-            // Start backend silently
+            // Start backend (no console)
             let child = Command::new(&backend_path)
-                .current_dir(&backend_dir) // Important: so backend can access dlls/config
-                .stdin(Stdio::null())
-                .stdout(Stdio::null())
-                .stderr(Stdio::null())
-                .creation_flags(0x08000000) // CREATE_NO_WINDOW
+                .current_dir(&backend_dir)
                 .spawn()
                 .map_err(|e| {
                     let msg = format!("Failed to start backend: {}", e);
