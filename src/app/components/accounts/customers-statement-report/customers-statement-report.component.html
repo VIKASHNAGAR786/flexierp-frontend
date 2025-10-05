@@ -1,7 +1,7 @@
 <!-- 🔍 Search Bar + Actions -->
 <div class="flex justify-between items-center mb-4 gap-2 flex-wrap">
   <!-- Search Input -->
-  <input type="text" [(ngModel)]="filter.searchTerm" (ngModelChange)="getCustomerData()" 
+  <input type="text" [(ngModel)]="filter.searchTerm" (ngModelChange)="getCustomerData()"
     placeholder="Search customers..."
     class="px-4 py-2 rounded-lg bg-slate-800 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-[#00ffee] w-1/3" />
 
@@ -13,7 +13,7 @@
 
   <!-- 📤 Export Buttons -->
   <div class="flex gap-2" *ngIf="customers.length > 0">
-    <button (click)="exportToPdf()"
+    <button (click)="exportToPdflist()"
       class="flex items-center gap-1 px-3 py-2 bg-red-600 hover:bg-red-700 rounded text-white">
       <i class="fas fa-file-pdf"></i> PDF
     </button>
@@ -43,7 +43,7 @@
     </thead>
     <tbody class="divide-y divide-slate-700">
       <tr *ngFor="let customer of customers; let i = index" class="hover:bg-slate-700 transition cursor-pointer"
-          (click)="viewCustomerStatement(customer.customerid)">
+        (click)="viewCustomerStatement(customer.customerid)">
         <td class="px-4 py-2 text-center">{{ (filter.pageNo - 1) * filter.pageSize + i + 1 }}</td>
         <td class="px-4 py-2 font-semibold">{{ customer.customername }}</td>
         <td class="px-4 py-2 text-center">{{ customer.contactNo }}</td>
@@ -67,8 +67,7 @@
   <button (click)="prevPage()" [disabled]="filter.pageNo === 1"
     class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50">Previous</button>
   <span>Page {{ filter.pageNo }} </span>
-  <button (click)="nextPage()"
-    class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50">Next</button>
+  <button (click)="nextPage()" class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50">Next</button>
 </div>
 
 
@@ -76,41 +75,44 @@
 
 
 <!-- Party Statement Popup -->
-<div 
-  *ngIf="showPartyStatement" 
-  class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
->
-  <div class="bg-slate-900 rounded-2xl shadow-2xl w-full max-w-5xl p-6 relative border border-slate-700 max-h-[90vh] overflow-y-auto">
+<div *ngIf="showPartyStatement" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+  <div
+    class="bg-slate-900 rounded-2xl shadow-2xl w-full max-w-5xl p-6 relative border border-slate-700 max-h-[90vh] overflow-y-auto">
 
     <!-- Close Button -->
-    <button 
-      (click)="showPartyStatement = false" 
-      class="absolute top-3 right-3 text-gray-400 hover:text-red-500 text-2xl font-bold"
-    >
+    <button (click)="showPartyStatement = false"
+      class="absolute top-3 right-3 text-gray-400 hover:text-red-500 text-2xl font-bold">
       ✕
     </button>
-    
+
     <!-- Title -->
     <h2 class="text-2xl font-bold text-center mb-4 text-[#00ffee] uppercase tracking-wide">
       Party Statement
     </h2>
 
     <!-- Party Info -->
-    <div class="flex flex-col sm:flex-row justify-center gap-6 mb-6 text-white text-base sm:text-lg">
-      <div>
-        <span class="font-semibold text-[#00ffee]">Party Name:</span> {{ customername }}
+    <div
+      class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-6 text-white text-base sm:text-lg bg-slate-800/60 px-6 py-3 rounded-xl shadow-md border border-[#00ffee]/30 backdrop-blur-sm">
+      <div class="flex items-center gap-2">
+        <span class="font-semibold text-[#00ffee]">Party Name:</span>
+        <span class="text-red-500 font-semibold tracking-wide">
+          {{ customername || 'N/A' }}
+        </span>
       </div>
-      <div>
-        <span class="font-semibold text-[#00ffee]">Contact No:</span> {{ contactno }}
+      <div class="hidden sm:block w-px h-6 bg-[#00ffee]/30"></div>
+      <div class="flex items-center gap-2">
+        <span class="font-semibold text-[#00ffee]">Contact No:</span>
+        <span class="text-gray-200 tracking-wide">{{ contactno || 'N/A' }}</span>
       </div>
     </div>
+
+
 
     <!-- Table -->
     <div class="overflow-x-auto bg-slate-800 rounded-lg shadow-inner">
       <table class="min-w-full text-white border-collapse">
         <thead
-          class="bg-gradient-to-r from-slate-900 to-slate-800 text-[#00ffee] uppercase text-sm md:text-base tracking-wide sticky top-0 z-10"
-        >
+          class="bg-gradient-to-r from-slate-900 to-slate-800 text-[#00ffee] uppercase text-sm md:text-base tracking-wide sticky top-0 z-10">
           <tr>
             <th class="px-4 py-2 border-b border-slate-700">Paid Amount</th>
             <th class="px-4 py-2 border-b border-slate-700">Balance Due</th>
@@ -125,10 +127,7 @@
           </tr>
         </thead>
         <tbody class="divide-y divide-slate-700">
-          <tr 
-            *ngFor="let record of partyStatement" 
-            class="hover:bg-slate-700 transition cursor-pointer"
-          >
+          <tr *ngFor="let record of partyStatement" class="hover:bg-slate-700 transition cursor-pointer">
             <td class="px-4 py-2 text-center">{{ record.paidamt }}</td>
             <td class="px-4 py-2 text-center">{{ record.balancedue }}</td>
             <td class="px-4 py-2 text-center">{{ record.totalamount }}</td>
@@ -152,18 +151,14 @@
     <!-- Footer -->
     <div class="flex flex-col sm:flex-row justify-between items-center mt-5 gap-3">
       <!-- PDF Export Button -->
-      <button 
-        (click)="exportToPdf()" 
-        class="flex items-center gap-2 px-5 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition shadow-md"
-      >
+      <button (click)="exportToPdf(partyStatement[0].customerid)"
+        class="flex items-center gap-2 px-5 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition shadow-md">
         <i class="fas fa-file-pdf"></i> Export PDF
       </button>
 
       <!-- Close Button -->
-      <button 
-        (click)="showPartyStatement = false" 
-        class="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition shadow-md"
-      >
+      <button (click)="showPartyStatement = false"
+        class="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition shadow-md">
         Close
       </button>
     </div>

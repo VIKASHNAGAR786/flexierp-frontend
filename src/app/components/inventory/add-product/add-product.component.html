@@ -43,14 +43,17 @@
       <div class="flex flex-col md:flex-row gap-6 w-full">
 
         <!-- Product Description -->
-        <div class="flex flex-col flex-1">
-          <label
-            class="mb-2 text-sm md:text-base font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide">
-            Product Description
-          </label>
-          <textarea placeholder="Enter Product Description" formControlName="productDescription"
-            class="w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 h-28 resize-y"></textarea>
-        </div>
+      <div class="flex flex-col flex-1">
+  <label class="label-style" for="productDescription">
+    Product Description
+  </label>
+  <textarea id="productDescription" placeholder="Enter Product Description"
+    formControlName="productDescription"
+    class="textarea-style"></textarea>
+</div>
+
+
+
 
         <!-- Packed Date -->
         <div class="flex flex-col w-full md:w-1/3">

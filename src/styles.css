@@ -69,21 +69,73 @@ body {
   @apply mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md;
 }
 
+/* input-style.css or global styles */
 .input-style {
-  @apply w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-slate-800 border
-         border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2
-         focus:ring-green-500 focus:border-green-500 transition-all duration-200;
+  width: 100%;                        /* full width */
+  padding: 0.5rem 1rem;               /* px-4 py-2 */
+  color: #ffffff;                      /* text color for dark theme */
+  background-color: #1e293b;           /* bg-slate-800 */
+  border: 1px solid #4b5563;          /* border-gray-600 */
+  border-radius: 0.5rem;               /* rounded-lg */
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* shadow-sm */
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  font-size: 0.875rem;                 /* text-sm default */
 }
 
+.input-style:focus {
+  border-color: #00ffee;              /* green accent */
+  box-shadow: 0 0 0 2px rgba(0,255,238,0.5); /* focus ring effect */
+}
+
+/* Optional: placeholder style */
+.input-style::placeholder {
+  color: #94a3b8;                     /* gray-400 placeholder */
+}
+
+/* Dark mode already applied above; if you want light version, create another class */
+
+
+/* dropdown-style.css or global styles */
 .dropdown-style {
-  @apply w-full appearance-none px-4 py-3 pr-10 text-gray-900 dark:text-white bg-white
-   dark:bg-slate-900 border border-gray-300 dark:border-gray-600 rounded-xl shadow-md focus:outline-none 
-   focus:ring-2 focus:ring-[#00ffee] focus:border-[#00ffee] transition-all duration-300 ease-in-out;
+  width: 100%;                        /* full width */
+  appearance: none;                    /* remove default dropdown arrow */
+  padding: 0.75rem 1rem 0.75rem 1rem; /* px-4 py-3 */
+  padding-right: 2.5rem;              /* pr-10 for dropdown arrow */
+  color: #ffffff;                      /* text color for dark mode */
+  background-color: #1e293b;           /* dark bg-slate-900 */
+  border: 1px solid #4b5563;          /* border-gray-600 */
+  border-radius: 0.75rem;              /* rounded-xl */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* shadow-md */
+  font-size: 0.875rem;                 /* text-sm default */
+  outline: none;
+  transition: all 0.3s ease-in-out;
+  position: relative;                  /* for positioning the arrow */
 }
 
-.dropdown-style svg {
-  @apply w-5 h-5 text-gray-500 dark:text-gray-400 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none;
+/* Focus state */
+.dropdown-style:focus {
+  border-color: #00ffee;
+  box-shadow: 0 0 0 2px rgba(0, 255, 238, 0.5);
 }
+
+/* Placeholder style */
+.dropdown-style option[disabled] {
+  color: #94a3b8;                     /* gray-400 placeholder */
+}
+
+/* Dropdown arrow SVG inside the select container */
+.dropdown-style svg {
+  width: 1.25rem;                     /* w-5 */
+  height: 1.25rem;                    /* h-5 */
+  color: #9ca3af;                     /* text-gray-500 */
+  position: absolute;
+  right: 0.75rem;                     /* right-3 */
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
 
 @keyframes scan {
   0% { top: 0%; }
@@ -95,3 +147,31 @@ body {
   animation: scan 2s linear infinite;
 }
 
+
+
+/* Textarea style for dark/light mode */
+.textarea-style {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  color: #111827;               /* light text */
+  background-color: #ffffff;    /* light background */
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  resize: vertical;
+  height: 7rem;
+  transition: all 0.2s;
+}
+
+body.dark .textarea-style {
+  color: #f9fafb;               /* white text for dark mode */
+  background-color: #1e293b;    /* dark background */
+  border-color: #4b5563;
+}
+
+.textarea-style:focus {
+  outline: none;
+  border-color: #22c55e;        
+  box-shadow: 0 0 0 2px rgba(34,197,94,0.5); /* green focus ring */
+}

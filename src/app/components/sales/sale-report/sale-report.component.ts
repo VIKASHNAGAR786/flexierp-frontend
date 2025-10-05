@@ -96,7 +96,10 @@ export class SaleReportComponent implements OnInit {
     this.reportIsLoading = true;
     this.saleService.GetSalesReportPdf(this.filter).subscribe(blob => {
       this.reportIsLoading = false;
-      if (blob) this.saleService.downloadFile(blob, 'ProductReport.pdf');
+      if (blob){
+         this.saleService.downloadFile(blob, 'ProductReport.pdf');
+         this.alertservice.showAlert("File Downloaded Successfully Inside Download Folder", 'success');
+      }
     });
   }
 
@@ -104,7 +107,10 @@ export class SaleReportComponent implements OnInit {
     this.reportIsLoading = true;
     this.saleService.GetSalesReportExcel(this.filter).subscribe(blob => {
       this.reportIsLoading = false;
-      if (blob) this.saleService.downloadFile(blob, 'ProductReport.xlsx');
+      if (blob) {
+        this.saleService.downloadFile(blob, 'ProductReport.xlsx');
+        this.alertservice.showAlert("File Downloaded Successfully Inside Download Folder", 'success');
+      }
     });
   }
 
@@ -115,6 +121,7 @@ export class SaleReportComponent implements OnInit {
       this.reportIsLoading = false;
       if (blob && blob.size > 0) {
         this.saleService.downloadFile(blob, 'Receipt.pdf');
+         this.alertservice.showAlert("File Downloaded Successfully Inside Download Folder", 'success');
       } else {
         console.error("Empty PDF blob received.");
         alert("Failed to generate receipt. Please try again.");

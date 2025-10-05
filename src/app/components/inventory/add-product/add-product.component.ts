@@ -9,7 +9,8 @@ import { AlertService } from '../../../services/alert.service';
   selector: 'app-add-product',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, FormsModule],
-  templateUrl: './add-product.component.html'
+  templateUrl: './add-product.component.html',
+  styleUrls: ['./add-product.component.css']
 })
 export class AddProductComponent {
   @Output() productAdded = new EventEmitter<any>();

@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import tippy, { Instance } from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
+import { AlertService } from '../../../services/alert.service';
 
 @Component({
   selector: 'app-sold-product',
@@ -35,7 +36,8 @@ export class SoldProductComponent {
     private barcodeService: BarcodeService,
     private inventoryService: InventoryService,
     private ngZone: NgZone,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private alertservice: AlertService
 
   ) {
     const now = new Date();
@@ -102,7 +104,10 @@ export class SoldProductComponent {
     this.reportIsLoading = true;
     this.inventoryService.getSoldProductReportPdf(this.filter).subscribe(blob => {
       this.reportIsLoading = false;
-      if (blob) this.inventoryService.downloadFile(blob, 'SoldProductReport.pdf');
+      if (blob){
+         this.inventoryService.downloadFile(blob, 'SoldProductReport.pdf');
+        this.alertservice.showAlert("File Downloaded Successfully Inside Download Folder", 'success');
+      }
     });
   }
 
@@ -110,7 +115,10 @@ export class SoldProductComponent {
     this.reportIsLoading = true;
     this.inventoryService.getSoldProductReportExcel(this.filter).subscribe(blob => {
       this.reportIsLoading = false;
-      if (blob) this.inventoryService.downloadFile(blob, 'SoldProductReport.xlsx');
+      if (blob){
+         this.inventoryService.downloadFile(blob, 'SoldProductReport.xlsx');
+         this.alertservice.showAlert("File Downloaded Successfully Inside Download Folder", 'success');
+      }
     });
   }
 

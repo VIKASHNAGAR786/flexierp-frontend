@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
 import { firstValueFrom, of } from 'rxjs';
 import { ProductByBarcodeDTO } from '../../../DTO/DTO';
 import { AlertService } from '../../../services/alert.service';
-import { CartItemDTO, Customer, generateReceiptpdf, Sale, SaleDetail } from '../../../MODEL/MODEL';
+import { CartItemDTO, ChequePayment, Customer, generateReceiptpdf, Sale, SaleDetail } from '../../../MODEL/MODEL';
 import { OldCustomerPopupComponent } from "../old-customer-popup/old-customer-popup.component";
 import { BarcodeService } from '../../../services/barcode.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -272,5 +272,41 @@ export class AddSaleComponent {
     this.customer.paidAmt = this.customer.totalAmt - this.customer.balanceDue;
   }
 
+
+showChequePopup = false;
+cheque: ChequePayment = this.resetCheque();
+
+onPaymentModeChange(event: any) {
+  if (this.customer.paymentMode === '2') { // Cheque selected
+    this.showChequePopup = true;
+  }
+}
+
+saveCheque() {
+  // Save cheque details to your customer object or send to backend
+  console.log('Cheque Details:', this.cheque);
+  this.showChequePopup = false;
+}
+
+cancelCheque() {
+  this.showChequePopup = false;
+  this.customer.paymentMode = "1"; // Reset payment mode
+  this.cheque = this.resetCheque();
+}
+
+resetCheque(): ChequePayment {
+  const today = new Date();
+  const formattedDate = today.toISOString().split('T')[0]; // "yyyy-MM-dd" string
+  return {
+    chequeNumber: '',
+    bankName: '',
+    branchName: '',
+    chequeDate: new Date(formattedDate), // Set default to today
+    amount: 0,
+    drawerName: '',
+    status: 'Pending',
+    remarks: ''
+  };
+}
 }
 

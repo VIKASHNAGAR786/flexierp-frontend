@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { PaginationFilter } from '../../../MODEL/MODEL';
 import { SaleserviceService } from '../../../services/saleservice.service';
 import { CustomerLedgerDetailDto, CustomerLedgerDto } from '../../../DTO/DTO';
+import { AlertService } from '../../../services/alert.service';
 
 
 @Component({
@@ -16,7 +17,8 @@ import { CustomerLedgerDetailDto, CustomerLedgerDto } from '../../../DTO/DTO';
 export class CustomersStatementReportComponent implements OnInit {
   
   constructor(
-    private saleservice:SaleserviceService
+    private saleservice:SaleserviceService,
+    private alertservice:AlertService
   ) { 
      this.filter = {
       startDate: this.today,
@@ -49,9 +51,19 @@ export class CustomersStatementReportComponent implements OnInit {
     });
   }
 
-  exportToPdf() {
+ exportToPdf(id: number) {
+    this.saleservice.GetCustomerledgerdetailspdf(id).subscribe(blob => {
+      if (blob) {
+        this.saleservice.downloadFile(blob, 'ProductReport.pdf');
+        this.alertservice.showAlert("File Downloaded Successfully Inside Download Folder", 'success');
+      }
+    });
+  }
+
+   exportToPdflist() {
     
   }
+
 
   exportToExcel() {
    

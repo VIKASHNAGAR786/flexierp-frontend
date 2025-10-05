@@ -7,6 +7,7 @@ import 'tippy.js/dist/tippy.css';
 import { PaginationFilter } from '../../../MODEL/MODEL';
 import { InventoryService } from '../../../services/inventory.service';
 import { ProductDTO } from '../../../DTO/DTO';
+import { AlertService } from '../../../services/alert.service';
 
 @Component({
   selector: 'app-product-list',
@@ -34,7 +35,8 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     private barcodeService: BarcodeService,
     private inventoryService: InventoryService,
     private ngZone: NgZone,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private alertservice:AlertService
 
   ) {
     const now = new Date();
@@ -101,7 +103,10 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     this.reportIsLoading = true;
     this.inventoryService.getProductReportPdf(this.filter).subscribe(blob => {
       this.reportIsLoading = false;
-      if (blob) this.inventoryService.downloadFile(blob, 'ProductReport.pdf');
+      if (blob) {
+        this.inventoryService.downloadFile(blob, 'ProductReport.pdf');
+        this.alertservice.showAlert("File Downloaded Successfully Inside Download Folder", 'success');
+      }
     });
   }
 
@@ -109,7 +114,10 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     this.reportIsLoading = true;
     this.inventoryService.getProductReportExcel(this.filter).subscribe(blob => {
       this.reportIsLoading = false;
-      if (blob) this.inventoryService.downloadFile(blob, 'ProductReport.xlsx');
+      if (blob){
+         this.inventoryService.downloadFile(blob, 'ProductReport.xlsx');
+         this.alertservice.showAlert("File Downloaded Successfully Inside Download Folder", 'success');
+      }
     });
   }
 

@@ -12,6 +12,18 @@ export interface PaginationFilter {
   pageSize: number;
 }
 
+export interface ChequePayment {
+  chequeNumber: string;   // Unique identifier
+  bankName: string;       // Name of the bank
+  branchName: string;     // Branch or IFSC
+  chequeDate: Date;       // Date on the cheque
+  amount: number;         // Cheque amount
+  drawerName: string;     // Name of the issuer
+  status?: 'Pending' | 'Cleared' | 'Bounced'; // Optional status
+  remarks?: string;       // Optional notes
+}
+
+
 export interface ProductCategory {
   categoryName: string;       // required
   description?: string;       // optional

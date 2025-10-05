@@ -18,3 +18,69 @@ input[readonly] {
   border: 1px solid #00ddee; /* optional neon border */
   box-shadow: 0 0 5px #00f0ff; /* subtle neon glow */
 }
+
+/* textarea-style.css */
+.textarea-style {
+  width: 100%;
+  padding: 0.5rem 1rem;                  /* px-4 py-2 */
+  color: #1f2937;                         /* text-gray-900 for light mode */
+  background-color: #ffffff;              /* bg-white for light mode */
+  border: 1px solid #d1d5db;             /* border-gray-300 */
+  border-radius: 0.5rem;                  /* rounded-lg */
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* shadow-sm */
+  font-size: 0.875rem;                    /* text-sm */
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  height: 7rem;                           /* h-28 */
+  resize: vertical;                       /* resize-y */
+  box-sizing: border-box;
+}
+
+/* Dark mode */
+.dark .textarea-style {
+  color: #ffffff;                         /* dark text */
+  background-color: #1e293b;              /* dark bg-slate-800 */
+  border: 1px solid #4b5563;             /* dark border-gray-600 */
+}
+
+/* Focus state */
+.textarea-style:focus {
+  border-color: #10b981;                  /* green-500 */
+  box-shadow: 0 0 0 2px rgba(16,185,129,0.5); /* ring-green-500 */
+}
+
+
+/* product style  */
+
+/* form-styles.css */
+
+
+:host ::ng-deep .textarea-style {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  color: #111827;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  resize: vertical;
+  height: 7rem;
+  transition: all 0.2s;
+}
+
+
+/* Dark mode using media query */
+@media (prefers-color-scheme: dark) {
+  .textarea-style {
+    color: #f9fafb;
+    background-color: #1e293b;
+    border-color: #4b5563;
+  }
+}
+
+.textarea-style:focus {
+  outline: none;
+  border-color: #22c55e;
+  box-shadow: 0 0 0 2px rgba(34,197,94,0.5);
+}

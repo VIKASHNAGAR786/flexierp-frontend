@@ -27,6 +27,7 @@ export class SaleserviceService {
   private GetReceiptPdfUrl = environment.BASE_URL + '/Sale/GetReceiptPdf';
   private GetCustomerledgerUrl = environment.AccountApiUrl + 'GetCustomerledger';
   private GetCustomerledgerdetailsUrl = environment.AccountApiUrl + 'GetCustomerledgerdetails';
+  private GetCustomerledgerdetailspdfUrl = environment.AccountApiUrl + 'GetCustomerledgerdetailspdf';
   private getAuthHeaders(): HttpHeaders | null {
     if (isPlatformBrowser(this.platformId)) {
       const token = this.userInfo.getToken();
@@ -176,5 +177,16 @@ export class SaleserviceService {
     return this.http.get<CustomerLedgerDetailDto[]>(this.GetCustomerledgerdetailsUrl, { headers, params });
   }
 
-     
+   GetCustomerledgerdetailspdf(customerid: number): Observable<Blob | null> {
+    const headers = this.getAuthHeaders();
+    if (!headers) return of(null);
+
+    let params = new HttpParams()
+      .set('customerid', customerid.toString());
+
+    return this.http.get(this.GetCustomerledgerdetailspdfUrl, { headers, params, responseType: 'blob' });
+  }
+
+
+
 }
