@@ -1,25 +1,20 @@
 <!-- 🔍 Search Bar + Pagination Controls + Export Buttons -->
 <div class="flex justify-between items-center mb-4 gap-2 flex-wrap">
   <!-- Search -->
-  <input type="text" [(ngModel)]="filter.searchTerm" (ngModelChange)="onSearchChange()" 
-    placeholder="Search customer..."
+  <input type="text" [(ngModel)]="filter.searchTerm" (ngModelChange)="onSearchChange()" placeholder="Search customer..."
     class="px-4 py-2 rounded-lg bg-slate-800 text-white border border-slate-600 w-1/3" />
 
   <!-- Modern Advanced Date Filter -->
   <div class="flex gap-2 flex-wrap items-center">
     <!-- Start Date -->
     <div class="relative w-44 md:w-52">
-      <input 
-        type="date" 
-        [(ngModel)]="filter.startDate" 
-        (ngModelChange)="onSearchChange()"
-        class="w-full px-10 py-2 rounded-lg bg-slate-800 text-white border border-slate-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00ffee]" 
-        placeholder="Start Date"
-      />
+      <input type="date" [(ngModel)]="filter.startDate" (ngModelChange)="onSearchChange()"
+        class="w-full px-10 py-2 rounded-lg bg-slate-800 text-white border border-slate-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00ffee]"
+        placeholder="Start Date" />
       <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#00ffee]">
         <i class="fas fa-calendar-alt"></i>
       </span>
-      <button *ngIf="filter.startDate" (click)="filter.startDate=''; onSearchChange()" 
+      <button *ngIf="filter.startDate" (click)="filter.startDate=''; onSearchChange()"
         class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-red-500" type="button">
         <i class="fas fa-times-circle"></i>
       </button>
@@ -27,17 +22,13 @@
 
     <!-- End Date -->
     <div class="relative w-44 md:w-52">
-      <input 
-        type="date" 
-        [(ngModel)]="filter.endDate" 
-        (ngModelChange)="onSearchChange()"
-        class="w-full px-10 py-2 rounded-lg bg-slate-800 text-white border border-slate-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00ffee]" 
-        placeholder="End Date"
-      />
+      <input type="date" [(ngModel)]="filter.endDate" (ngModelChange)="onSearchChange()"
+        class="w-full px-10 py-2 rounded-lg bg-slate-800 text-white border border-slate-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00ffee]"
+        placeholder="End Date" />
       <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#00ffee]">
         <i class="fas fa-calendar-alt"></i>
       </span>
-      <button *ngIf="filter.endDate" (click)="filter.endDate=''; onSearchChange()" 
+      <button *ngIf="filter.endDate" (click)="filter.endDate=''; onSearchChange()"
         class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-red-500" type="button">
         <i class="fas fa-times-circle"></i>
       </button>
@@ -64,60 +55,59 @@
 </div>
 <!-- 📋 Sales Table -->
 <div class="overflow-x-auto overflow-y-auto bg-slate-900 rounded-lg shadow-lg relative max-h-[500px]">
- <table class="min-w-full text-white border-collapse">
-  <thead class="bg-gradient-to-r from-slate-900 to-slate-800 text-[#00ffee] uppercase text-sm md:text-base tracking-wide sticky top-0 z-50">
-    <tr>
-      <th class="px-4 py-2 border-b border-slate-700">Sr.No</th>
-      <th class="px-4 py-2 border-b border-slate-700">Customer Name</th>
-      <th class="px-4 py-2 border-b border-slate-700">Total Items</th>
-      <th class="px-4 py-2 border-b border-slate-700">Total Amount</th>
-      <th class="px-4 py-2 border-b border-slate-700">Total Discount</th>
-      <th class="px-4 py-2 border-b border-slate-700">Order Date</th>
-      <th class="px-4 py-2 border-b border-slate-700">Created By</th>
-      <th class="px-4 py-2 border-b border-slate-700 text-center">Action</th>
-    </tr>
-  </thead>
+  <table class="min-w-full text-white border-collapse">
+    <thead
+      class="bg-gradient-to-r from-slate-900 to-slate-800 text-[#00ffee] uppercase text-sm md:text-base tracking-wide sticky top-0 z-50">
+      <tr>
+        <th class="px-4 py-2 border-b border-slate-700">Sr.No</th>
+        <th class="px-4 py-2 border-b border-slate-700">Customer Name</th>
+        <th class="px-4 py-2 border-b border-slate-700">Total Items</th>
+        <th class="px-4 py-2 border-b border-slate-700">Total Amount</th>
+        <th class="px-4 py-2 border-b border-slate-700">Total Discount</th>
+        <th class="px-4 py-2 border-b border-slate-700">Order Date</th>
+        <th class="px-4 py-2 border-b border-slate-700">Created By</th>
+        <th class="px-4 py-2 border-b border-slate-700 text-center">Action</th>
+      </tr>
+    </thead>
 
-  <tbody class="divide-y divide-slate-700">
-    <tr *ngFor="let sale of sales; let i = index" class="hover:bg-slate-700 transition">
-      <td class="px-4 py-2 text-center">{{ i + 1 }}</td>
-      <td class="px-4 py-2">{{ sale.customerName }}</td>
-      <td class="px-4 py-2 text-center">{{ sale.totalItems }}</td>
-      <td class="px-4 py-2 text-center">{{ sale.totalAmount | currency:'INR':'symbol':'1.2-2' }}</td>
-      <td class="px-4 py-2 text-center">{{ sale.totalDiscount | currency:'INR':'symbol':'1.2-2' }}</td>
-      <td class="px-4 py-2 text-center">{{ sale.orderDate | date:'short' }}</td>
-      <td class="px-4 py-2 text-center">{{ sale.fullName }}</td>
+    <tbody class="divide-y divide-slate-700">
+      <tr *ngFor="let sale of sales; let i = index" class="hover:bg-slate-700 transition">
+        <td class="px-4 py-2 text-center">{{ i + 1 }}</td>
+        <td class="px-4 py-2">{{ sale.customerName }}</td>
+        <td class="px-4 py-2 text-center">{{ sale.totalItems }}</td>
+        <td class="px-4 py-2 text-center">{{ sale.totalAmount | currency:'INR':'symbol':'1.2-2' }}</td>
+        <td class="px-4 py-2 text-center">{{ sale.totalDiscount | currency:'INR':'symbol':'1.2-2' }}</td>
+        <td class="px-4 py-2 text-center">{{ sale.orderDate | date:'short' }}</td>
+        <td class="px-4 py-2 text-center">{{ sale.fullName }}</td>
 
-      <!-- Action Column -->
-      <td class="px-4 py-2 text-center">
-        <button 
-          (click)="seeReceipt(sale.saleID)" 
-          class="px-3 py-1 bg-green-600 hover:bg-green-700 text-white rounded-md shadow-md flex items-center gap-2 mx-auto"
-        >
-          <i class="fas fa-receipt"></i> See Receipt
-        </button>
-      </td>
-    </tr>
+        <!-- Action Column -->
+        <td class="px-4 py-2 text-center">
+          <button (click)="seeReceipt(sale.saleID, sale.customerName)"
+            class="px-3 py-1 bg-green-600 hover:bg-green-700 text-white rounded-md shadow-md flex items-center gap-2 mx-auto">
+            <i class="fas fa-receipt"></i> See Receipt
+          </button>
+        </td>
+      </tr>
 
-    <tr *ngIf="sales.length === 0">
-      <td colspan="8" class="text-center py-4 text-gray-400">No sales available.</td>
-    </tr>
-  </tbody>
-</table>
+      <tr *ngIf="sales.length === 0">
+        <td colspan="8" class="text-center py-4 text-gray-400">No sales available.</td>
+      </tr>
+    </tbody>
+  </table>
 
 </div>
 
 <!-- 📄 Pagination Controls -->
 <div class="flex justify-between items-center mt-4 text-white">
   <button (click)="prevPage()" [disabled]="filter.pageNo === 1"
-      class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50">Previous</button>
+    class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50">Previous</button>
   <span>Page {{ filter.pageNo }} of {{ totalPages }}</span>
   <button (click)="nextPage()" [disabled]="filter.pageNo === totalPages"
-      class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50">Next</button>
+    class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50">Next</button>
 </div>
 
 <!-- for the big loader -->
- <div *ngIf="reportIsLoading" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+<div *ngIf="reportIsLoading" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
   <div class="text-center space-y-4">
 
     <!-- Animated FLEXIERP text -->
@@ -133,3 +123,42 @@
     <p class="text-white text-lg font-semibold animate-pulse">Loading report, please wait...</p>
   </div>
 </div>
+
+
+<!-- Receipt Viewer Popup -->
+<div *ngIf="showReceiptPopup" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+  <div
+    class="bg-white dark:bg-slate-900 rounded-xl shadow-2xl w-[90%] max-w-4xl h-[90vh] p-4 flex flex-col border border-slate-600">
+
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-3 border-b border-slate-300 dark:border-slate-700 pb-2">
+      <h2 class="text-lg font-semibold text-slate-800 dark:text-slate-200">Receipt Preview</h2>
+      <button (click)="closeReceiptPopup()" class="text-red-500 hover:text-red-600 text-xl font-bold">
+        ✕
+      </button>
+
+    </div>
+
+    <!-- PDF Viewer -->
+    <div class="flex-1 overflow-hidden">
+      <iframe *ngIf="pdfUrl" [src]="pdfUrl"
+        class="w-full h-full rounded-md border border-slate-300 dark:border-slate-700">
+      </iframe>
+    </div>
+    <div class="bg-slate-800 p-3 flex justify-end gap-3 rounded-b-lg">
+      <button (click)="downloadPdf()"
+        class="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg shadow">
+        <i class="fas fa-file-pdf"></i> Download
+      </button>
+      <button (click)="printPdf()"
+        class="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow">
+        <i class="fas fa-print"></i> Print
+      </button>
+      <button (click)="closeReceiptPopup()"
+        class="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 active:bg-red-800 text-white font-medium rounded-lg shadow-md transition-all duration-200">
+        <i class="fas fa-times"></i>
+        Close
+      </button>
+
+    </div>
+  </div>
