@@ -5,7 +5,7 @@ import { UserinfowithloginService } from './userinfowithlogin.service';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { PaginationFilter, ProductCategory, ProductModel, ProviderModel, UpdateCompanyInfo, WarehouseModel } from '../MODEL/MODEL';
-import { CompanyInfoDTO, ProductCategoryDTO, ProductDTO, ProviderDTO, UserLoginHistoryDTO, WarehouseDTO } from '../DTO/DTO';
+import { CompanyInfoDTO, DashboardMetricsDto, ProductCategoryDTO, ProductDTO, ProviderDTO, UserLoginHistoryDTO, WarehouseDTO } from '../DTO/DTO';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +32,7 @@ export class CommonService {
   private readonly GetUserLoginHistoryUrl = environment.AccountApiUrl + 'GetUserLoginHistory';
   private readonly GetCompanyInfoUrl = environment.AccountApiUrl + 'GetCompanyInfo';
   private readonly UpdateCompanyInfoUrl = environment.AccountApiUrl + 'UpdateCompanyInfo';
+  private readonly GetDashboardMetricsAsyncUrl = environment.BASE_URL + '/CommonMaster/GetDashboardMetricsAsync';
 
   logout(): Observable<string> {
     const headers = this.getAuthHeaders();
@@ -84,5 +85,18 @@ export class CommonService {
 
   return this.http.post<string>(this.UpdateCompanyInfoUrl, formData, { headers: headers ?? undefined });
 }
+
+  GetDashboardMetricsAsync(startdate:string, enddate:string): Observable<DashboardMetricsDto | null> {
+     const headers = this.getAuthHeaders();
+    if (!headers) return of(null);
+
+    // Send filter as query parameters
+    let params = new HttpParams()
+      .set('startDate', startdate)
+      .set('endDate', enddate)
+
+    return this.http.get<DashboardMetricsDto>(this.GetDashboardMetricsAsyncUrl, { headers, params });
+  }
+
 
 }

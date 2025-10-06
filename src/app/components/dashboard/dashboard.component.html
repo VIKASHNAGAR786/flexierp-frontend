@@ -1,17 +1,79 @@
-<div class="flex flex-col items-center justify-center min-h-[60vh] text-center text-white px-4 py-10">
-
-  <div class="text-[#00ffee] text-6xl md:text-7xl mb-6 animate-pulse">
-    🚧
+<!-- dashboard.component.html -->
+<div class="min-h-screen bg-gray-900 text-white font-sans p-6">
+  <!-- Header -->
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold text-cyan-400">Finance Dashboard</h1>
+    <p class="text-gray-400">Overview of your cash & cheque transactions</p>
   </div>
 
-  <h2 class="text-2xl md:text-3xl font-bold mb-4">This Module is Coming Soon!</h2>
+  <!-- Filters -->
+  <div class="flex flex-wrap gap-4 mb-6">
+    <div>
+      <label class="block mb-1 text-gray-300">Date Range</label>
+      <select class="bg-gray-800 border border-cyan-500 rounded px-3 py-2 text-white">
+        <option>Last 7 Days</option>
+        <option>Last Month</option>
+        <option>Last Year</option>
+      </select>
+    </div>
+    <button class="bg-cyan-500 hover:bg-cyan-400 px-4 py-2 rounded font-semibold">Export PDF</button>
+    <button class="bg-purple-500 hover:bg-purple-400 px-4 py-2 rounded font-semibold">Export Excel</button>
+  </div>
 
-  <p class="text-slate-400 max-w-xl mb-6">
-    We're working hard to bring you this feature. Stay tuned — it'll be worth the wait.
-  </p>
+  <!-- Metrics Cards -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="bg-gray-800 border border-cyan-500 rounded-xl p-4 shadow-lg hover:shadow-cyan-500/50 transition">
+      <p class="text-gray-400 uppercase text-sm">Total Cash Received</p>
+      <h2 class="text-2xl font-bold text-cyan-400">₹ {{dashboarddata.totalCashReceived}}</h2>
+      <p class="text-green-400 text-sm mt-1">{{dashboarddata.cashGrowthPercent}}</p>
+    </div>
 
-  <button routerLink="/" class="bg-[#00ffee] text-black px-6 py-2 rounded-full font-semibold hover:bg-[#00ddcc] transition">
-    Back to Dashboard
-  </button>
+    <div class="bg-gray-800 border border-purple-500 rounded-xl p-4 shadow-lg hover:shadow-purple-500/50 transition">
+      <p class="text-gray-400 uppercase text-sm">Total Cheque Received</p>
+      <h2 class="text-2xl font-bold text-purple-400">₹ {{dashboarddata.totalChequeReceived}}</h2>
+      <p class="text-green-400 text-sm mt-1">{{dashboarddata.chequeGrowthPercent}}</p>
+    </div>
 
+    <div class="bg-gray-800 border border-pink-500 rounded-xl p-4 shadow-lg hover:shadow-pink-500/50 transition">
+      <p class="text-gray-400 uppercase text-sm">Trends & Growth</p>
+      <h2 class="text-2xl font-bold text-pink-400">📈 Increasing</h2>
+    </div>
+
+    <div class="bg-gray-800 border border-yellow-500 rounded-xl p-4 shadow-lg hover:shadow-yellow-500/50 transition">
+      <p class="text-gray-400 uppercase text-sm">Other Metrics</p>
+      <h2 class="text-2xl font-bold text-yellow-400">Demo Value</h2>
+    </div>
+  </div>
+
+  <!-- Dummy Table -->
+  <div class="mt-8 bg-gray-800 rounded-xl p-4 border border-cyan-500 shadow-lg">
+    <h3 class="text-xl font-semibold text-cyan-400 mb-4">Recent Transactions</h3>
+    <table class="w-full text-left border-collapse">
+      <thead>
+        <tr class="text-gray-300 border-b border-gray-700">
+          <th class="py-2 px-4">Date</th>
+          <th class="py-2 px-4">Customer</th>
+          <th class="py-2 px-4">Type</th>
+          <th class="py-2 px-4">Amount</th>
+          <th class="py-2 px-4">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border-b border-gray-700 hover:bg-gray-700/50 transition">
+          <td class="py-2 px-4">06-Oct-2025</td>
+          <td class="py-2 px-4">Vikash Nagar</td>
+          <td class="py-2 px-4">Cash</td>
+          <td class="py-2 px-4">₹ 25,000</td>
+          <td class="py-2 px-4 text-green-400">Completed</td>
+        </tr>
+        <tr class="border-b border-gray-700 hover:bg-gray-700/50 transition">
+          <td class="py-2 px-4">05-Oct-2025</td>
+          <td class="py-2 px-4">Rahul Kumar</td>
+          <td class="py-2 px-4">Cheque</td>
+          <td class="py-2 px-4">₹ 50,000</td>
+          <td class="py-2 px-4 text-yellow-400">Pending</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

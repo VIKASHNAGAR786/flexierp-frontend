@@ -165,4 +165,10 @@ export interface CustomerLedgerDetailDto {
   contactno: string;
 }
 
-
+export interface DashboardMetricsDto
+ {
+     TotalCashReceived : number,
+     TotalChequeReceived : number,
+     CashGrowthPercent : number,
+     ChequeGrowthPercent : number,
+ }
