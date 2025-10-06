@@ -283,13 +283,20 @@
               </select>
 
               <!-- Tooltip icon (visible only if Cheque is selected) -->
-              <div *ngIf="customer.paymentMode === '2'" class="relative group cursor-pointer">
-                <i class="fa fa-info-circle text-blue-400 text-lg"></i>
+              <div *ngIf="customer.paymentMode === '2'" class="relative group">
+                <button type="button" (click)="showChequePopup = true"
+                  class="flex items-center justify-center text-blue-400 hover:text-blue-500 bg-slate-800/40 hover:bg-slate-800 rounded-full p-2 transition-all duration-200 border border-slate-700 shadow-md cursor-pointer"
+                  aria-label="See cheque details">
+                  <i class="fa fa-info-circle text-lg"></i>
+                </button>
+
+                <!-- Tooltip -->
                 <span
-                  class="absolute left-6 top-1/2 -translate-y-1/2 bg-slate-800 text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap shadow-md border border-slate-600">
+                  class="absolute left-10 top-1/2 -translate-y-1/2 bg-slate-800 text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap shadow-md border border-slate-600">
                   See cheque details
                 </span>
               </div>
+
             </div>
 
             <span *ngIf="paymentMode.invalid && paymentMode.touched" class="text-red-500 text-xs">

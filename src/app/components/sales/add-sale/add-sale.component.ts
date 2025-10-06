@@ -278,6 +278,7 @@ showChequePopup = false;
 cheque: SaveChequePaymentDto = this.resetCheque();
 
 onPaymentModeChange(event: any) {
+  this.cheque = this.resetCheque();
   if (this.customer.paymentMode === '2') { // Cheque selected
     this.showChequePopup = true;
   }
@@ -288,7 +289,9 @@ saveCheque() {
   console.log('Cheque Details:', this.cheque);
   this.showChequePopup = false;
   this.customer.chequepayment = this.cheque; // Attach cheque details to customer
-  this.cheque = this.resetCheque();
+  this.customer.paidAmt = this.cheque.amount;
+  this.customer.balanceDue = this.customer.totalAmt - this.customer.paidAmt;
+  // this.cheque = this.resetCheque();
   
 }
 
