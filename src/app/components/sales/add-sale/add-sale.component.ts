@@ -1,4 +1,3 @@
-
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -8,25 +7,35 @@ import { catchError } from 'rxjs/operators';
 import { firstValueFrom, of } from 'rxjs';
 import { ProductByBarcodeDTO } from '../../../DTO/DTO';
 import { AlertService } from '../../../services/alert.service';
-import { CartItemDTO,  Customer, generateReceiptpdf, Sale, SaleDetail, SaveChequePaymentDto } from '../../../MODEL/MODEL';
+import { CartItemDTO, Customer, generateReceiptpdf, Sale, SaleDetail, SaveChequePaymentDto } from '../../../MODEL/MODEL';
 import { OldCustomerPopupComponent } from "../old-customer-popup/old-customer-popup.component";
 import { BarcodeService } from '../../../services/barcode.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
+// 🟩 Added for extra charges handling
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-add-sale',
   standalone: true,
-  imports: [CommonModule, FormsModule, ScanBarcodeComponent, OldCustomerPopupComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,   // ✅ Add this line
+    ScanBarcodeComponent,
+    OldCustomerPopupComponent
+  ],
   templateUrl: './add-sale.component.html',
   styleUrls: ['./add-sale.component.css']
 })
+
 export class AddSaleComponent {
 
   saleProduct: ProductByBarcodeDTO | any = {};
   saledata: Sale | any = {};
   cart: CartItemDTO[] = [];
 
-  // ✅ FIX: Initialize customer with paymentMode = '' so placeholder shows
   customer: Customer | any = {
     paymentMode: ''
   };
@@ -36,25 +45,57 @@ export class AddSaleComponent {
   receiptPdfData: generateReceiptpdf | any = {};
   barcode: string = '';
 
+  // 🟩 Added: form builder instance and extraCharges form array
+  extraChargesForm: FormGroup;  // master form for extra charges
+  get extraCharges(): FormArray {
+    return this.extraChargesForm.get('extraCharges') as FormArray;
+  }
+
   constructor(
     private saleservice: SaleserviceService,
     private alertservice: AlertService,
     private pythonservice: BarcodeService,
     private sanitizer: DomSanitizer,
-  ) { }
+    private fb: FormBuilder // 🟩 Added for creating extra charges form
+  ) {
+    // 🟩 Initialize extra charges bucket
+    this.extraChargesForm = this.fb.group({
+      extraCharges: this.fb.array([])
+    });
+  }
 
-  // -------------------------------
-  // New method: Fetch product by barcode
+  // 🟩 Add new charge block
+  addCharge() {
+    const chargeGroup = this.fb.group({
+      name: ['', Validators.required],
+      amount: [0, [Validators.required, Validators.min(0)]]
+    });
+    this.extraCharges.push(chargeGroup);
+  }
+
+  // 🟩 Remove charge block
+  removeCharge(index: number) {
+    this.extraCharges.removeAt(index);
+  }
+
+  // 🟩 Total of extra charges
+  get totalExtraCharges(): number {
+    return this.extraCharges.value.reduce(
+      (acc: number, item: any) => acc + item.amount,
+      0
+    );
+  }
+
+  // --------------------------------------
+  // Existing code (unchanged)
   fetchProductByBarcode(barcode: string) {
     if (!barcode) return;
 
     this.saleservice.GetProductByBarcode(barcode)
-      .pipe(
-        catchError(err => {
-          console.error("Error fetching product:", err);
-          return of(null);
-        })
-      )
+      .pipe(catchError(err => {
+        console.error("Error fetching product:", err);
+        return of(null);
+      }))
       .subscribe((product: ProductByBarcodeDTO | null) => {
         if (product) {
           this.saleProduct = product;
@@ -79,26 +120,22 @@ export class AddSaleComponent {
 
   editfromcartdata: ProductByBarcodeDTO[] = [];
 
-  // -------------------------------
+  
   addToCart() {
     if (!this.saleProduct.productID || !this.saleProduct.productName) {
       alert('Please enter valid product details');
       return;
     }
 
-    
-
     const price = (this.saleProduct.sellingPrice ?? 0);
     const discountAmt = (this.saleProduct.discount ?? 0) * (this.saleProduct.quantity ?? 1);
     const taxAmt = (price * (this.saleProduct.taxRate ?? 0)) / 100;
-    const finalPrice =  (this.saleProduct.sellingPrice ?? 0) * (this.saleProduct.quantity ?? 1);
+    const finalPrice = (this.saleProduct.sellingPrice ?? 0) * (this.saleProduct.quantity ?? 1);
 
     const weight = this.saleProduct.packedWeight;
     const name = `${this.saleProduct.productName ?? ''}${weight ? ` (${weight} kg)` : ''}`;
 
-    // 🔹 Check if product already exists in cart by productID
     const existingItem = this.cart.find(item => item.productID === this.saleProduct.productID);
-
     if (existingItem) {
       this.alertservice.showAlert(`"${this.saleProduct.productName}" is already in the cart.`, 'warning');
       return;
@@ -128,7 +165,6 @@ export class AddSaleComponent {
     this.customer.paymentMode = "";
     this.customer.totalAmt = this.grandTotal;
     this.customer.paidAmt = this.grandTotal;
-    // Reset for next scan
     this.saleProduct = {
       barcode: '',
       name: '',
@@ -146,9 +182,10 @@ export class AddSaleComponent {
 
   clearSale() {
     this.saleProduct = {};
-    this.customer = { paymentMode: '' }; // reset with empty paymentMode
+    this.customer = { paymentMode: '' };
     this.cart = [];
     this.grandTotal = 0;
+    this.extraCharges.clear(); // 🟩 Reset extra charges on clear
   }
 
   calculateTotal(product: any) {
@@ -159,15 +196,15 @@ export class AddSaleComponent {
   }
 
   MakeTheSale(): void {
+    const totalExtra = this.totalExtraCharges; // 🟩 include extra charges total
     const sale: Sale = {
       saleDetails: this.saledetails,
-      customer: this.customer, // ✅ includes paymentMode now
+      customer: this.customer,
       totalItems: this.cart.length,
-      customerID:this.customer.customerID,
-      totalAmount: this.cart.reduce((sum, item) => sum + item.total, 0),
+      customerID: this.customer.customerID,
+      totalAmount: this.cart.reduce((sum, item) => sum + item.total, 0) + totalExtra, // 🟩 added extra charges
       totalDiscount: this.cart.reduce((sum, item) => sum + (item.discountAmt || 0), 0),
       orderDate: new Date(),
-      
     };
 
     this.saleservice.InsertSale(sale)
@@ -184,23 +221,21 @@ export class AddSaleComponent {
   }
 
   updateGrandTotal() {
-    this.grandTotal = this.cart.reduce((sum, item) => sum + item.total, 0);
+    const productTotal = this.cart.reduce((sum, item) => sum + item.total, 0);
+    this.grandTotal = productTotal + this.totalExtraCharges; // 🟩 include extra charges in grand total
   }
 
   showOldCustomer = false;
-
   openOldCustomerSale() {
     this.showOldCustomer = true;
   }
 
-  // binding customer ID
   onCustomerSelected(customer: any) {
     this.customer = customer;
     this.customer.paymentMode = "";
     this.customer.totalAmt = this.grandTotal;
     this.customer.paidAmt = this.grandTotal;
     this.saledata.customerID = customer.customerID;
-    console.log('Selected customer:', customer);
   }
 
   editingIndex: number | null = null;
@@ -210,34 +245,32 @@ export class AddSaleComponent {
     const item = this.cart[index];
     this.saleProduct = this.editfromcartdata[index];
     this.updateGrandTotal();
-    console.log(this.saleProduct);
     this.removeFromCart(index);
   }
 
   showPdfPopup: boolean = false;
   pdfUrl: SafeResourceUrl | null = null;
-  pdfBlobUrl!: string; // Normal string for download/print
+  pdfBlobUrl!: string;
   async generateReceipt(barcode: string) {
     try {
       this.receiptPdfData.barcode = barcode;
       this.receiptPdfData.customer = this.customer;
       this.receiptPdfData.cart = this.cart;
+      this.receiptPdfData.extraCharges = this.extraCharges.value; // 🟩 include in receipt if needed
 
       const blob = await firstValueFrom(this.pythonservice.generateReceiptPDF(this.receiptPdfData));
-
-      // Create both versions
-      this.pdfBlobUrl = URL.createObjectURL(blob); // raw blob URL
-      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.pdfBlobUrl); // safe for iframe
-
+      this.pdfBlobUrl = URL.createObjectURL(blob);
+      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.pdfBlobUrl);
       this.showPdfPopup = true;
     } catch (error) {
       console.error('Error generating receipt PDF:', error);
     }
   }
+
   closePdfPopup() {
     this.showPdfPopup = false;
     if (this.pdfBlobUrl) {
-      URL.revokeObjectURL(this.pdfBlobUrl); // cleanup
+      URL.revokeObjectURL(this.pdfBlobUrl);
       this.pdfBlobUrl = '';
     }
   }
@@ -267,52 +300,46 @@ export class AddSaleComponent {
     this.customer.balanceDue = this.customer.totalAmt - this.customer.paidAmt;
   }
 
-  // Called when Balance Due changes
   onDueChange(value: number) {
     this.customer.balanceDue = value < 0 ? 0 : value;
     this.customer.paidAmt = this.customer.totalAmt - this.customer.balanceDue;
   }
 
+  showChequePopup = false;
+  cheque: SaveChequePaymentDto = this.resetCheque();
 
-showChequePopup = false;
-cheque: SaveChequePaymentDto = this.resetCheque();
+  onPaymentModeChange(event: any) {
+    this.cheque = this.resetCheque();
+    if (this.customer.paymentMode === '2') {
+      this.showChequePopup = true;
+    }
+  }
 
-onPaymentModeChange(event: any) {
-  this.cheque = this.resetCheque();
-  if (this.customer.paymentMode === '2') { // Cheque selected
-    this.showChequePopup = true;
+  saveCheque() {
+    console.log('Cheque Details:', this.cheque);
+    this.showChequePopup = false;
+    this.customer.chequepayment = this.cheque;
+    this.customer.paidAmt = this.cheque.amount;
+    this.customer.balanceDue = this.customer.totalAmt - this.customer.paidAmt;
+  }
+
+  cancelCheque() {
+    this.showChequePopup = false;
+    this.customer.paymentMode = "1";
+    this.cheque = this.resetCheque();
+  }
+
+  resetCheque(): SaveChequePaymentDto {
+    const today = new Date();
+    const formattedDate = today.toISOString().split('T')[0];
+    return {
+      chequeNumber: '',
+      bankName: '',
+      branchName: '',
+      chequeDate: formattedDate,
+      amount: 0,
+      ifsc_Code: '',
+      createdBy: 0
+    };
   }
 }
-
-saveCheque() {
-  // Save cheque details to your customer object or send to backend
-  console.log('Cheque Details:', this.cheque);
-  this.showChequePopup = false;
-  this.customer.chequepayment = this.cheque; // Attach cheque details to customer
-  this.customer.paidAmt = this.cheque.amount;
-  this.customer.balanceDue = this.customer.totalAmt - this.customer.paidAmt;
-  // this.cheque = this.resetCheque();
-  
-}
-
-cancelCheque() {
-  this.showChequePopup = false;
-  this.customer.paymentMode = "1"; // Reset payment mode
-  this.cheque = this.resetCheque();
-}
-
-resetCheque(): SaveChequePaymentDto {
-  const today = new Date();
-  const formattedDate = today.toISOString().split('T')[0]; // "yyyy-MM-dd" string
-  return {
-    chequeNumber: '',
-    bankName: '',
-    branchName: '',
-    chequeDate: formattedDate,
-    amount: 0,
-    ifsc_Code: '',
-    createdBy: 0
-  };
-}
-}
-
