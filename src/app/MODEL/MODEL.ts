@@ -12,16 +12,16 @@ export interface PaginationFilter {
   pageSize: number;
 }
 
-export interface ChequePayment {
-  chequeNumber: string;   // Unique identifier
-  bankName: string;       // Name of the bank
-  branchName: string;     // Branch or IFSC
-  chequeDate: Date;       // Date on the cheque
-  amount: number;         // Cheque amount
-  drawerName: string;     // Name of the issuer
-  status?: 'Pending' | 'Cleared' | 'Bounced'; // Optional status
-  remarks?: string;       // Optional notes
+export interface SaveChequePaymentDto {
+  chequeNumber?: string;
+  bankName?: string;
+  branchName?: string;
+  chequeDate?: string;   // use string for date (ISO format) when sending to API
+  amount: number;
+  ifsc_Code?: string;
+  createdBy?: number;
 }
+
 
 
 export interface ProductCategory {
@@ -73,6 +73,8 @@ export interface Customer {
   balanceDue?: number;        // @balance_due
   totalAmt?: number;          // @total_amt
   transactionType?: string;   // @transaction_type
+  chequepayment?: SaveChequePaymentDto; // optional cheque details
+
 }
 
 export interface SaleDetail {

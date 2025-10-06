@@ -3,7 +3,7 @@
 
     <!-- for barcode scan  -->
     <app-scan-barcode (barcodeScanned)="fetchProductByBarcode($event)"></app-scan-barcode>
-   
+
   </div>
 
   <!-- 🔹 Product Detail Section -->
@@ -167,7 +167,7 @@
           <tr *ngFor="let item of cart; let i = index" class="border-b border-slate-600">
             <td class="px-3 py-2">{{ item.name }}</td>
             <td class="px-3 py-2 text-center">{{ item.qty}}</td>
-            <td class="px-3 py-2 text-center">{{ item.sellingPrice  | number:'1.2-2' }}</td>
+            <td class="px-3 py-2 text-center">{{ item.sellingPrice | number:'1.2-2' }}</td>
             <td class="px-3 py-2 text-center">{{ item.discountAmt }}</td>
             <td class="px-3 py-2 text-center">{{ item.taxAmt }}%</td>
             <td class="px-3 py-2 text-center font-semibold">{{ item.total | number:'1.2-2' }}</td>
@@ -268,64 +268,75 @@
         </div>
 
         <!-- Payment Row -->
-       <!-- Payment Row 1 (Payment Method + Paid Amount) -->
-<div class="flex flex-row gap-6 w-full">
-  <!-- Payment Method -->
-  <div class="flex flex-col flex-1">
-  <label for="paymentMode" class="label-style">PAYMENT METHOD</label>
-  <select id="paymentMode" [(ngModel)]="customer.paymentMode" name="paymentMode" required
-          #paymentMode="ngModel" class="dropdown-style w-full"
-          (change)="onPaymentModeChange($event)"
-          [ngClass]="{'text-gray-400': customer.paymentMode === ''}">
-    <option value="" disabled hidden>Select a payment method</option>
-    <option value="1">Cash</option>
-    <option value="2">Cheque</option>
-  </select>
-  <span *ngIf="paymentMode.invalid && paymentMode.touched" class="text-red-500 text-xs">
-    Payment method is required.
-  </span>
-</div>
+        <!-- Payment Row 1 (Payment Method + Paid Amount) -->
+        <div class="flex flex-row gap-6 w-full items-center">
+          <!-- Payment Method -->
+          <div class="flex flex-col flex-1 relative">
+            <label for="paymentMode" class="label-style">PAYMENT METHOD</label>
+            <div class="flex items-center gap-2">
+              <select id="paymentMode" [(ngModel)]="customer.paymentMode" name="paymentMode" required
+                #paymentMode="ngModel" class="dropdown-style w-full" (change)="onPaymentModeChange($event)"
+                [ngClass]="{'text-gray-400': customer.paymentMode === ''}">
+                <option value="" disabled hidden>Select a payment method</option>
+                <option value="1">Cash</option>
+                <option value="2">Cheque</option>
+              </select>
+
+              <!-- Tooltip icon (visible only if Cheque is selected) -->
+              <div *ngIf="customer.paymentMode === '2'" class="relative group cursor-pointer">
+                <i class="fa fa-info-circle text-blue-400 text-lg"></i>
+                <span
+                  class="absolute left-6 top-1/2 -translate-y-1/2 bg-slate-800 text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap shadow-md border border-slate-600">
+                  See cheque details
+                </span>
+              </div>
+            </div>
+
+            <span *ngIf="paymentMode.invalid && paymentMode.touched" class="text-red-500 text-xs">
+              Payment method is required.
+            </span>
+          </div>
 
 
 
-  <!-- Paid Amount -->
-  <div class="flex flex-col flex-1">
-  <label for="paidAmt" class="label-style">PAID AMOUNT</label>
-  <input type="number" id="paidAmt" [(ngModel)]="customer.paidAmt" name="paidAmt"
-    class="input-style w-full" required min="0" (ngModelChange)="onPaidChange($event)"
-     #paidamount="ngModel" />
-
-  <!-- Validation -->
-  <span *ngIf="paidamount.invalid && paidamount.touched" class="text-red-500 text-xs">
-    Paid amount cannot be less than 0.
-  </span>
-</div>
-
-</div>
-
-<!-- Payment Row 2 (Balance Due + Total Amount) -->
-<div class="flex flex-row gap-6 w-full">
-  <!-- Balance Due -->
-  <div class="flex flex-col flex-1">
-  <label for="balanceDue" class="label-style">BALANCE DUE</label>
-  <input type="number" id="balanceDue" [(ngModel)]="customer.balanceDue" name="balanceDue"
-    class="input-style w-full" required min="0" (ngModelChange)="onDueChange($event)"
-    #balanceDue="ngModel" />
-
-  <!-- Validation -->
-  <span *ngIf="balanceDue.invalid && balanceDue.touched" class="text-red-500 text-xs">
-    Balance due cannot be less than 0.
-  </span>
-</div>
 
 
-  <!-- Total Amount -->
-  <div class="flex flex-col flex-1">
-    <label for="totalAmt" class="label-style">TOTAL AMOUNT</label>
-    <input type="number" id="totalAmt" [(ngModel)]="customer.totalAmt" name="totalAmt"
-      class="input-style w-full" readonly />
-  </div>
-</div>
+          <!-- Paid Amount -->
+          <div class="flex flex-col flex-1">
+            <label for="paidAmt" class="label-style">PAID AMOUNT</label>
+            <input type="number" id="paidAmt" [(ngModel)]="customer.paidAmt" name="paidAmt" class="input-style w-full"
+              required min="0" (ngModelChange)="onPaidChange($event)" #paidamount="ngModel" />
+
+            <!-- Validation -->
+            <span *ngIf="paidamount.invalid && paidamount.touched" class="text-red-500 text-xs">
+              Paid amount cannot be less than 0.
+            </span>
+          </div>
+
+        </div>
+
+        <!-- Payment Row 2 (Balance Due + Total Amount) -->
+        <div class="flex flex-row gap-6 w-full">
+          <!-- Balance Due -->
+          <div class="flex flex-col flex-1">
+            <label for="balanceDue" class="label-style">BALANCE DUE</label>
+            <input type="number" id="balanceDue" [(ngModel)]="customer.balanceDue" name="balanceDue"
+              class="input-style w-full" required min="0" (ngModelChange)="onDueChange($event)" #balanceDue="ngModel" />
+
+            <!-- Validation -->
+            <span *ngIf="balanceDue.invalid && balanceDue.touched" class="text-red-500 text-xs">
+              Balance due cannot be less than 0.
+            </span>
+          </div>
+
+
+          <!-- Total Amount -->
+          <div class="flex flex-col flex-1">
+            <label for="totalAmt" class="label-style">TOTAL AMOUNT</label>
+            <input type="number" id="totalAmt" [(ngModel)]="customer.totalAmt" name="totalAmt"
+              class="input-style w-full" readonly />
+          </div>
+        </div>
 
 
 
@@ -386,13 +397,11 @@
 <!-- Cheque Payment Modal -->
 <!-- Cheque Payment Modal (Dark Theme) -->
 <div *ngIf="showChequePopup" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
-  <div class="bg-slate-900 rounded-2xl shadow-2xl w-full max-w-lg p-6 relative border border-slate-700 max-h-[90vh] overflow-y-auto">
-    
+  <div
+    class="bg-slate-900 rounded-2xl shadow-2xl w-full max-w-lg p-6 relative border border-slate-700 max-h-[90vh] overflow-y-auto">
+
     <!-- Close Button -->
-    <button 
-      (click)="cancelCheque()" 
-      class="absolute top-3 right-3 text-gray-400 hover:text-red-500 text-2xl font-bold"
-    >
+    <button (click)="cancelCheque()" class="absolute top-3 right-3 text-gray-400 hover:text-red-500 text-2xl font-bold">
       ✕
     </button>
 
@@ -406,51 +415,51 @@
 
       <div class="flex flex-col">
         <label class="label-style">Cheque Number <span class="text-red-500">*</span></label>
-        <input type="text" [(ngModel)]="cheque.chequeNumber" name="chequeNumber" 
-               class="input-style w-full bg-slate-800 border border-slate-600 text-white focus:ring-2 focus:ring-[#00ffee]" 
-               required #chequeNumber="ngModel">
+        <input type="text" [(ngModel)]="cheque.chequeNumber" name="chequeNumber"
+          class="input-style w-full bg-slate-800 border border-slate-600 text-white focus:ring-2 focus:ring-[#00ffee]"
+          required #chequeNumber="ngModel">
       </div>
 
       <div class="flex flex-col">
         <label class="label-style">Bank Name <span class="text-red-500">*</span></label>
-        <input type="text" [(ngModel)]="cheque.bankName" name="bankName" 
-               class="input-style w-full bg-slate-800 border border-slate-600 text-white focus:ring-2 focus:ring-[#00ffee]" 
-               required #bankName="ngModel">
+        <input type="text" [(ngModel)]="cheque.bankName" name="bankName"
+          class="input-style w-full bg-slate-800 border border-slate-600 text-white focus:ring-2 focus:ring-[#00ffee]"
+          required #bankName="ngModel">
       </div>
 
       <div class="flex flex-col">
-        <label class="label-style">Branch / IFSC <span class="text-red-500">*</span></label>
-        <input type="text" [(ngModel)]="cheque.branchName" name="branchName" 
-               class="input-style w-full bg-slate-800 border border-slate-600 text-white focus:ring-2 focus:ring-[#00ffee]" 
-               required #branchName="ngModel">
+        <label class="label-style">Branch Name <span class="text-red-500">*</span></label>
+        <input type="text" [(ngModel)]="cheque.branchName" name="branchName"
+          class="input-style w-full bg-slate-800 border border-slate-600 text-white focus:ring-2 focus:ring-[#00ffee]"
+          required #branchName="ngModel">
+      </div>
+
+      <div class="flex flex-col">
+        <label class="label-style">IFSC Code <span class="text-red-500">*</span></label>
+        <input type="text" [(ngModel)]="cheque.ifsc_Code" name="ifsc_Code"
+          class="input-style w-full bg-slate-800 border border-slate-600 text-white focus:ring-2 focus:ring-[#00ffee]"
+          required #ifsc_Code="ngModel">
       </div>
 
       <div class="flex flex-col">
         <label class="label-style">Cheque Date <span class="text-red-500">*</span></label>
-        <input type="date" [(ngModel)]="cheque.chequeDate" name="chequeDate" 
-               class="input-style w-full bg-slate-800 border border-slate-600 text-white focus:ring-2 focus:ring-[#00ffee]" 
-               required #chequeDate="ngModel">
+        <input type="date" [(ngModel)]="cheque.chequeDate" name="chequeDate"
+          class="input-style w-full bg-slate-800 border border-slate-600 text-white focus:ring-2 focus:ring-[#00ffee]"
+          required #chequeDate="ngModel">
       </div>
 
       <div class="flex flex-col">
         <label class="label-style">Amount <span class="text-red-500">*</span></label>
-        <input type="number" [(ngModel)]="cheque.amount" name="amount" 
-               class="input-style w-full bg-slate-800 border border-slate-600 text-white focus:ring-2 focus:ring-[#00ffee]" 
-               required #amount="ngModel">
-      </div>
-
-      <div class="flex flex-col">
-        <label class="label-style">Drawer Name <span class="text-red-500">*</span></label>
-        <input type="text" [(ngModel)]="cheque.drawerName" name="drawerName" 
-               class="input-style w-full bg-slate-800 border border-slate-600 text-white focus:ring-2 focus:ring-[#00ffee]" 
-               required #drawerName="ngModel">
+        <input type="number" [(ngModel)]="cheque.amount" name="amount"
+          class="input-style w-full bg-slate-800 border border-slate-600 text-white focus:ring-2 focus:ring-[#00ffee]"
+          required #amount="ngModel">
       </div>
 
       <div class="col-span-2 flex justify-end mt-4 gap-2">
-        <button type="button" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded text-white" (click)="cancelCheque()">Cancel</button>
-        <button type="button" class="px-4 py-2 bg-[#00ffee] hover:bg-[#00ddcc] rounded text-slate-900 font-semibold" 
-                [disabled]="!chequeForm.form.valid"
-                (click)="saveCheque()">Save</button>
+        <button type="button" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded text-white"
+          (click)="cancelCheque()">Cancel</button>
+        <button type="button" class="px-4 py-2 bg-[#00ffee] hover:bg-[#00ddcc] rounded text-slate-900 font-semibold"
+          [disabled]="!chequeForm.form.valid" (click)="saveCheque()">Save</button>
       </div>
 
     </form>

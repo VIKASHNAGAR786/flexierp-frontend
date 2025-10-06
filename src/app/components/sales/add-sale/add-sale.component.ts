@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
 import { firstValueFrom, of } from 'rxjs';
 import { ProductByBarcodeDTO } from '../../../DTO/DTO';
 import { AlertService } from '../../../services/alert.service';
-import { CartItemDTO, ChequePayment, Customer, generateReceiptpdf, Sale, SaleDetail } from '../../../MODEL/MODEL';
+import { CartItemDTO,  Customer, generateReceiptpdf, Sale, SaleDetail, SaveChequePaymentDto } from '../../../MODEL/MODEL';
 import { OldCustomerPopupComponent } from "../old-customer-popup/old-customer-popup.component";
 import { BarcodeService } from '../../../services/barcode.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -166,7 +166,8 @@ export class AddSaleComponent {
       customerID:this.customer.customerID,
       totalAmount: this.cart.reduce((sum, item) => sum + item.total, 0),
       totalDiscount: this.cart.reduce((sum, item) => sum + (item.discountAmt || 0), 0),
-      orderDate: new Date()
+      orderDate: new Date(),
+      
     };
 
     this.saleservice.InsertSale(sale)
@@ -274,7 +275,7 @@ export class AddSaleComponent {
 
 
 showChequePopup = false;
-cheque: ChequePayment = this.resetCheque();
+cheque: SaveChequePaymentDto = this.resetCheque();
 
 onPaymentModeChange(event: any) {
   if (this.customer.paymentMode === '2') { // Cheque selected
@@ -286,6 +287,9 @@ saveCheque() {
   // Save cheque details to your customer object or send to backend
   console.log('Cheque Details:', this.cheque);
   this.showChequePopup = false;
+  this.customer.chequepayment = this.cheque; // Attach cheque details to customer
+  this.cheque = this.resetCheque();
+  
 }
 
 cancelCheque() {
@@ -294,18 +298,17 @@ cancelCheque() {
   this.cheque = this.resetCheque();
 }
 
-resetCheque(): ChequePayment {
+resetCheque(): SaveChequePaymentDto {
   const today = new Date();
   const formattedDate = today.toISOString().split('T')[0]; // "yyyy-MM-dd" string
   return {
     chequeNumber: '',
     bankName: '',
     branchName: '',
-    chequeDate: new Date(formattedDate), // Set default to today
+    chequeDate: formattedDate,
     amount: 0,
-    drawerName: '',
-    status: 'Pending',
-    remarks: ''
+    ifsc_Code: '',
+    createdBy: 0
   };
 }
 }
