@@ -171,6 +171,7 @@ export interface DashboardMetricsDto
      TotalChequeReceived : number,
      CashGrowthPercent : number,
      ChequeGrowthPercent : number,
+     totalBalanceDue : number,
  }
 
      export interface ProductCategoryListDto
