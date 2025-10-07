@@ -37,19 +37,16 @@ export class AddSaleComponent {
   cart: CartItemDTO[] = [];
 
   customer: Customer | any = {
-    paymentMode: ''
+    paymentMode: '',
+    balanceDue: 0,
+    paidAmt: 0,
+    totalAmt: 0
   };
 
   saledetails: SaleDetail[] | any = [];
   grandTotal: number = 0;
   receiptPdfData: generateReceiptpdf | any = {};
   barcode: string = '';
-
-  // 🟩 Added: form builder instance and extraCharges form array
-  extraChargesForm: FormGroup;  // master form for extra charges
-  get extraCharges(): FormArray {
-    return this.extraChargesForm.get('extraCharges') as FormArray;
-  }
 
   constructor(
     private saleservice: SaleserviceService,
@@ -58,32 +55,9 @@ export class AddSaleComponent {
     private sanitizer: DomSanitizer,
     private fb: FormBuilder // 🟩 Added for creating extra charges form
   ) {
-    // 🟩 Initialize extra charges bucket
     this.extraChargesForm = this.fb.group({
-      extraCharges: this.fb.array([])
+      extraCharges: this.fb.array([]),
     });
-  }
-
-  // 🟩 Add new charge block
-  addCharge() {
-    const chargeGroup = this.fb.group({
-      name: ['', Validators.required],
-      amount: [0, [Validators.required, Validators.min(0)]]
-    });
-    this.extraCharges.push(chargeGroup);
-  }
-
-  // 🟩 Remove charge block
-  removeCharge(index: number) {
-    this.extraCharges.removeAt(index);
-  }
-
-  // 🟩 Total of extra charges
-  get totalExtraCharges(): number {
-    return this.extraCharges.value.reduce(
-      (acc: number, item: any) => acc + item.amount,
-      0
-    );
   }
 
   // --------------------------------------
@@ -185,7 +159,6 @@ export class AddSaleComponent {
     this.customer = { paymentMode: '' };
     this.cart = [];
     this.grandTotal = 0;
-    this.extraCharges.clear(); // 🟩 Reset extra charges on clear
   }
 
   calculateTotal(product: any) {
@@ -196,13 +169,12 @@ export class AddSaleComponent {
   }
 
   MakeTheSale(): void {
-    const totalExtra = this.totalExtraCharges; // 🟩 include extra charges total
     const sale: Sale = {
       saleDetails: this.saledetails,
       customer: this.customer,
       totalItems: this.cart.length,
       customerID: this.customer.customerID,
-      totalAmount: this.cart.reduce((sum, item) => sum + item.total, 0) + totalExtra, // 🟩 added extra charges
+      totalAmount: this.cart.reduce((sum, item) => sum + item.total, 0), // 🟩 added extra charges
       totalDiscount: this.cart.reduce((sum, item) => sum + (item.discountAmt || 0), 0),
       orderDate: new Date(),
     };
@@ -222,7 +194,7 @@ export class AddSaleComponent {
 
   updateGrandTotal() {
     const productTotal = this.cart.reduce((sum, item) => sum + item.total, 0);
-    this.grandTotal = productTotal + this.totalExtraCharges; // 🟩 include extra charges in grand total
+    this.grandTotal = productTotal; // 🟩 include extra charges in grand total
   }
 
   showOldCustomer = false;
@@ -256,7 +228,6 @@ export class AddSaleComponent {
       this.receiptPdfData.barcode = barcode;
       this.receiptPdfData.customer = this.customer;
       this.receiptPdfData.cart = this.cart;
-      this.receiptPdfData.extraCharges = this.extraCharges.value; // 🟩 include in receipt if needed
 
       const blob = await firstValueFrom(this.pythonservice.generateReceiptPDF(this.receiptPdfData));
       this.pdfBlobUrl = URL.createObjectURL(blob);
@@ -342,4 +313,55 @@ export class AddSaleComponent {
       createdBy: 0
     };
   }
+
+
+  // 🟩 Extra Charges Handling
+
+  showExtraChargesPopup = false;
+  extraChargesForm: FormGroup;
+  totalExtraCharges = 0;
+
+  get extraCharges(): FormArray {
+    return this.extraChargesForm.get('extraCharges') as FormArray;
+  }
+
+  openExtraChargesPopup() {
+    this.showExtraChargesPopup = true;
+    if (this.extraCharges.length === 0) {
+      this.addCharge();
+    }
+  }
+
+  closeExtraChargesPopup() {
+    this.showExtraChargesPopup = false;
+  }
+
+  addCharge() {
+    const chargeGroup = this.fb.group({
+      name: ['', Validators.required],
+      amount: [0, [Validators.required, Validators.min(0)]],
+    });
+
+    this.extraCharges.push(chargeGroup);
+    this.calculateTotalExtraCharges();
+  }
+
+  removeCharge(index: number) {
+    this.extraCharges.removeAt(index);
+    this.calculateTotalExtraCharges();
+  }
+
+  calculateTotalExtraCharges() {
+    this.totalExtraCharges = this.extraCharges.controls
+      .map((c) => c.get('amount')?.value || 0)
+      .reduce((a, b) => a + b, 0);
+  }
+
+  saveExtraCharges() {
+    this.calculateTotalExtraCharges();
+    console.log('Saved Extra Charges:', this.extraChargesForm.value);
+    console.log('Total:', this.totalExtraCharges);
+    this.closeExtraChargesPopup();
+  }
 }
+
