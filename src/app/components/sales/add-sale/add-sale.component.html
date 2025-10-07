@@ -127,7 +127,7 @@
 
       <!-- Quantity (Required for sale) -->
       <div class="flex flex-col md:col-span-2">
-        <label class="label-style">Quantity</label>
+        <label class="label-style">Quantity <label style="color: red;"> *</label></label>
         <input type="number" [(ngModel)]="saleProduct.quantity" name="quantity" placeholder="Enter Quantity" required
           min="1" #quantity="ngModel" class="input-style" />
         <span *ngIf="quantity.invalid && quantity.touched" class="text-red-500 text-xs">
@@ -270,7 +270,7 @@
         <!-- Customer Name -->
         <div class="flex flex-col">
           <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
-            Customer Name
+            Customer Name <label style="color: red;"> *</label>
           </label>
           <input type="text" [(ngModel)]="customer.customerName" name="customerName" placeholder="Enter Customer Name"
             required minlength="3" #customerName="ngModel" class="input-style" />
@@ -282,7 +282,7 @@
         <!-- Customer Email -->
         <div class="flex flex-col">
           <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
-            Email
+            Email <label style="color: red;"> *</label>
           </label>
           <input type="email" [(ngModel)]="customer.email" name="email" placeholder="Enter Email" required email
             #email="ngModel" class="input-style" />
@@ -294,7 +294,7 @@
         <!-- Customer Phone -->
         <div class="flex flex-col">
           <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
-            Phone
+            Phone <label style="color: red;"> *</label>
           </label>
           <input type="tel" [(ngModel)]="customer.phoneNo" name="phoneNo" placeholder="Enter Phone Number" required
             pattern="^[0-9]{10}$" maxlength="10" #phoneNo="ngModel" class="input-style" />
@@ -307,7 +307,7 @@
         <!-- Customer Address -->
         <div class="flex flex-col">
           <label class="mb-2 text-sm md:text-base font-extrabold text-[#00ffee] uppercase tracking-wide drop-shadow-md">
-            Address
+            Address <label style="color: red;"> *</label>
           </label>
           <textarea [(ngModel)]="customer.customerAddress" name="customerAddress" rows="2" placeholder="Enter Address"
             required #customerAddress="ngModel" class="input-style resize-none"></textarea>
@@ -321,7 +321,7 @@
         <div class="flex flex-row gap-6 w-full items-center">
           <!-- Payment Method -->
           <div class="flex flex-col flex-1 relative">
-            <label for="paymentMode" class="label-style">PAYMENT METHOD</label>
+            <label for="paymentMode" class="label-style">PAYMENT METHOD <label style="color: red;"> *</label></label>
             <div class="flex items-center gap-2">
               <select id="paymentMode" [(ngModel)]="customer.paymentMode" name="paymentMode" required
                 #paymentMode="ngModel" class="dropdown-style w-full" (change)="onPaymentModeChange($event)"
@@ -359,7 +359,7 @@
 
           <!-- Paid Amount -->
           <div class="flex flex-col flex-1">
-            <label for="paidAmt" class="label-style">PAID AMOUNT</label>
+            <label for="paidAmt" class="label-style">PAID AMOUNT <label style="color: red;"> *</label></label>
             <input type="number" id="paidAmt" [(ngModel)]="customer.paidAmt" name="paidAmt" class="input-style w-full"
               required min="0" (ngModelChange)="onPaidChange($event)" #paidamount="ngModel" />
 
@@ -375,7 +375,7 @@
         <div class="flex flex-row gap-6 w-full">
           <!-- Balance Due -->
           <div class="flex flex-col flex-1">
-            <label for="balanceDue" class="label-style">BALANCE DUE</label>
+            <label for="balanceDue" class="label-style">BALANCE DUE <label style="color: red;"> *</label></label>
             <input type="number" id="balanceDue" [(ngModel)]="customer.balanceDue" name="balanceDue"
               class="input-style w-full" required min="0" (ngModelChange)="onDueChange($event)" #balanceDue="ngModel" />
 
