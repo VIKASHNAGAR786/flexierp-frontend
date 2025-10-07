@@ -40,15 +40,16 @@ export class NavbarComponent implements OnInit {
     { label: 'Settings', path: '/settings', icon: 'bi bi-gear' },
   ];
 
-  futureLinks = [
-    { label: 'Reports', path: '/reports', icon: 'bi bi-graph-up-arrow' },
-    { label: 'Purchases', path: '/purchases', icon: 'bi bi-cart-check' },
-    { label: 'HR Management', icon: 'bi bi-people-fill', badge: 'Planned', badgeClass: 'bg-yellow-500 text-black' },
-    { label: 'Payroll System', icon: 'bi bi-wallet2', badge: 'Planned', badgeClass: 'bg-yellow-500 text-black' },
-    { label: 'Support Tickets', icon: 'bi bi-headset', badge: 'Beta Soon', badgeClass: 'bg-gray-500 text-white' },
-    { label: 'Inventory Insights', icon: 'bi bi-bar-chart-line', badge: 'In Design', badgeClass: 'bg-gray-500 text-white' },
-    { label: 'Audit Logs', icon: 'bi bi-clock-history', badge: 'Admin', badgeClass: 'bg-pink-500 text-white' },
-  ];
+futureLinks = [
+  { label: 'Reports', path: '/reports', icon: 'bi bi-graph-up-arrow', badge: 'Planned', badgeClass: 'bg-yellow-500 text-black' },
+  // { label: 'Purchases', path: '/purchases', icon: 'bi bi-cart-check', badge: 'Planned', badgeClass: 'bg-yellow-500 text-black' },
+  // { label: 'HR Management', path: '/hr', icon: 'bi bi-people-fill', badge: 'Planned', badgeClass: 'bg-yellow-500 text-black' },
+  // { label: 'Payroll System', path: '/payroll', icon: 'bi bi-wallet2', badge: 'Planned', badgeClass: 'bg-yellow-500 text-black' },
+  // { label: 'Support Tickets', path: '/support', icon: 'bi bi-headset', badge: 'Beta Soon', badgeClass: 'bg-gray-500 text-white' },
+  // { label: 'Inventory Insights', path: '/inventory', icon: 'bi bi-bar-chart-line', badge: 'In Design', badgeClass: 'bg-gray-500 text-white' },
+  // { label: 'Audit Logs', path: '/audit', icon: 'bi bi-clock-history', badge: 'Admin', badgeClass: 'bg-pink-500 text-white' },
+];
+
 
   constructor(
     private router: Router,

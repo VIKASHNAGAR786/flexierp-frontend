@@ -107,26 +107,33 @@
   <!-- Preferences + Log History + Activity History -->
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-    <!-- Preferences -->
-    <div class="rounded-3xl bg-slate-900/80 backdrop-blur-xl p-6 border border-slate-800/50 shadow-lg">
-      <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
-        ⚙️ <span>Preferences</span>
-      </h3>
-      <div class="space-y-4 text-sm">
-        <div class="flex items-center justify-between">
-          <span>🌙 Dark Mode</span>
-          <input type="checkbox" class="w-4 h-4 accent-[#00ffee]" />
-        </div>
-        <div class="flex items-center justify-between">
-          <span>📧 Email Notifications</span>
-          <input type="checkbox" class="w-4 h-4 accent-[#00ffee]" checked />
-        </div>
-        <div class="flex items-center justify-between">
-          <span>📲 SMS Alerts</span>
-          <input type="checkbox" class="w-4 h-4 accent-[#00ffee]" />
-        </div>
-      </div>
+    <!-- Preferences - Coming Soon -->
+<div class="relative rounded-3xl bg-slate-900/80 backdrop-blur-xl p-6 border border-slate-800/50 shadow-lg">
+  <!-- Overlay label -->
+  <div class="absolute inset-0 bg-black/50 flex items-center justify-center rounded-3xl z-10">
+    <span class="text-white font-bold text-lg uppercase">Coming Soon</span>
+  </div>
+
+  <!-- Original content (optional, blurred behind overlay) -->
+  <h3 class="text-lg font-semibold mb-4 flex items-center gap-2 opacity-50">
+    ⚙️ <span>Preferences</span>
+  </h3>
+  <div class="space-y-4 text-sm opacity-50">
+    <div class="flex items-center justify-between">
+      <span>🌙 Dark Mode</span>
+      <input type="checkbox" class="w-4 h-4 accent-[#00ffee]" />
     </div>
+    <div class="flex items-center justify-between">
+      <span>📧 Email Notifications</span>
+      <input type="checkbox" class="w-4 h-4 accent-[#00ffee]" checked />
+    </div>
+    <div class="flex items-center justify-between">
+      <span>📲 SMS Alerts</span>
+      <input type="checkbox" class="w-4 h-4 accent-[#00ffee]" />
+    </div>
+  </div>
+</div>
+
 
     <!-- Log History -->
     <div class="rounded-3xl bg-slate-900/80 backdrop-blur-xl p-6 border border-slate-800/50 shadow-lg">
@@ -160,37 +167,43 @@
 
 
     <!-- Activity History -->
-    <div class="rounded-3xl bg-slate-900/80 backdrop-blur-xl p-6 border border-slate-800/50 shadow-lg">
-      <h3 class="text-lg font-semibold mb-6 flex items-center gap-2">
-        📜 <span>Activity History</span>
-      </h3>
-      <div class="relative border-l-2 border-slate-700 pl-6 space-y-6">
-        <div class="relative pl-10">
-          <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
-                    border border-[#00ffee] flex items-center justify-center">
-            <span class="text-[#00ffee] text-xs">✅</span>
-          </div>
-          <p class="text-white">Company details updated</p>
-          <span class="text-slate-400 text-xs">28 Sep 2025, 10:45 AM</span>
-        </div>
-        <div class="relative pl-10">
-          <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
-                    border border-[#00ffee] flex items-center justify-center">
-            <span class="text-[#00ffee] text-xs">📄</span>
-          </div>
-          <p class="text-white">New Invoice Prefix added</p>
-          <span class="text-slate-400 text-xs">20 Sep 2025, 03:15 PM</span>
-        </div>
-        <div class="relative pl-10">
-          <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
-                    border border-[#00ffee] flex items-center justify-center">
-            <span class="text-[#00ffee] text-xs">📧</span>
-          </div>
-          <p class="text-white">Email changed from <i>support.com</i></p>
-          <span class="text-slate-400 text-xs">12 Sep 2025, 06:30 PM</span>
-        </div>
+<div class="relative rounded-3xl bg-slate-900/80 backdrop-blur-xl p-6 border border-slate-800/50 shadow-lg">
+  <!-- Overlay label -->
+  <div class="absolute inset-0 bg-black/50 flex items-center justify-center rounded-3xl z-10">
+    <span class="text-white font-bold text-lg uppercase">Coming Soon</span>
+  </div>
+
+  <!-- Original content (optional, blurred behind overlay) -->
+  <h3 class="text-lg font-semibold mb-6 flex items-center gap-2 opacity-50">
+    📜 <span>Activity History</span>
+  </h3>
+  <div class="relative border-l-2 border-slate-700 pl-6 space-y-6 opacity-50">
+    <div class="relative pl-10">
+      <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
+                  border border-[#00ffee] flex items-center justify-center">
+        <span class="text-[#00ffee] text-xs">✅</span>
       </div>
+      <p class="text-white">Company details updated</p>
+      <span class="text-slate-400 text-xs">28 Sep 2025, 10:45 AM</span>
     </div>
+    <div class="relative pl-10">
+      <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
+                  border border-[#00ffee] flex items-center justify-center">
+        <span class="text-[#00ffee] text-xs">📄</span>
+      </div>
+      <p class="text-white">New Invoice Prefix added</p>
+      <span class="text-slate-400 text-xs">20 Sep 2025, 03:15 PM</span>
+    </div>
+    <div class="relative pl-10">
+      <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
+                  border border-[#00ffee] flex items-center justify-center">
+        <span class="text-[#00ffee] text-xs">📧</span>
+      </div>
+      <p class="text-white">Email changed from <i>support.com</i></p>
+      <span class="text-slate-400 text-xs">12 Sep 2025, 06:30 PM</span>
+    </div>
+  </div>
+</div>
 
   </div>
 
