@@ -172,7 +172,19 @@ export interface DashboardMetricsDto
      CashGrowthPercent : number,
      ChequeGrowthPercent : number,
      totalBalanceDue : number,
+     recenttransaction: TransactionDto[],
  }
+
+ export interface TransactionDto {
+  date: string;
+  time: string;
+  customerName: string;
+  receivedAmount: number;
+  balanceDue: number;
+  totalAmount: number;
+  paymentType: string;
+  transactionType: string;
+}
 
      export interface ProductCategoryListDto
     {

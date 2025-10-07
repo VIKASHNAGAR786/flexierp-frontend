@@ -93,6 +93,7 @@ export class ScanBarcodeComponent {
   onProductSelected(product: any) {
     // If you only want barcode:
     this.saleProduct.barcode = product.barCode;
+    this.onEnterBarcode();
 
     // If you want full product details:
     // this.saleProduct = { ...product };

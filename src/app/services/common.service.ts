@@ -32,7 +32,9 @@ export class CommonService {
   private readonly GetUserLoginHistoryUrl = environment.AccountApiUrl + 'GetUserLoginHistory';
   private readonly GetCompanyInfoUrl = environment.AccountApiUrl + 'GetCompanyInfo';
   private readonly UpdateCompanyInfoUrl = environment.AccountApiUrl + 'UpdateCompanyInfo';
+  private readonly GenerateDashboardPdfUrl = environment.BASE_URL + '/CommonMaster/GenerateDashboardPdf';
   private readonly GetDashboardMetricsAsyncUrl = environment.BASE_URL + '/CommonMaster/GetDashboardMetricsAsync';
+  private readonly GenerateDashboardExcelUrl = environment.BASE_URL + '/CommonMaster/GenerateDashboardExcel';
 
   logout(): Observable<string> {
     const headers = this.getAuthHeaders();
@@ -99,4 +101,34 @@ export class CommonService {
   }
 
 
+  GenerateDashboardPdf(startDate:string, endDate:string): Observable<Blob | null> {
+      const headers = this.getAuthHeaders();
+      if (!headers) return of(null);
+  
+      let params = new HttpParams()
+        .set('startDate', startDate)
+        .set('endDate', endDate);
+
+      return this.http.get(this.GenerateDashboardPdfUrl, { headers, params, responseType: 'blob' });
+    }
+
+    GenerateDashboardExcel(startDate:string, endDate:string): Observable<Blob | null> {
+        const headers = this.getAuthHeaders();
+        if (!headers) return of(null);
+    
+        let params = new HttpParams()
+        .set('startDate', startDate)
+        .set('endDate', endDate);
+
+        return this.http.get(this.GenerateDashboardExcelUrl, { headers, params, responseType: 'blob' });
+      }
+    
+       downloadFile(blob: Blob, fileName: string) {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }
 }
