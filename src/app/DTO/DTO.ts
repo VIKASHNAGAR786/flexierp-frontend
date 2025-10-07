@@ -172,3 +172,11 @@ export interface DashboardMetricsDto
      CashGrowthPercent : number,
      ChequeGrowthPercent : number,
  }
+
+     export interface ProductCategoryListDto
+    {
+        srNo: number;
+        categoryName: string;
+        description: string;
+        createdDate: Date;
+    }

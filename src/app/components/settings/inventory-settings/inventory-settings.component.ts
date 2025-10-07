@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProductCategory, WarehouseModel } from '../../../MODEL/MODEL';
 import { InventoryService } from '../../../services/inventory.service';
-import { WarehouseDTO } from '../../../DTO/DTO';
+import { ProductCategoryListDto, WarehouseDTO } from '../../../DTO/DTO';
 
 @Component({
   selector: 'app-inventory-settings',
@@ -27,6 +27,7 @@ export class InventorySettingsComponent implements OnInit {
   showCategoryForm = false;
   showWarehouseForm = false;
   warehouses: WarehouseDTO[] = [];
+  categories: ProductCategoryListDto[] = [];
 
 
   constructor(private fb: FormBuilder, private inventoryService: InventoryService) {
@@ -105,6 +106,15 @@ export class InventorySettingsComponent implements OnInit {
     });
   }
 
+   loadCategories(): void {
+    this.inventoryService.GetProductCategoryList().subscribe({
+      next: (data) => {
+        this.categories = data || [];
+      },
+      error: (err) => console.error(err)
+    });
+  }
+
   private _activeTab = 'category';
 
 get activeTab(): 'category' | 'warehouse' {
@@ -115,6 +125,8 @@ set activeTab(value: 'category' | 'warehouse') {
   this._activeTab = value;
   if (value === 'warehouse') {
     this.loadWarehouses();
+  } else {
+    this.loadCategories();
   }
 }
 }

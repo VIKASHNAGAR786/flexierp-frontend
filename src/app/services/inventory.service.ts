@@ -5,7 +5,7 @@ import { UserinfowithloginService } from './userinfowithlogin.service';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { PaginationFilter, ProductCategory, ProductModel, ProviderModel, WarehouseModel } from '../MODEL/MODEL';
-import { ProductCategoryDTO, ProductDTO, ProviderDTO, WarehouseDTO } from '../DTO/DTO';
+import { ProductCategoryDTO, ProductCategoryListDto, ProductDTO, ProviderDTO, WarehouseDTO } from '../DTO/DTO';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +43,7 @@ export class InventoryService {
   private GetSoldProductReportExcelUrl = environment.BASE_URL + '/Inventrory/GetSoldProductReportExcel';
   private AddProviderUrl = environment.BASE_URL + '/Inventrory/AddProvider';
   private GetProvidersUrl = environment.BASE_URL + '/Inventrory/GetProviders';
+  private GetProductCategoryListUrl = environment.BASE_URL + '/Inventrory/GetProductCategoryList';
 
   saveProductCategory(categorydata: ProductCategory): Observable<any> {
     const headers = this.getAuthHeaders();
@@ -193,5 +194,11 @@ export class InventoryService {
     return this.http.get(this.GetSoldProductReportExcelUrl, { headers, params, responseType: 'blob' });
   }
 
+   GetProductCategoryList(): Observable<ProductCategoryListDto[] | null> {
+    const headers = this.getAuthHeaders();
+    return headers
+      ? this.http.get<ProductCategoryListDto[]>(this.GetProductCategoryListUrl, { headers })
+      : of(null);
+  }
 
 }

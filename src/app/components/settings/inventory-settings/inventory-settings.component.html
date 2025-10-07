@@ -50,11 +50,11 @@
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-700">
-              <tr *ngFor="let warehouse of warehouses; let i = index" class="hover:bg-slate-700 transition">
+              <tr *ngFor="let category of categories; let i = index" class="hover:bg-slate-700 transition">
                 <td class="px-4 py-2 text-center">{{ i + 1 }}</td>
-                <td class="px-4 py-2">{{ warehouse.warehouseName }}</td>
-                <td class="px-4 py-2">{{ warehouse.remark }}</td>
-                <td class="px-4 py-2 text-center">{{ warehouse.createdDate | date:'short' }}</td>
+                <td class="px-4 py-2">{{ category.categoryName }}</td>
+                <td class="px-4 py-2">{{ category.description }}</td>
+                <td class="px-4 py-2 text-center">{{ category.createdDate | date:'short' }}</td>
               </tr>
             </tbody>
           </table>
