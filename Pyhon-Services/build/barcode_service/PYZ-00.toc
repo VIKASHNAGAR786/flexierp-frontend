@@ -1379,66 +1379,6 @@
    'C:\\Users\\VIKAS '
    'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\charset_normalizer\\version.py',
    'PYMODULE'),
-  ('click',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\click\\__init__.py',
-   'PYMODULE'),
-  ('click._compat',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\click\\_compat.py',
-   'PYMODULE'),
-  ('click._termui_impl',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\click\\_termui_impl.py',
-   'PYMODULE'),
-  ('click._textwrap',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\click\\_textwrap.py',
-   'PYMODULE'),
-  ('click._winconsole',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\click\\_winconsole.py',
-   'PYMODULE'),
-  ('click.core',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\click\\core.py',
-   'PYMODULE'),
-  ('click.decorators',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\click\\decorators.py',
-   'PYMODULE'),
-  ('click.exceptions',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\click\\exceptions.py',
-   'PYMODULE'),
-  ('click.formatting',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\click\\formatting.py',
-   'PYMODULE'),
-  ('click.globals',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\click\\globals.py',
-   'PYMODULE'),
-  ('click.parser',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\click\\parser.py',
-   'PYMODULE'),
-  ('click.shell_completion',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\click\\shell_completion.py',
-   'PYMODULE'),
-  ('click.termui',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\click\\termui.py',
-   'PYMODULE'),
-  ('click.types',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\click\\types.py',
-   'PYMODULE'),
-  ('click.utils',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\click\\utils.py',
-   'PYMODULE'),
   ('cmd', 'C:\\Python312\\Lib\\cmd.py', 'PYMODULE'),
   ('code', 'C:\\Python312\\Lib\\code.py', 'PYMODULE'),
   ('codeop', 'C:\\Python312\\Lib\\codeop.py', 'PYMODULE'),
@@ -1915,970 +1855,6 @@
   ('filecmp', 'C:\\Python312\\Lib\\filecmp.py', 'PYMODULE'),
   ('fileinput', 'C:\\Python312\\Lib\\fileinput.py', 'PYMODULE'),
   ('fnmatch', 'C:\\Python312\\Lib\\fnmatch.py', 'PYMODULE'),
-  ('fontTools',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\__init__.py',
-   'PYMODULE'),
-  ('fontTools.agl',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\agl.py',
-   'PYMODULE'),
-  ('fontTools.cffLib',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\cffLib\\__init__.py',
-   'PYMODULE'),
-  ('fontTools.cffLib.CFF2ToCFF',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\cffLib\\CFF2ToCFF.py',
-   'PYMODULE'),
-  ('fontTools.cffLib.CFFToCFF2',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\cffLib\\CFFToCFF2.py',
-   'PYMODULE'),
-  ('fontTools.cffLib.specializer',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\cffLib\\specializer.py',
-   'PYMODULE'),
-  ('fontTools.cffLib.transforms',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\cffLib\\transforms.py',
-   'PYMODULE'),
-  ('fontTools.cffLib.width',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\cffLib\\width.py',
-   'PYMODULE'),
-  ('fontTools.colorLib',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\colorLib\\__init__.py',
-   'PYMODULE'),
-  ('fontTools.colorLib.builder',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\colorLib\\builder.py',
-   'PYMODULE'),
-  ('fontTools.colorLib.errors',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\colorLib\\errors.py',
-   'PYMODULE'),
-  ('fontTools.colorLib.geometry',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\colorLib\\geometry.py',
-   'PYMODULE'),
-  ('fontTools.colorLib.table_builder',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\colorLib\\table_builder.py',
-   'PYMODULE'),
-  ('fontTools.colorLib.unbuilder',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\colorLib\\unbuilder.py',
-   'PYMODULE'),
-  ('fontTools.config',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\config\\__init__.py',
-   'PYMODULE'),
-  ('fontTools.designspaceLib',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\designspaceLib\\__init__.py',
-   'PYMODULE'),
-  ('fontTools.designspaceLib.split',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\designspaceLib\\split.py',
-   'PYMODULE'),
-  ('fontTools.designspaceLib.statNames',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\designspaceLib\\statNames.py',
-   'PYMODULE'),
-  ('fontTools.designspaceLib.types',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\designspaceLib\\types.py',
-   'PYMODULE'),
-  ('fontTools.encodings',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\encodings\\__init__.py',
-   'PYMODULE'),
-  ('fontTools.encodings.StandardEncoding',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\encodings\\StandardEncoding.py',
-   'PYMODULE'),
-  ('fontTools.encodings.codecs',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\encodings\\codecs.py',
-   'PYMODULE'),
-  ('fontTools.feaLib',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\feaLib\\__init__.py',
-   'PYMODULE'),
-  ('fontTools.feaLib.ast',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\feaLib\\ast.py',
-   'PYMODULE'),
-  ('fontTools.feaLib.error',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\feaLib\\error.py',
-   'PYMODULE'),
-  ('fontTools.feaLib.location',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\feaLib\\location.py',
-   'PYMODULE'),
-  ('fontTools.feaLib.lookupDebugInfo',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\feaLib\\lookupDebugInfo.py',
-   'PYMODULE'),
-  ('fontTools.misc',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\__init__.py',
-   'PYMODULE'),
-  ('fontTools.misc.arrayTools',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\arrayTools.py',
-   'PYMODULE'),
-  ('fontTools.misc.classifyTools',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\classifyTools.py',
-   'PYMODULE'),
-  ('fontTools.misc.cliTools',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\cliTools.py',
-   'PYMODULE'),
-  ('fontTools.misc.configTools',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\configTools.py',
-   'PYMODULE'),
-  ('fontTools.misc.cython',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\cython.py',
-   'PYMODULE'),
-  ('fontTools.misc.dictTools',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\dictTools.py',
-   'PYMODULE'),
-  ('fontTools.misc.encodingTools',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\encodingTools.py',
-   'PYMODULE'),
-  ('fontTools.misc.enumTools',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\enumTools.py',
-   'PYMODULE'),
-  ('fontTools.misc.etree',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\etree.py',
-   'PYMODULE'),
-  ('fontTools.misc.filenames',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\filenames.py',
-   'PYMODULE'),
-  ('fontTools.misc.fixedTools',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\fixedTools.py',
-   'PYMODULE'),
-  ('fontTools.misc.intTools',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\intTools.py',
-   'PYMODULE'),
-  ('fontTools.misc.iterTools',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\iterTools.py',
-   'PYMODULE'),
-  ('fontTools.misc.lazyTools',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\lazyTools.py',
-   'PYMODULE'),
-  ('fontTools.misc.loggingTools',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\loggingTools.py',
-   'PYMODULE'),
-  ('fontTools.misc.macCreatorType',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\macCreatorType.py',
-   'PYMODULE'),
-  ('fontTools.misc.macRes',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\macRes.py',
-   'PYMODULE'),
-  ('fontTools.misc.plistlib',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\plistlib\\__init__.py',
-   'PYMODULE'),
-  ('fontTools.misc.psCharStrings',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\psCharStrings.py',
-   'PYMODULE'),
-  ('fontTools.misc.roundTools',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\roundTools.py',
-   'PYMODULE'),
-  ('fontTools.misc.sstruct',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\sstruct.py',
-   'PYMODULE'),
-  ('fontTools.misc.textTools',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\textTools.py',
-   'PYMODULE'),
-  ('fontTools.misc.timeTools',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\timeTools.py',
-   'PYMODULE'),
-  ('fontTools.misc.transform',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\transform.py',
-   'PYMODULE'),
-  ('fontTools.misc.treeTools',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\treeTools.py',
-   'PYMODULE'),
-  ('fontTools.misc.vector',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\vector.py',
-   'PYMODULE'),
-  ('fontTools.misc.visitor',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\visitor.py',
-   'PYMODULE'),
-  ('fontTools.misc.xmlReader',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\xmlReader.py',
-   'PYMODULE'),
-  ('fontTools.misc.xmlWriter',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\misc\\xmlWriter.py',
-   'PYMODULE'),
-  ('fontTools.otlLib',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\otlLib\\__init__.py',
-   'PYMODULE'),
-  ('fontTools.otlLib.builder',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\otlLib\\builder.py',
-   'PYMODULE'),
-  ('fontTools.otlLib.error',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\otlLib\\error.py',
-   'PYMODULE'),
-  ('fontTools.otlLib.maxContextCalc',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\otlLib\\maxContextCalc.py',
-   'PYMODULE'),
-  ('fontTools.otlLib.optimize',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\otlLib\\optimize\\__init__.py',
-   'PYMODULE'),
-  ('fontTools.otlLib.optimize.gpos',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\otlLib\\optimize\\gpos.py',
-   'PYMODULE'),
-  ('fontTools.pens',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\pens\\__init__.py',
-   'PYMODULE'),
-  ('fontTools.pens.basePen',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\pens\\basePen.py',
-   'PYMODULE'),
-  ('fontTools.pens.boundsPen',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\pens\\boundsPen.py',
-   'PYMODULE'),
-  ('fontTools.pens.filterPen',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\pens\\filterPen.py',
-   'PYMODULE'),
-  ('fontTools.pens.pointPen',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\pens\\pointPen.py',
-   'PYMODULE'),
-  ('fontTools.pens.recordingPen',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\pens\\recordingPen.py',
-   'PYMODULE'),
-  ('fontTools.pens.reverseContourPen',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\pens\\reverseContourPen.py',
-   'PYMODULE'),
-  ('fontTools.pens.t2CharStringPen',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\pens\\t2CharStringPen.py',
-   'PYMODULE'),
-  ('fontTools.pens.transformPen',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\pens\\transformPen.py',
-   'PYMODULE'),
-  ('fontTools.pens.ttGlyphPen',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\pens\\ttGlyphPen.py',
-   'PYMODULE'),
-  ('fontTools.subset',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\subset\\__init__.py',
-   'PYMODULE'),
-  ('fontTools.subset.cff',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\subset\\cff.py',
-   'PYMODULE'),
-  ('fontTools.subset.svg',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\subset\\svg.py',
-   'PYMODULE'),
-  ('fontTools.subset.util',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\subset\\util.py',
-   'PYMODULE'),
-  ('fontTools.svgLib',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\svgLib\\__init__.py',
-   'PYMODULE'),
-  ('fontTools.svgLib.path',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\svgLib\\path\\__init__.py',
-   'PYMODULE'),
-  ('fontTools.svgLib.path.arc',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\svgLib\\path\\arc.py',
-   'PYMODULE'),
-  ('fontTools.svgLib.path.parser',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\svgLib\\path\\parser.py',
-   'PYMODULE'),
-  ('fontTools.svgLib.path.shapes',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\svgLib\\path\\shapes.py',
-   'PYMODULE'),
-  ('fontTools.ttLib',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\__init__.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.macUtils',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\macUtils.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.reorderGlyphs',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\reorderGlyphs.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.sfnt',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\sfnt.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.standardGlyphOrder',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\standardGlyphOrder.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\__init__.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.B_A_S_E_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\B_A_S_E_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.BitmapGlyphMetrics',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\BitmapGlyphMetrics.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.C_B_D_T_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\C_B_D_T_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.C_B_L_C_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\C_B_L_C_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.C_F_F_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\C_F_F_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.C_F_F__2',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\C_F_F__2.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.C_O_L_R_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\C_O_L_R_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.C_P_A_L_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\C_P_A_L_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.D_S_I_G_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\D_S_I_G_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.D__e_b_g',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\D__e_b_g.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.DefaultTable',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\DefaultTable.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.E_B_D_T_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\E_B_D_T_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.E_B_L_C_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\E_B_L_C_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.F_F_T_M_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\F_F_T_M_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.F__e_a_t',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\F__e_a_t.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.G_D_E_F_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\G_D_E_F_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.G_M_A_P_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\G_M_A_P_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.G_P_K_G_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\G_P_K_G_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.G_P_O_S_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\G_P_O_S_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.G_S_U_B_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\G_S_U_B_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.G_V_A_R_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\G_V_A_R_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.G__l_a_t',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\G__l_a_t.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.G__l_o_c',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\G__l_o_c.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.H_V_A_R_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\H_V_A_R_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.J_S_T_F_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\J_S_T_F_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.L_T_S_H_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\L_T_S_H_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.M_A_T_H_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\M_A_T_H_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.M_E_T_A_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\M_E_T_A_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.M_V_A_R_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\M_V_A_R_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.O_S_2f_2',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\O_S_2f_2.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.S_I_N_G_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\S_I_N_G_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.S_T_A_T_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\S_T_A_T_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.S_V_G_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\S_V_G_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.S__i_l_f',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\S__i_l_f.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.S__i_l_l',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\S__i_l_l.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.T_S_I_B_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\T_S_I_B_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.T_S_I_C_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\T_S_I_C_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.T_S_I_D_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\T_S_I_D_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.T_S_I_J_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\T_S_I_J_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.T_S_I_P_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\T_S_I_P_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.T_S_I_S_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\T_S_I_S_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.T_S_I_V_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\T_S_I_V_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.T_S_I__0',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\T_S_I__0.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.T_S_I__1',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\T_S_I__1.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.T_S_I__2',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\T_S_I__2.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.T_S_I__3',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\T_S_I__3.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.T_S_I__5',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\T_S_I__5.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.T_T_F_A_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\T_T_F_A_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.TupleVariation',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\TupleVariation.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.V_A_R_C_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\V_A_R_C_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.V_D_M_X_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\V_D_M_X_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.V_O_R_G_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\V_O_R_G_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.V_V_A_R_',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\V_V_A_R_.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._a_n_k_r',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_a_n_k_r.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._a_v_a_r',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_a_v_a_r.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._b_s_l_n',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_b_s_l_n.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._c_i_d_g',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_c_i_d_g.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._c_m_a_p',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_c_m_a_p.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._c_v_a_r',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_c_v_a_r.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._c_v_t',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_c_v_t.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._f_e_a_t',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_f_e_a_t.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._f_p_g_m',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_f_p_g_m.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._f_v_a_r',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_f_v_a_r.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._g_a_s_p',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_g_a_s_p.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._g_c_i_d',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_g_c_i_d.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._g_l_y_f',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_g_l_y_f.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._g_v_a_r',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_g_v_a_r.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._h_d_m_x',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_h_d_m_x.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._h_e_a_d',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_h_e_a_d.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._h_h_e_a',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_h_h_e_a.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._h_m_t_x',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_h_m_t_x.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._k_e_r_n',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_k_e_r_n.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._l_c_a_r',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_l_c_a_r.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._l_o_c_a',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_l_o_c_a.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._l_t_a_g',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_l_t_a_g.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._m_a_x_p',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_m_a_x_p.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._m_e_t_a',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_m_e_t_a.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._m_o_r_t',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_m_o_r_t.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._m_o_r_x',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_m_o_r_x.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._n_a_m_e',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_n_a_m_e.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._o_p_b_d',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_o_p_b_d.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._p_o_s_t',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_p_o_s_t.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._p_r_e_p',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_p_r_e_p.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._p_r_o_p',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_p_r_o_p.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._s_b_i_x',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_s_b_i_x.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._t_r_a_k',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_t_r_a_k.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._v_h_e_a',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_v_h_e_a.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables._v_m_t_x',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\_v_m_t_x.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.asciiTable',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\asciiTable.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.grUtils',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\grUtils.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.otBase',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\otBase.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.otConverters',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\otConverters.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.otData',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\otData.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.otTables',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\otTables.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.otTraverse',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\otTraverse.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.sbixGlyph',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\sbixGlyph.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.sbixStrike',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\sbixStrike.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.tables.ttProgram',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\tables\\ttProgram.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.ttCollection',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\ttCollection.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.ttFont',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\ttFont.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.ttGlyphSet',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\ttGlyphSet.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.ttVisitor',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\ttVisitor.py',
-   'PYMODULE'),
-  ('fontTools.ttLib.woff2',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttLib\\woff2.py',
-   'PYMODULE'),
-  ('fontTools.ttx',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\ttx.py',
-   'PYMODULE'),
-  ('fontTools.unicode',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\unicode.py',
-   'PYMODULE'),
-  ('fontTools.unicodedata',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\unicodedata\\__init__.py',
-   'PYMODULE'),
-  ('fontTools.unicodedata.Blocks',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\unicodedata\\Blocks.py',
-   'PYMODULE'),
-  ('fontTools.unicodedata.Mirrored',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\unicodedata\\Mirrored.py',
-   'PYMODULE'),
-  ('fontTools.unicodedata.OTTags',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\unicodedata\\OTTags.py',
-   'PYMODULE'),
-  ('fontTools.unicodedata.ScriptExtensions',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\unicodedata\\ScriptExtensions.py',
-   'PYMODULE'),
-  ('fontTools.unicodedata.Scripts',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\unicodedata\\Scripts.py',
-   'PYMODULE'),
-  ('fontTools.varLib',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\varLib\\__init__.py',
-   'PYMODULE'),
-  ('fontTools.varLib.builder',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\varLib\\builder.py',
-   'PYMODULE'),
-  ('fontTools.varLib.cff',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\varLib\\cff.py',
-   'PYMODULE'),
-  ('fontTools.varLib.errors',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\varLib\\errors.py',
-   'PYMODULE'),
-  ('fontTools.varLib.featureVars',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\varLib\\featureVars.py',
-   'PYMODULE'),
-  ('fontTools.varLib.merger',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\varLib\\merger.py',
-   'PYMODULE'),
-  ('fontTools.varLib.models',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\varLib\\models.py',
-   'PYMODULE'),
-  ('fontTools.varLib.multiVarStore',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\varLib\\multiVarStore.py',
-   'PYMODULE'),
-  ('fontTools.varLib.mvar',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\varLib\\mvar.py',
-   'PYMODULE'),
-  ('fontTools.varLib.stat',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\varLib\\stat.py',
-   'PYMODULE'),
-  ('fontTools.varLib.varStore',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fontTools\\varLib\\varStore.py',
-   'PYMODULE'),
-  ('fpdf',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\__init__.py',
-   'PYMODULE'),
-  ('fpdf.actions',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\actions.py',
-   'PYMODULE'),
-  ('fpdf.annotations',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\annotations.py',
-   'PYMODULE'),
-  ('fpdf.bidi',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\bidi.py',
-   'PYMODULE'),
-  ('fpdf.deprecation',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\deprecation.py',
-   'PYMODULE'),
-  ('fpdf.drawing',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\drawing.py',
-   'PYMODULE'),
-  ('fpdf.encryption',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\encryption.py',
-   'PYMODULE'),
-  ('fpdf.enums',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\enums.py',
-   'PYMODULE'),
-  ('fpdf.errors',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\errors.py',
-   'PYMODULE'),
-  ('fpdf.fonts',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\fonts.py',
-   'PYMODULE'),
-  ('fpdf.fpdf',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\fpdf.py',
-   'PYMODULE'),
-  ('fpdf.graphics_state',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\graphics_state.py',
-   'PYMODULE'),
-  ('fpdf.html',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\html.py',
-   'PYMODULE'),
-  ('fpdf.image_datastructures',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\image_datastructures.py',
-   'PYMODULE'),
-  ('fpdf.image_parsing',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\image_parsing.py',
-   'PYMODULE'),
-  ('fpdf.line_break',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\line_break.py',
-   'PYMODULE'),
-  ('fpdf.linearization',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\linearization.py',
-   'PYMODULE'),
-  ('fpdf.outline',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\outline.py',
-   'PYMODULE'),
-  ('fpdf.output',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\output.py',
-   'PYMODULE'),
-  ('fpdf.prefs',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\prefs.py',
-   'PYMODULE'),
-  ('fpdf.recorder',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\recorder.py',
-   'PYMODULE'),
-  ('fpdf.sign',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\sign.py',
-   'PYMODULE'),
-  ('fpdf.structure_tree',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\structure_tree.py',
-   'PYMODULE'),
-  ('fpdf.svg',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\svg.py',
-   'PYMODULE'),
-  ('fpdf.syntax',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\syntax.py',
-   'PYMODULE'),
-  ('fpdf.table',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\table.py',
-   'PYMODULE'),
-  ('fpdf.template',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\template.py',
-   'PYMODULE'),
-  ('fpdf.text_region',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\text_region.py',
-   'PYMODULE'),
-  ('fpdf.transitions',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\transitions.py',
-   'PYMODULE'),
-  ('fpdf.unicode_script',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\unicode_script.py',
-   'PYMODULE'),
-  ('fpdf.util',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fpdf\\util.py',
-   'PYMODULE'),
   ('fqdn',
    'C:\\Users\\VIKAS '
    'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\fqdn\\__init__.py',
@@ -2894,50 +1870,6 @@
   ('gettext', 'C:\\Python312\\Lib\\gettext.py', 'PYMODULE'),
   ('glob', 'C:\\Python312\\Lib\\glob.py', 'PYMODULE'),
   ('gzip', 'C:\\Python312\\Lib\\gzip.py', 'PYMODULE'),
-  ('h11',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\h11\\__init__.py',
-   'PYMODULE'),
-  ('h11._abnf',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\h11\\_abnf.py',
-   'PYMODULE'),
-  ('h11._connection',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\h11\\_connection.py',
-   'PYMODULE'),
-  ('h11._events',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\h11\\_events.py',
-   'PYMODULE'),
-  ('h11._headers',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\h11\\_headers.py',
-   'PYMODULE'),
-  ('h11._readers',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\h11\\_readers.py',
-   'PYMODULE'),
-  ('h11._receivebuffer',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\h11\\_receivebuffer.py',
-   'PYMODULE'),
-  ('h11._state',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\h11\\_state.py',
-   'PYMODULE'),
-  ('h11._util',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\h11\\_util.py',
-   'PYMODULE'),
-  ('h11._version',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\h11\\_version.py',
-   'PYMODULE'),
-  ('h11._writers',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\h11\\_writers.py',
-   'PYMODULE'),
   ('hashlib', 'C:\\Python312\\Lib\\hashlib.py', 'PYMODULE'),
   ('hmac', 'C:\\Python312\\Lib\\hmac.py', 'PYMODULE'),
   ('html', 'C:\\Python312\\Lib\\html\\__init__.py', 'PYMODULE'),
@@ -4090,6 +3022,10 @@
    'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\mdurl\\_url.py',
    'PYMODULE'),
   ('mimetypes', 'C:\\Python312\\Lib\\mimetypes.py', 'PYMODULE'),
+  ('models',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\Desktop\\flexierp-frontend\\Pyhon-Services\\models.py',
+   'PYMODULE'),
   ('multiprocessing',
    'C:\\Python312\\Lib\\multiprocessing\\__init__.py',
    'PYMODULE'),
@@ -7459,6 +6395,394 @@
    'C:\\Users\\VIKAS '
    'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\regex\\regex.py',
    'PYMODULE'),
+  ('reportlab',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\__init__.py',
+   'PYMODULE'),
+  ('reportlab.graphics',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\__init__.py',
+   'PYMODULE'),
+  ('reportlab.graphics.charts',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\charts\\__init__.py',
+   'PYMODULE'),
+  ('reportlab.graphics.charts.areas',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\charts\\areas.py',
+   'PYMODULE'),
+  ('reportlab.graphics.charts.legends',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\charts\\legends.py',
+   'PYMODULE'),
+  ('reportlab.graphics.charts.piecharts',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\charts\\piecharts.py',
+   'PYMODULE'),
+  ('reportlab.graphics.charts.textlabels',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\charts\\textlabels.py',
+   'PYMODULE'),
+  ('reportlab.graphics.charts.utils',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\charts\\utils.py',
+   'PYMODULE'),
+  ('reportlab.graphics.charts.utils3d',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\charts\\utils3d.py',
+   'PYMODULE'),
+  ('reportlab.graphics.renderPDF',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\renderPDF.py',
+   'PYMODULE'),
+  ('reportlab.graphics.renderPM',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\renderPM.py',
+   'PYMODULE'),
+  ('reportlab.graphics.renderPS',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\renderPS.py',
+   'PYMODULE'),
+  ('reportlab.graphics.renderSVG',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\renderSVG.py',
+   'PYMODULE'),
+  ('reportlab.graphics.renderbase',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\renderbase.py',
+   'PYMODULE'),
+  ('reportlab.graphics.shapes',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\shapes.py',
+   'PYMODULE'),
+  ('reportlab.graphics.testshapes',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\testshapes.py',
+   'PYMODULE'),
+  ('reportlab.graphics.transform',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\transform.py',
+   'PYMODULE'),
+  ('reportlab.graphics.utils',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\utils.py',
+   'PYMODULE'),
+  ('reportlab.graphics.widgetbase',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\widgetbase.py',
+   'PYMODULE'),
+  ('reportlab.graphics.widgets',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\widgets\\__init__.py',
+   'PYMODULE'),
+  ('reportlab.graphics.widgets.flags',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\widgets\\flags.py',
+   'PYMODULE'),
+  ('reportlab.graphics.widgets.markers',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\widgets\\markers.py',
+   'PYMODULE'),
+  ('reportlab.graphics.widgets.signsandsymbols',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\widgets\\signsandsymbols.py',
+   'PYMODULE'),
+  ('reportlab.lib',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\__init__.py',
+   'PYMODULE'),
+  ('reportlab.lib.PyFontify',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\PyFontify.py',
+   'PYMODULE'),
+  ('reportlab.lib.abag',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\abag.py',
+   'PYMODULE'),
+  ('reportlab.lib.arciv',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\arciv.py',
+   'PYMODULE'),
+  ('reportlab.lib.attrmap',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\attrmap.py',
+   'PYMODULE'),
+  ('reportlab.lib.boxstuff',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\boxstuff.py',
+   'PYMODULE'),
+  ('reportlab.lib.colors',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\colors.py',
+   'PYMODULE'),
+  ('reportlab.lib.corp',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\corp.py',
+   'PYMODULE'),
+  ('reportlab.lib.enums',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\enums.py',
+   'PYMODULE'),
+  ('reportlab.lib.fonts',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\fonts.py',
+   'PYMODULE'),
+  ('reportlab.lib.formatters',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\formatters.py',
+   'PYMODULE'),
+  ('reportlab.lib.geomutils',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\geomutils.py',
+   'PYMODULE'),
+  ('reportlab.lib.logger',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\logger.py',
+   'PYMODULE'),
+  ('reportlab.lib.normalDate',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\normalDate.py',
+   'PYMODULE'),
+  ('reportlab.lib.pagesizes',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\pagesizes.py',
+   'PYMODULE'),
+  ('reportlab.lib.pdfencrypt',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\pdfencrypt.py',
+   'PYMODULE'),
+  ('reportlab.lib.randomtext',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\randomtext.py',
+   'PYMODULE'),
+  ('reportlab.lib.rl_accel',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\rl_accel.py',
+   'PYMODULE'),
+  ('reportlab.lib.rl_safe_eval',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\rl_safe_eval.py',
+   'PYMODULE'),
+  ('reportlab.lib.rltempfile',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\rltempfile.py',
+   'PYMODULE'),
+  ('reportlab.lib.rparsexml',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\rparsexml.py',
+   'PYMODULE'),
+  ('reportlab.lib.sequencer',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\sequencer.py',
+   'PYMODULE'),
+  ('reportlab.lib.styles',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\styles.py',
+   'PYMODULE'),
+  ('reportlab.lib.textsplit',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\textsplit.py',
+   'PYMODULE'),
+  ('reportlab.lib.units',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\units.py',
+   'PYMODULE'),
+  ('reportlab.lib.utils',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\utils.py',
+   'PYMODULE'),
+  ('reportlab.lib.validators',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\validators.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\__init__.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase._fontdata',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase._fontdata_enc_macexpert',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_enc_macexpert.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase._fontdata_enc_macroman',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_enc_macroman.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase._fontdata_enc_pdfdoc',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_enc_pdfdoc.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase._fontdata_enc_standard',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_enc_standard.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase._fontdata_enc_symbol',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_enc_symbol.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase._fontdata_enc_winansi',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_enc_winansi.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase._fontdata_enc_zapfdingbats',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_enc_zapfdingbats.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase._fontdata_widths_courier',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_courier.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase._fontdata_widths_courierbold',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_courierbold.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase._fontdata_widths_courierboldoblique',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_courierboldoblique.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase._fontdata_widths_courieroblique',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_courieroblique.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase._fontdata_widths_helvetica',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_helvetica.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase._fontdata_widths_helveticabold',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_helveticabold.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase._fontdata_widths_helveticaboldoblique',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_helveticaboldoblique.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase._fontdata_widths_helveticaoblique',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_helveticaoblique.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase._fontdata_widths_symbol',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_symbol.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase._fontdata_widths_timesbold',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_timesbold.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase._fontdata_widths_timesbolditalic',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_timesbolditalic.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase._fontdata_widths_timesitalic',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_timesitalic.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase._fontdata_widths_timesroman',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_timesroman.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase._fontdata_widths_zapfdingbats',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_zapfdingbats.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase._glyphlist',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_glyphlist.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase.acroform',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\acroform.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase.pdfdoc',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\pdfdoc.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase.pdfmetrics',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\pdfmetrics.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase.pdfutils',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\pdfutils.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase.rl_codecs',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\rl_codecs.py',
+   'PYMODULE'),
+  ('reportlab.pdfbase.ttfonts',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\ttfonts.py',
+   'PYMODULE'),
+  ('reportlab.pdfgen',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfgen\\__init__.py',
+   'PYMODULE'),
+  ('reportlab.pdfgen.canvas',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfgen\\canvas.py',
+   'PYMODULE'),
+  ('reportlab.pdfgen.pathobject',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfgen\\pathobject.py',
+   'PYMODULE'),
+  ('reportlab.pdfgen.pdfgeom',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfgen\\pdfgeom.py',
+   'PYMODULE'),
+  ('reportlab.pdfgen.pdfimages',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfgen\\pdfimages.py',
+   'PYMODULE'),
+  ('reportlab.pdfgen.textobject',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfgen\\textobject.py',
+   'PYMODULE'),
+  ('reportlab.platypus',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\platypus\\__init__.py',
+   'PYMODULE'),
+  ('reportlab.platypus.doctemplate',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\platypus\\doctemplate.py',
+   'PYMODULE'),
+  ('reportlab.platypus.flowables',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\platypus\\flowables.py',
+   'PYMODULE'),
+  ('reportlab.platypus.frames',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\platypus\\frames.py',
+   'PYMODULE'),
+  ('reportlab.platypus.multicol',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\platypus\\multicol.py',
+   'PYMODULE'),
+  ('reportlab.platypus.paragraph',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\platypus\\paragraph.py',
+   'PYMODULE'),
+  ('reportlab.platypus.paraparser',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\platypus\\paraparser.py',
+   'PYMODULE'),
+  ('reportlab.platypus.tables',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\platypus\\tables.py',
+   'PYMODULE'),
+  ('reportlab.platypus.xpreformatted',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\platypus\\xpreformatted.py',
+   'PYMODULE'),
+  ('reportlab.rl_config',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\rl_config.py',
+   'PYMODULE'),
+  ('reportlab.rl_settings',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\rl_settings.py',
+   'PYMODULE'),
   ('requests',
    'C:\\Users\\VIKAS '
    'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\requests\\__init__.py',
@@ -9142,166 +8466,6 @@
    'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\urllib3\\util\\wait.py',
    'PYMODULE'),
   ('uuid', 'C:\\Python312\\Lib\\uuid.py', 'PYMODULE'),
-  ('uvicorn',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\__init__.py',
-   'PYMODULE'),
-  ('uvicorn.__main__',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\__main__.py',
-   'PYMODULE'),
-  ('uvicorn._compat',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\_compat.py',
-   'PYMODULE'),
-  ('uvicorn._subprocess',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\_subprocess.py',
-   'PYMODULE'),
-  ('uvicorn._types',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\_types.py',
-   'PYMODULE'),
-  ('uvicorn.config',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\config.py',
-   'PYMODULE'),
-  ('uvicorn.importer',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\importer.py',
-   'PYMODULE'),
-  ('uvicorn.lifespan',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\lifespan\\__init__.py',
-   'PYMODULE'),
-  ('uvicorn.lifespan.off',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\lifespan\\off.py',
-   'PYMODULE'),
-  ('uvicorn.lifespan.on',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\lifespan\\on.py',
-   'PYMODULE'),
-  ('uvicorn.logging',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\logging.py',
-   'PYMODULE'),
-  ('uvicorn.loops',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\loops\\__init__.py',
-   'PYMODULE'),
-  ('uvicorn.loops.asyncio',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\loops\\asyncio.py',
-   'PYMODULE'),
-  ('uvicorn.loops.auto',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\loops\\auto.py',
-   'PYMODULE'),
-  ('uvicorn.loops.uvloop',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\loops\\uvloop.py',
-   'PYMODULE'),
-  ('uvicorn.main',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\main.py',
-   'PYMODULE'),
-  ('uvicorn.middleware',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\middleware\\__init__.py',
-   'PYMODULE'),
-  ('uvicorn.middleware.asgi2',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\middleware\\asgi2.py',
-   'PYMODULE'),
-  ('uvicorn.middleware.message_logger',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\middleware\\message_logger.py',
-   'PYMODULE'),
-  ('uvicorn.middleware.proxy_headers',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\middleware\\proxy_headers.py',
-   'PYMODULE'),
-  ('uvicorn.middleware.wsgi',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\middleware\\wsgi.py',
-   'PYMODULE'),
-  ('uvicorn.protocols',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\protocols\\__init__.py',
-   'PYMODULE'),
-  ('uvicorn.protocols.http',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\protocols\\http\\__init__.py',
-   'PYMODULE'),
-  ('uvicorn.protocols.http.auto',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\protocols\\http\\auto.py',
-   'PYMODULE'),
-  ('uvicorn.protocols.http.flow_control',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\protocols\\http\\flow_control.py',
-   'PYMODULE'),
-  ('uvicorn.protocols.http.h11_impl',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\protocols\\http\\h11_impl.py',
-   'PYMODULE'),
-  ('uvicorn.protocols.http.httptools_impl',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\protocols\\http\\httptools_impl.py',
-   'PYMODULE'),
-  ('uvicorn.protocols.utils',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\protocols\\utils.py',
-   'PYMODULE'),
-  ('uvicorn.protocols.websockets',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\protocols\\websockets\\__init__.py',
-   'PYMODULE'),
-  ('uvicorn.protocols.websockets.auto',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\protocols\\websockets\\auto.py',
-   'PYMODULE'),
-  ('uvicorn.protocols.websockets.websockets_impl',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\protocols\\websockets\\websockets_impl.py',
-   'PYMODULE'),
-  ('uvicorn.protocols.websockets.websockets_sansio_impl',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\protocols\\websockets\\websockets_sansio_impl.py',
-   'PYMODULE'),
-  ('uvicorn.protocols.websockets.wsproto_impl',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\protocols\\websockets\\wsproto_impl.py',
-   'PYMODULE'),
-  ('uvicorn.server',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\server.py',
-   'PYMODULE'),
-  ('uvicorn.supervisors',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\supervisors\\__init__.py',
-   'PYMODULE'),
-  ('uvicorn.supervisors.basereload',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\supervisors\\basereload.py',
-   'PYMODULE'),
-  ('uvicorn.supervisors.multiprocess',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\supervisors\\multiprocess.py',
-   'PYMODULE'),
-  ('uvicorn.supervisors.statreload',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\supervisors\\statreload.py',
-   'PYMODULE'),
-  ('uvicorn.supervisors.watchfilesreload',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\supervisors\\watchfilesreload.py',
-   'PYMODULE'),
-  ('uvicorn.workers',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\uvicorn\\workers.py',
-   'PYMODULE'),
   ('wave', 'C:\\Python312\\Lib\\wave.py', 'PYMODULE'),
   ('wcwidth',
    'C:\\Users\\VIKAS '
@@ -9459,38 +8623,6 @@
   ('winerror',
    'C:\\Users\\VIKAS '
    'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\win32\\lib\\winerror.py',
-   'PYMODULE'),
-  ('wsproto',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\wsproto\\__init__.py',
-   'PYMODULE'),
-  ('wsproto.connection',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\wsproto\\connection.py',
-   'PYMODULE'),
-  ('wsproto.events',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\wsproto\\events.py',
-   'PYMODULE'),
-  ('wsproto.extensions',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\wsproto\\extensions.py',
-   'PYMODULE'),
-  ('wsproto.frame_protocol',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\wsproto\\frame_protocol.py',
-   'PYMODULE'),
-  ('wsproto.handshake',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\wsproto\\handshake.py',
-   'PYMODULE'),
-  ('wsproto.typing',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\wsproto\\typing.py',
-   'PYMODULE'),
-  ('wsproto.utilities',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\wsproto\\utilities.py',
    'PYMODULE'),
   ('xml', 'C:\\Python312\\Lib\\xml\\__init__.py', 'PYMODULE'),
   ('xml.dom', 'C:\\Python312\\Lib\\xml\\dom\\__init__.py', 'PYMODULE'),

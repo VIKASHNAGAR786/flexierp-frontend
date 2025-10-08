@@ -1,15 +1,21 @@
-from fastapi import FastAPI, HTTPException,Response, Query
+# barcode_service.py
+from fastapi import FastAPI, HTTPException, Response, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 import barcode
 from barcode.writer import ImageWriter
 from io import BytesIO
-from fpdf import FPDF # fpdf2
-from PIL import Image
-from models import GenerateReceiptPDF
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
+from PIL import Image
 import datetime
+from reportlab.lib.utils import ImageReader
+from models import GenerateReceiptPDF  # Your Pydantic models
+import os
+import sys
+from io import BytesIO
+from fpdf import FPDF # fpdf2
+
 
 app = FastAPI(
     title="Barcode Generator API",
@@ -17,51 +23,46 @@ app = FastAPI(
     version="1.1"
 )
 
-# Allow Angular frontend or other frontends to call API
+# Allow frontend access
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Change to frontend domain in production
+    allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Supported barcode types
 SUPPORTED_BARCODES = ["code128"]
+
+if getattr(sys, 'frozen', False):
+    base_path = sys._MEIPASS
+else:
+    base_path = os.path.dirname(__file__)
+
+font_path = os.path.join(base_path, "fonts", "DejaVuSans.ttf")
 
 @app.get("/barcode/png/{text}")
 def generate_barcode_png(
     text: str,
-    barcode_type: str = Query("code128", description="Barcode format"),
-    module_width: float = Query(0.2, description="Width of barcode lines"),
-    module_height: float = Query(15.0, description="Height of barcode lines")
+    barcode_type: str = Query("code128"),
+    module_width: float = Query(0.2),
+    module_height: float = Query(15.0)
 ):
-    """
-    Generate a barcode as PNG image.
-    - `text`: The data/text to encode in barcode
-    - `barcode_type`: Type of barcode (default: code128)
-    - `module_width`: Width of each barcode module (default: 0.2)
-    - `module_height`: Height of barcode (default: 15.0)
-    """
     try:
         barcode_type = barcode_type.lower()
         if barcode_type not in SUPPORTED_BARCODES:
-            raise HTTPException(status_code=400, detail=f"Unsupported barcode type. Supported: {SUPPORTED_BARCODES}")
-
-        # Generate barcode
-        barcode_class = barcode.get_barcode_class(barcode_type)
-        ean = barcode_class(
-            text, 
-            writer=ImageWriter()
-        )
+            raise HTTPException(status_code=400, detail=f"Unsupported barcode type")
         
-        # Customize barcode size
+        barcode_class = barcode.get_barcode_class(barcode_type)
+        ean = barcode_class(text, writer=ImageWriter())
         ean.writer.set_options({
             "module_width": module_width,
             "module_height": module_height,
             "quiet_zone": 2.0,
             "font_size": 10,
-            "text_distance": 1.0
+            "text_distance": 1.0,
+            "font_path": font_path
         })
+
 
         buffer = BytesIO()
         ean.write(buffer)
@@ -78,19 +79,16 @@ async def generate_receipt(data: GenerateReceiptPDF):
     pdf = canvas.Canvas(buffer, pagesize=A4)
     width, height = A4
 
-    # ----- Generate barcode image -----
+    # Generate barcode image
     barcode_class = barcode.get_barcode_class('code128')
     barcode_img_buffer = BytesIO()
     ean = barcode_class(data.barcode, writer=ImageWriter())
     ean.write(barcode_img_buffer)
     barcode_img_buffer.seek(0)
     barcode_img = Image.open(barcode_img_buffer)
-
-    # Convert PIL Image to ReportLab format
-    from reportlab.lib.utils import ImageReader
     barcode_reader = ImageReader(barcode_img)
 
-    # ----- Company Info (Hardcoded) -----
+    # Company Info
     pdf.setFont("Helvetica-Bold", 14)
     pdf.drawString(50, height - 40, "🏢 My Company Pvt. Ltd.")
     pdf.setFont("Helvetica", 10)
@@ -104,7 +102,7 @@ async def generate_receipt(data: GenerateReceiptPDF):
     pdf.drawString(50, height - 120, f"Invoice No: {data.barcode}")
     pdf.drawString(300, height - 120, f"Date: {datetime.datetime.now().strftime('%d-%m-%Y %H:%M')}")
 
-    # Draw Barcode below header
+    # Draw Barcode
     pdf.drawImage(barcode_reader, 400, height - 150, width=150, height=50)
 
     # Customer Details
@@ -129,7 +127,7 @@ async def generate_receipt(data: GenerateReceiptPDF):
             pdf.drawString(60, y, f"Remark: {data.customer.remark}")
             y -= 15
 
-    # Cart Table Header
+    # Cart Table
     y -= 20
     pdf.setFont("Helvetica-Bold", 11)
     pdf.drawString(50, y, "Product")
@@ -146,7 +144,7 @@ async def generate_receipt(data: GenerateReceiptPDF):
     grand_total = 0
     for item in data.cart:
         y -= 20
-        if y < 100:  # New Page if space ends
+        if y < 100:
             pdf.showPage()
             y = height - 100
         pdf.drawString(50, y, item.name)
@@ -165,13 +163,55 @@ async def generate_receipt(data: GenerateReceiptPDF):
 
     pdf.showPage()
     pdf.save()
-
     buffer.seek(0)
+
     return Response(
         buffer.getvalue(),
         media_type="application/pdf",
         headers={"Content-Disposition": f"inline; filename=invoice_{data.barcode}.pdf"}
     )
+
+@app.post("/barcode/pdf")
+def generate_barcode_pdf(barcodes: list[str]):
+    try:
+        pdf = FPDF()
+        pdf.set_auto_page_break(auto=True, margin=15)
+        pdf.add_page()
+        pdf.set_font("helvetica", size=12)
+
+        x, y = 10, 10
+        for code in barcodes:
+            ean = barcode.get("code128", code, writer=ImageWriter())
+            ean.writer.set_options({
+                "font_path": font_path,   # 👈 ensures font exists even in .exe
+                "font_size": 10,
+                "text_distance": 1.0,
+            })
+
+            buffer = BytesIO()
+            ean.write(buffer)
+            buffer.seek(0)
+
+            img = Image.open(buffer)
+            temp_img = BytesIO()
+            img.save(temp_img, format="PNG")
+            temp_img.seek(0)
+
+            pdf.image(temp_img, x=x, y=y, w=50, h=20)
+
+            y += 30
+            if y > 250:
+                y = 10
+                pdf.add_page()
+
+        output = BytesIO()
+        pdf.output(output)
+        output.seek(0)
+        return StreamingResponse(output, media_type="application/pdf")
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 
 #pip install 
@@ -180,3 +220,7 @@ async def generate_receipt(data: GenerateReceiptPDF):
 # python -m uvicorn barcode_service:app --reload --host 127.0.0.1 --port 5001
 # for building executable
 # python -m PyInstaller --onefile barcode_service.py
+# new command for build
+# python -m PyInstaller --onefile --add-data "fonts;fonts" run_service.py
+
+

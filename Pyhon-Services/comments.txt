@@ -1,0 +1,10 @@
+#pip install 
+# pip install fastapi uvicorn python-barcode fpdf2 pillow   
+# for running this service directly
+# python -m uvicorn barcode_service:app --reload --host 127.0.0.1 --port 5001
+# for building executable
+# python -m PyInstaller --onefile barcode_service.py
+# new command for build
+python -m PyInstaller --onefile --noconsole run_service.py --add-data "fonts;fonts"
+nts" run_service.py
+
