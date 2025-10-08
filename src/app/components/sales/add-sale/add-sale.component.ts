@@ -136,9 +136,7 @@ export class AddSaleComponent {
     this.updateGrandTotal();
     this.editfromcartdata.push(this.saleProduct);
 
-    this.customer.paymentMode = "";
-    this.customer.totalAmt = this.grandTotal;
-    this.customer.paidAmt = this.grandTotal;
+   
     this.saleProduct = {
       barcode: '',
       name: '',
@@ -152,6 +150,11 @@ export class AddSaleComponent {
   removeFromCart(index: number) {
     this.cart.splice(index, 1);
     this.updateGrandTotal();
+    if(this.cart.length===0){
+      this.totalExtraCharges = 0;
+      this.extraCharges.clear();
+      this.updateGrandTotal();
+    }
   }
 
   clearSale() {
@@ -168,7 +171,8 @@ export class AddSaleComponent {
     return total;
   }
 
-  MakeTheSale(): void {
+  MakeTheSale(): void { 
+
     const sale: Sale = {
       saleDetails: this.saledetails,
       customer: this.customer,
@@ -177,6 +181,7 @@ export class AddSaleComponent {
       totalAmount: this.cart.reduce((sum, item) => sum + item.total, 0), // 🟩 added extra charges
       totalDiscount: this.cart.reduce((sum, item) => sum + (item.discountAmt || 0), 0),
       orderDate: new Date(),
+      extracharges: this.extraChargesForm.value.extraCharges.length ? this.extraChargesForm.value.extraCharges : null
     };
 
     this.saleservice.InsertSale(sale)
@@ -193,8 +198,13 @@ export class AddSaleComponent {
   }
 
   updateGrandTotal() {
-    const productTotal = this.cart.reduce((sum, item) => sum + item.total, 0);
+    let productTotal = this.cart.reduce((sum, item) => sum + item.total, 0);
+    productTotal += this.totalExtraCharges; // 🟩 include extra charges in grand total
     this.grandTotal = productTotal; // 🟩 include extra charges in grand total
+
+     this.customer.paymentMode = "";
+    this.customer.totalAmt = this.grandTotal;
+    this.customer.paidAmt = this.grandTotal;
   }
 
   showOldCustomer = false;
@@ -349,12 +359,14 @@ export class AddSaleComponent {
   removeCharge(index: number) {
     this.extraCharges.removeAt(index);
     this.calculateTotalExtraCharges();
+    
   }
 
   calculateTotalExtraCharges() {
     this.totalExtraCharges = this.extraCharges.controls
       .map((c) => c.get('amount')?.value || 0)
       .reduce((a, b) => a + b, 0);
+      this.updateGrandTotal();
   }
 
   saveExtraCharges() {
@@ -363,5 +375,18 @@ export class AddSaleComponent {
     console.log('Total:', this.totalExtraCharges);
     this.closeExtraChargesPopup();
   }
+
+isFormValid(): boolean {
+  if (this.extraCharges.length === 0) {
+    return false;
+  }
+
+  return this.extraCharges.controls.every(
+    ctrl =>
+      ctrl.get('amount')?.value >= 1 &&
+      ctrl.get('name')?.value?.trim()
+  );
+}
+
 }
 

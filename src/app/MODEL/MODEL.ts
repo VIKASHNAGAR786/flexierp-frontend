@@ -82,6 +82,11 @@ export interface SaleDetail {
   createdBy?: number; // nullable
   productquantity?: number; // nullable
 }
+export interface ExtraCharge {
+  name?: string;
+  amount?: number;
+}
+
 
 export interface Sale {
   customerID?: number; // nullable if new customer
@@ -91,6 +96,7 @@ export interface Sale {
   totalDiscount: number;
   orderDate?: Date; // nullable
   saleDetails: SaleDetail[];
+  extracharges: ExtraCharge[] | null; // nullable
 }
 
 export interface ProviderModel {

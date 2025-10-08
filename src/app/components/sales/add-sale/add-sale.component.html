@@ -112,28 +112,36 @@
         </span>
       </div>
 
+      <!-- Available Quantity -->
       <div class="flex flex-col md:col-span-2">
-        <!-- Animated Red Label -->
-        <label class="label-animated">
-          Available Quantity
-        </label>
-
-        <!-- Read-only Input with animated glow -->
+        <label class="label-animated">Available Quantity</label>
         <input type="number" [(ngModel)]="saleProduct.availableQuantity" name="availableQuantity"
           placeholder="Available Quantity" readonly class="input-animated cursor-not-allowed" />
       </div>
 
-
-
-      <!-- Quantity (Required for sale) -->
+      <!-- Quantity (Required for Sale) -->
       <div class="flex flex-col md:col-span-2">
-        <label class="label-style">Quantity <label style="color: red;"> *</label></label>
+        <label class="label-style">
+          Quantity <label style="color: red;">*</label>
+        </label>
+
         <input type="number" [(ngModel)]="saleProduct.quantity" name="quantity" placeholder="Enter Quantity" required
-          min="1" #quantity="ngModel" class="input-style" />
-        <span *ngIf="quantity.invalid && quantity.touched" class="text-red-500 text-xs">
+          min="1" [max]="saleProduct.availableQuantity" #quantity="ngModel" class="input-style" />
+
+        <!-- Validation Messages -->
+        <span *ngIf="quantity.errors?.['required'] && quantity.touched" class="text-red-500 text-xs">
+          Quantity is required.
+        </span>
+
+        <span *ngIf="quantity.errors?.['min'] && quantity.touched" class="text-red-500 text-xs">
           Quantity must be at least 1.
         </span>
+
+        <span *ngIf="quantity.errors?.['max'] && quantity.touched" class="text-red-500 text-xs">
+          Quantity cannot exceed available quantity ({{ saleProduct.availableQuantity }}).
+        </span>
       </div>
+
     </div>
 
     <!-- Save Product Button -->
@@ -151,15 +159,11 @@
       </h3>
 
       <!-- Extra Charges Button -->
-     <button
-  type="button"
-  (click)="openExtraChargesPopup()"
-  [disabled]="cart.length === 0"
-  class="bg-amber-500 hover:bg-amber-600 text-white font-semibold px-4 py-2 rounded-lg shadow flex items-center gap-2
+      <button type="button" (click)="openExtraChargesPopup()" [disabled]="cart.length === 0" class="bg-amber-500 hover:bg-amber-600 text-white font-semibold px-4 py-2 rounded-lg shadow flex items-center gap-2
          disabled:opacity-50 disabled:cursor-not-allowed">
-  <i class="bi bi-plus-circle text-lg"></i>
-  <span class="hidden sm:inline">Extra Charges</span>
-</button>
+        <i class="bi bi-plus-circle text-lg"></i>
+        <span class="hidden sm:inline">Extra Charges</span>
+      </button>
 
     </div>
 
@@ -205,13 +209,15 @@
     <div class="flex flex-col md:flex-row justify-between items-center mt-4 text-lg font-bold">
       <span>Total Items: {{ cart.length }}</span>
 
-      <span class="text-[#00ffee]">
+      <span class="text-[#39FF14] drop-shadow-[0_0_5px_#39FF14] font-bold">
         Total Extra Charges: ₹{{ totalExtraCharges || 0 }}
       </span>
 
-      <span class="text-[#00ffee]">
+
+      <span class="text-[#FF3131] drop-shadow-[0_0_5px_#FF3131] font-bold">
         Grand Total: ₹{{ grandTotal | number:'1.2-2' }}
       </span>
+
     </div>
 
   </div>
@@ -527,8 +533,12 @@
             class="flex-1 bg-slate-800 p-2 rounded-lg text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-[#00ffee]" />
 
           <input type="number" placeholder="Amount (₹)" formControlName="amount"
-            class="w-32 bg-slate-800 p-2 rounded-lg text-white text-right outline-none focus:ring-2 focus:ring-[#00ffee]" />
-
+            class="w-32 bg-slate-800 p-2 rounded-lg text-white text-right outline-none focus:ring-2 focus:ring-[#00ffee]"
+            [class.border-red-500]="charge.get('amount')?.value < 1" />
+          <!-- Validation Message -->
+          <div *ngIf="charge.get('amount')?.value < 1" class="text-red-400 text-sm ml-2">
+            Amount must be at least ₹1
+          </div>
           <button type="button" (click)="removeCharge(i)" class="text-red-400 hover:text-red-500 text-xl font-bold">
             ✕
           </button>
@@ -542,8 +552,8 @@
 
       <!-- Submit Button -->
       <div class="text-right mt-4">
-        <button type="button" (click)="saveExtraCharges()"
-          class="bg-[#00ffee] hover:bg-[#00ddcc] text-slate-900 font-semibold px-4 py-2 rounded-lg shadow">
+        <button type="button" (click)="saveExtraCharges()" [disabled]="!isFormValid()" class="bg-[#00ffee] hover:bg-[#00ddcc] text-slate-900 font-semibold px-4 py-2 rounded-lg shadow 
+           disabled:opacity-50 disabled:cursor-not-allowed">
           Save Charges
         </button>
       </div>

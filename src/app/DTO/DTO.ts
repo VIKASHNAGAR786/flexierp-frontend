@@ -57,6 +57,7 @@ export interface SaleDTO {
   orderDate: Date;
   fullName: string;
   totalRows: number;
+  extracharges?: number; // New field for extra charges
 }
 
 export interface OldCustomerDTO {
