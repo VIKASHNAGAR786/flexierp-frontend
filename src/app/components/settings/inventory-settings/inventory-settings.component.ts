@@ -28,8 +28,6 @@ export class InventorySettingsComponent implements OnInit {
   showWarehouseForm = false;
   warehouses: WarehouseDTO[] = [];
   categories: ProductCategoryListDto[] = [];
-
-
   constructor(private fb: FormBuilder, private inventoryService: InventoryService) {
     this.categoryForm = this.fb.group({
       categoryName: ['', Validators.required],
