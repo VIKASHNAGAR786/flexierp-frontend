@@ -213,14 +213,3 @@ def generate_barcode_pdf(barcodes: list[str]):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-
-#pip install 
-# pip install fastapi uvicorn python-barcode fpdf2 pillow   
-# for running this service directly
-# python -m uvicorn barcode_service:app --reload --host 127.0.0.1 --port 5001
-# for building executable
-# python -m PyInstaller --onefile barcode_service.py
-# new command for build
-# python -m PyInstaller --onefile --add-data "fonts;fonts" run_service.py
-
-
