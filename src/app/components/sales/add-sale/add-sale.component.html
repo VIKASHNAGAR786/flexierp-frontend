@@ -337,14 +337,24 @@
 
           <!-- Paid Amount -->
           <div class="flex flex-col flex-1">
-            <label for="paidAmt" class="label-style">PAID AMOUNT <label style="color: red;"> *</label></label>
-            <input type="number" id="paidAmt" [(ngModel)]="customer.paidAmt" name="paidAmt" class="input-style w-full"
-              required min="0" (ngModelChange)="onPaidChange($event)" #paidamount="ngModel" />
+            <label for="paidAmt" class="label-style">
+              PAID AMOUNT <span style="color: red;">*</span>
+            </label>
 
-            <!-- Validation -->
-            <span *ngIf="paidamount.invalid && paidamount.touched" class="text-red-500 text-xs">
-              Paid amount cannot be less than 0.
-            </span>
+            <input type="number" id="paidAmt" name="paidAmt" class="input-style w-full" required min="0"
+              [max]="grandTotal" [(ngModel)]="customer.paidAmt" #paidamount="ngModel"
+              (ngModelChange)="onPaidChange($event)" />
+
+            <!-- Validation Messages -->
+            <div class="text-xs mt-1">
+              <span *ngIf="paidamount.invalid && paidamount.touched" class="text-red-500">
+                Paid amount must be at least 0.
+              </span>
+
+              <span *ngIf="customer.paidAmt > grandTotal && paidamount.touched" class="text-red-500">
+                Paid amount cannot exceed Grand Total (₹{{ grandTotal | number:'1.2-2' }}).
+              </span>
+            </div>
           </div>
 
         </div>
