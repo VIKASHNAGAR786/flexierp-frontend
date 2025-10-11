@@ -167,7 +167,7 @@
 
     </div>
 
-    <div class="overflow-x-auto relative">
+    <div class="overflow-x-auto">
       <table class="w-full text-sm border-collapse">
         <thead>
           <tr class="bg-slate-700 text-[#00ffee] uppercase text-xs">
@@ -190,30 +190,23 @@
             <td class="px-3 py-2 text-center font-semibold">{{ item.total | number:'1.2-2' }}</td>
             <td class="px-3 py-2 text-center flex justify-center gap-2">
               <!-- Edit Button -->
-            <!-- Edit Button with Tooltip -->
-              <button
-                type="button"
-                (click)="editCartItem(i)"
-                class="text-yellow-400 hover:text-yellow-600"
-                appTooltip="Edit item"
-                [tooltipPosition]="'top'"
-                [tooltipFixed]="true"
+              <!-- Edit Button with Tooltip -->
+              <div class="relative flex items-center gap-2">
+  <!-- Edit Button -->
+  <button type="button" (click)="editCartItem(i)" 
+          class="text-yellow-400 hover:text-yellow-600"
+          appTooltip="Edit item" [tooltipPosition]="'right'" [tooltipFixed]="false">
+    <i class="fas fa-edit"></i>
+  </button>
 
-              >
-                <i class="fas fa-edit"></i>
-              </button>
+  <!-- Delete Button with Tooltip -->
+  <button type="button" (click)="removeFromCart(i)" 
+          class="text-red-400 hover:text-red-600"
+          appTooltip="Remove item" [tooltipPosition]="'left'" [tooltipFixed]="false">
+    <i class="fas fa-trash"></i>
+  </button>
+</div>
 
-              <!-- Delete Button with Tooltip -->
-              <button
-                type="button"
-                (click)="removeFromCart(i)"
-                class="text-red-400 hover:text-red-600"
-                appTooltip="Remove item"
-                [tooltipPosition]="'top'"
-                [tooltipFixed]="true"
-              >
-  <i class="fas fa-trash"></i>
-</button>
             </td>
           </tr>
         </tbody>

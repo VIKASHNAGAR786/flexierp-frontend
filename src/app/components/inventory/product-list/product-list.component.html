@@ -20,11 +20,18 @@
 
   <!-- 📤 Export Buttons -->
   <div class="flex gap-2" *ngIf="products.length > 0">
-    <button (click)="exportToPdf()"
+    <button appTooltip="Download Product Pdf"
+    [tooltipPosition]="'top'"
+    [tooltipFixed]="false"
+      (click)="exportToPdf()"
       class="flex items-center gap-1 px-3 py-2 bg-red-600 hover:bg-red-700 rounded text-white">
       <i class="fas fa-file-pdf"></i> PDF
     </button>
-    <button (click)="exportToExcel()"
+    <button 
+    appTooltip="Download Product Excel"
+    [tooltipPosition]="'top'"
+    [tooltipFixed]="false"
+    (click)="exportToExcel()"
       class="flex items-center gap-1 px-3 py-2 bg-green-600 hover:bg-green-700 rounded text-white">
       <i class="fas fa-file-excel"></i> Excel
     </button>

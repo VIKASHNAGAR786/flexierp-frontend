@@ -8,10 +8,11 @@ import { FormsModule } from '@angular/forms';
 import tippy, { Instance } from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 import { AlertService } from '../../../services/alert.service';
+import { TooltipDirective } from '../../../shared/tooltip.directive';
 
 @Component({
   selector: 'app-sold-product',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TooltipDirective],
   templateUrl: './sold-product.component.html',
   styleUrl: './sold-product.component.css'
 })
