@@ -5,12 +5,13 @@ import { PaginationFilter } from '../../../MODEL/MODEL';
 import { SaleserviceService } from '../../../services/saleservice.service';
 import { CustomerLedgerDetailDto, CustomerLedgerDto } from '../../../DTO/DTO';
 import { AlertService } from '../../../services/alert.service';
+import { TooltipDirective } from '../../../shared/tooltip.directive';
 
 
 @Component({
   selector: 'app-customers-statement-report',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TooltipDirective],
   templateUrl: './customers-statement-report.component.html',
   styleUrl: './customers-statement-report.component.css'
 })

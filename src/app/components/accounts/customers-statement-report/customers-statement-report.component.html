@@ -42,8 +42,14 @@
       </tr>
     </thead>
     <tbody class="divide-y divide-slate-700">
-      <tr *ngFor="let customer of customers; let i = index" class="hover:bg-slate-700 transition cursor-pointer"
-        (click)="viewCustomerStatement(customer.customerid)">
+      <tr *ngFor="let customer of customers; let i = index" 
+    class="hover:bg-slate-700 transition cursor-pointer"
+    (click)="viewCustomerStatement(customer.customerid)"
+    appTooltip="Click to view statement for {{ customer.customername }}"
+    [tooltipPosition]="'top'"
+    [tooltipFixed]="false"
+    [tooltipDelay]="800"
+    >
         <td class="px-4 py-2 text-center">{{ (filter.pageNo - 1) * filter.pageSize + i + 1 }}</td>
         <td class="px-4 py-2 font-semibold">{{ customer.customername }}</td>
         <td class="px-4 py-2 text-center">{{ customer.contactNo }}</td>
