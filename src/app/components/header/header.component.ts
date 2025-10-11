@@ -4,12 +4,15 @@ import { Router } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { CommonService } from '../../services/common.service';
 import { AlertService } from '../../services/alert.service';
+import { environment } from '../../../environments/environment';
+import { TooltipDirective } from '../../shared/tooltip.directive';
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule],
+  imports: [CommonModule,TooltipDirective],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrls: ['./header.component.css'],
+  standalone: true
 })
 export class HeaderComponent implements OnInit {
   constructor(
@@ -20,6 +23,7 @@ export class HeaderComponent implements OnInit {
      private alertservice:AlertService
   ) { }
   public username: string = 'Guest';
+  isProduction = environment.production;
   ngOnInit() {
     this.username = this.userInfo.getUserName() || 'Guest';
   }

@@ -15,6 +15,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 // 🟩 Added for extra charges handling
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TooltipDirective } from '../../../shared/tooltip.directive';
 
 @Component({
   selector: 'app-add-sale',
@@ -24,7 +25,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,   // ✅ Add this line
     ScanBarcodeComponent,
-    OldCustomerPopupComponent
+    OldCustomerPopupComponent,
+    TooltipDirective
   ],
   templateUrl: './add-sale.component.html',
   styleUrls: ['./add-sale.component.css']

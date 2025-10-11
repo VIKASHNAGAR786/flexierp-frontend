@@ -1,21 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, AfterViewChecked, ViewChild, ElementRef, NgZone, ChangeDetectorRef, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef, NgZone, ChangeDetectorRef, ViewChildren, QueryList } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BarcodeService } from '../../../services/barcode.service';
-import tippy, { Instance } from 'tippy.js';
-import 'tippy.js/dist/tippy.css';
 import { PaginationFilter } from '../../../MODEL/MODEL';
 import { InventoryService } from '../../../services/inventory.service';
 import { ProductDTO } from '../../../DTO/DTO';
 import { AlertService } from '../../../services/alert.service';
+import { TooltipDirective } from '../../../shared/tooltip.directive';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TooltipDirective],
   templateUrl: './product-list.component.html'
 })
-export class ProductListComponent implements OnInit, AfterViewInit {
+export class ProductListComponent implements OnInit {
    @ViewChild('productTable', { static: false }) productTable!: ElementRef;
   @ViewChildren('tooltipTarget') tooltipTargets!: QueryList<ElementRef>;
   @Input() products: ProductDTO[] = [];
@@ -28,8 +27,6 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   filter: PaginationFilter;
   pageSizes: number[] = [10, 20, 50];
   reportIsLoading: boolean = false;
-
-  private tooltips: Instance[] = [];
 
   constructor(
     private barcodeService: BarcodeService,
@@ -58,12 +55,6 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     this.getProductData();
   }
 
- ngAfterViewInit(): void {
-    // Run once after view init
-    this.tooltipTargets.changes.subscribe(() => {
-      this.initTooltips();
-    });
-  }
 
 
   getProductData() {
@@ -167,21 +158,4 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // 🔹 Tooltips
-   initTooltips() {
-    // Destroy old tooltips
-    this.tooltips.forEach(t => t.destroy());
-    this.tooltips = [];
-
-    this.ngZone.runOutsideAngular(() => {
-      this.tooltipTargets.forEach(el => {
-        const tip = tippy(el.nativeElement, {
-          delay: [100, 100],
-          arrow: true,
-          theme: 'light',
-        });
-        this.tooltips.push(Array.isArray(tip) ? tip[0] : tip);
-      });
-    });
-  }
 }

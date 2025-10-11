@@ -1,6 +1,6 @@
 [package]
 name = "app"
-version = "0.1.0"
+version = "0.1.3"
 description = "A Tauri App"
 authors = ["you"]
 edition = "2021"
@@ -10,6 +10,13 @@ rust-version = "1.77.2"
 name = "app_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
+# ✅ Add this binary section (important)
+[[bin]]
+name = "app"
+path = "src/main.rs"
+# 👇 prevents blank terminal window on Windows
+windows_subsystem = "windows"
+
 [build-dependencies]
 tauri-build = { version = "2.4.1", features = [] }
 
@@ -17,12 +24,15 @@ tauri-build = { version = "2.4.1", features = [] }
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
 log = "0.4"
-windows-sys = { version = "0.61.0", features = ["Win32_UI_WindowsAndMessaging", "Win32_System_Threading"] }
+windows-sys = { version = "0.61.0", features = [
+    "Win32_UI_WindowsAndMessaging",
+    "Win32_System_Threading"
+] }
 
 # ✅ Core Tauri runtime
 tauri = { version = "2.8.5", features = [] }
 
 # ✅ Plugins (matching Tauri 2.x)
 tauri-plugin-log   = "2.7.0"
-tauri-plugin-fs    = "2.3.0" # for file system access
-tauri-plugin-shell = "2.3.0" # for running shell commands
+tauri-plugin-fs    = "2.3.0"   # for file system access
+tauri-plugin-shell = "2.3.0"   # for running shell commands

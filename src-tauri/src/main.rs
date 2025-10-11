@@ -1,3 +1,5 @@
+#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+
 use std::process::{Command, Child};
 use std::sync::{Mutex, Arc};
 use std::path::PathBuf;
