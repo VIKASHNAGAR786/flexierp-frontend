@@ -5,7 +5,7 @@ import { UserinfowithloginService } from './userinfowithlogin.service';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { PaginationFilter, ProductCategory, ProductModel, ProviderModel, UpdateCompanyInfo, WarehouseModel } from '../MODEL/MODEL';
-import { CompanyInfoDTO, DashboardMetricsDto, ProductCategoryDTO, ProductDTO, ProviderDTO, UserLoginHistoryDTO, WarehouseDTO } from '../DTO/DTO';
+import { CompanyInfoDTO, DashboardMetricsDto, ProductCategoryDTO, ProductDTO, ProviderDTO, ReceivedChequeDto, UserLoginHistoryDTO, WarehouseDTO } from '../DTO/DTO';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +35,7 @@ export class CommonService {
   private readonly GenerateDashboardPdfUrl = environment.BASE_URL + '/CommonMaster/GenerateDashboardPdf';
   private readonly GetDashboardMetricsAsyncUrl = environment.BASE_URL + '/CommonMaster/GetDashboardMetricsAsync';
   private readonly GenerateDashboardExcelUrl = environment.BASE_URL + '/CommonMaster/GenerateDashboardExcel';
+  private readonly GetReceivedChequesAsyncUrl = environment.BASE_URL + '/CommonMaster/GetReceivedChequesAsync';
 
   logout(): Observable<string> {
     const headers = this.getAuthHeaders();
@@ -130,5 +131,20 @@ export class CommonService {
     a.download = fileName;
     a.click();
     window.URL.revokeObjectURL(url);
+  }
+
+  GetReceivedCheques(filter: PaginationFilter): Observable<ReceivedChequeDto[] | null> {
+    const headers = this.getAuthHeaders();
+    if (!headers) return of(null);
+
+    // Send filter as query parameters
+    let params = new HttpParams()
+      .set('pageNo', filter.pageNo.toString())
+      .set('pageSize', filter.pageSize.toString())
+      .set('searchTerm', filter.searchTerm || '')
+      
+
+
+    return this.http.get<ReceivedChequeDto[]>(this.GetReceivedChequesAsyncUrl, { headers, params });
   }
 }

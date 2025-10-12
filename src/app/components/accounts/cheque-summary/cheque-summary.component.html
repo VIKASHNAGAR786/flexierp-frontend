@@ -1,0 +1,99 @@
+<!-- 🔍 Search Bar + Filters + Pagination -->
+<div class="flex flex-wrap justify-between items-center mb-4 gap-3">
+  <!-- 🔍 Search Input -->
+  <input
+    type="text"
+    [(ngModel)]="filter.searchTerm"
+    (ngModelChange)="loadGetReceivedCheques()"
+    placeholder="Search cheques..."
+    class="px-4 py-2 rounded-lg bg-slate-800 text-white border border-slate-600
+           focus:outline-none focus:ring-2 focus:ring-[#00ffee] w-full sm:w-1/3"
+  />
+
+  <!-- 📑 Rows Per Page -->
+  <select
+    [(ngModel)]="filter.pageSize"
+    (change)="loadGetReceivedCheques()"
+    class="px-3 py-2 rounded bg-slate-800 text-white border border-slate-600"
+  >
+    <option *ngFor="let size of pageSizes" [value]="size">
+      {{ size }} per page
+    </option>
+  </select>
+
+  
+</div>
+
+<!-- 📋 Received Cheques Table -->
+<div
+  #productTable
+  class="overflow-x-auto overflow-y-auto bg-slate-900 rounded-lg shadow-lg relative max-h-[500px]"
+>
+  <table class="min-w-full text-white border-collapse">
+    <thead
+      class="bg-gradient-to-r from-slate-900 to-slate-800 text-[#00ffee]
+             uppercase text-sm md:text-base tracking-wide sticky top-0 z-50"
+    >
+      <tr>
+        <th class="px-4 py-2 border-b border-slate-700">Sr No</th>
+        <th class="px-4 py-2 border-b border-slate-700">Customer Name</th>
+        <th class="px-4 py-2 border-b border-slate-700">Customer Address</th>
+        <th class="px-4 py-2 border-b border-slate-700">Phone No</th>
+        <th class="px-4 py-2 border-b border-slate-700">Bank Name</th>
+        <th class="px-4 py-2 border-b border-slate-700">Branch Name</th>
+        <th class="px-4 py-2 border-b border-slate-700">IFSC Code</th>
+        <th class="px-4 py-2 border-b border-slate-700">Cheque No</th>
+        <th class="px-4 py-2 border-b border-slate-700">Amount</th>
+        <th class="px-4 py-2 border-b border-slate-700">Created At</th>
+        <th class="px-4 py-2 border-b border-slate-700">Added By</th>
+      </tr>
+    </thead>
+
+    <tbody class="divide-y divide-slate-700">
+      <tr
+        *ngFor="let cheque of chequedata; let i = index"
+        class="hover:bg-slate-700 transition"
+      >
+        <td class="px-4 py-2 text-center">{{ cheque.srNo }}</td>
+        <td class="px-4 py-2 text-center">{{ cheque.customerName }}</td>
+        <td class="px-4 py-2 text-center">{{ cheque.customerAddress }}</td>
+        <td class="px-4 py-2 text-center">{{ cheque.phoneNo }}</td>
+        <td class="px-4 py-2 text-center">{{ cheque.bankName }}</td>
+        <td class="px-4 py-2 text-center">{{ cheque.branchName }}</td>
+        <td class="px-4 py-2 text-center">{{ cheque.ifsc_Code }}</td>
+        <td class="px-4 py-2 text-center">{{ cheque.chequeNumber }}</td>
+        <td class="px-4 py-2 text-center">{{ cheque.amount | currency:'INR' }}</td>
+        <td class="px-4 py-2 text-center">{{ cheque.createdAt | date:'short' }}</td>
+        <td class="px-4 py-2 text-center">{{ cheque.fullName }}</td>
+      </tr>
+
+      <!-- 💤 Empty State -->
+      <tr *ngIf="chequedata.length === 0">
+        <td colspan="11" class="text-center py-4 text-gray-400">
+          No cheques found.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 📄 Pagination Controls -->
+<div class="flex justify-between items-center mt-4 text-white">
+  <button
+    (click)="prevPage()"
+    [disabled]="filter.pageNo === 1"
+    class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50"
+  >
+    Previous
+  </button>
+
+  <span>Page {{ filter.pageNo }} of {{ totalPages }}</span>
+
+  <button
+    (click)="nextPage()"
+    [disabled]="filter.pageNo === totalPages"
+    class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50"
+  >
+    Next
+  </button>
+</div>

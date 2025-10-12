@@ -194,3 +194,19 @@ export interface DashboardMetricsDto
         description: string;
         createdDate: Date;
     }
+
+    export interface ReceivedChequeDto {
+  srNo: number;
+  customerName: string;
+  customerAddress: string;
+  phoneNo: string;
+  chequeNumber: string;
+  bankName: string;
+  branchName: string;
+  chequeDate: string;
+  amount: number;
+  ifsc_Code: string;
+  createdAt: string;
+  fullName: string;
+  totalRecords: number;
+}
