@@ -1,34 +1,52 @@
 import { Component } from '@angular/core';
-import { FarmerService } from '../../services/signup.service';
+import {  SignupService } from '../../services/signup.service';
 import { FormsModule } from '@angular/forms';
 import { AlertService } from '../../services/alert.service';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
+import { RegisterUser } from '../../MODEL/MODEL';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-signup',
   standalone: true,
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
   imports: [FormsModule,CommonModule],
-  providers: [FarmerService] // <-- Add this line
+  providers: [SignupService]
 })
 export class SignupComponent {
-  farmer = {
-  name: '',
-  userName: '',
-  password: '',
-  role: '',
-  email: '',
-  companyName: '',
-  companyType: '',
 
+  user: RegisterUser = {
+    fullName: '',
+    username: '',
+    email: '',
+    passwordHash: '',
+    mobileNo: '',
+    gender: '',
+    dateOfBirth: new Date(),
+    address: '',
+    city: '',
+    state: '',
+    country: '',
+    profileImageUrl: '',
+    lastLoginAt: new Date(),
+    isActive: true,
+    isEmailVerified: false
   };
 
-  constructor(private farmerService: FarmerService, private alertService: AlertService) {}
+  constructor(private signupservice: SignupService,
+     private alertService: AlertService,
+    private router: Router) {}
+    isLoading = false;
   signup() {
-    this.farmerService.Register(this.farmer).subscribe(
+    if(this.user.passwordHash !== this.confirmPassword) {
+      this.alertService.showAlert('Passwords do not match!', 'error');
+      return;
+    }
+    this.signupservice.Register(this.user).subscribe(
       (response) => {
-        console.log('✅ Farmer registered:', response);
+        console.log('✅ User registered:', response);
         this.alertService.showAlert('Signup successful!', 'success');
+        this.router.navigate(['/auth/login']);
       },
       (error) => {
         console.error('❌ Signup failed:', error);
@@ -36,6 +54,8 @@ export class SignupComponent {
       }
     );
   }
+
+  confirmPassword: string = '';
   field = [
     { label: 'Name', name: 'name', type: 'text' },
     { label: 'User Name', name: 'userName', type: 'text' },
@@ -45,12 +65,35 @@ export class SignupComponent {
     { label: 'Company Name', name: 'companyName', type: 'text' },
     { label: 'Company Type', name: 'companyType', type: 'text' },
   ];
-  
-  testSuccess() {
-    this.alertService.showAlert('Test success alert!', 'success');
+
+   goToLogin() {
+    this.router.navigate(['/auth/login']);
   }
 
-  testError() {
-    this.alertService.showAlert('Test error alert!', 'error');
+  currentStep = 1;
+  nextStep() {
+  if (this.user.fullName && this.user.username && this.user.email && this.user.mobileNo) {
+    this.currentStep = 2;
+  } else {
+    alert('Please fill all required fields before continuing.');
   }
+}
+
+prevStep() {
+  this.currentStep = 1;
+}
+
+checkPasswordMatch() {
+  // This triggers the class binding on input change
+}
+
+passwordClass() {
+  if (!this.user.passwordHash && !this.confirmPassword) {
+    return 'border-gray-300 focus:ring-purple-500 bg-white text-gray-800';
+  } else if (this.user.passwordHash === this.confirmPassword) {
+    return 'border-green-500 focus:ring-green-400 bg-white text-gray-800';
+  } else {
+    return 'border-red-500 focus:ring-red-400 bg-white text-gray-800';
+  }
+}
 }

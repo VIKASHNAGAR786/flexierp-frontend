@@ -96,26 +96,56 @@ export class SaleReportComponent implements OnInit {
   }
 
   exportToPdf() {
-    this.reportIsLoading = true;
-    this.saleService.GetSalesReportPdf(this.filter).subscribe(blob => {
-      this.reportIsLoading = false;
-      if (blob) {
-        this.saleService.downloadFile(blob, 'ProductReport.pdf');
-        this.alertservice.showAlert("File Downloaded Successfully Inside Download Folder", 'success');
+  this.reportIsLoading = true;
+  try {
+    this.saleService.GetSalesReportPdf(this.filter).subscribe({
+      next: (blob) => {
+        if (blob) {
+          this.saleService.downloadFile(blob, 'ProductReport.pdf');
+          this.alertservice.showAlert("File Downloaded Successfully Inside Download Folder", 'success');
+        } else {
+          this.alertservice.showAlert("No data found to export.", 'warning');
+        }
+        this.reportIsLoading = false;
+      },
+      error: (error) => {
+        console.error('Error downloading PDF:', error);
+        this.alertservice.showAlert("Failed to download PDF file. Please try again later.", 'error');
+        this.reportIsLoading = false;
       }
     });
+  } catch (error) {
+    console.error('Unexpected error:', error);
+    this.alertservice.showAlert("Something went wrong. Please try again.", 'error');
+    this.reportIsLoading = false;
   }
+}
 
-  exportToExcel() {
-    this.reportIsLoading = true;
-    this.saleService.GetSalesReportExcel(this.filter).subscribe(blob => {
-      this.reportIsLoading = false;
-      if (blob) {
-        this.saleService.downloadFile(blob, 'ProductReport.xlsx');
-        this.alertservice.showAlert("File Downloaded Successfully Inside Download Folder", 'success');
+exportToExcel() {
+  this.reportIsLoading = true;
+  try {
+    this.saleService.GetSalesReportExcel(this.filter).subscribe({
+      next: (blob) => {
+        if (blob) {
+          this.saleService.downloadFile(blob, 'ProductReport.xlsx');
+          this.alertservice.showAlert("File Downloaded Successfully Inside Download Folder", 'success');
+        } else {
+          this.alertservice.showAlert("No data found to export.", 'warning');
+        }
+        this.reportIsLoading = false;
+      },
+      error: (error) => {
+        console.error('Error downloading Excel:', error);
+        this.alertservice.showAlert("Failed to download Excel file. Please try again later.", 'error');
+        this.reportIsLoading = false;
       }
     });
+  } catch (error) {
+    console.error('Unexpected error:', error);
+    this.alertservice.showAlert("Something went wrong. Please try again.", 'error');
+    this.reportIsLoading = false;
   }
+}
 
   showReceiptPopup: boolean = false;
   pdfUrl: SafeResourceUrl | null = null;

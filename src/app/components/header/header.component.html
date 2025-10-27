@@ -2,16 +2,27 @@
   <!-- Actions -->
   <div class="flex items-center gap-4 ml-auto">
 
-    <!-- Notes -->
-  <button 
-  appTooltip="Notes"
-  [tooltipFixed]="true"
-  [tooltipPosition]="'bottom'"
+    <!-- Backup -->
+    <button
+      appTooltip="Backup Data"
+      [tooltipFixed]="true"
+      [tooltipPosition]="'bottom'"
+      (click)="onBackup()"
+      class="relative p-2 rounded-full hover:bg-slate-800 transition text-[#00ffee]"
+    >
+      <i class="bi bi-cloud-arrow-up text-xl"></i>
+    </button>
 
-  class="relative p-2 rounded-full hover:bg-slate-800 transition text-[#00ffee]"
->
-  <i class="bi bi-journal-text text-xl"></i>
-</button>
+    <!-- Notes -->
+    <button 
+      appTooltip="Notes"
+      [tooltipFixed]="true"
+      [tooltipPosition]="'bottom'"
+      (click)="openNotes()"
+      class="relative p-2 rounded-full hover:bg-slate-800 transition text-[#00ffee]"
+    >
+      <i class="bi bi-journal-text text-xl"></i>
+    </button>
 
     <!-- User Dropdown -->
     <div class="relative">

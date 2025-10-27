@@ -4,6 +4,24 @@ export interface Tab {
   component: any;
 }
 
+export interface RegisterUser {
+    fullName: string;            // required
+    username: string;            // required
+    email: string;               // required
+    passwordHash: string;        // required
+    mobileNo: string;            // required
+    gender?: string;             // optional
+    dateOfBirth: Date;           // required
+    address?: string;            // optional
+    city?: string;               // optional
+    state?: string;              // optional
+    country?: string;            // optional
+    profileImageUrl?: string;    // optional
+    lastLoginAt: Date;           // required
+    isActive?: boolean;          // optional
+    isEmailVerified?: boolean;   // optional
+}
+
 export interface PaginationFilter {
   startDate: string | null;
   endDate: string | null;
@@ -160,4 +178,9 @@ export interface CartItemDTO {
   discountAmt: number;     // Discount amount applied
   taxAmt: number;          // Tax amount applied
   sellingPrice: number;    // Selling price per unit
+}
+
+ export interface BackupRequest
+{
+   backupFolderPath: string;
 }

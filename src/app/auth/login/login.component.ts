@@ -57,4 +57,10 @@ export class LoginComponent {
       this.isLoading = false; // Re-enable button regardless of success or failure
     }
   }
+
+  goToSignup() {
+    this.router.navigate(['/auth/signup']); // navigates to the signup component
+  }
+
+  
 }

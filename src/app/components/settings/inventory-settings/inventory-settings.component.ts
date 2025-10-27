@@ -14,9 +14,7 @@ import { ProductCategoryListDto, WarehouseDTO } from '../../../DTO/DTO';
 export class InventorySettingsComponent implements OnInit {
 
     ngOnInit(): void {
-      if (this.activeTab === 'warehouse') {
-        this.loadWarehouses();
-      }
+      this.loadCategories();
   }
 
   categoryForm: FormGroup;
@@ -64,6 +62,7 @@ export class InventorySettingsComponent implements OnInit {
         this.isSubmitting = false;
       }
     });
+    this.loadCategories();
   }
 
   submitWarehouse() {

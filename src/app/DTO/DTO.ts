@@ -77,8 +77,6 @@ export interface CustomerWithSalesDTO {
     customerAddress: string;
     phoneNo: string;
     email: string;
-    totalItems: number;
-    paymentMode: string;
     remark: string;
     createdDate: string;  // Use string if coming from API (ISO date), otherwise Date
     fullName: string;
