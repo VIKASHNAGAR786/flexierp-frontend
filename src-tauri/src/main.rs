@@ -1,18 +1,25 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use std::{
-    ffi::OsStr, fs::OpenOptions, io::Write, iter::once, os::windows::{ffi::OsStrExt, process::CommandExt}, path::PathBuf, process::{Child, Command}, ptr, sync::Mutex, thread, time::Duration
+    ffi::OsStr,
+    fs::OpenOptions,
+    io::Write,
+    iter::once,
+    os::windows::{ffi::OsStrExt, process::CommandExt},
+    path::PathBuf,
+    process::{Child, Command},
+    ptr,
+    sync::Mutex,
+    thread,
+    time::Duration,
 };
 
-use tauri::{Manager, State};
+use tauri::{Manager, State, Wry};
 use windows::core::PCWSTR;
 use windows::Win32::Foundation::{ERROR_ALREADY_EXISTS, GetLastError, HWND};
 use windows::Win32::System::Threading::{CreateMutexW, CREATE_NO_WINDOW};
 use windows::Win32::UI::WindowsAndMessaging::{MessageBoxW, MB_ICONERROR, MB_OK};
 
-use tauri::{Wry};
-
-// ✅ Import your dialog plugin
 use tauri_plugin_dialog;
 
 fn show_error(title: &str, message: &str) {
@@ -20,7 +27,7 @@ fn show_error(title: &str, message: &str) {
     let msg_w: Vec<u16> = OsStr::new(message).encode_wide().chain(Some(0)).collect();
     unsafe {
         MessageBoxW(
-            Some(HWND(std::ptr::null_mut())),
+            Some(HWND(ptr::null_mut())),
             PCWSTR(msg_w.as_ptr()),
             PCWSTR(title_w.as_ptr()),
             MB_OK | MB_ICONERROR,
@@ -30,7 +37,7 @@ fn show_error(title: &str, message: &str) {
 
 fn log_error(message: &str) {
     use chrono::Local;
-    let log_path = PathBuf::from("FlexiERP_Error.log");
+    let log_path = PathBuf::from("resources/logs/FlexiERP_Error.log"); // ✅ Move log to avoid dev rebuild loop
     if let Ok(mut file) = OpenOptions::new().create(true).append(true).open(&log_path) {
         let _ = writeln!(file, "[{}] {}", Local::now().format("%Y-%m-%d %H:%M:%S"), message);
     }
@@ -72,16 +79,14 @@ struct BackendProcesses {
 
 fn resolve_backend_dir() -> Result<PathBuf, String> {
     if cfg!(debug_assertions) {
-        // Dev mode: use project-relative path
-        let dev_path = std::env::current_dir()
+        let path = std::env::current_dir()
             .map_err(|e| format!("Failed to get current dir: {}", e))?
             .join("resources")
             .join("backend");
-        Ok(dev_path)
+        Ok(path)
     } else {
-        // Production: resolve relative to exe
-        let exe_dir = std::env::current_exe().map_err(|e| format!("Exe path error: {}", e))?;
-        exe_dir
+        std::env::current_exe()
+            .map_err(|e| format!("Exe path error: {}", e))?
             .parent()
             .map(|p| p.join("resources").join("backend"))
             .ok_or_else(|| "Failed to resolve backend directory path".to_string())
@@ -89,13 +94,23 @@ fn resolve_backend_dir() -> Result<PathBuf, String> {
 }
 
 fn start_backends(backend_dir: &PathBuf) -> Result<BackendProcesses, String> {
+    if std::env::var("FLEXIERP_SKIP_BACKEND").is_ok() {
+        log_error("Skipping backend launch due to FLEXIERP_SKIP_BACKEND");
+        return Ok(BackendProcesses {
+            flexierp: None,
+            run_service: None,
+        });
+    }
+
     let flexierp_path = backend_dir.join("FLEXIERP.exe");
     let run_service_path = backend_dir.join("run_service.exe");
 
     if !flexierp_path.exists() {
+        log_error(&format!("Missing FLEXIERP.exe at {:?}", flexierp_path));
         return Err(format!("FLEXIERP.exe not found at {:?}", flexierp_path));
     }
     if !run_service_path.exists() {
+        log_error(&format!("Missing run_service.exe at {:?}", run_service_path));
         return Err(format!("run_service.exe not found at {:?}", run_service_path));
     }
 
@@ -136,13 +151,12 @@ fn start_backends(backend_dir: &PathBuf) -> Result<BackendProcesses, String> {
 
 #[tauri::command]
 fn restart_backends(state: State<Mutex<BackendProcesses>>) -> Result<(), String> {
-   let backend_dir = resolve_backend_dir()?;
+    let backend_dir = resolve_backend_dir()?;
     let new_processes = start_backends(&backend_dir)?;
     if let Ok(mut state) = state.lock() {
         state.flexierp = new_processes.flexierp;
         state.run_service = new_processes.run_service;
     }
-
     Ok(())
 }
 
@@ -163,12 +177,10 @@ fn main() {
     });
 
     tauri::Builder::<Wry>::default()
-        // ✅ Register dialog plugin
         .plugin(tauri_plugin_dialog::init())
         .invoke_handler(tauri::generate_handler![restart_backends])
         .setup(|app| {
-           let backend_dir = resolve_backend_dir()?;
-
+            let backend_dir = resolve_backend_dir()?;
             match start_backends(&backend_dir) {
                 Ok(processes) => {
                     if let Ok(mut state) = app.state::<Mutex<BackendProcesses>>().lock() {
@@ -189,7 +201,7 @@ fn main() {
                 if let Ok(mut state) = window.app_handle().state::<Mutex<BackendProcesses>>().lock() {
                     let mut flexierp = state.flexierp.take();
                     let mut run_service = state.run_service.take();
-                    drop(state); // release lock
+                    drop(state);
                     thread::spawn(move || {
                         force_kill(&mut flexierp, "FLEXIERP.exe", "FLEXIERP backend");
                         force_kill(&mut run_service, "run_service.exe", "run_service");

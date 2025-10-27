@@ -84,8 +84,6 @@ export class HeaderComponent implements OnInit {
 async onBackup() {
   try {
     const isTauri = await this.isTauriEnvironment();
-    this.alertservice.showAlert(`🔍 Tauri environment: ${isTauri}`, 'info');
-
     let folderPath: string | null = null;
 
     if (isTauri) {
@@ -98,11 +96,9 @@ async onBackup() {
         })) as string | null;
 
         if (!folderPath) {
-          this.alertservice.showAlert('⚠️ No folder selected.', 'warning');
           return;
         }
 
-        this.alertservice.showAlert(`📁 Selected Folder: ${folderPath}`, 'info');
       } catch (tauriErr: any) {
         this.alertservice.showAlert(
           `⚠️ Error opening folder dialog: ${tauriErr.message || tauriErr}`,
@@ -126,7 +122,6 @@ async onBackup() {
       backupFolderPath: folderPath,
     };
 
-    this.alertservice.showAlert('📤 Sending backup request...', 'info');
 
     this.commonservice.backup(backupRequest).subscribe({
       next: (res: any) => {
