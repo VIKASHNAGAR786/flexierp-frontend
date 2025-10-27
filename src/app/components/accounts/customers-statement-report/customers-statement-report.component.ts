@@ -64,7 +64,7 @@ endDate: string = '';
  exportToPdf(id: number) {
     this.saleservice.GetCustomerledgerdetailspdf(id,this.startDate,this.endDate).subscribe(blob => {
       if (blob) {
-        this.saleservice.downloadFile(blob, 'ProductReport.pdf');
+        this.saleservice.downloadFile(blob, `PartyStatement_${this.customername}.pdf`);
         this.alertservice.showAlert("File Downloaded Successfully Inside Download Folder", 'success');
       }
     });
