@@ -1,0 +1,193 @@
+<!-- Notes Header -->
+
+<div class="min-h-screen bg-gray-900 text-white font-sans p-6">
+  <h2 class="text-2xl font-semibold mb-6 text-[#00ffee] text-center drop-shadow-md">
+    🗒️ My Notes
+  </h2>
+
+  <!-- Add Note Button -->
+  <div class="text-center mb-6">
+    <button (click)="openPopup()"
+      class="py-2 px-5 rounded-lg bg-[#00ffee] text-black font-semibold hover:bg-[#00e6d5] transition shadow-md">
+      ➕ Add New Note
+    </button>
+  </div>
+
+  <!-- Notes List -->
+  <div *ngIf="allnotes.length > 0; else noNotes">
+  <div class="space-y-4 max-h-[500px] overflow-y-auto">
+    <div
+      *ngFor="let note of allnotes"
+      class="bg-slate-800/70 backdrop-blur-sm p-4 rounded-xl shadow-md border border-slate-700 hover:bg-slate-700/50 transition relative"
+    >
+
+      <!-- Note Content -->
+      <div class="pr-12">
+        <div class="flex items-center mb-1 text-sm text-gray-300">
+          <span class="font-medium">Author: {{ note.authorId }}</span>
+        </div>
+        <h3 class="text-lg text-[#00ffee] font-semibold mb-2">{{ note.title }}</h3>
+        <p class="text-white mb-2 prose prose-invert" [innerHTML]="note.content"></p>
+
+        <!-- Date moved below content -->
+        <div class="text-xs text-gray-400 italic mt-1">
+          {{ note.createdAt | date:'medium' }}
+        </div>
+      </div>
+
+      <!-- Right-side Action Buttons (Always Visible & Compact) -->
+      <div class="absolute right-1.5 top-2 flex flex-col space-y-[2px]">
+        <button
+          appTooltip="View Note"
+          [tooltipFixed]="false"
+          [tooltipPosition]="'left'"
+          (click)="viewNote(note)"
+          class="p-1 rounded-full hover:bg-slate-700 transition text-blue-400"
+        >
+          <i class="bi bi-eye text-sm"></i>
+        </button>
+
+        <button
+          appTooltip="Edit Note"
+          [tooltipFixed]="false"
+          [tooltipPosition]="'left'"
+          (click)="editNote(note)"
+          class="p-1 rounded-full hover:bg-slate-700 transition text-green-400"
+        >
+          <i class="bi bi-pencil-square text-sm"></i>
+        </button>
+
+        <button
+          appTooltip="Pin Note"
+          [tooltipFixed]="false"
+          [tooltipPosition]="'left'"
+          (click)="pinNote(note)"
+          class="p-1 rounded-full hover:bg-slate-700 transition text-yellow-400"
+        >
+          <i class="bi bi-pin-angle text-sm"></i>
+        </button>
+
+        <button
+          appTooltip="Delete Note"
+          [tooltipFixed]="false"
+          [tooltipPosition]="'left'"
+          (click)="deleteNote(note)"
+          class="p-1 rounded-full hover:bg-slate-700 transition text-red-500"
+        >
+          <i class="bi bi-trash3 text-sm"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- No Notes Template -->
+<ng-template #noNotes>
+  <p class="text-gray-400 text-center mt-6">No notes available. Start by adding one!</p>
+</ng-template>
+
+<!-- No Notes Template -->
+<ng-template #noNotes>
+  <p class="text-gray-400 text-center mt-6">No notes available. Start by adding one!</p>
+</ng-template>
+
+
+
+  <!-- No Notes Template -->
+  <ng-template #noNotes>
+    <p class="text-center text-gray-400">No notes yet. Click “Add New Note” to start.</p>
+  </ng-template>
+
+  <!-- Add Note Popup --------------------------------------------------------->
+  <div *ngIf="showPopup" class="fixed inset-0 bg-black/70 flex justify-center items-center z-50">
+    <div class="bg-slate-900 p-8 rounded-2xl shadow-2xl w-full max-w-3xl relative border border-slate-700">
+
+      <!-- Close Button -->
+      <button (click)="closePopup()"
+        class="absolute top-4 right-5 text-gray-400 hover:text-[#00ffee] text-2xl font-bold transition">
+        ✖
+      </button>
+
+      <h2 class="text-2xl font-semibold mb-6 text-[#00ffee] text-center drop-shadow-md">📝 Create a New Note</h2>
+
+      <div class="space-y-6">
+        <!-- Title -->
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-1">Note Title *</label>
+          <input type="text" [(ngModel)]="noteTitle" placeholder="Enter your note title..."
+            class="w-full p-3 rounded-lg bg-slate-800/70 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-[#00ffee] shadow-inner placeholder-gray-400" />
+        </div>
+
+        <!-- Rich Text Editor -->
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-2">Note Content *</label>
+
+          <!-- Toolbar -->
+          <div
+            class="flex flex-wrap items-center justify-center gap-3 mb-3 bg-slate-800/70 p-3 rounded-lg border border-slate-700 shadow-inner">
+            <button type="button" (click)="formatText('bold')" title="Bold"
+              class="px-2 py-1 text-[#00ffee] hover:bg-[#00ffee]/10 rounded text-lg font-bold">B</button>
+            <button type="button" (click)="formatText('italic')" title="Italic"
+              class="px-2 py-1 text-[#00ffee] hover:bg-[#00ffee]/10 rounded italic text-lg">I</button>
+            <button type="button" (click)="formatText('underline')" title="Underline"
+              class="px-2 py-1 text-[#00ffee] hover:bg-[#00ffee]/10 rounded underline text-lg">U</button>
+            <button type="button" (click)="formatText('strikeThrough')" title="Strikethrough"
+              class="px-2 py-1 text-[#00ffee] hover:bg-[#00ffee]/10 rounded text-lg line-through">S</button>
+
+            <div class="w-px h-5 bg-slate-600"></div>
+
+            <button type="button" (click)="formatText('insertUnorderedList')" title="Bullet List"
+              class="px-2 py-1 text-[#00ffee] hover:bg-[#00ffee]/10 rounded text-lg">• List</button>
+            <button type="button" (click)="formatText('insertOrderedList')" title="Numbered List"
+              class="px-2 py-1 text-[#00ffee] hover:bg-[#00ffee]/10 rounded text-lg">1. List</button>
+
+            <div class="w-px h-5 bg-slate-600"></div>
+
+            <button type="button" (click)="formatText('justifyLeft')" title="Align Left"
+              class="px-2 py-1 text-[#00ffee] hover:bg-[#00ffee]/10 rounded text-lg">⇤</button>
+            <button type="button" (click)="formatText('justifyCenter')" title="Align Center"
+              class="px-2 py-1 text-[#00ffee] hover:bg-[#00ffee]/10 rounded text-lg">☰</button>
+            <button type="button" (click)="formatText('justifyRight')" title="Align Right"
+              class="px-2 py-1 text-[#00ffee] hover:bg-[#00ffee]/10 rounded text-lg">⇥</button>
+
+            <div class="w-px h-5 bg-slate-600"></div>
+
+            <button type="button" (click)="formatText('undo')" title="Undo"
+              class="px-2 py-1 text-[#00ffee] hover:bg-[#00ffee]/10 rounded text-lg">↶</button>
+            <button type="button" (click)="formatText('redo')" title="Redo"
+              class="px-2 py-1 text-[#00ffee] hover:bg-[#00ffee]/10 rounded text-lg">↷</button>
+          </div>
+
+          <!-- Editable Content Area -->
+          <div contenteditable="true"
+            class="w-full min-h-[250px] p-4 rounded-lg bg-slate-800/50 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-[#00ffee] shadow-inner overflow-y-auto"
+            (input)="newNote = ($any($event.target).innerHTML || '')" [innerHTML]="newNote">
+          </div>
+        </div>
+
+        <!-- Flags -->
+        <div class="flex items-center justify-center space-x-8 mt-4">
+          <label class="flex items-center space-x-2 text-sm text-gray-300">
+            <input type="checkbox" [(ngModel)]="notePinned"
+              class="h-5 w-5 text-[#00ffee] bg-slate-800/50 border-slate-600 rounded focus:ring-[#00ffee] focus:ring-2" />
+            <span>Pinned</span>
+          </label>
+          <label class="flex items-center space-x-2 text-sm text-gray-300">
+            <input type="checkbox" [(ngModel)]="noteArchived"
+              class="h-5 w-5 text-[#00ffee] bg-slate-800/50 border-slate-600 rounded focus:ring-[#00ffee] focus:ring-2" />
+            <span>Archived</span>
+          </label>
+        </div>
+
+        <!-- Add Note Button -->
+        <button (click)="addNote()"
+          class="w-full py-3 px-4 rounded-lg font-semibold bg-[#00ffee] text-black hover:bg-[#00e6d5] transition-all shadow-md text-lg">
+          💾 Save Note
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+</div>

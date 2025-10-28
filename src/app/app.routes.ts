@@ -16,6 +16,7 @@ import { SalesComponent } from './components/sales/sales.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { VendorsComponent } from './components/vendors/vendors.component';
 import { ProfileViewComponent } from './components/profile-view/profile-view.component';
+import { NotesComponent } from './components/COMMON/notes/notes.component';
 
 export const routes: Routes = [
   // Default redirect
@@ -41,6 +42,7 @@ export const routes: Routes = [
       { path: 'settings', component: SettingsComponent },
       { path: 'vendors', component: VendorsComponent },
       { path: 'profileview', component: ProfileViewComponent },
+      { path: 'notes', component: NotesComponent },
     ]
   },
 

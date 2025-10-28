@@ -4,8 +4,8 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { UserinfowithloginService } from './userinfowithlogin.service';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { BackupRequest, PaginationFilter, ProductCategory, ProductModel, ProviderModel, UpdateCompanyInfo, WarehouseModel } from '../MODEL/MODEL';
-import { CompanyInfoDTO, DashboardMetricsDto, ProductCategoryDTO, ProductDTO, ProviderDTO, ReceivedChequeDto, UserLoginHistoryDTO, WarehouseDTO } from '../DTO/DTO';
+import { BackupRequest, PaginationFilter, ProductCategory, ProductModel, ProviderModel, SaveNote, UpdateCompanyInfo, WarehouseModel } from '../MODEL/MODEL';
+import { CompanyInfoDTO, DashboardMetricsDto, NoteDto, ProductCategoryDTO, ProductDTO, ProviderDTO, ReceivedChequeDto, UserLoginHistoryDTO, WarehouseDTO } from '../DTO/DTO';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +37,8 @@ export class CommonService {
   private readonly GenerateDashboardExcelUrl = environment.BASE_URL + '/CommonMaster/GenerateDashboardExcel';
   private readonly GetReceivedChequesAsyncUrl = environment.BASE_URL + '/CommonMaster/GetReceivedChequesAsync';
   private readonly backupurl = environment.BASE_URL + '/Backup/backup';
+  private readonly savenotesUrl = environment.BASE_URL + '/CommonMaster/SaveNote';
+  private readonly GetAllNotesUrl = environment.BASE_URL + '/CommonMaster/GetAllNotes';
 
   logout(): Observable<string> {
     const headers = this.getAuthHeaders();
@@ -155,4 +157,18 @@ export class CommonService {
 
     return this.http.post<string>(this.backupurl, request, { headers });
   }
+
+ savenotes(notes: SaveNote): Observable<string> {
+  const headers = this.getAuthHeaders(); // should include 'Authorization' if needed
+  if (!headers) return of("");
+  return this.http.post<string>(this.savenotesUrl, notes, { headers });
+}
+
+
+GetAllNotes(): Observable<NoteDto[] | null> {
+    const headers = this.getAuthHeaders();
+    if (!headers) return of(null);
+
+    return this.http.get<NoteDto[]>(this.GetAllNotesUrl, { headers });
   }
+}

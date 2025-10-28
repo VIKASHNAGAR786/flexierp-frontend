@@ -11,6 +11,7 @@ import { TooltipDirective } from '../../shared/tooltip.directive';
 import { open } from '@tauri-apps/plugin-dialog';
 import { BackupRequest } from '../../MODEL/MODEL';
 import { getVersion } from '@tauri-apps/api/app';
+import { NotesComponent } from "../COMMON/notes/notes.component";
 
 
 
@@ -143,10 +144,9 @@ async onBackup() {
 }
 
 
-  openNotes() {
-    // Future: You can open a modal or route to your Notes page
-    this.alertservice.showAlert('🗒️ Notes feature coming soon!', 'info');
-  }
+openNotes() {
+  this.router.navigate(['/notes']);
+}
 
   
 async isTauriEnvironment(): Promise<boolean> {

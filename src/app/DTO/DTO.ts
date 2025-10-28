@@ -208,3 +208,17 @@ export interface DashboardMetricsDto
   fullName: string;
   totalRecords: number;
 }
+
+export interface NoteDto {
+  id: number;
+  title: string;
+  content: string;
+  createdAt: string;       // ISO date string
+  updatedAt?: string;      // optional ISO date string
+  authorId: string;
+  isPinned: boolean;
+  isArchived: boolean;
+  createdBy: string;
+  updatedBy?: string;
+  status: boolean;
+}

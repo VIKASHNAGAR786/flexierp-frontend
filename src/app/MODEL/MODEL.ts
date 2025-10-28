@@ -184,3 +184,11 @@ export interface CartItemDTO {
 {
    backupFolderPath: string;
 }
+
+export interface SaveNote {
+  title: string;
+  content: string;
+  authorId: number;
+  isPinned: boolean;
+  isArchived: boolean;
+}
