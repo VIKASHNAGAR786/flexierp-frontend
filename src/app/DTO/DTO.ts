@@ -222,3 +222,16 @@ export interface NoteDto {
   updatedBy?: string;
   status: boolean;
 }
+
+export interface NoteDetailsDto {
+  title: string;
+  content: string;
+  createdat: string;         // AM/PM formatted string
+  updatedat?: string;        // optional
+  authorname: string;
+  ispinned: boolean;
+  isarchived: boolean;
+  createdbyName: string;
+  updatedbyName: string;
+  status: boolean;
+}

@@ -5,7 +5,7 @@ import { UserinfowithloginService } from './userinfowithlogin.service';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { BackupRequest, PaginationFilter, ProductCategory, ProductModel, ProviderModel, SaveNote, UpdateCompanyInfo, WarehouseModel } from '../MODEL/MODEL';
-import { CompanyInfoDTO, DashboardMetricsDto, NoteDto, ProductCategoryDTO, ProductDTO, ProviderDTO, ReceivedChequeDto, UserLoginHistoryDTO, WarehouseDTO } from '../DTO/DTO';
+import { CompanyInfoDTO, DashboardMetricsDto, NoteDetailsDto, NoteDto, ProductCategoryDTO, ProductDTO, ProviderDTO, ReceivedChequeDto, UserLoginHistoryDTO, WarehouseDTO } from '../DTO/DTO';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +39,7 @@ export class CommonService {
   private readonly backupurl = environment.BASE_URL + '/Backup/backup';
   private readonly savenotesUrl = environment.BASE_URL + '/CommonMaster/SaveNote';
   private readonly GetAllNotesUrl = environment.BASE_URL + '/CommonMaster/GetAllNotes';
+  private readonly GetNoteDetailsByIdAsyncUrl = environment.BASE_URL + '/CommonMaster/GetNoteDetailsByIdAsync';
 
   logout(): Observable<string> {
     const headers = this.getAuthHeaders();
@@ -171,4 +172,13 @@ GetAllNotes(): Observable<NoteDto[] | null> {
 
     return this.http.get<NoteDto[]>(this.GetAllNotesUrl, { headers });
   }
+
+  GetNoteDetailsByIdAsync(rowid: number): Observable<NoteDetailsDto | null> {
+    const headers = this.getAuthHeaders();
+    if (!headers) return of(null);
+    let params = new HttpParams()
+      .set('rowid', rowid.toString());
+    return this.http.get<NoteDetailsDto>(this.GetNoteDetailsByIdAsyncUrl, { headers, params });
+  }
+
 }

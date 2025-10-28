@@ -1,4 +1,4 @@
-<!-- Notes Header -->
+Notes Header
 
 <div class="min-h-screen bg-gray-900 text-white font-sans p-6">
   <h2 class="text-2xl font-semibold mb-6 text-[#00ffee] text-center drop-shadow-md">
@@ -15,82 +15,60 @@
 
   <!-- Notes List -->
   <div *ngIf="allnotes.length > 0; else noNotes">
-  <div class="space-y-4 max-h-[500px] overflow-y-auto">
-    <div
-      *ngFor="let note of allnotes"
-      class="bg-slate-800/70 backdrop-blur-sm p-4 rounded-xl shadow-md border border-slate-700 hover:bg-slate-700/50 transition relative"
-    >
+    <div class="space-y-4 max-h-[500px] overflow-y-auto">
+      <div *ngFor="let note of allnotes"
+        class="bg-slate-800/70 backdrop-blur-sm p-4 rounded-xl shadow-md border border-slate-700 hover:bg-slate-700/50 transition relative">
 
-      <!-- Note Content -->
-      <div class="pr-12">
-        <div class="flex items-center mb-1 text-sm text-gray-300">
-          <span class="font-medium">Author: {{ note.authorId }}</span>
+        <!-- Note Content -->
+        <div class="pr-12">
+          <div class="flex items-center mb-1 text-sm text-gray-300">
+            <span class="font-medium">Author: {{ note.authorId }}</span>
+          </div>
+          <h3 class="text-lg text-[#00ffee] font-semibold mb-2">{{ note.title }}</h3>
+          <p class="text-white mb-2 prose prose-invert" [innerHTML]="note.content"></p>
+
+          <!-- Date moved below content -->
+          <div class="text-xs text-gray-400 italic mt-1">
+            {{ note.createdAt | date:'medium' }}
+          </div>
         </div>
-        <h3 class="text-lg text-[#00ffee] font-semibold mb-2">{{ note.title }}</h3>
-        <p class="text-white mb-2 prose prose-invert" [innerHTML]="note.content"></p>
 
-        <!-- Date moved below content -->
-        <div class="text-xs text-gray-400 italic mt-1">
-          {{ note.createdAt | date:'medium' }}
+        <!-- Right-side Action Buttons (Always Visible & Compact) -->
+        <div class="absolute right-1.5 top-2 flex flex-col space-y-[2px]">
+          <button appTooltip="View Note" [tooltipFixed]="false" [tooltipPosition]="'left'" (click)="viewNote(note.id)"
+            class="p-1 rounded-full hover:bg-slate-700 transition text-blue-400">
+            <i class="bi bi-eye text-sm"></i>
+          </button>
+
+          <button appTooltip="Edit Note" [tooltipFixed]="false" [tooltipPosition]="'left'" (click)="editNote(note)"
+            class="p-1 rounded-full hover:bg-slate-700 transition text-green-400">
+            <i class="bi bi-pencil-square text-sm"></i>
+          </button>
+
+          <button appTooltip="Pin Note" [tooltipFixed]="false" [tooltipPosition]="'left'" (click)="pinNote(note)"
+            class="p-1 rounded-full hover:bg-slate-700 transition text-yellow-400">
+            <i class="bi bi-pin-angle text-sm"></i>
+          </button>
+
+          <button appTooltip="Delete Note" [tooltipFixed]="false" [tooltipPosition]="'left'" (click)="deleteNote(note)"
+            class="p-1 rounded-full hover:bg-slate-700 transition text-red-500">
+            <i class="bi bi-trash3 text-sm"></i>
+          </button>
         </div>
+
       </div>
-
-      <!-- Right-side Action Buttons (Always Visible & Compact) -->
-      <div class="absolute right-1.5 top-2 flex flex-col space-y-[2px]">
-        <button
-          appTooltip="View Note"
-          [tooltipFixed]="false"
-          [tooltipPosition]="'left'"
-          (click)="viewNote(note)"
-          class="p-1 rounded-full hover:bg-slate-700 transition text-blue-400"
-        >
-          <i class="bi bi-eye text-sm"></i>
-        </button>
-
-        <button
-          appTooltip="Edit Note"
-          [tooltipFixed]="false"
-          [tooltipPosition]="'left'"
-          (click)="editNote(note)"
-          class="p-1 rounded-full hover:bg-slate-700 transition text-green-400"
-        >
-          <i class="bi bi-pencil-square text-sm"></i>
-        </button>
-
-        <button
-          appTooltip="Pin Note"
-          [tooltipFixed]="false"
-          [tooltipPosition]="'left'"
-          (click)="pinNote(note)"
-          class="p-1 rounded-full hover:bg-slate-700 transition text-yellow-400"
-        >
-          <i class="bi bi-pin-angle text-sm"></i>
-        </button>
-
-        <button
-          appTooltip="Delete Note"
-          [tooltipFixed]="false"
-          [tooltipPosition]="'left'"
-          (click)="deleteNote(note)"
-          class="p-1 rounded-full hover:bg-slate-700 transition text-red-500"
-        >
-          <i class="bi bi-trash3 text-sm"></i>
-        </button>
-      </div>
-
     </div>
   </div>
-</div>
 
-<!-- No Notes Template -->
-<ng-template #noNotes>
-  <p class="text-gray-400 text-center mt-6">No notes available. Start by adding one!</p>
-</ng-template>
+  <!-- No Notes Template -->
+  <ng-template #noNotes>
+    <p class="text-gray-400 text-center mt-6">No notes available. Start by adding one!</p>
+  </ng-template>
 
-<!-- No Notes Template -->
-<ng-template #noNotes>
-  <p class="text-gray-400 text-center mt-6">No notes available. Start by adding one!</p>
-</ng-template>
+  <!-- No Notes Template -->
+  <ng-template #noNotes>
+    <p class="text-gray-400 text-center mt-6">No notes available. Start by adding one!</p>
+  </ng-template>
 
 
 
@@ -159,11 +137,16 @@
               class="px-2 py-1 text-[#00ffee] hover:bg-[#00ffee]/10 rounded text-lg">↷</button>
           </div>
 
-          <!-- Editable Content Area -->
-          <div contenteditable="true"
-            class="w-full min-h-[250px] p-4 rounded-lg bg-slate-800/50 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-[#00ffee] shadow-inner overflow-y-auto"
-            (input)="newNote = ($any($event.target).innerHTML || '')" [innerHTML]="newNote">
-          </div>
+        <div
+      #editor
+      id="noteEditor"
+      contenteditable="true"
+      dir="ltr"
+      spellcheck="true"
+      (input)="onNoteInput($event)"
+      class="w-full min-h-[250px] p-4 rounded-lg bg-slate-800/50 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-[#00ffee] shadow-inner overflow-y-auto text-left"
+    ></div>
+    
         </div>
 
         <!-- Flags -->
@@ -188,6 +171,49 @@
       </div>
     </div>
   </div>
+
+
+  <!-- View Note Details Popup -->
+  <div *ngIf="showNoteDetailPopup" class="fixed inset-0 bg-black/70 flex justify-center items-center z-50">
+    <div
+      class="bg-slate-800 p-8 rounded-2xl shadow-2xl w-[90%] max-w-3xl relative border border-[#00ffee] overflow-y-auto max-h-[85vh] text-white">
+      <!-- Close Button -->
+      <button (click)="closeNoteDetailPopup()"
+        class="absolute top-4 right-4 text-gray-300 hover:text-[#00ffee] text-2xl font-bold">
+        ✖
+      </button>
+
+      <!-- Header -->
+      <h2 class="text-2xl font-semibold mb-6 text-[#00ffee] text-center tracking-wide">
+        📝 Note Details
+      </h2>
+
+      <!-- Note Details -->
+      <div *ngIf="selectedNote; else loadingNote" class="space-y-5">
+        <div class="p-4 bg-slate-700/50 rounded-lg shadow-inner border border-slate-600">
+          <h3 class="text-2xl font-semibold text-[#00ffee] mb-3">
+            Title : {{ selectedNote.title || 'Untitled Note' }}
+          </h3>
+
+          <div class="text-base text-gray-100 leading-relaxed mb-4 whitespace-pre-wrap"
+            [innerHTML]="selectedNote.content || 'No content available'"></div>
+
+          <div class="text-sm text-gray-300 border-t border-slate-600 pt-3 space-y-1">
+            <p><span class="font-medium text-[#00ffee]">Author:</span> {{ selectedNote.authorname || 'N/A' }}</p>
+            <p><span class="font-medium text-[#00ffee]">Created:</span> {{ selectedNote.createdat | date:'medium' }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading Template -->
+      <ng-template #loadingNote>
+        <div class="text-center text-gray-300 text-lg mt-6">
+          Loading note details...
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
 
 
 </div>
