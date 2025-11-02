@@ -38,6 +38,8 @@ export class CustomersStatementReportComponent implements OnInit {
   contactno: string = '';
   startDate: string = '';
 endDate: string = '';
+public  partyStatement: CustomerLedgerDetailDto[] = [];
+
 
   ngOnInit(): void {
     this.getCustomerData();
@@ -78,7 +80,6 @@ endDate: string = '';
   exportToExcel() {
    
   }
-public  partyStatement: CustomerLedgerDetailDto[] = [];
  showPartyStatement = false;
   viewCustomerStatement(id: number) {
     this.showPartyStatement = true;

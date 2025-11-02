@@ -18,57 +18,61 @@ import { TooltipDirective } from '../../../shared/tooltip.directive';
 export class NotesComponent implements OnInit {
   @ViewChild('editor', { static: false }) editor!: ElementRef<HTMLElement>;
   newNote = '';
-noteTitle: any;
-notePinned: any;
-noteArchived: any;
-selectedNote: NoteDetailsDto | null = null;
+  noteTitle: any;
+  notePinned: any;
+  noteArchived: any;
+  selectedNote: NoteDetailsDto | null = null;
   showNoteDetailPopup = false;
+  openEditPopup = false;
+  rowid: number = 0;
+  deleteNoteId: number = 0;
 
   constructor(
     private notesService: CommonService,
     private alertservice: AlertService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.loadNotes();
   }
 
-  allnotes:NoteDto[] = [];
-addNote() {
-  
-  if (!this.noteTitle.trim() && !this.newNote.trim()) return;
+  allnotes: NoteDto[] = [];
+  addNote(notesid: number = 0) {
 
-  const note: SaveNote = {
-    title: this.noteTitle,
-    content: this.newNote,
-    authorId: 1, // Replace with actual user ID
-    isPinned: this.notePinned,
-    isArchived: this.noteArchived
-  };
+    if (!this.noteTitle.trim() && !this.newNote.trim()) return;
 
-  try {
-    this.notesService.savenotes(note).subscribe({
-      next: () => {
-        this.loadNotes();
-        this.newNote = '';
-        this.noteTitle = '';
-        this.notePinned = false;
-        this.noteArchived = false;
-      },
-      error: (err) => {
-        this.alertservice.showAlert('Failed to save note:', err);
-      },
-      complete: () => {
-       this.alertservice.showAlert('✅ Note saved successfully.', 'success');
-      }
-    });
-  } catch (err) {
-    console.error('Unexpected error:', err);
-    this.alertservice.showAlert('❌ Something went wrong.', "error");
+    const note: SaveNote = {
+      title: this.noteTitle,
+      content: this.newNote,
+      authorId: 1, // Replace with actual user ID
+      isPinned: this.notePinned,
+      isArchived: this.noteArchived,
+      notesid: notesid // New note, so ID is 0
+    };
+
+    try {
+      this.notesService.savenotes(note).subscribe({
+        next: () => {
+          this.loadNotes();
+          this.newNote = '';
+          this.noteTitle = '';
+          this.notePinned = false;
+          this.noteArchived = false;
+        },
+        error: (err) => {
+          this.alertservice.showAlert('Failed to save note:', err);
+        },
+        complete: () => {
+          this.alertservice.showAlert('✅ Note saved successfully.', 'success');
+        }
+      });
+    } catch (err) {
+      console.error('Unexpected error:', err);
+      this.alertservice.showAlert('❌ Something went wrong.', "error");
+    }
   }
-}
 
-closePopup() {
+  closePopup() {
     this.showPopup = false;
     // optional: clear editor content
     setTimeout(() => {
@@ -91,9 +95,18 @@ closePopup() {
     }
   }
 
-  deleteNote(note: any) {
-    this.allnotes = this.allnotes.filter(n => n !== note);
+deleteNote(deleteNoteId: number) {
+  this.deleteNoteId = deleteNoteId;
+}
+
+confirmDelete(confirmed: boolean) {
+  if (confirmed) {
+   this.deleteNoteId ;
   }
+  else{
+    this.deleteNoteId = 0;
+  }
+}
 
   pinNote(note: any) {
     this.allnotes = [note, ...this.allnotes.filter(n => n !== note)];
@@ -114,7 +127,7 @@ closePopup() {
 
   showPopup = false;
 
- openPopup(editHtml: string = '') {
+  openPopup(editHtml: string = '') {
     this.showPopup = true;
     this.newNote = editHtml || ''; // keep model
     // wait for view to render, then set editor innerHTML and focus
@@ -127,25 +140,25 @@ closePopup() {
       }
     }, 0);
   }
-   clearForm() {
+  clearForm() {
     this.noteTitle = '';
     this.newNote = '';
     this.notePinned = false;
     this.noteArchived = false;
   }
   formatText(command: string) {
-  document.execCommand(command, false, '');
-}
+    document.execCommand(command, false, '');
+  }
 
-onNoteInput(event: Event) {
+  onNoteInput(event: Event) {
     const el = event.target as HTMLElement;
     this.newNote = el.innerHTML;
     // optional: console.log('live html:', this.newNote);
   }
 
 
-viewNote(rowid: number) {
-  this.selectedNote = null; // reset to show loading
+  viewNote(rowid: number) {
+    this.selectedNote = null; // reset to show loading
     this.notesService.GetNoteDetailsByIdAsync(rowid).subscribe({
       next: (note) => {
         if (note) {
@@ -167,10 +180,46 @@ viewNote(rowid: number) {
     this.showNoteDetailPopup = false;
     this.selectedNote = null;
   }
-  
-  editNote(note: any) {
-  // Logic to edit the note
-  console.log('Editing note:', note);
-}
+
+  editNote(id: number) {
+    // open the edit popup and load the note content (content is a string)
+    this.openEditPopup = true;
+
+    this.notesService.GetNoteDetailsByIdAsync(id).subscribe({
+      next: (note) => {
+        if (note) {
+          this.selectedNote = note;
+          // content is a string, so assign directly
+          this.newNote = note.content ?? '';
+          this.noteTitle = note.title ?? '';
+          this.notePinned = note.ispinned ?? false;
+          this.noteArchived = note.isarchived ?? false;
+          this.rowid = id;
+          // wait for view to render, then set editor innerHTML and focus
+          setTimeout(() => {
+            if (this.editor && this.editor.nativeElement) {
+              this.editor.nativeElement.innerHTML = this.newNote || '';
+              // place caret at end
+              this.placeCaretAtEnd(this.editor.nativeElement);
+            }
+          }, 0);
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching note for edit:', err);
+      }
+    });
+  }
+  onEditNoteInput(event: Event) {
+    const el = event.target as HTMLElement;
+    this.newNote = el.innerHTML;
+    // optional: console.log('live html:', this.newNote);
+  }
+  closeEditPopup(){
+    this.openEditPopup = false;
+  }
+  EditaddNote() {
+     this.addNote(this.rowid);
+  }
 
 }

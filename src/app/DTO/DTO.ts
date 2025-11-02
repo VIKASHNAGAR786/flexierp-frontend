@@ -157,7 +157,7 @@ export interface CustomerLedgerDetailDto {
   saledate?: string;
   totalitems: number;
   totaldiscount: number;
-  paymentmode: number;
+  paymentmode: string;
   rowid?: number;
   tax?: number;
   customername: string;

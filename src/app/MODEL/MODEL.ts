@@ -191,4 +191,5 @@ export interface SaveNote {
   authorId: number;
   isPinned: boolean;
   isArchived: boolean;
+  notesid: number;
 }
