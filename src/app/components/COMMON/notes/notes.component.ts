@@ -101,7 +101,22 @@ deleteNote(deleteNoteId: number) {
 
 confirmDelete(confirmed: boolean) {
   if (confirmed) {
-   this.deleteNoteId ;
+   this.notesService.DeleteNotesById(this.deleteNoteId).subscribe({
+      next: (result) => {
+        if (result && result > 0) {
+        this.alertservice.showAlert('✅ Note deleted successfully.', 'success');
+        this.deleteNoteId = 0;
+        this.loadNotes();
+        } else {
+          this.alertservice.showAlert('❌ Note deletion failed.', 'error');
+          this.deleteNoteId = 0;
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching note details:', err);
+        this.deleteNoteId = 0;
+      },
+    });
   }
   else{
     this.deleteNoteId = 0;

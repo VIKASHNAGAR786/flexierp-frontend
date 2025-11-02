@@ -40,6 +40,7 @@ export class CommonService {
   private readonly savenotesUrl = environment.BASE_URL + '/CommonMaster/SaveNote';
   private readonly GetAllNotesUrl = environment.BASE_URL + '/CommonMaster/GetAllNotes';
   private readonly GetNoteDetailsByIdAsyncUrl = environment.BASE_URL + '/CommonMaster/GetNoteDetailsByIdAsync';
+  private readonly DeleteNotesByIdUrl = environment.BASE_URL + '/CommonMaster/DeleteNotesById';
 
   logout(): Observable<string> {
     const headers = this.getAuthHeaders();
@@ -179,6 +180,14 @@ GetAllNotes(): Observable<NoteDto[] | null> {
     let params = new HttpParams()
       .set('rowid', rowid.toString());
     return this.http.get<NoteDetailsDto>(this.GetNoteDetailsByIdAsyncUrl, { headers, params });
+  }
+
+  DeleteNotesById(deletednotsid: number): Observable<number | null> {
+    const headers = this.getAuthHeaders();
+    if (!headers) return of(null);
+    let params = new HttpParams()
+      .set('deletednotsid', deletednotsid.toString());
+    return this.http.delete<number>(this.DeleteNotesByIdUrl, { headers, params });
   }
 
 }
