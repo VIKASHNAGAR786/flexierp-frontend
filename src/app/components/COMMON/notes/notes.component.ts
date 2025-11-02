@@ -26,6 +26,8 @@ export class NotesComponent implements OnInit {
   openEditPopup = false;
   rowid: number = 0;
   deleteNoteId: number = 0;
+    allnotes: NoteDto[] = [];
+      showPopup = false;
 
   constructor(
     private notesService: CommonService,
@@ -36,7 +38,7 @@ export class NotesComponent implements OnInit {
     this.loadNotes();
   }
 
-  allnotes: NoteDto[] = [];
+
   addNote(notesid: number = 0) {
 
     if (!this.noteTitle.trim() && !this.newNote.trim()) return;
@@ -64,6 +66,8 @@ export class NotesComponent implements OnInit {
         },
         complete: () => {
           this.alertservice.showAlert('✅ Note saved successfully.', 'success');
+          this.showPopup = false;
+          this.openEditPopup = false;
         }
       });
     } catch (err) {
@@ -123,8 +127,20 @@ confirmDelete(confirmed: boolean) {
   }
 }
 
-  pinNote(note: any) {
-    this.allnotes = [note, ...this.allnotes.filter(n => n !== note)];
+  pinNote(id: number) {
+    this.notesService.MarkPinned(id).subscribe({
+      next: (result) => {
+        if (result && result > 0) {
+          this.alertservice.showAlert('✅ Note pinned successfully.', 'success');
+          this.loadNotes();
+        } else {
+          this.alertservice.showAlert('❌ Note pinning failed.', 'error');
+        }
+      },
+      error: (err) => {
+        console.error('Error pinning note:', err);
+      }
+    });
   }
 
   loadNotes() {
@@ -139,8 +155,6 @@ confirmDelete(confirmed: boolean) {
       }
     });
   }
-
-  showPopup = false;
 
   openPopup(editHtml: string = '') {
     this.showPopup = true;

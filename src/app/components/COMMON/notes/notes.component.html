@@ -41,10 +41,25 @@
               <i class="bi bi-pencil-square text-base"></i>
             </button>
 
-            <button appTooltip="Pin Note" [tooltipPosition]="'bottom'" [tooltipFixed]="false" (click)="pinNote(note)"
-              class="p-2 rounded-lg bg-slate-700/60 hover:bg-slate-700 transition text-yellow-400">
-              <i class="bi bi-pin-angle text-base"></i>
-            </button>
+            <!-- Show Pin button if note is not pinned -->
+<button *ngIf="!note.isPinned"
+        appTooltip="Pin Note"
+        [tooltipPosition]="'bottom'"
+        [tooltipFixed]="false"
+        (click)="pinNote(note.id)"
+        class="p-2 rounded-lg bg-slate-700/60 hover:bg-slate-700 transition text-yellow-400">
+  <i class="bi bi-pin-angle text-base"></i>
+</button>
+
+<!-- Show Unpin button if note is pinned -->
+<button *ngIf="note.isPinned"
+        appTooltip="Unpin Note"
+        [tooltipPosition]="'bottom'"
+        [tooltipFixed]="false"
+        (click)="pinNote(note.id)"
+        class="p-2 rounded-lg bg-slate-700/60 hover:bg-slate-700 transition text-red-400">
+  <i class="bi bi-pin text-base"></i>
+</button>
 
             <button appTooltip="Delete Note" [tooltipPosition]="'bottom'" [tooltipFixed]="false"
               (click)="deleteNote(note.id)"
