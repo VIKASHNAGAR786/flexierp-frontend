@@ -1,0 +1,29 @@
+/* Neon glow for dark mode */
+.neon-green {
+  text-shadow: 0 0 8px rgba(0, 255, 128, 0.6),
+               0 0 16px rgba(0, 255, 128, 0.4);
+}
+
+.neon-red {
+  text-shadow: 0 0 8px rgba(255, 0, 80, 0.6),
+               0 0 16px rgba(255, 0, 80, 0.4);
+}
+
+/* Subtle pulsing animation */
+@keyframes glowPulseGreen {
+  0%, 100% { text-shadow: 0 0 8px rgba(0, 255, 128, 0.6); }
+  50% { text-shadow: 0 0 16px rgba(0, 255, 128, 0.9); }
+}
+
+@keyframes glowPulseRed {
+  0%, 100% { text-shadow: 0 0 8px rgba(255, 0, 128, 0.6); }
+  50% { text-shadow: 0 0 16px rgba(255, 0, 128, 0.9); }
+}
+
+.animate-glow-green {
+  animation: glowPulseGreen 2s infinite ease-in-out;
+}
+
+.animate-glow-red {
+  animation: glowPulseRed 2s infinite ease-in-out;
+}

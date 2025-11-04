@@ -29,7 +29,7 @@ export class AddProductComponent {
       productName: ['', Validators.required],
       productCategory: [null, Validators.required],
       productType: [''],
-      packedDate: [null],
+    packedDate: [new Date().toISOString().substring(0, 10)],
       packedWeight: [null, [Validators.required, Validators.min(0)]],
       packedHeight: [null, [Validators.required, Validators.min(0)]],
       packedWidth: [null,  [Validators.required, Validators.min(0)]],

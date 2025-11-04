@@ -235,3 +235,15 @@ export interface NoteDetailsDto {
   updatedbyName: string;
   status: boolean;
 }
+
+export interface BalanceDueDto {
+  customerId: number;
+  customerName?: string;
+  customerAddress?: string;
+  phoneNo?: string;
+  email?: string;
+  totalDueAmount: number;
+  dueId: number;
+  lastTransactionDate?: string;
+  totalrecords?: number;
+}

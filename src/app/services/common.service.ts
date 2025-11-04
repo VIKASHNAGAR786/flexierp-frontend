@@ -5,7 +5,7 @@ import { UserinfowithloginService } from './userinfowithlogin.service';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { BackupRequest, PaginationFilter, ProductCategory, ProductModel, ProviderModel, SaveNote, UpdateCompanyInfo, WarehouseModel } from '../MODEL/MODEL';
-import { CompanyInfoDTO, DashboardMetricsDto, NoteDetailsDto, NoteDto, ProductCategoryDTO, ProductDTO, ProviderDTO, ReceivedChequeDto, UserLoginHistoryDTO, WarehouseDTO } from '../DTO/DTO';
+import { BalanceDueDto, CompanyInfoDTO, DashboardMetricsDto, NoteDetailsDto, NoteDto, ProductCategoryDTO, ProductDTO, ProviderDTO, ReceivedChequeDto, UserLoginHistoryDTO, WarehouseDTO } from '../DTO/DTO';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +42,7 @@ export class CommonService {
   private readonly GetNoteDetailsByIdAsyncUrl = environment.BASE_URL + '/CommonMaster/GetNoteDetailsByIdAsync';
   private readonly DeleteNotesByIdUrl = environment.BASE_URL + '/CommonMaster/DeleteNotesById';
   private readonly MarkPinnedUrl = environment.BASE_URL + '/CommonMaster/MarkPinned';
+  private readonly GetBalanceDueListAsyncUrl = environment.AccountApiUrl + 'GetBalanceDueListAsync';
 
   logout(): Observable<string> {
     const headers = this.getAuthHeaders();
@@ -199,5 +200,17 @@ GetAllNotes(): Observable<NoteDto[] | null> {
 
   return this.http.put<number>(this.MarkPinnedUrl, null, { headers, params });
 }
+
+ getBalanceDueList(pageNo: number, pageSize: number, searchTerm: string): Observable<BalanceDueDto[] | null> {
+    const headers = this.getAuthHeaders();
+    if (!headers) return of(null);
+
+    let params = new HttpParams()
+      .set('pageNumber', pageNo.toString())
+      .set('pageSize', pageSize.toString())
+      .set('searchTerm', searchTerm || '');
+
+    return this.http.get<BalanceDueDto[]>(this.GetBalanceDueListAsyncUrl, { headers, params });
+  }
 
 }

@@ -149,7 +149,7 @@ exportToExcel() {
 
   showReceiptPopup: boolean = false;
   pdfUrl: SafeResourceUrl | null = null;
-  pdfBlobUrl!: string; // For download/print
+pdfBlobUrl: string | null = null;
 
   async seeReceipt(saleid: number, customername: string) {
     try {
@@ -160,16 +160,12 @@ exportToExcel() {
 
       this.reportIsLoading = false;
 
-      if (blob && blob.size > 0) {
-        // Create both versions
-        this.pdfBlobUrl = URL.createObjectURL(blob); // Raw blob URL
-        this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.pdfBlobUrl); // Safe for iframe
-
-        this.showReceiptPopup = true; // ✅ Correct variable name
-      } else {
-        console.error("Empty PDF blob received.");
-        this.alertservice.showAlert("Failed to generate receipt. Please try again.", 'error');
-      }
+      if (blob) {
+      this.pdfBlobUrl = URL.createObjectURL(blob);
+      this.printPdf();
+    } else {
+      this.alertservice.showAlert('No data found for selected date range.', 'warning');
+    }
     } catch (err) {
       this.reportIsLoading = false;
       console.error("Error fetching receipt PDF:", err);
@@ -178,33 +174,45 @@ exportToExcel() {
   }
 
   // Optional: Cleanup when closing popup
-  closeReceiptPopup() {
-    this.showReceiptPopup = false;
-    if (this.pdfBlobUrl) {
-      URL.revokeObjectURL(this.pdfBlobUrl); // cleanup
-      this.pdfBlobUrl = '';
-    }
-  }
+  // closeReceiptPopup() {
+  //   this.showReceiptPopup = false;
+  //   if (this.pdfBlobUrl) {
+  //     URL.revokeObjectURL(this.pdfBlobUrl); // cleanup
+  //     this.pdfBlobUrl = '';
+  //   }
+  // }
 
-  downloadPdf() {
-    if (this.pdfBlobUrl) {
-      const link = document.createElement('a');
-      link.href = this.pdfBlobUrl;
-      link.download = `${this.customername.toUpperCase()}-Receipt.pdf`;
-      link.click();
-    }
-  }
+  // downloadPdf() {
+  //   if (this.pdfBlobUrl) {
+  //     const link = document.createElement('a');
+  //     link.href = this.pdfBlobUrl;
+  //     link.download = `${this.customername.toUpperCase()}-Receipt.pdf`;
+  //     link.click();
+  //   }
+  // }
 
   printPdf() {
-    if (this.pdfBlobUrl) {
-      const iframe = document.createElement('iframe');
-      iframe.style.display = 'none';
-      iframe.src = this.pdfBlobUrl;
-      document.body.appendChild(iframe);
+  if (this.pdfBlobUrl) {
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = this.pdfBlobUrl;
+
+    // Wait until the iframe loads the PDF
+    iframe.onload = () => {
       iframe.contentWindow?.focus();
       iframe.contentWindow?.print();
-    }
+    };
+
+    document.body.appendChild(iframe);
+
+    // Remove iframe after a delay (give enough time for printing)
+    setTimeout(() => {
+      document.body.removeChild(iframe);
+      URL.revokeObjectURL(this.pdfBlobUrl!);
+      this.pdfBlobUrl = null;
+    }, 500000); // 5 minutes delay
   }
+}
 
 
 

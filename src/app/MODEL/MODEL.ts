@@ -193,3 +193,12 @@ export interface SaveNote {
   isArchived: boolean;
   notesid: number;
 }
+
+// 📁 settle-balance.dto.ts
+export interface SettleBalance {
+  settledamount: number;     // Amount being paid/settled
+  remainingamount: number;   // Amount left after settlement
+  paymode: string;           // e.g., 'Cash', 'UPI', 'Bank Transfer'
+  customerid: number;        // ID of the customer
+  dueid: number;             // ID of the due entry
+}
