@@ -198,7 +198,8 @@ export interface SaveNote {
 export interface SettleBalance {
   settledamount: number;     // Amount being paid/settled
   remainingamount: number;   // Amount left after settlement
-  paymode: string;           // e.g., 'Cash', 'UPI', 'Bank Transfer'
+  paymode: number;           // e.g., 'Cash', 'UPI', 'Bank Transfer'
   customerid: number;        // ID of the customer
   dueid: number;             // ID of the due entry
+  chequepayment?: SaveChequePaymentDto; // optional cheque details
 }

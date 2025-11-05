@@ -282,6 +282,9 @@ export class AddSaleComponent {
   onPaidChange(value: number) {
     this.customer.paidAmt = value < 0 ? 0 : value;
     this.customer.balanceDue = this.customer.totalAmt - this.customer.paidAmt;
+    if(this.customer.paidAmt <= 0){
+     this.customer.cheque= this.resetCheque();
+    }
   }
 
   onDueChange(value: number) {

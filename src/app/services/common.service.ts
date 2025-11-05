@@ -4,7 +4,7 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { UserinfowithloginService } from './userinfowithlogin.service';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { BackupRequest, PaginationFilter, ProductCategory, ProductModel, ProviderModel, SaveNote, UpdateCompanyInfo, WarehouseModel } from '../MODEL/MODEL';
+import { BackupRequest, PaginationFilter, ProductCategory, ProductModel, ProviderModel, SaveNote, SettleBalance, UpdateCompanyInfo, WarehouseModel } from '../MODEL/MODEL';
 import { BalanceDueDto, CompanyInfoDTO, DashboardMetricsDto, NoteDetailsDto, NoteDto, ProductCategoryDTO, ProductDTO, ProviderDTO, ReceivedChequeDto, UserLoginHistoryDTO, WarehouseDTO } from '../DTO/DTO';
 
 @Injectable({
@@ -43,6 +43,7 @@ export class CommonService {
   private readonly DeleteNotesByIdUrl = environment.BASE_URL + '/CommonMaster/DeleteNotesById';
   private readonly MarkPinnedUrl = environment.BASE_URL + '/CommonMaster/MarkPinned';
   private readonly GetBalanceDueListAsyncUrl = environment.AccountApiUrl + 'GetBalanceDueListAsync';
+  private readonly SaveCustomerBalanceSettlementUrl = environment.AccountApiUrl + 'SaveCustomerBalanceSettlement';
 
   logout(): Observable<string> {
     const headers = this.getAuthHeaders();
@@ -212,5 +213,11 @@ GetAllNotes(): Observable<NoteDto[] | null> {
 
     return this.http.get<BalanceDueDto[]>(this.GetBalanceDueListAsyncUrl, { headers, params });
   }
+
+  SaveCustomerBalanceSettlement(settlebalance: SettleBalance): Observable<string> {
+  const headers = this.getAuthHeaders(); // should include 'Authorization' if needed
+  if (!headers) return of("");
+  return this.http.post<string>(this.SaveCustomerBalanceSettlementUrl, settlebalance, { headers });
+}
 
 }

@@ -67,7 +67,7 @@
                 <!-- ⚡ Action Column -->
                 <td class="px-4 py-2 text-center">
                     <button appTooltip="Settle the outstanding balance for this customer." [tooltipPosition]="'left'"
-                        [tooltipFixed]="false" (click)="onSettleBalance(due.totalDueAmount)" class="relative inline-flex items-center gap-2 justify-center px-4 py-2 
+                        [tooltipFixed]="false" (click)="onSettleBalance(due)" class="relative inline-flex items-center gap-2 justify-center px-4 py-2 
            text-sm font-semibold text-[#00ffee] rounded-md overflow-hidden 
            transition-all duration-300 border border-[#00ffee]/50 
            hover:text-black hover:bg-[#00ffee] 
@@ -153,43 +153,61 @@
 
       <!-- Input Fields -->
       <div class="space-y-5 text-left">
-        <div>
-          <label class="block text-gray-300 mb-1 font-medium">Settled Amount (₹)</label>
-          <input
-            type="number"
-            [(ngModel)]="settleBalance!.settledamount"
-            class="w-full bg-slate-800/70 text-white rounded-md px-4 py-2.5 border border-[#00ffee]/30 
-                   focus:border-[#00ffee] focus:ring-1 focus:ring-[#00ffee] outline-none
-                   placeholder-gray-500 transition-all duration-200"
-            placeholder="Enter settled amount"
-          />
-        </div>
 
-        <div>
-          <label class="block text-gray-300 mb-1 font-medium">Remaining Amount (₹)</label>
-          <input
-            type="number"
-            [(ngModel)]="settleBalance!.remainingamount"
-            class="w-full bg-slate-800/70 text-white rounded-md px-4 py-2.5 border border-[#00ffee]/30 
-                   focus:border-[#00ffee] focus:ring-1 focus:ring-[#00ffee] outline-none
-                   placeholder-gray-500 transition-all duration-200"
-            placeholder="Enter remaining amount"
-          />
-        </div>
+       <div>
+  <label class="block text-gray-300 mb-1 font-medium">Settled Amount (₹)</label>
+  <input
+    type="number"
+    [(ngModel)]="settleBalance!.settledamount"
+    #paymentMode="ngModel"
+    (ngModelChange)="adjustRemainingAmount()"
+    class="w-full bg-slate-800/70 text-white rounded-md px-4 py-2.5 border border-[#00ffee]/30 
+           focus:border-[#00ffee] focus:ring-1 focus:ring-[#00ffee] outline-none
+           placeholder-gray-500 transition-all duration-200"
+    placeholder="Enter settled amount"
+  />
+</div>
+
+<div>
+  <label class="block text-gray-300 mb-1 font-medium">Remaining Amount (₹)</label>
+  <input
+    type="number"
+    [(ngModel)]="settleBalance!.remainingamount"
+    [readonly]="true"
+    class="w-full bg-slate-800/70 text-white rounded-md px-4 py-2.5 border border-[#00ffee]/30 
+           focus:border-[#00ffee] focus:ring-1 focus:ring-[#00ffee] outline-none
+           placeholder-gray-500 transition-all duration-200 cursor-not-allowed opacity-70"
+    placeholder="Remaining amount will adjust automatically"
+  />
+</div>
+
 
         <div>
           <label class="block text-gray-300 mb-1 font-medium">Payment Mode</label>
           <select
             [(ngModel)]="settleBalance!.paymode"
+            (ngModelChange)="onPaymentModeChange($event)"
             class="w-full bg-slate-800/70 text-white rounded-md px-4 py-2.5 border border-[#00ffee]/30
                    focus:border-[#00ffee] focus:ring-1 focus:ring-[#00ffee] outline-none transition-all"
           >
             <option value="" disabled>Select Mode</option>
-            <option value="Cash">Cash</option>
-            <option value="UPI">UPI</option>
-            <option value="Bank Transfer">Bank Transfer</option>
+            <option value=1>Cash</option>
+            <option value=2>Cheque</option>
           </select>
         </div>
+        <div *ngIf="settleBalance!.paymode == 2" class="relative group">
+                <button type="button" (click)="showChequePopup = true"
+                  class="flex items-center justify-center text-blue-400 hover:text-blue-500 bg-slate-800/40 hover:bg-slate-800 rounded-full p-2 transition-all duration-200 border border-slate-700 shadow-md cursor-pointer"
+                  aria-label="See cheque details">
+                  <i class="fa fa-info-circle text-lg"></i>
+                </button>
+
+                <!-- Tooltip -->
+                <span
+                  class="absolute left-10 top-1/2 -translate-y-1/2 bg-slate-800 text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap shadow-md border border-slate-600">
+                  See cheque details
+                </span>
+              </div>
       </div>
 
       <!-- Action Buttons -->
@@ -213,3 +231,76 @@
     </div>
   </div>
 </div>
+
+
+<!-- Cheque Payment Modal (Dark Theme) -->
+<div *ngIf="showChequePopup" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+  <div
+    class="bg-slate-900 rounded-2xl shadow-2xl w-full max-w-lg p-6 relative border border-slate-700 max-h-[90vh] overflow-y-auto">
+
+    <!-- Close Button -->
+    <button (click)="cancelCheque()" class="absolute top-3 right-3 text-gray-400 hover:text-red-500 text-2xl font-bold">
+      ✕
+    </button>
+
+    <!-- Title -->
+    <h2 class="text-2xl font-bold mb-4 text-[#00ffee] text-center uppercase tracking-wide">
+      Enter Cheque Details
+    </h2>
+
+    <!-- Cheque Form -->
+    <form #chequeForm="ngForm" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-white">
+
+      <div class="flex flex-col">
+        <label class="label-style">Cheque Number <span class="text-red-500">*</span></label>
+        <input type="text" [(ngModel)]="cheque.chequeNumber" name="chequeNumber"
+          class="input-style w-full bg-slate-800 border border-slate-600 text-white focus:ring-2 focus:ring-[#00ffee]"
+          required #chequeNumber="ngModel">
+      </div>
+
+      <div class="flex flex-col">
+        <label class="label-style">Bank Name <span class="text-red-500">*</span></label>
+        <input type="text" [(ngModel)]="cheque.bankName" name="bankName"
+          class="input-style w-full bg-slate-800 border border-slate-600 text-white focus:ring-2 focus:ring-[#00ffee]"
+          required #bankName="ngModel">
+      </div>
+
+      <div class="flex flex-col">
+        <label class="label-style">Branch Name <span class="text-red-500">*</span></label>
+        <input type="text" [(ngModel)]="cheque.branchName" name="branchName"
+          class="input-style w-full bg-slate-800 border border-slate-600 text-white focus:ring-2 focus:ring-[#00ffee]"
+          required #branchName="ngModel">
+      </div>
+
+      <div class="flex flex-col">
+        <label class="label-style">IFSC Code <span class="text-red-500">*</span></label>
+        <input type="text" [(ngModel)]="cheque.ifsc_Code" name="ifsc_Code"
+          class="input-style w-full bg-slate-800 border border-slate-600 text-white focus:ring-2 focus:ring-[#00ffee]"
+          required #ifsc_Code="ngModel">
+      </div>
+
+      <div class="flex flex-col">
+        <label class="label-style">Cheque Date <span class="text-red-500">*</span></label>
+        <input type="date" [(ngModel)]="cheque.chequeDate" name="chequeDate"
+          class="input-style w-full bg-slate-800 border border-slate-600 text-white focus:ring-2 focus:ring-[#00ffee]"
+          required #chequeDate="ngModel">
+      </div>
+
+      <div class="flex flex-col">
+        <label class="label-style">Amount <span class="text-red-500">*</span></label>
+        <input type="number" [(ngModel)]="cheque.amount" name="amount"
+          class="input-style w-full bg-slate-800 border border-slate-600 text-white focus:ring-2 focus:ring-[#00ffee]"
+          required #amount="ngModel">
+      </div>
+
+      <div class="col-span-2 flex justify-end mt-4 gap-2">
+        <button type="button" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded text-white"
+          (click)="cancelCheque()">Cancel</button>
+        <button type="button" class="px-4 py-2 bg-[#00ffee] hover:bg-[#00ddcc] rounded text-slate-900 font-semibold"
+          [disabled]="!chequeForm.form.valid" (click)="saveCheque()">Save</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
