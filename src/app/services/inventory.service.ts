@@ -5,7 +5,7 @@ import { UserinfowithloginService } from './userinfowithlogin.service';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { PaginationFilter, ProductCategory, ProductModel, ProviderModel, WarehouseModel } from '../MODEL/MODEL';
-import { ProductCategoryDTO, ProductCategoryListDto, ProductDTO, ProviderDTO, WarehouseDTO } from '../DTO/DTO';
+import { ProductCategoryDTO, ProductCategoryListDto, ProductDTO, ProviderDTO, SoldProductDTO, WarehouseDTO } from '../DTO/DTO';
 
 @Injectable({
   providedIn: 'root'
@@ -149,7 +149,7 @@ export class InventoryService {
     return this.http.get<ProviderDTO[]>(this.GetProvidersUrl, { headers, params });
   }
 
-  GetSoldProducts(filter: PaginationFilter): Observable<ProductDTO[] | null> {
+  GetSoldProducts(filter: PaginationFilter): Observable<SoldProductDTO[] | null> {
     const headers = this.getAuthHeaders();
     if (!headers) return of(null);
 
@@ -162,7 +162,7 @@ export class InventoryService {
       .set('endDate', filter.endDate || '');
 
 
-    return this.http.get<ProductDTO[]>(this.GetSoldProductsUrl, { headers, params });
+    return this.http.get<SoldProductDTO[]>(this.GetSoldProductsUrl, { headers, params });
   }
 
   getSoldProductReportPdf(filter: PaginationFilter): Observable<Blob | null> {

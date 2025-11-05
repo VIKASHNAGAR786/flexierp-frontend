@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, ElementRef, Input, NgZone, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { ProductDTO } from '../../../DTO/DTO';
+import { ProductDTO, SoldProductDTO } from '../../../DTO/DTO';
 import { PaginationFilter } from '../../../MODEL/MODEL';
 import { BarcodeService } from '../../../services/barcode.service';
 import { InventoryService } from '../../../services/inventory.service';
@@ -20,7 +20,7 @@ export class SoldProductComponent {
 
    @ViewChild('productTable', { static: false }) productTable!: ElementRef;
   @ViewChildren('tooltipTarget') tooltipTargets!: QueryList<ElementRef>;
-  @Input() products: ProductDTO[] = [];
+  @Input() products: SoldProductDTO[] = [];
   selectedBarcodes: string[] = [];
   barcode: string | null = null;
   barcodeText: string = '';

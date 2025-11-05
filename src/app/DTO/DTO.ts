@@ -247,3 +247,28 @@ export interface BalanceDueDto {
   lastTransactionDate?: string;
   totalrecords?: number;
 }
+
+export interface SoldProductDTO {
+  productID: number;
+  productCode: string;
+  barCode: string;
+  productName: string;
+  categoryName: string;
+  productType: string;
+  packedDate: string | null; // ISO date string
+  packedWeight: number | null;
+  packedHeight: number | null;
+  packedDepth: number | null;
+  packedWidth: number | null;
+  isPerishable: boolean | null;
+  createdDate: string; // ISO date string
+  purchasePrice: number | null;
+  sellingPrice: number | null;
+  taxRate: number | null;
+  discount: number | null;
+  fullName: string;
+  totalRecords: number;
+  solddate: string | null; // ISO date string
+  soldquantity: number | null;
+  availablequantity: number | null;
+}

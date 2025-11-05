@@ -46,19 +46,21 @@
       <tr>
         <th class="px-4 py-2 border-b border-slate-700">Sr.No</th>
         <th class="px-4 py-2 border-b border-slate-700">Code</th>
-        <th class="px-4 py-2 border-b border-slate-700">Barcode</th>
         <th class="px-4 py-2 border-b border-slate-700">Name</th>
         <th class="px-4 py-2 border-b border-slate-700">Category</th>
-        <th class="px-4 py-2 border-b border-slate-700">Product Type</th>
         <th class="px-4 py-2 border-b border-slate-700">Packed Date</th>
+        <th class="px-4 py-2 border-b border-slate-700">SoldDate</th>
+        <th class="px-4 py-2 border-b border-slate-700">SoldQuantity</th>
+        <th class="px-4 py-2 border-b border-slate-700">AvailableQuantity</th>
+        <th class="px-4 py-2 border-b border-slate-700">Purchase Price</th>
+        <th class="px-4 py-2 border-b border-slate-700">Selling Price</th>
         <th class="px-4 py-2 border-b border-slate-700">Weight (kg)</th>
         <th class="px-4 py-2 border-b border-slate-700">HxWxD</th>
         <th class="px-4 py-2 border-b border-slate-700">Perishable</th>
         <th class="px-4 py-2 border-b border-slate-700">Created By</th>
-        <th class="px-4 py-2 border-b border-slate-700">Purchase Price</th>
-        <th class="px-4 py-2 border-b border-slate-700">Selling Price</th>
         <th class="px-4 py-2 border-b border-slate-700">Tax Rate</th>
         <th class="px-4 py-2 border-b border-slate-700">Discount</th>
+
       </tr>
     </thead>
     <tbody class="divide-y divide-slate-700">
@@ -66,19 +68,14 @@
         <td class="px-4 py-2 text-center">{{ (filter.pageNo - 1) * filter.pageSize + i + 1 }}</td>
         <td class="px-4 py-2 text-center">{{ product.productCode }}</td>
 
-        <!-- Checkbox -->
-        <td class="px-4 py-2 text-center">
-          <label class="inline-flex items-center cursor-pointer">
-            <input type="checkbox" [value]="product.barCode" (change)="toggleSelection($event)"
-              class="form-checkbox h-5 w-5 text-[#00ffee] rounded transition duration-200 ease-in-out hover:scale-110" />
-          </label>
-        </td>
-
-
         <td class="px-4 py-2">{{ product.productName }}</td>
         <td class="px-4 py-2">{{ product.categoryName }}</td>
-        <td class="px-4 py-2">{{ product.productType }}</td>
         <td class="px-4 py-2 text-center">{{ product.packedDate | date:'yyyy-MM-dd' }}</td>
+        <td class="px-4 py-2 text-center">{{ product.solddate | date:'yyyy-MM-dd' }}</td>
+        <td class="px-4 py-2 text-center">{{ product.soldquantity }}</td>
+        <td class="px-4 py-2 text-center">{{ product.availablequantity }}</td>
+        <td class="px-4 py-2 text-center">{{ product.purchasePrice | currency:'INR':'symbol':'1.2-2' }}</td>
+        <td class="px-4 py-2 text-center">{{ product.sellingPrice | currency:'INR':'symbol':'1.2-2' }}</td>
         <td class="px-4 py-2 text-center">{{ product.packedWeight }}</td>
         <td class="px-4 py-2 text-center">{{ product.packedHeight }}x{{ product.packedWidth }}x{{ product.packedDepth }}
         </td>
@@ -87,10 +84,9 @@
           <span *ngIf="!product.isPerishable">No</span>
         </td>
         <td class="px-4 py-2">{{ product.fullName }}</td>
-        <td class="px-4 py-2 text-center">{{ product.purchasePrice | currency:'INR':'symbol':'1.2-2' }}</td>
-        <td class="px-4 py-2 text-center">{{ product.sellingPrice | currency:'INR':'symbol':'1.2-2' }}</td>
         <td class="px-4 py-2 text-center">{{ product.taxRate }}%</td>
         <td class="px-4 py-2 text-center">{{ product.discount }}%</td>
+
       </tr>
 
       <!-- Empty State -->
