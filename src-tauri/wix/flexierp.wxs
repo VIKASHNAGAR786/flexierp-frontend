@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+  <Product
+    Id="*"
+    Name="FLEXIERP"
+    Language="1033"
+    Version="$(var.Version)"
+    Manufacturer="FlexiERP"
+    UpgradeCode="e8c3561a-4666-4f38-9d53-0fd4e7dbcb71">
+
+    <Package InstallerVersion="500" Compressed="yes" InstallScope="perUser" />
+
+    <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
+
+    <!-- ✅ INSTALLATION PATH MOVED TO USER FOLDER -->
+    <Property Id="INSTALLDIR">
+      <DirectorySearch Id="UserDir" Path="[LocalAppDataFolder]FLEXIERP" Depth="0" />
+    </Property>
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="LocalAppDataFolder">
+        <Directory Id="INSTALLDIR" Name="FLEXIERP">
+          <!-- ✅ Tauri will auto insert app files here -->
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <Feature Id="MainFeature" Title="FLEXIERP" Level="1">
+      <ComponentGroupRef Id="AppComponents" />
+    </Feature>
+
+  </Product>
+</Wix>

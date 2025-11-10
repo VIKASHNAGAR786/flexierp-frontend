@@ -1,0 +1,27 @@
+{
+  "identifier": "dialog:default",
+  "description": "Allows showing open/save dialogs using @tauri-apps/plugin-dialog",
+  "windows": ["main"],
+  "permissions": [
+    {
+      "identifier": "dialog:allow-open",
+      "scopes": ["window:main"]
+    },
+    {
+      "identifier": "dialog:allow-save",
+      "scopes": ["window:main"]
+    },
+    {
+      "identifier": "dialog:allow-message",
+      "scopes": ["window:main"]
+    },
+    {
+      "identifier": "dialog:allow-ask",
+      "scopes": ["window:main"]
+    },
+    {
+      "identifier": "dialog:allow-confirm",
+      "scopes": ["window:main"]
+    }
+  ]
+}

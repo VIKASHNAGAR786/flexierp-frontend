@@ -43,6 +43,4 @@ Thumbs.db
 
 
 #tauri settings 
-/src-tauri
-/flexierp-frontend/src-tauri
-/Backend Production
+src-tauri/resources

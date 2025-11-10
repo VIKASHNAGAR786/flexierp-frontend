@@ -1,21 +1,19 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "FLEXIERP",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "identifier": "com.flexierp",
-
   "build": {
     "beforeBuildCommand": "ng build --configuration production",
     "beforeDevCommand": "ng serve",
     "frontendDist": "../dist/browser",
     "devUrl": "http://localhost:4200"
   },
-
   "app": {
     "windows": [
       {
         "title": "FLEXIERP",
-         "label": "main",      
+        "label": "main",
         "width": 800,
         "height": 600,
         "resizable": true,
@@ -24,18 +22,25 @@
     ],
     "security": {
       "csp": null,
-      "capabilities": ["default", "dialog:default"]
+      "capabilities": [
+        "default",
+        "dialog:default"
+      ]
     }
   },
-
   "bundle": {
     "active": true,
-    "targets": ["msi"],
+    "targets": [
+      "msi"
+    ],
     "icon": [
       "icons/APPLOGO.png",
       "icons/APPLOGO.ico"
     ],
     "windows": {
+      "wix": {
+        "template": "src-tauri/wix/flexierp.wxs"
+      },
       "webviewInstallMode": {
         "type": "embedBootstrapper"
       }
