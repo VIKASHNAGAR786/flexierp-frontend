@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
-  "productName": "FLEXIERP",
-  "version": "0.1.6",
+  "productName": "FlexiERP",
+  "version": "1.0.0",
   "identifier": "com.flexierp",
   "build": {
     "beforeBuildCommand": "ng build --configuration production",
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "FLEXIERP",
+        "title": "FlexiERP",
         "label": "main",
         "width": 800,
         "height": 600,
@@ -29,20 +29,25 @@
     }
   },
   "bundle": {
-    "active": true,
-    "targets": [
-      "msi"
-    ],
+    "active": false,
+    "targets": ["msi"],
     "icon": [
       "icons/APPLOGO.png",
       "icons/APPLOGO.ico"
     ],
     "windows": {
-      "wix": {
-        "template": "wix/flexierp.wxs"
-      },
       "webviewInstallMode": {
         "type": "embedBootstrapper"
+      },
+      "wix": {
+        "template": "./wix/flexierp.wxs",
+        "language": "en-us",
+        "fragmentPaths": [],
+        "componentGroupRefs": [],
+        "componentRefs": [],
+        "bannerPath": "wix/banner.bmp",
+        "dialogImagePath": "wix/dialog.bmp"
+        
       }
     },
     "resources": [
