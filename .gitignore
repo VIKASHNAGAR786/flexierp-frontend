@@ -44,3 +44,4 @@ Thumbs.db
 
 #tauri settings 
 src-tauri/resources
+src-tauri/wix/flexierp-debug.msi

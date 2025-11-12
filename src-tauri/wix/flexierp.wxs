@@ -1,44 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?if $(sys.BUILDARCH)="x86"?>
-    <?define Win64 = "no" ?>
-    <?define PlatformProgramFilesFolder = "ProgramFilesFolder" ?>
-<?elseif $(sys.BUILDARCH)="x64"?>
-    <?define Win64 = "yes" ?>
-    <?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
-<?elseif $(sys.BUILDARCH)="arm64"?>
-    <?define Win64 = "yes" ?>
-    <?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
-<?else?>
-    <?error Unsupported value of sys.BUILDARCH=$(sys.BUILDARCH)?>
-<?endif?>
-
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
     <Product
-            Id="*"
-            Name="FLEXIERP"
-            UpgradeCode="9271ebb8-d010-531e-b4e7-bcc06039b56b"
-            Language="!(loc.TauriLanguage)"
-            Manufacturer="flexierp"
-            Version="0.1.5">
+        Id="*"
+        Name="FLEXIERP"
+        UpgradeCode="9271ebb8-d010-531e-b4e7-bcc06039b56b"
+        Language="!(loc.TauriLanguage)"
+        Manufacturer="flexierp"
+        Version="0.1.5">
 
         <Package Id="*"
-                 Keywords="Installer"
-                 InstallerVersion="450"
-                 Languages="0"
-                 Compressed="yes"
-                 InstallScope="perMachine"
-                 SummaryCodepage="!(loc.TauriCodepage)"/>
+            Keywords="Installer"
+            InstallerVersion="450"
+            Languages="0"
+            Compressed="yes"
+            InstallScope="perUser"
+            SummaryCodepage="!(loc.TauriCodepage)" />
 
         <!-- https://docs.microsoft.com/en-us/windows/win32/msi/reinstallmode -->
         <!-- reinstall all files; rewrite all registry entries; reinstall all shortcuts -->
         <Property Id="REINSTALLMODE" Value="amus" />
 
-        <!-- Auto launch app after installation, useful for passive mode which usually used in updates -->
+        <!-- Auto launch app after installation, useful for passive mode which usually used in
+        updates -->
         <Property Id="AUTOLAUNCHAPP" Secure="yes" />
-        <!-- Property to forward cli args to the launched app to not lose those of the pre-update instance -->
+        <!-- Property to forward cli args to the launched app to not lose those of the pre-update
+        instance -->
         <Property Id="LAUNCHAPPARGS" Secure="yes" />
 
-            <MajorUpgrade Schedule="afterInstallInitialize" AllowDowngrades="yes" />
+        <MajorUpgrade Schedule="afterInstallInitialize" AllowDowngrades="yes" />
 
         <InstallExecuteSequence>
             <RemoveShortcuts>Installed AND NOT UPGRADINGPRODUCTCODE</RemoveShortcuts>
@@ -47,164 +36,434 @@
         <Media Id="1" Cabinet="app.cab" EmbedCab="yes" />
 
 
-        <Icon Id="ProductIcon" SourceFile="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\target\release\resources\icon.ico"/>
+        <Icon Id="ProductIcon"
+            SourceFile="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\target\release\resources\icon.ico" />
         <Property Id="ARPPRODUCTICON" Value="ProductIcon" />
         <Property Id="ARPNOREPAIR" Value="yes" Secure="yes" />      <!-- Remove repair -->
-        <SetProperty Id="ARPNOMODIFY" Value="1" After="InstallValidate" Sequence="execute"/>
+        <SetProperty Id="ARPNOMODIFY" Value="1" After="InstallValidate" Sequence="execute" />
 
 
         <Property Id="INSTALLDIR">
-          <!-- First attempt: Search for "InstallDir" -->
-          <RegistrySearch Id="PrevInstallDirWithName" Root="HKCU" Key="Software\flexierp\FLEXIERP" Name="InstallDir" Type="raw" />
+            <!-- First attempt: Search for "InstallDir" -->
+            <RegistrySearch Id="PrevInstallDirWithName" Root="HKCU" Key="Software\flexierp\FLEXIERP"
+                Name="InstallDir" Type="raw" />
 
-          <!-- Second attempt: If the first fails, search for the default key value (this is how the nsis installer currently stores the path) -->
-          <RegistrySearch Id="PrevInstallDirNoName" Root="HKCU" Key="Software\flexierp\FLEXIERP" Type="raw" />
+            <!-- Second attempt: If the first fails, search for the default key value (this is how
+            the nsis installer currently stores the path) -->
+            <RegistrySearch Id="PrevInstallDirNoName" Root="HKCU" Key="Software\flexierp\FLEXIERP"
+                Type="raw" />
         </Property>
 
         <!-- launch app checkbox -->
         <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="!(loc.LaunchApp)" />
-        <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOX" Value="1"/>
-        <CustomAction Id="LaunchApplication" Impersonate="yes" FileKey="Path" ExeCommand="[LAUNCHAPPARGS]" Return="asyncNoWait" />
+        <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOX" Value="1" />
+        <CustomAction Id="LaunchApplication" Impersonate="yes" FileKey="Path"
+            ExeCommand="[LAUNCHAPPARGS]" Return="asyncNoWait" />
 
         <UI>
             <!-- launch app checkbox -->
-            <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
+            <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX
+                = 1 and NOT Installed</Publish>
 
             <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
 
             <!-- Skip license dialog -->
             <Publish Dialog="WelcomeDlg"
-                     Control="Next"
-                     Event="NewDialog"
-                     Value="InstallDirDlg"
-                     Order="2">1</Publish>
+                Control="Next"
+                Event="NewDialog"
+                Value="InstallDirDlg"
+                Order="2">1</Publish>
             <Publish Dialog="InstallDirDlg"
-                     Control="Back"
-                     Event="NewDialog"
-                     Value="WelcomeDlg"
-                     Order="2">1</Publish>
+                Control="Back"
+                Event="NewDialog"
+                Value="WelcomeDlg"
+                Order="2">1</Publish>
         </UI>
 
         <UIRef Id="WixUI_InstallDir" />
 
         <Directory Id="TARGETDIR" Name="SourceDir">
+            <!-- Desktop Shortcut -->
             <Directory Id="DesktopFolder" Name="Desktop">
                 <Component Id="ApplicationShortcutDesktop" Guid="*">
-                    <Shortcut Id="ApplicationDesktopShortcut" Name="FLEXIERP" Description="Runs FLEXIERP" Target="[!Path]" WorkingDirectory="INSTALLDIR" />
-                    <RemoveFolder Id="DesktopFolder" On="uninstall" />
-                    <RegistryValue Root="HKCU" Key="Software\flexierp\FLEXIERP" Name="Desktop Shortcut" Type="integer" Value="1" KeyPath="yes" />
+                    <Shortcut Id="ApplicationDesktopShortcut"
+                        Name="FLEXIERP"
+                        Description="Runs FLEXIERP"
+                        Target="[INSTALLDIR]app.exe"
+                        WorkingDirectory="INSTALLDIR" />
+                    <RemoveFile Id="RemoveDesktopShortcut" Name="FLEXIERP.lnk" On="uninstall" />
+                    <RegistryValue Root="HKCU"
+                        Key="Software\flexierp\FLEXIERP"
+                        Name="Desktop Shortcut"
+                        Type="integer"
+                        Value="1"
+                        KeyPath="yes" />
                 </Component>
             </Directory>
-            <Directory Id="$(var.PlatformProgramFilesFolder)" Name="PFiles">
-                <Directory Id="INSTALLDIR" Name="FLEXIERP"/>
+
+            <!-- Main Install Directory -->
+            <Directory Id="PersonalFolder">
+                <Directory Id="INSTALLDIR" Name="FLEXIERP" />
             </Directory>
+
+            <!-- Start Menu Shortcut Folder -->
             <Directory Id="ProgramMenuFolder">
-                <Directory Id="ApplicationProgramsFolder" Name="FLEXIERP"/>
+                <Directory Id="ApplicationProgramsFolder" Name="FLEXIERP" />
             </Directory>
         </Directory>
 
         <DirectoryRef Id="INSTALLDIR">
             <Component Id="RegistryEntries" Guid="*">
                 <RegistryKey Root="HKCU" Key="Software\flexierp\FLEXIERP">
-                    <RegistryValue Name="InstallDir" Type="string" Value="[INSTALLDIR]" KeyPath="yes" />
+                    <RegistryValue Name="InstallDir" Type="string" Value="[INSTALLDIR]"
+                        KeyPath="yes" />
                 </RegistryKey>
                 <!-- Change the Root to HKCU for perUser installations -->
-</Component>
+            </Component>
             <Component Id="Path" Guid="df8e9bc8-c912-52c6-9518-7118acb4472b" Win64="$(var.Win64)">
-                <File Id="Path" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\target\release\app.exe" KeyPath="yes" Checksum="yes"/>
-</Component>
-            <Directory Id="I9d12fc7333024c1eb9a4dddb853c24b0" Name="resources"><Component Id="I52e6e594b34546fc8562e406a32d3c0d" Guid="ebe36cab-c9ad-461c-a3c8-7f6082786a20" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I52e6e594b34546fc8562e406a32d3c0d" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\vcredist_x64.exe" /></Component><Directory Id="I6476e9dba9484dd6a2b97094f415007c" Name="backend"><Component Id="I482e8157e02f42fa92f885d6324c8dfe" Guid="dc5af6d3-14a6-4d9f-8ad6-6740c1827162" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I482e8157e02f42fa92f885d6324c8dfe" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\FLEXIERP.exe" /></Component><Component Id="I9d66d103d77942a08f065574b39eb673" Guid="adecdddb-e9a3-4ee7-91c4-7654afdf77c6" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I9d66d103d77942a08f065574b39eb673" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\FLEXIERP.pdb" /></Component><Component Id="I8018e663fe9f43b49fc37bc5d089edc5" Guid="e898763f-4c02-4370-bac2-1757ef6a121b" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I8018e663fe9f43b49fc37bc5d089edc5" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\FLEXIERP.staticwebassets.endpoints.json" /></Component><Component Id="Ie12e6447823a49258072ee8c4bf3addc" Guid="710e9c7f-2d65-47d7-b3b7-21dd99080594" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_Ie12e6447823a49258072ee8c4bf3addc" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\Microsoft.Data.SqlClient.SNI.dll" /></Component><Component Id="I3a55ce349fe3475791561a815e06e7c5" Guid="08d8e839-312f-472b-a0ec-a87363279c8d" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I3a55ce349fe3475791561a815e06e7c5" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\QuestPdfSkia.dll" /></Component><Component Id="I3d7afef68e214cea9263da0cbc363b8f" Guid="dbf48f78-fe45-4d7f-8332-e2ab60991976" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I3d7afef68e214cea9263da0cbc363b8f" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\Select.Html.dep" /></Component><Component Id="I2b4b296e9f924c548ba7fc124f340b36" Guid="00806b6e-5ed8-43ce-84a2-9a2dc8ee7f95" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I2b4b296e9f924c548ba7fc124f340b36" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\appsettings.Development.json" /></Component><Component Id="I244d668310bb43f498d757c5217ef4d6" Guid="8b8eef7a-62e7-4194-bddb-7f150866e757" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I244d668310bb43f498d757c5217ef4d6" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\appsettings.json" /></Component><Component Id="I1b8ca817593b491583ae238966984f37" Guid="869349c9-91f4-4d54-a17d-50bebd354c1e" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I1b8ca817593b491583ae238966984f37" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\aspnetcorev2_inprocess.dll" /></Component><Component Id="I665f9d23cc514495b4ba5c919f8cb93b" Guid="8404314c-675e-4a10-b409-64fc60394be1" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I665f9d23cc514495b4ba5c919f8cb93b" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\e_sqlite3.dll" /></Component><Component Id="Ib954bbbc76ef4231b4cd9169f14b5636" Guid="c16a99e3-5192-457b-886e-d0b8c3cabc89" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_Ib954bbbc76ef4231b4cd9169f14b5636" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\libgcc_s_seh-1.dll" /></Component><Component Id="Ifd3e2739a9b54eac89af5f399bb97e33" Guid="5d19b52d-9b82-4f16-a1f6-99a67695d8c1" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_Ifd3e2739a9b54eac89af5f399bb97e33" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\libstdc++-6.dll" /></Component><Component Id="I460546bf0edd4fd88fe77bb229e739aa" Guid="1243ef29-d6c9-420a-bc20-8912b2d2d2aa" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I460546bf0edd4fd88fe77bb229e739aa" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\libwinpthread-1.dll" /></Component><Component Id="I55b169da91aa442d9555db0aa0c675ae" Guid="22d7b433-7f3d-4b23-8cd9-eee1871901fc" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I55b169da91aa442d9555db0aa0c675ae" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\qpdf.dll" /></Component><Component Id="I9d3dd32f9dad4604b1e7afa5b0d02cda" Guid="01bb3809-3fbc-46bb-8090-3f11b9e9c09b" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I9d3dd32f9dad4604b1e7afa5b0d02cda" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\run_service.exe" /></Component><Component Id="I137bec5b7894402ea56df53de3b767bf" Guid="aa0718b3-5474-41f3-bb17-dce7186f87f4" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I137bec5b7894402ea56df53de3b767bf" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\web.config" /></Component><Component Id="I507d0a849b1745689b372651df7e97f4" Guid="8196b9b1-eac5-4b61-9eab-03e6a67c662f" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I507d0a849b1745689b372651df7e97f4" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\zlib1.dll" /></Component><Directory Id="I2f3a255f71574c268521d17808ce8b26" Name="Documents"><Component Id="Ib5b45559931d46feaf4bd08926977772" Guid="e44c9d9d-54ca-4cfd-8a03-0abfde9242d3" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_Ib5b45559931d46feaf4bd08926977772" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\Documents\flexi-logo.png" /></Component></Directory><Directory Id="I5605e493115b469491038b0e188f0575" Name="LatoFont"><Component Id="I3a23aeccecc24223ae490cf5606f1521" Guid="4cba9227-733f-4134-b35a-2778bf4b74d4" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I3a23aeccecc24223ae490cf5606f1521" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-Black.ttf" /></Component><Component Id="I661852b09c2a47ccbd638dc7bd5b63b4" Guid="f69f6dcb-9bb5-4808-b062-42c87fc9149d" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I661852b09c2a47ccbd638dc7bd5b63b4" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-BlackItalic.ttf" /></Component><Component Id="Ibb6f206de56544f2aef5cfc7c30334f3" Guid="c396b92b-0a33-441f-b674-08540b67368d" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_Ibb6f206de56544f2aef5cfc7c30334f3" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-Bold.ttf" /></Component><Component Id="Ib61898f722c546acbe03fdef685a654a" Guid="bff74b41-bcdc-4ab8-99a2-0c6d12184814" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_Ib61898f722c546acbe03fdef685a654a" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-BoldItalic.ttf" /></Component><Component Id="I09723add98934b33a4e1110c8e6334c7" Guid="bb1f5e03-af35-4a4f-8af0-b1a55dd2a6e6" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I09723add98934b33a4e1110c8e6334c7" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-ExtraBold.ttf" /></Component><Component Id="Iac74c47b5b6842e88ac054211e3d5654" Guid="a94ad5f3-2799-4047-a71c-f3de1400175d" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_Iac74c47b5b6842e88ac054211e3d5654" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-ExtraBoldItalic.ttf" /></Component><Component Id="I2cdb2565ce6b4ead86bc1caf4654018d" Guid="a630f113-7eb8-43bc-8557-31e8f38f7901" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I2cdb2565ce6b4ead86bc1caf4654018d" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-ExtraLight.ttf" /></Component><Component Id="I053c77427be94bc8ad32f9e2a1ce067f" Guid="9501e144-17de-41a5-8a88-7d6ed19995c2" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I053c77427be94bc8ad32f9e2a1ce067f" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-ExtraLightItalic.ttf" /></Component><Component Id="If34565ba261f47f884dd8947211294ef" Guid="64ec8e26-c414-4548-b337-6f34fa59c8cb" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_If34565ba261f47f884dd8947211294ef" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-Italic.ttf" /></Component><Component Id="Ic76e2b35eda84206b96fd78f2acc4ac4" Guid="dc779f9b-4515-4c08-a00f-b833230d742a" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_Ic76e2b35eda84206b96fd78f2acc4ac4" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-Light.ttf" /></Component><Component Id="I049a4596ac5642e585962eb27c24259b" Guid="cf907c47-6b56-4dd7-bd09-be70be6f8b30" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I049a4596ac5642e585962eb27c24259b" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-LightItalic.ttf" /></Component><Component Id="I5482c0ae08a148b7878c97f015a9eb82" Guid="5cd914a8-c6fb-44be-946b-3d33379e2011" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I5482c0ae08a148b7878c97f015a9eb82" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-Medium.ttf" /></Component><Component Id="Ic8cdb702dbef4bb08e564548902897c3" Guid="093c748d-4003-4870-bc63-dc3594e2be5e" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_Ic8cdb702dbef4bb08e564548902897c3" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-MediumItalic.ttf" /></Component><Component Id="I4e63df3a33cd481c84738854a80c459b" Guid="44861c84-b4a9-4c52-adc3-bf84cc20a5de" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I4e63df3a33cd481c84738854a80c459b" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-Regular.ttf" /></Component><Component Id="I4221dabdf73e469892814f488d3f7e35" Guid="58997abc-a22d-437d-9322-20ff13a7d755" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I4221dabdf73e469892814f488d3f7e35" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-SemiBold.ttf" /></Component><Component Id="Ia77682d266894219b32cd8b3ef5b453d" Guid="12563c30-6745-4de8-807c-3f47ed763085" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_Ia77682d266894219b32cd8b3ef5b453d" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-SemiBoldItalic.ttf" /></Component><Component Id="I43aaaa31d97a48f483fc0370f83c8012" Guid="99247c67-2930-43e7-854b-03dbada19de0" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I43aaaa31d97a48f483fc0370f83c8012" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-Thin.ttf" /></Component><Component Id="I9907a99617ab4585b9963dd899d918b8" Guid="bb666586-50c3-4d9f-95a2-cb6c5a26fe23" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I9907a99617ab4585b9963dd899d918b8" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-ThinItalic.ttf" /></Component><Component Id="Ic3d41ee49b884575ab24973ca34af06a" Guid="c4d64dfd-d6d3-4854-b57a-6a253f39531a" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_Ic3d41ee49b884575ab24973ca34af06a" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\OFL.txt" /></Component></Directory><Directory Id="Id21ae4efd2184ab59e253e6ca068995a" Name="app_data"><Component Id="I68f92ee7971e45348021c12beae90a40" Guid="5643af3a-f6df-42c4-bbb0-cec22fa1364e" Win64="$(var.Win64)" KeyPath="yes"><File Id="PathFile_I68f92ee7971e45348021c12beae90a40" Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\app_data\mydatabase.db" /></Component></Directory></Directory></Directory>
+                <File Id="Path"
+                    Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\target\release\app.exe"
+                    KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Directory Id="I9d12fc7333024c1eb9a4dddb853c24b0" Name="resources">
+                <Component Id="I52e6e594b34546fc8562e406a32d3c0d"
+                    Guid="ebe36cab-c9ad-461c-a3c8-7f6082786a20" Win64="$(var.Win64)" KeyPath="yes">
+                    <File Id="PathFile_I52e6e594b34546fc8562e406a32d3c0d"
+                        Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\vcredist_x64.exe" />
+                </Component>
+                <Directory Id="I6476e9dba9484dd6a2b97094f415007c" Name="backend">
+                    <Component Id="I482e8157e02f42fa92f885d6324c8dfe"
+                        Guid="dc5af6d3-14a6-4d9f-8ad6-6740c1827162" Win64="$(var.Win64)"
+                        KeyPath="yes">
+                        <File Id="PathFile_I482e8157e02f42fa92f885d6324c8dfe"
+                            Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\FLEXIERP.exe" />
+                    </Component>
+                    <Component Id="I9d66d103d77942a08f065574b39eb673"
+                        Guid="adecdddb-e9a3-4ee7-91c4-7654afdf77c6" Win64="$(var.Win64)"
+                        KeyPath="yes">
+                        <File Id="PathFile_I9d66d103d77942a08f065574b39eb673"
+                            Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\FLEXIERP.pdb" />
+                    </Component>
+                    <Component Id="I8018e663fe9f43b49fc37bc5d089edc5"
+                        Guid="e898763f-4c02-4370-bac2-1757ef6a121b" Win64="$(var.Win64)"
+                        KeyPath="yes">
+                        <File Id="PathFile_I8018e663fe9f43b49fc37bc5d089edc5"
+                            Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\FLEXIERP.staticwebassets.endpoints.json" />
+                    </Component>
+                    <Component Id="Ie12e6447823a49258072ee8c4bf3addc"
+                        Guid="710e9c7f-2d65-47d7-b3b7-21dd99080594" Win64="$(var.Win64)"
+                        KeyPath="yes">
+                        <File Id="PathFile_Ie12e6447823a49258072ee8c4bf3addc"
+                            Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\Microsoft.Data.SqlClient.SNI.dll" />
+                    </Component>
+                    <Component Id="I3a55ce349fe3475791561a815e06e7c5"
+                        Guid="08d8e839-312f-472b-a0ec-a87363279c8d" Win64="$(var.Win64)"
+                        KeyPath="yes">
+                        <File Id="PathFile_I3a55ce349fe3475791561a815e06e7c5"
+                            Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\QuestPdfSkia.dll" />
+                    </Component>
+                    <Component Id="I3d7afef68e214cea9263da0cbc363b8f"
+                        Guid="dbf48f78-fe45-4d7f-8332-e2ab60991976" Win64="$(var.Win64)"
+                        KeyPath="yes">
+                        <File Id="PathFile_I3d7afef68e214cea9263da0cbc363b8f"
+                            Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\Select.Html.dep" />
+                    </Component>
+                    <Component Id="I2b4b296e9f924c548ba7fc124f340b36"
+                        Guid="00806b6e-5ed8-43ce-84a2-9a2dc8ee7f95" Win64="$(var.Win64)"
+                        KeyPath="yes">
+                        <File Id="PathFile_I2b4b296e9f924c548ba7fc124f340b36"
+                            Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\appsettings.Development.json" />
+                    </Component>
+                    <Component Id="I244d668310bb43f498d757c5217ef4d6"
+                        Guid="8b8eef7a-62e7-4194-bddb-7f150866e757" Win64="$(var.Win64)"
+                        KeyPath="yes">
+                        <File Id="PathFile_I244d668310bb43f498d757c5217ef4d6"
+                            Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\appsettings.json" />
+                    </Component>
+                    <Component Id="I1b8ca817593b491583ae238966984f37"
+                        Guid="869349c9-91f4-4d54-a17d-50bebd354c1e" Win64="$(var.Win64)"
+                        KeyPath="yes">
+                        <File Id="PathFile_I1b8ca817593b491583ae238966984f37"
+                            Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\aspnetcorev2_inprocess.dll" />
+                    </Component>
+                    <Component Id="I665f9d23cc514495b4ba5c919f8cb93b"
+                        Guid="8404314c-675e-4a10-b409-64fc60394be1" Win64="$(var.Win64)"
+                        KeyPath="yes">
+                        <File Id="PathFile_I665f9d23cc514495b4ba5c919f8cb93b"
+                            Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\e_sqlite3.dll" />
+                    </Component>
+                    <Component Id="Ib954bbbc76ef4231b4cd9169f14b5636"
+                        Guid="c16a99e3-5192-457b-886e-d0b8c3cabc89" Win64="$(var.Win64)"
+                        KeyPath="yes">
+                        <File Id="PathFile_Ib954bbbc76ef4231b4cd9169f14b5636"
+                            Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\libgcc_s_seh-1.dll" />
+                    </Component>
+                    <Component Id="Ifd3e2739a9b54eac89af5f399bb97e33"
+                        Guid="5d19b52d-9b82-4f16-a1f6-99a67695d8c1" Win64="$(var.Win64)"
+                        KeyPath="yes">
+                        <File Id="PathFile_Ifd3e2739a9b54eac89af5f399bb97e33"
+                            Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\libstdc++-6.dll" />
+                    </Component>
+                    <Component Id="I460546bf0edd4fd88fe77bb229e739aa"
+                        Guid="1243ef29-d6c9-420a-bc20-8912b2d2d2aa" Win64="$(var.Win64)"
+                        KeyPath="yes">
+                        <File Id="PathFile_I460546bf0edd4fd88fe77bb229e739aa"
+                            Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\libwinpthread-1.dll" />
+                    </Component>
+                    <Component Id="I55b169da91aa442d9555db0aa0c675ae"
+                        Guid="22d7b433-7f3d-4b23-8cd9-eee1871901fc" Win64="$(var.Win64)"
+                        KeyPath="yes">
+                        <File Id="PathFile_I55b169da91aa442d9555db0aa0c675ae"
+                            Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\qpdf.dll" />
+                    </Component>
+                    <Component Id="I9d3dd32f9dad4604b1e7afa5b0d02cda"
+                        Guid="01bb3809-3fbc-46bb-8090-3f11b9e9c09b" Win64="$(var.Win64)"
+                        KeyPath="yes">
+                        <File Id="PathFile_I9d3dd32f9dad4604b1e7afa5b0d02cda"
+                            Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\run_service.exe" />
+                    </Component>
+                    <Component Id="I137bec5b7894402ea56df53de3b767bf"
+                        Guid="aa0718b3-5474-41f3-bb17-dce7186f87f4" Win64="$(var.Win64)"
+                        KeyPath="yes">
+                        <File Id="PathFile_I137bec5b7894402ea56df53de3b767bf"
+                            Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\web.config" />
+                    </Component>
+                    <Component Id="I507d0a849b1745689b372651df7e97f4"
+                        Guid="8196b9b1-eac5-4b61-9eab-03e6a67c662f" Win64="$(var.Win64)"
+                        KeyPath="yes">
+                        <File Id="PathFile_I507d0a849b1745689b372651df7e97f4"
+                            Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\zlib1.dll" />
+                    </Component>
+                    <Directory Id="I2f3a255f71574c268521d17808ce8b26" Name="Documents">
+                        <Component Id="Ib5b45559931d46feaf4bd08926977772"
+                            Guid="e44c9d9d-54ca-4cfd-8a03-0abfde9242d3" Win64="$(var.Win64)"
+                            KeyPath="yes">
+                            <File Id="PathFile_Ib5b45559931d46feaf4bd08926977772"
+                                Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\Documents\flexi-logo.png" />
+                        </Component>
+                    </Directory>
+                    <Directory Id="I5605e493115b469491038b0e188f0575" Name="LatoFont">
+                        <Component Id="I3a23aeccecc24223ae490cf5606f1521"
+                            Guid="4cba9227-733f-4134-b35a-2778bf4b74d4" Win64="$(var.Win64)"
+                            KeyPath="yes">
+                            <File Id="PathFile_I3a23aeccecc24223ae490cf5606f1521"
+                                Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-Black.ttf" />
+                        </Component>
+                        <Component Id="I661852b09c2a47ccbd638dc7bd5b63b4"
+                            Guid="f69f6dcb-9bb5-4808-b062-42c87fc9149d" Win64="$(var.Win64)"
+                            KeyPath="yes">
+                            <File Id="PathFile_I661852b09c2a47ccbd638dc7bd5b63b4"
+                                Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-BlackItalic.ttf" />
+                        </Component>
+                        <Component Id="Ibb6f206de56544f2aef5cfc7c30334f3"
+                            Guid="c396b92b-0a33-441f-b674-08540b67368d" Win64="$(var.Win64)"
+                            KeyPath="yes">
+                            <File Id="PathFile_Ibb6f206de56544f2aef5cfc7c30334f3"
+                                Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-Bold.ttf" />
+                        </Component>
+                        <Component Id="Ib61898f722c546acbe03fdef685a654a"
+                            Guid="bff74b41-bcdc-4ab8-99a2-0c6d12184814" Win64="$(var.Win64)"
+                            KeyPath="yes">
+                            <File Id="PathFile_Ib61898f722c546acbe03fdef685a654a"
+                                Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-BoldItalic.ttf" />
+                        </Component>
+                        <Component Id="I09723add98934b33a4e1110c8e6334c7"
+                            Guid="bb1f5e03-af35-4a4f-8af0-b1a55dd2a6e6" Win64="$(var.Win64)"
+                            KeyPath="yes">
+                            <File Id="PathFile_I09723add98934b33a4e1110c8e6334c7"
+                                Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-ExtraBold.ttf" />
+                        </Component>
+                        <Component Id="Iac74c47b5b6842e88ac054211e3d5654"
+                            Guid="a94ad5f3-2799-4047-a71c-f3de1400175d" Win64="$(var.Win64)"
+                            KeyPath="yes">
+                            <File Id="PathFile_Iac74c47b5b6842e88ac054211e3d5654"
+                                Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-ExtraBoldItalic.ttf" />
+                        </Component>
+                        <Component Id="I2cdb2565ce6b4ead86bc1caf4654018d"
+                            Guid="a630f113-7eb8-43bc-8557-31e8f38f7901" Win64="$(var.Win64)"
+                            KeyPath="yes">
+                            <File Id="PathFile_I2cdb2565ce6b4ead86bc1caf4654018d"
+                                Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-ExtraLight.ttf" />
+                        </Component>
+                        <Component Id="I053c77427be94bc8ad32f9e2a1ce067f"
+                            Guid="9501e144-17de-41a5-8a88-7d6ed19995c2" Win64="$(var.Win64)"
+                            KeyPath="yes">
+                            <File Id="PathFile_I053c77427be94bc8ad32f9e2a1ce067f"
+                                Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-ExtraLightItalic.ttf" />
+                        </Component>
+                        <Component Id="If34565ba261f47f884dd8947211294ef"
+                            Guid="64ec8e26-c414-4548-b337-6f34fa59c8cb" Win64="$(var.Win64)"
+                            KeyPath="yes">
+                            <File Id="PathFile_If34565ba261f47f884dd8947211294ef"
+                                Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-Italic.ttf" />
+                        </Component>
+                        <Component Id="Ic76e2b35eda84206b96fd78f2acc4ac4"
+                            Guid="dc779f9b-4515-4c08-a00f-b833230d742a" Win64="$(var.Win64)"
+                            KeyPath="yes">
+                            <File Id="PathFile_Ic76e2b35eda84206b96fd78f2acc4ac4"
+                                Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-Light.ttf" />
+                        </Component>
+                        <Component Id="I049a4596ac5642e585962eb27c24259b"
+                            Guid="cf907c47-6b56-4dd7-bd09-be70be6f8b30" Win64="$(var.Win64)"
+                            KeyPath="yes">
+                            <File Id="PathFile_I049a4596ac5642e585962eb27c24259b"
+                                Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-LightItalic.ttf" />
+                        </Component>
+                        <Component Id="I5482c0ae08a148b7878c97f015a9eb82"
+                            Guid="5cd914a8-c6fb-44be-946b-3d33379e2011" Win64="$(var.Win64)"
+                            KeyPath="yes">
+                            <File Id="PathFile_I5482c0ae08a148b7878c97f015a9eb82"
+                                Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-Medium.ttf" />
+                        </Component>
+                        <Component Id="Ic8cdb702dbef4bb08e564548902897c3"
+                            Guid="093c748d-4003-4870-bc63-dc3594e2be5e" Win64="$(var.Win64)"
+                            KeyPath="yes">
+                            <File Id="PathFile_Ic8cdb702dbef4bb08e564548902897c3"
+                                Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-MediumItalic.ttf" />
+                        </Component>
+                        <Component Id="I4e63df3a33cd481c84738854a80c459b"
+                            Guid="44861c84-b4a9-4c52-adc3-bf84cc20a5de" Win64="$(var.Win64)"
+                            KeyPath="yes">
+                            <File Id="PathFile_I4e63df3a33cd481c84738854a80c459b"
+                                Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-Regular.ttf" />
+                        </Component>
+                        <Component Id="I4221dabdf73e469892814f488d3f7e35"
+                            Guid="58997abc-a22d-437d-9322-20ff13a7d755" Win64="$(var.Win64)"
+                            KeyPath="yes">
+                            <File Id="PathFile_I4221dabdf73e469892814f488d3f7e35"
+                                Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-SemiBold.ttf" />
+                        </Component>
+                        <Component Id="Ia77682d266894219b32cd8b3ef5b453d"
+                            Guid="12563c30-6745-4de8-807c-3f47ed763085" Win64="$(var.Win64)"
+                            KeyPath="yes">
+                            <File Id="PathFile_Ia77682d266894219b32cd8b3ef5b453d"
+                                Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-SemiBoldItalic.ttf" />
+                        </Component>
+                        <Component Id="I43aaaa31d97a48f483fc0370f83c8012"
+                            Guid="99247c67-2930-43e7-854b-03dbada19de0" Win64="$(var.Win64)"
+                            KeyPath="yes">
+                            <File Id="PathFile_I43aaaa31d97a48f483fc0370f83c8012"
+                                Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-Thin.ttf" />
+                        </Component>
+                        <Component Id="I9907a99617ab4585b9963dd899d918b8"
+                            Guid="bb666586-50c3-4d9f-95a2-cb6c5a26fe23" Win64="$(var.Win64)"
+                            KeyPath="yes">
+                            <File Id="PathFile_I9907a99617ab4585b9963dd899d918b8"
+                                Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\Lato-ThinItalic.ttf" />
+                        </Component>
+                        <Component Id="Ic3d41ee49b884575ab24973ca34af06a"
+                            Guid="c4d64dfd-d6d3-4854-b57a-6a253f39531a" Win64="$(var.Win64)"
+                            KeyPath="yes">
+                            <File Id="PathFile_Ic3d41ee49b884575ab24973ca34af06a"
+                                Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\LatoFont\OFL.txt" />
+                        </Component>
+                    </Directory>
+                    <Directory Id="Id21ae4efd2184ab59e253e6ca068995a" Name="app_data">
+                        <Component Id="I68f92ee7971e45348021c12beae90a40"
+                            Guid="5643af3a-f6df-42c4-bbb0-cec22fa1364e" Win64="$(var.Win64)"
+                            KeyPath="yes">
+                            <File Id="PathFile_I68f92ee7971e45348021c12beae90a40"
+                                Source="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\resources\backend\app_data\mydatabase.db" />
+                        </Component>
+                    </Directory>
+                </Directory>
+            </Directory>
             <Component Id="CMP_UninstallShortcut" Guid="*">
 
                 <Shortcut Id="UninstallShortcut"
-						  Name="Uninstall FLEXIERP"
-						  Description="Uninstalls FLEXIERP"
-						  Target="[System64Folder]msiexec.exe"
-						  Arguments="/x [ProductCode]" />
+                    Name="Uninstall FLEXIERP"
+                    Description="Uninstalls FLEXIERP"
+                    Target="[System64Folder]msiexec.exe"
+                    Arguments="/x [ProductCode]" />
 
-				<RemoveFolder Id="INSTALLDIR"
-							  On="uninstall" />
+                <RemoveFolder Id="INSTALLDIR"
+                    On="uninstall" />
 
-				<RegistryValue Root="HKCU"
-							   Key="Software\flexierp\FLEXIERP"
-							   Name="Uninstaller Shortcut"
-							   Type="integer"
-							   Value="1"
-							   KeyPath="yes" />
+                <RegistryValue Root="HKCU"
+                    Key="Software\flexierp\FLEXIERP"
+                    Name="Uninstaller Shortcut"
+                    Type="integer"
+                    Value="1"
+                    KeyPath="yes" />
             </Component>
         </DirectoryRef>
 
         <DirectoryRef Id="ApplicationProgramsFolder">
-            <Component Id="ApplicationShortcut" Guid="*">
-                <Shortcut Id="ApplicationStartMenuShortcut"
-                    Name="FLEXIERP"
-                    Description="Runs FLEXIERP"
-                    Target="[!Path]"
-                    Icon="ProductIcon"
-                    WorkingDirectory="INSTALLDIR">
-                    <ShortcutProperty Key="System.AppUserModel.ID" Value="com.flexierp"/>
-                </Shortcut>
-                <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
-                <RegistryValue Root="HKCU" Key="Software\flexierp\FLEXIERP" Name="Start Menu Shortcut" Type="integer" Value="1" KeyPath="yes"/>
-           </Component>
+           <Component Id="ApplicationShortcut" Guid="*">
+    <Shortcut Id="ApplicationStartMenuShortcut"
+        Name="FLEXIERP"
+        Description="Runs FLEXIERP"
+        Target="[INSTALLDIR]app.exe"
+        Icon="ProductIcon"
+        WorkingDirectory="INSTALLDIR">
+
+        <!-- ✅ Moved inside Shortcut -->
+        <ShortcutProperty Key="System.AppUserModel.ID" Value="com.flexierp" />
+
+    </Shortcut>
+
+    <!-- Remove folder only if empty -->
+    <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
+
+    <RegistryValue Root="HKCU"
+        Key="Software\flexierp\FLEXIERP"
+        Name="Start Menu Shortcut"
+        Type="integer"
+        Value="1"
+        KeyPath="yes" />
+</Component>
+
         </DirectoryRef>
 
-<Feature
-                Id="MainProgram"
-                Title="Application"
-                Description="!(loc.InstallAppFeature)"
-                Level="1"
-                ConfigurableDirectory="INSTALLDIR"
-                AllowAdvertise="no"
-                Display="expand"
-                Absent="disallow">
+       <Feature Id="MainFeature" Title="FLEXIERP" Level="1">
+    <ComponentRef Id="ApplicationShortcutDesktop" />
+    <ComponentRef Id="RegistryEntries" />
+    <ComponentRef Id="Path" />
 
-            <ComponentRef Id="RegistryEntries"/>
-
-<ComponentRef Id="I52e6e594b34546fc8562e406a32d3c0d"/>
-<ComponentRef Id="I482e8157e02f42fa92f885d6324c8dfe"/>
-<ComponentRef Id="I9d66d103d77942a08f065574b39eb673"/>
-<ComponentRef Id="I8018e663fe9f43b49fc37bc5d089edc5"/>
-<ComponentRef Id="Ie12e6447823a49258072ee8c4bf3addc"/>
-<ComponentRef Id="I3a55ce349fe3475791561a815e06e7c5"/>
-<ComponentRef Id="I3d7afef68e214cea9263da0cbc363b8f"/>
-<ComponentRef Id="I2b4b296e9f924c548ba7fc124f340b36"/>
-<ComponentRef Id="I244d668310bb43f498d757c5217ef4d6"/>
-<ComponentRef Id="I1b8ca817593b491583ae238966984f37"/>
-<ComponentRef Id="I665f9d23cc514495b4ba5c919f8cb93b"/>
-<ComponentRef Id="Ib954bbbc76ef4231b4cd9169f14b5636"/>
-<ComponentRef Id="Ifd3e2739a9b54eac89af5f399bb97e33"/>
-<ComponentRef Id="I460546bf0edd4fd88fe77bb229e739aa"/>
-<ComponentRef Id="I55b169da91aa442d9555db0aa0c675ae"/>
-<ComponentRef Id="I9d3dd32f9dad4604b1e7afa5b0d02cda"/>
-<ComponentRef Id="I137bec5b7894402ea56df53de3b767bf"/>
-<ComponentRef Id="I507d0a849b1745689b372651df7e97f4"/>
-<ComponentRef Id="Ib5b45559931d46feaf4bd08926977772"/>
-<ComponentRef Id="I3a23aeccecc24223ae490cf5606f1521"/>
-<ComponentRef Id="I661852b09c2a47ccbd638dc7bd5b63b4"/>
-<ComponentRef Id="Ibb6f206de56544f2aef5cfc7c30334f3"/>
-<ComponentRef Id="Ib61898f722c546acbe03fdef685a654a"/>
-<ComponentRef Id="I09723add98934b33a4e1110c8e6334c7"/>
-<ComponentRef Id="Iac74c47b5b6842e88ac054211e3d5654"/>
-<ComponentRef Id="I2cdb2565ce6b4ead86bc1caf4654018d"/>
-<ComponentRef Id="I053c77427be94bc8ad32f9e2a1ce067f"/>
-<ComponentRef Id="If34565ba261f47f884dd8947211294ef"/>
-<ComponentRef Id="Ic76e2b35eda84206b96fd78f2acc4ac4"/>
-<ComponentRef Id="I049a4596ac5642e585962eb27c24259b"/>
-<ComponentRef Id="I5482c0ae08a148b7878c97f015a9eb82"/>
-<ComponentRef Id="Ic8cdb702dbef4bb08e564548902897c3"/>
-<ComponentRef Id="I4e63df3a33cd481c84738854a80c459b"/>
-<ComponentRef Id="I4221dabdf73e469892814f488d3f7e35"/>
-<ComponentRef Id="Ia77682d266894219b32cd8b3ef5b453d"/>
-<ComponentRef Id="I43aaaa31d97a48f483fc0370f83c8012"/>
-<ComponentRef Id="I9907a99617ab4585b9963dd899d918b8"/>
-<ComponentRef Id="Ic3d41ee49b884575ab24973ca34af06a"/>
-<ComponentRef Id="I68f92ee7971e45348021c12beae90a40"/>
+            <ComponentRef Id="I52e6e594b34546fc8562e406a32d3c0d" />
+            <ComponentRef Id="I482e8157e02f42fa92f885d6324c8dfe" />
+            <ComponentRef Id="I9d66d103d77942a08f065574b39eb673" />
+            <ComponentRef Id="I8018e663fe9f43b49fc37bc5d089edc5" />
+            <ComponentRef Id="Ie12e6447823a49258072ee8c4bf3addc" />
+            <ComponentRef Id="I3a55ce349fe3475791561a815e06e7c5" />
+            <ComponentRef Id="I3d7afef68e214cea9263da0cbc363b8f" />
+            <ComponentRef Id="I2b4b296e9f924c548ba7fc124f340b36" />
+            <ComponentRef Id="I244d668310bb43f498d757c5217ef4d6" />
+            <ComponentRef Id="I1b8ca817593b491583ae238966984f37" />
+            <ComponentRef Id="I665f9d23cc514495b4ba5c919f8cb93b" />
+            <ComponentRef Id="Ib954bbbc76ef4231b4cd9169f14b5636" />
+            <ComponentRef Id="Ifd3e2739a9b54eac89af5f399bb97e33" />
+            <ComponentRef Id="I460546bf0edd4fd88fe77bb229e739aa" />
+            <ComponentRef Id="I55b169da91aa442d9555db0aa0c675ae" />
+            <ComponentRef Id="I9d3dd32f9dad4604b1e7afa5b0d02cda" />
+            <ComponentRef Id="I137bec5b7894402ea56df53de3b767bf" />
+            <ComponentRef Id="I507d0a849b1745689b372651df7e97f4" />
+            <ComponentRef Id="Ib5b45559931d46feaf4bd08926977772" />
+            <ComponentRef Id="I3a23aeccecc24223ae490cf5606f1521" />
+            <ComponentRef Id="I661852b09c2a47ccbd638dc7bd5b63b4" />
+            <ComponentRef Id="Ibb6f206de56544f2aef5cfc7c30334f3" />
+            <ComponentRef Id="Ib61898f722c546acbe03fdef685a654a" />
+            <ComponentRef Id="I09723add98934b33a4e1110c8e6334c7" />
+            <ComponentRef Id="Iac74c47b5b6842e88ac054211e3d5654" />
+            <ComponentRef Id="I2cdb2565ce6b4ead86bc1caf4654018d" />
+            <ComponentRef Id="I053c77427be94bc8ad32f9e2a1ce067f" />
+            <ComponentRef Id="If34565ba261f47f884dd8947211294ef" />
+            <ComponentRef Id="Ic76e2b35eda84206b96fd78f2acc4ac4" />
+            <ComponentRef Id="I049a4596ac5642e585962eb27c24259b" />
+            <ComponentRef Id="I5482c0ae08a148b7878c97f015a9eb82" />
+            <ComponentRef Id="Ic8cdb702dbef4bb08e564548902897c3" />
+            <ComponentRef Id="I4e63df3a33cd481c84738854a80c459b" />
+            <ComponentRef Id="I4221dabdf73e469892814f488d3f7e35" />
+            <ComponentRef Id="Ia77682d266894219b32cd8b3ef5b453d" />
+            <ComponentRef Id="I43aaaa31d97a48f483fc0370f83c8012" />
+            <ComponentRef Id="I9907a99617ab4585b9963dd899d918b8" />
+            <ComponentRef Id="Ic3d41ee49b884575ab24973ca34af06a" />
+            <ComponentRef Id="I68f92ee7971e45348021c12beae90a40" />
 
             <Feature Id="ShortcutsFeature"
                 Title="Shortcuts"
                 Level="1">
-                <ComponentRef Id="Path"/>
+                <ComponentRef Id="Path" />
                 <ComponentRef Id="CMP_UninstallShortcut" />
                 <ComponentRef Id="ApplicationShortcut" />
                 <ComponentRef Id="ApplicationShortcutDesktop" />
@@ -216,23 +475,29 @@
                 Description="!(loc.PathEnvVarFeature)"
                 Level="1"
                 Absent="allow">
-            <ComponentRef Id="Path"/>
-</Feature>
+                <ComponentRef Id="Path" />
+            </Feature>
         </Feature>
 
         <Feature Id="External" AllowAdvertise="no" Absent="disallow">
-</Feature>
+        </Feature>
 
         <!-- WebView2 -->
         <Property Id="WVRTINSTALLED">
-            <RegistrySearch Id="WVRTInstalledSystem" Root="HKLM" Key="SOFTWARE\Microsoft\EdgeUpdate\Clients\{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}" Name="pv" Type="raw" Win64="no" />
-            <RegistrySearch Id="WVRTInstalledUser" Root="HKCU" Key="SOFTWARE\Microsoft\EdgeUpdate\Clients\{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}" Name="pv" Type="raw"/>
+            <RegistrySearch Id="WVRTInstalledSystem" Root="HKLM"
+                Key="SOFTWARE\Microsoft\EdgeUpdate\Clients\{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}"
+                Name="pv" Type="raw" Win64="no" />
+            <RegistrySearch Id="WVRTInstalledUser" Root="HKCU"
+                Key="SOFTWARE\Microsoft\EdgeUpdate\Clients\{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}"
+                Name="pv" Type="raw" />
         </Property>
 
 
         <!-- Embedded webview bootstrapper mode -->
-        <Binary Id="MicrosoftEdgeWebview2Setup.exe" SourceFile="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\target\release\wix\x64\MicrosoftEdgeWebview2Setup.exe"/>
-        <CustomAction Id='InvokeBootstrapper' BinaryKey='MicrosoftEdgeWebview2Setup.exe' Execute="deferred" ExeCommand='/silent /install' Return='check' />
+        <Binary Id="MicrosoftEdgeWebview2Setup.exe"
+            SourceFile="C:\Users\VIKAS NAGAR\Desktop\flexierp-frontend\src-tauri\target\release\wix\x64\MicrosoftEdgeWebview2Setup.exe" />
+        <CustomAction Id='InvokeBootstrapper' BinaryKey='MicrosoftEdgeWebview2Setup.exe'
+            Execute="deferred" ExeCommand='/silent /install' Return='check' />
         <InstallExecuteSequence>
             <Custom Action='InvokeBootstrapper' Before='InstallFinalize'>
                 <![CDATA[NOT(REMOVE OR WVRTINSTALLED)]]>
@@ -242,11 +507,11 @@
         <!-- Embedded offline installer -->
 
 
-
         <InstallExecuteSequence>
-          <Custom Action="LaunchApplication" After="InstallFinalize">AUTOLAUNCHAPP AND NOT Installed</Custom>
+            <Custom Action="LaunchApplication" After="InstallFinalize">AUTOLAUNCHAPP AND NOT
+                Installed</Custom>
         </InstallExecuteSequence>
 
-        <SetProperty Id="ARPINSTALLLOCATION" Value="[INSTALLDIR]" After="CostFinalize"/>
+        <SetProperty Id="ARPINSTALLLOCATION" Value="[INSTALLDIR]" After="CostFinalize" />
     </Product>
 </Wix>

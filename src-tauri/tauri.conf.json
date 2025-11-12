@@ -39,7 +39,7 @@
     ],
     "windows": {
       "wix": {
-        "template": "src-tauri/wix/flexierp.wxs"
+        "template": "wix/flexierp.wxs"
       },
       "webviewInstallMode": {
         "type": "embedBootstrapper"
