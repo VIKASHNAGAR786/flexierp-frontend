@@ -9,8 +9,6 @@ import { AccountsComponent } from './components/accounts/accounts.component';
 import { CustomersComponent } from './components/customers/customers.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
-import { ProductsComponent } from './components/products/products.component';
-import { PurchasesComponent } from './components/purchases/purchases.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { SalesComponent } from './components/sales/sales.component';
 import { SettingsComponent } from './components/settings/settings.component';
@@ -34,9 +32,7 @@ export const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'inventory', component: InventoryComponent },
       { path: 'customers', component: CustomersComponent },
-      { path: 'products', component: ProductsComponent },
       { path: 'sales', component: SalesComponent },
-      { path: 'purchases', component: PurchasesComponent },
       { path: 'reports', component: ReportsComponent },
       { path: 'accounts', component: AccountsComponent },
       { path: 'settings', component: SettingsComponent },
