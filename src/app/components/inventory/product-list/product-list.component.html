@@ -1,133 +1,193 @@
 <!-- 🔍 Search Bar + Actions -->
 <div class="flex justify-between items-center mb-4 gap-2 flex-wrap">
-  <!-- Search Input -->
-  <input type="text" [(ngModel)]="filter.searchTerm" (ngModelChange)="getProductData()" placeholder="Search products..."
-    class="px-4 py-2 rounded-lg bg-slate-800 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-[#00ffee] w-1/3" />
 
-  <!-- 📅 Date Range -->
+  <!-- Search Input -->
+  <input
+    type="text"
+    [(ngModel)]="filter.searchTerm"
+    (ngModelChange)="getProductData()"
+    placeholder="Search products..."
+    class="px-4 py-2 rounded-lg focus:outline-none focus:ring-2 w-1/3"
+    style="
+      background: var(--input-bg);
+      color: var(--input-text);
+      border: 1px solid var(--input-border);
+      --tw-ring-color: var(--accent-1);
+    "
+  />
+
+  <!-- Date Range -->
   <div class="flex gap-2">
-    <input type="date" [(ngModel)]="filter.startDate" (ngModelChange)="getProductData()"
-      class="px-3 py-2 rounded bg-slate-800 text-white border border-slate-600" />
-    <input type="date" [(ngModel)]="filter.endDate" (ngModelChange)="getProductData()"
-      class="px-3 py-2 rounded bg-slate-800 text-white border border-slate-600" />
+    <input
+      type="date"
+      [(ngModel)]="filter.startDate"
+      (ngModelChange)="getProductData()"
+      class="px-3 py-2 rounded"
+      style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+    />
+
+    <input
+      type="date"
+      [(ngModel)]="filter.endDate"
+      (ngModelChange)="getProductData()"
+      class="px-3 py-2 rounded"
+      style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+    />
   </div>
 
-  <!-- 📑 Rows per page -->
-  <select [(ngModel)]="filter.pageSize" (change)="getProductData()"
-    class="px-3 py-2 rounded bg-slate-800 text-white border border-slate-600">
+  <!-- Rows per page -->
+  <select
+    [(ngModel)]="filter.pageSize"
+    (change)="getProductData()"
+    class="px-3 py-2 rounded"
+    style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+  >
     <option *ngFor="let size of pageSizes" [value]="size">{{ size }} per page</option>
   </select>
 
-  <!-- 📤 Export Buttons -->
+  <!-- Export Buttons -->
   <div class="flex gap-2" *ngIf="products.length > 0">
-    <button appTooltip="Download Product Pdf"
-    [tooltipPosition]="'top'"
-    [tooltipFixed]="false"
+    <button
       (click)="exportToPdf()"
-      class="flex items-center gap-1 px-3 py-2 bg-red-600 hover:bg-red-700 rounded text-white">
+      class="flex items-center gap-1 px-3 py-2 rounded"
+      style="background: #dc2626; color: white;"
+    >
       <i class="fas fa-file-pdf"></i> PDF
     </button>
-    <button 
-    appTooltip="Download Product Excel"
-    [tooltipPosition]="'top'"
-    [tooltipFixed]="false"
-    (click)="exportToExcel()"
-      class="flex items-center gap-1 px-3 py-2 bg-green-600 hover:bg-green-700 rounded text-white">
+
+    <button
+      (click)="exportToExcel()"
+      class="flex items-center gap-1 px-3 py-2 rounded"
+      style="background: #16a34a; color: white;"
+    >
       <i class="fas fa-file-excel"></i> Excel
     </button>
   </div>
+</div>
 
 
   <!-- 📋 Product Table -->
-  <div #productTable class="overflow-x-auto overflow-y-auto bg-slate-900 rounded-lg shadow-lg relative max-h-[500px]">
-    <table class="min-w-full text-white border-collapse">
-      <thead
-        class="bg-gradient-to-r from-slate-900 to-slate-800 text-[#00ffee] uppercase text-sm md:text-base tracking-wide sticky top-0 z-50">
-        <tr>
-          <th class="px-4 py-2 border-b border-slate-700">Sr.No</th>
-          <th class="px-4 py-2 border-b border-slate-700">Code</th>
-          <th class="px-4 py-2 border-b border-slate-700">Barcode</th>
-          <th class="px-4 py-2"><input type="checkbox" (change)="toggleAll($event)" /></th>
-          <th class="px-4 py-2 border-b border-slate-700">Name</th>
-          <th class="px-4 py-2 border-b border-slate-700">Category</th>
-          <th class="px-4 py-2 border-b border-slate-700">Product Type</th>
-          <th class="px-4 py-2 border-b border-slate-700">Packed Date</th>
-          <th class="px-4 py-2 border-b border-slate-700">Weight (kg)</th>
-          <th class="px-4 py-2 border-b border-slate-700">HxWxD</th>
-          <th class="px-4 py-2 border-b border-slate-700">Perishable</th>
-          <th class="px-4 py-2 border-b border-slate-700">Created By</th>
-          <th class="px-4 py-2 border-b border-slate-700">Purchase Price</th>
-          <th class="px-4 py-2 border-b border-slate-700">Selling Price</th>
-          <th class="px-4 py-2 border-b border-slate-700">Tax Rate</th>
-          <th class="px-4 py-2 border-b border-slate-700">Discount</th>
-        </tr>
-      </thead>
-      <tbody class="divide-y divide-slate-700">
-        <tr *ngFor="let product of products; let i = index" class="hover:bg-slate-700 transition">
-          <td class="px-4 py-2 text-center">{{ (filter.pageNo - 1) * filter.pageSize + i + 1 }}</td>
-          <td class="px-4 py-2 text-center">{{ product.productCode }}</td>
+<div
+  #productTable
+  class="overflow-x-auto overflow-y-auto rounded-lg shadow-lg relative max-h-[500px]"
+  style="background: var(--card-bg); border: 1px solid var(--card-border);"
+>
+  <table class="min-w-full border-collapse" style="color: var(--card-text);">
 
-          <!-- Barcode with Tooltip -->
-          <td appTooltip="Click to view barcode for {{ product.productName }}"
-            class="px-4 py-2 cursor-pointer bg-slate-800 text-[#00ffee] font-semibold rounded hover:bg-slate-700 hover:text-white transition duration-200 ease-in-out shadow-sm flex justify-center items-center gap-2 text-center"
-            (click)="showBarcode(product.barCode)">
-            <i class="fas fa-barcode"></i>
-            <span>{{ product.barCode }}</span>
-          </td>
+    <thead
+      class="uppercase text-sm md:text-base tracking-wide sticky top-0 z-50"
+      style="
+        background: linear-gradient(to right, var(--card-bg), var(--input-bg));
+        color: var(--accent-1);
+      "
+    >
+      <tr>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Sr.No</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Code</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Barcode</th>
+        <th class="px-4 py-2"><input type="checkbox" (change)="toggleAll($event)" /></th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Name</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Category</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Product Type</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Packed Date</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Weight (kg)</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">HxWxD</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Perishable</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Created By</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Purchase Price</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Selling Price</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Tax Rate</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Discount</th>
+      </tr>
+    </thead>
 
-          <!-- Checkbox -->
-          <td class="px-4 py-2 text-center">
-            <label class="inline-flex items-center cursor-pointer">
-              <input type="checkbox" [value]="product.barCode" (change)="toggleSelection($event)"
-                class="form-checkbox h-5 w-5 text-[#00ffee] rounded transition duration-200 ease-in-out hover:scale-110" />
-            </label>
-          </td>
+    <tbody>
+      <tr
+        *ngFor="let product of products; let i = index"
+        class="transition"
+        style="border-color: var(--input-border);"
+        onmouseover="this.style.background='var(--accent-hover)'"
+        onmouseout="this.style.background='transparent'"
+      >
+        <td class="px-4 py-2 text-center">{{ (filter.pageNo - 1) * filter.pageSize + i + 1 }}</td>
+        <td class="px-4 py-2 text-center">{{ product.productCode }}</td>
 
+        <!-- Barcode -->
+        <td
+          class="px-4 py-2 cursor-pointer font-semibold rounded flex justify-center items-center gap-2 text-center transition"
+          style="background: var(--input-bg); color: var(--accent-1);"
+          (click)="showBarcode(product.barCode)"
+        >
+          <i class="fas fa-barcode"></i>
+          <span>{{ product.barCode }}</span>
+        </td>
 
-          <td class="px-4 py-2">{{ product.productName }}</td>
-          <td class="px-4 py-2">{{ product.categoryName }}</td>
-          <td class="px-4 py-2">{{ product.productType }}</td>
-          <td class="px-4 py-2 text-center">{{ product.packedDate | date:'yyyy-MM-dd' }}</td>
-          <td class="px-4 py-2 text-center">{{ product.packedWeight }}</td>
-          <td class="px-4 py-2 text-center">{{ product.packedHeight }}x{{ product.packedWidth }}x{{ product.packedDepth
-            }}
-          </td>
-          <td class="px-4 py-2 text-center">
-            <span *ngIf="product.isPerishable" class="text-[#00ffee] font-bold">Yes</span>
-            <span *ngIf="!product.isPerishable">No</span>
-          </td>
-          <td class="px-4 py-2">{{ product.fullName }}</td>
-          <td class="px-4 py-2 text-center">{{ product.purchasePrice | currency:'INR':'symbol':'1.2-2' }}</td>
-          <td class="px-4 py-2 text-center">{{ product.sellingPrice | currency:'INR':'symbol':'1.2-2' }}</td>
-          <td class="px-4 py-2 text-center">{{ product.taxRate }}%</td>
-          <td class="px-4 py-2 text-center">{{ product.discount }}%</td>
-        </tr>
+        <!-- Checkbox -->
+        <td class="px-4 py-2 text-center">
+          <input type="checkbox" [value]="product.barCode" (change)="toggleSelection($event)" />
+        </td>
 
-        <!-- Empty State -->
-        <tr *ngIf="products.length === 0">
-          <td colspan="16" class="text-center py-4 text-gray-400">No products available.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+        <td class="px-4 py-2">{{ product.productName }}</td>
+        <td class="px-4 py-2">{{ product.categoryName }}</td>
+        <td class="px-4 py-2">{{ product.productType }}</td>
+        <td class="px-4 py-2 text-center">{{ product.packedDate | date:'yyyy-MM-dd' }}</td>
+        <td class="px-4 py-2 text-center">{{ product.packedWeight }}</td>
+        <td class="px-4 py-2 text-center">{{ product.packedHeight }}x{{ product.packedWidth }}x{{ product.packedDepth }}</td>
+        <td class="px-4 py-2 text-center">
+          <span *ngIf="product.isPerishable" style="color: var(--accent-1); font-weight: bold">Yes</span>
+          <span *ngIf="!product.isPerishable">No</span>
+        </td>
+        <td class="px-4 py-2">{{ product.fullName }}</td>
+        <td class="px-4 py-2 text-center">{{ product.purchasePrice }}</td>
+        <td class="px-4 py-2 text-center">{{ product.sellingPrice }}</td>
+        <td class="px-4 py-2 text-center">{{ product.taxRate }}%</td>
+        <td class="px-4 py-2 text-center">{{ product.discount }}%</td>
+      </tr>
+
+      <!-- Empty State -->
+      <tr *ngIf="products.length === 0">
+        <td colspan="16" class="text-center py-4" style="color: gray;">No products available.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 
   <!-- 📦 Generate Barcode PDF -->
-  <div class="flex justify-center mt-4">
-    <button (click)="generateBarcodePDF()" [disabled]="selectedBarcodes.length === 0" class="px-4 py-2 rounded text-black 
-                 bg-[#00ffee] hover:bg-[#00ddcc] 
-                 disabled:bg-gray-400 disabled:cursor-not-allowed">
-      Generate Bar Code PDF
-    </button>
-  </div>
+ <div class="flex justify-center mt-4">
+  <button
+    (click)="generateBarcodePDF()"
+    [disabled]="selectedBarcodes.length === 0"
+    class="px-4 py-2 rounded disabled:bg-gray-400 disabled:cursor-not-allowed"
+    style="background: var(--accent-1); color: black;"
+  >
+    Generate Bar Code PDF
+  </button>
+</div>
 
-  <!-- 📄 Pagination Controls -->
-  <div class="flex justify-between items-center mt-4 text-white">
-    <button (click)="prevPage()" [disabled]="filter.pageNo === 1"
-      class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50">Previous</button>
-    <span>Page {{ filter.pageNo }} of {{ totalPages }}</span>
-    <button (click)="nextPage()" [disabled]="filter.pageNo === totalPages"
-      class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50">Next</button>
-  </div>
+
+  <div class="flex justify-between items-center mt-4">
+  <button
+    (click)="prevPage()"
+    [disabled]="filter.pageNo === 1"
+    class="px-3 py-1 rounded disabled:opacity-50"
+    style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+  >
+    Previous
+  </button>
+
+  <span style="color: var(--card-text);">Page {{ filter.pageNo }} of {{ totalPages }}</span>
+
+  <button
+    (click)="nextPage()"
+    [disabled]="filter.pageNo === totalPages"
+    class="px-3 py-1 rounded disabled:opacity-50"
+    style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+  >
+    Next
+  </button>
+</div>
+
 
   <!-- 🎯 Barcode Preview -->
   <div *ngIf="barcode" class="mt-4">

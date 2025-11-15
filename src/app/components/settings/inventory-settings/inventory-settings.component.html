@@ -1,56 +1,112 @@
 <!-- Container -->
-<div class="flex h-screen bg-slate-900/70 backdrop-blur-sm text-white">
+<div class="flex h-screen" 
+     style="background: var(--bg); color: var(--text);">
 
   <!-- Vertical Tabs (Fixed Sidebar) -->
-  <div class="w-48 bg-slate-800/70 backdrop-blur-sm border-r border-slate-700 flex flex-col h-screen sticky top-0">
+  <div class="w-48 border-r h-screen sticky top-0"
+       style="background: var(--sidebar-bg-start); border-color: var(--sidebar-border);">
+
     <button (click)="activeTab='category'"
-      [ngClass]="activeTab==='category' ? 'bg-slate-700/70 text-[#00ffee]' : 'text-white'"
-      class="w-full py-4 px-4 text-left hover:bg-slate-700/50 transition">
+      [ngClass]="activeTab==='category' ? 'active-tab' : ''"
+      class="w-full py-4 px-4 text-left transition"
+      style="color: var(--sidebar-text);">
       Category
     </button>
+
     <button (click)="activeTab='warehouse'"
-      [ngClass]="activeTab==='warehouse' ? 'bg-slate-700/70 text-[#00ffee]' : 'text-white'"
-      class="w-full py-4 px-4 text-left hover:bg-slate-700/50 transition">
+      [ngClass]="activeTab==='warehouse' ? 'active-tab' : ''"
+      class="w-full py-4 px-4 text-left transition"
+      style="color: var(--sidebar-text);">
       Warehouse
     </button>
   </div>
 
-  <!-- Scrollable Tab Content -->
-<div class="flex-1 overflow-y-auto h-screen p-4">
-    
-    <!-- Category Content -->
-    <div *ngIf="activeTab==='category'" class="bg-slate-900/50 backdrop-blur-md p-4 rounded-xl shadow-md mb-4">
-      <h2 class="text-2xl font-semibold mb-6 text-[#00ffee] text-center drop-shadow-md">Add New Category</h2>
+
+  <!-- Scrollable Content -->
+  <div class="flex-1 overflow-y-auto h-screen p-4">
+
+    <!-- Category -->
+    <div *ngIf="activeTab==='category'" 
+         class="p-4 rounded-xl shadow-md mb-4"
+         style="background: var(--card-bg); border: 1px solid var(--card-border);">
+
+      <h2 class="text-2xl font-semibold mb-6 text-center"
+          style="color: var(--heading);">
+        Add New Category
+      </h2>
+
       <form [formGroup]="categoryForm" (ngSubmit)="submitCategory()" class="space-y-5">
+
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-1">Category Name *</label>
-          <input type="text" formControlName="categoryName" class="input-style" placeholder="Enter category name"
-            [ngClass]="{'border-red-500': categoryForm.get('categoryName')?.invalid && categoryForm.get('categoryName')?.touched}" />
+          <label class="block text-sm font-medium mb-1"
+                 style="color: var(--text-muted);">
+            Category Name *
+          </label>
+
+          <input type="text" formControlName="categoryName"
+            class="input-style"
+            placeholder="Enter category name"
+            [ngClass]="{'border-red-500': categoryForm.get('categoryName')?.invalid && categoryForm.get('categoryName')?.touched}"
+            style="
+              background: var(--input-bg);
+              color: var(--input-text);
+              border: 1px solid var(--input-border);
+            ">
         </div>
+
+
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-1">Description</label>
-          <textarea formControlName="description" rows="3" class="input-style" placeholder="Enter description (optional)"></textarea>
+          <label class="block text-sm font-medium mb-1"
+                 style="color: var(--text-muted);">
+            Description
+          </label>
+
+          <textarea rows="3" formControlName="description"
+            class="input-style"
+            placeholder="Enter description (optional)"
+            style="
+              background: var(--input-bg);
+              color: var(--input-text);
+              border: 1px solid var(--input-border);
+            "></textarea>
         </div>
-        <button type="submit" class="w-full py-2 px-4 rounded-lg font-medium bg-[#00ffee] text-black hover:bg-[#00e6d5] transition shadow-md"
-          [disabled]="isSubmitting">
+
+
+        <button type="submit"
+          class="w-full py-2 px-4 rounded-lg font-medium transition shadow-md"
+          [disabled]="isSubmitting"
+          style="background: var(--accent-1); color: black;">
           {{ isSubmitting ? '⏳ Saving...' : 'Add Category' }}
         </button>
+
       </form>
+
+
       <!-- Category List -->
       <div *ngIf="categories.length !== 0" class="mt-8">
-        <h3 class="text-xl font-semibold text-[#00ffee] mb-3 text-center drop-shadow-md">Available Category</h3>
-        <div class="overflow-x-auto max-h-64 border border-slate-700 rounded-lg shadow-inner bg-slate-900/50 backdrop-blur-sm">
-          <table class="min-w-full text-white border-collapse">
-            <thead class="bg-slate-800/70 sticky top-0 z-10 backdrop-blur-sm">
+        <h3 class="text-xl font-semibold mb-3 text-center"
+            style="color: var(--heading);">
+          Available Category
+        </h3>
+
+        <div class="overflow-x-auto max-h-64 rounded-lg shadow-inner"
+             style="background: var(--card-bg); border: 1px solid var(--card-border);">
+
+          <table class="min-w-full border-collapse" style="color: var(--text);">
+            <thead style="background: var(--card-border);">
               <tr>
-                <th class="px-4 py-2 border-b border-slate-700 text-center">Sr.No</th>
-                <th class="px-4 py-2 border-b border-slate-700">Category Name</th>
-                <th class="px-4 py-2 border-b border-slate-700">Description</th>
-                <th class="px-4 py-2 border-b border-slate-700 text-center">Created Date</th>
+                <th class="px-4 py-2 border-b" style="border-color: var(--input-border);">Sr.No</th>
+                <th class="px-4 py-2 border-b" style="border-color: var(--input-border);">Category Name</th>
+                <th class="px-4 py-2 border-b" style="border-color: var(--input-border);">Description</th>
+                <th class="px-4 py-2 border-b" style="border-color: var(--input-border);">Created Date</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-700">
-              <tr *ngFor="let category of categories; let i = index" class="hover:bg-slate-700 transition">
+
+            <tbody>
+              <tr *ngFor="let category of categories; let i = index"
+                  style="transition: 0.2s;"
+                  (mouseover)="hoverRow($event)"
+                  (mouseout)="unhoverRow($event)">
                 <td class="px-4 py-2 text-center">{{ i + 1 }}</td>
                 <td class="px-4 py-2">{{ category.categoryName }}</td>
                 <td class="px-4 py-2">{{ category.description }}</td>
@@ -58,52 +114,99 @@
               </tr>
             </tbody>
           </table>
+
         </div>
       </div>
+
     </div>
 
-    <!-- Warehouse Content -->
-    <div *ngIf="activeTab==='warehouse'" class="bg-slate-900/50 backdrop-blur-md p-6 rounded-xl shadow-md">
-      <h2 class="text-2xl font-semibold mb-6 text-[#00ffee] text-center drop-shadow-md">Add New Warehouse</h2>
+
+
+    <!-- Warehouse -->
+    <div *ngIf="activeTab==='warehouse'" 
+         class="p-6 rounded-xl shadow-md"
+         style="background: var(--card-bg); border: 1px solid var(--card-border);">
+
+      <h2 class="text-2xl font-semibold mb-6 text-center"
+          style="color: var(--heading);">
+        Add New Warehouse
+      </h2>
+
       <form [formGroup]="warehouseForm" (ngSubmit)="submitWarehouse()" class="space-y-5">
+
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-1">Warehouse Name *</label>
-          <input type="text" formControlName="warehouseName" class="input-style" placeholder="Enter warehouse name"
-            [ngClass]="{'border-red-500': warehouseForm.get('warehouseName')?.invalid && warehouseForm.get('warehouseName')?.touched}" />
+          <label class="block text-sm font-medium mb-1"
+                 style="color: var(--text-muted);">
+            Warehouse Name *
+          </label>
+
+          <input type="text" formControlName="warehouseName"
+            class="input-style"
+            placeholder="Enter warehouse name"
+            style="
+              background: var(--input-bg);
+              color: var(--input-text);
+              border: 1px solid var(--input-border);
+            ">
         </div>
 
         <div class="flex items-center space-x-3">
           <input type="checkbox" formControlName="isRefrigerated"
-            class="h-5 w-5 text-[#00ffee] bg-slate-800/50 border-slate-600 rounded focus:ring-[#00ffee] focus:ring-2" />
-          <label class="text-sm font-medium text-gray-300">Is Refrigerated?</label>
+            style="accent-color: var(--accent-1);">
+          <label style="color: var(--text-muted);" class="text-sm font-medium">
+            Is Refrigerated?
+          </label>
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-1">Remark</label>
-          <textarea formControlName="remark" rows="3" class="input-style" placeholder="Enter remark (optional)"></textarea>
+          <label class="block text-sm font-medium mb-1"
+                 style="color: var(--text-muted);">
+            Remark
+          </label>
+
+          <textarea rows="3" formControlName="remark"
+            class="input-style"
+            placeholder="Enter remark (optional)"
+            style="
+              background: var(--input-bg);
+              color: var(--input-text);
+              border: 1px solid var(--input-border);
+            "></textarea>
         </div>
 
-        <button type="submit" class="w-full py-2 px-4 rounded-lg font-medium bg-[#00ffee] text-black hover:bg-[#00e6d5] transition shadow-md"
-          [disabled]="isSubmitting">
+        <button type="submit"
+          class="w-full py-2 px-4 rounded-lg font-medium transition shadow-md"
+          style="background: var(--accent-1); color: black;">
           {{ isSubmitting ? '⏳ Saving...' : 'Add Warehouse' }}
         </button>
       </form>
 
       <!-- Warehouse List -->
       <div *ngIf="warehouses.length > 0" class="mt-8">
-        <h3 class="text-xl font-semibold text-[#00ffee] mb-3 text-center drop-shadow-md">Available Warehouses</h3>
-        <div class="overflow-x-auto max-h-64 border border-slate-700 rounded-lg shadow-inner bg-slate-900/50 backdrop-blur-sm">
-          <table class="min-w-full text-white border-collapse">
-            <thead class="bg-slate-800/70 sticky top-0 z-10 backdrop-blur-sm">
+        <h3 
+        class="text-xl font-semibold mb-3 text-center"
+            style="color: var(--heading);"
+        >
+        Available Warehouses
+      </h3>
+        <div 
+        class="overflow-x-auto max-h-64 rounded-lg shadow-inner"
+             style="background: var(--card-bg); border: 1px solid var(--card-border);"
+        >
+          <table class="min-w-full border-collapse" style="color: var(--text);">
+            <thead style="background: var(--card-border);">
               <tr>
-                <th class="px-4 py-2 border-b border-slate-700 text-center">Sr.No</th>
-                <th class="px-4 py-2 border-b border-slate-700">Warehouse Name</th>
-                <th class="px-4 py-2 border-b border-slate-700">Remark</th>
-                <th class="px-4 py-2 border-b border-slate-700 text-center">Created Date</th>
+                <th class="px-4 py-2 border-b" style="border-color: var(--input-border);">Sr.No</th>
+                <th class="px-4 py-2 border-b" style="border-color: var(--input-border);">Warehouse Name</th>
+                <th class="px-4 py-2 border-b" style="border-color: var(--input-border);">Remark</th>
+                <th class="px-4 py-2 border-b" style="border-color: var(--input-border);">Created Date</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-700">
-              <tr *ngFor="let warehouse of warehouses; let i = index" class="hover:bg-slate-700 transition">
+              <tr *ngFor="let warehouse of warehouses; let i = index"
+               style="transition: 0.2s;"
+                  (mouseover)="hoverRow($event)"
+                  (mouseout)="unhoverRow($event)">
                 <td class="px-4 py-2 text-center">{{ i + 1 }}</td>
                 <td class="px-4 py-2">{{ warehouse.warehouseName }}</td>
                 <td class="px-4 py-2">{{ warehouse.remark }}</td>

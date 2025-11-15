@@ -1,13 +1,25 @@
 <!-- 🔍 Search Bar + Pagination Controls -->
 <div class="flex flex-wrap justify-between items-center mb-4 gap-3">
   <!-- 🔍 Search Input -->
-  <input type="text" [(ngModel)]="searchTerm" (ngModelChange)="loadBalanceDueList()" placeholder="Search customers..."
-    class="px-4 py-2 rounded-lg bg-slate-800 text-white border border-slate-600
-           focus:outline-none focus:ring-2 focus:ring-[#00ffee] w-full sm:w-1/3" />
+  <input type="text" 
+  [(ngModel)]="searchTerm" 
+  (ngModelChange)="loadBalanceDueList()" 
+  placeholder="Search customers..."
+   class="px-4 py-2 rounded-lg focus:outline-none focus:ring-2 w-1/3"
+    style="
+      background: var(--input-bg);
+      color: var(--input-text);
+      border: 1px solid var(--input-border);
+      --tw-ring-color: var(--accent-1);
+    " 
+           />
 
   <!-- 📑 Rows Per Page -->
-  <select [(ngModel)]="pageSize" (change)="loadBalanceDueList()"
-    class="px-3 py-2 rounded bg-slate-800 text-white border border-slate-600">
+  <select [(ngModel)]="pageSize"
+   (change)="loadBalanceDueList()"
+     class="px-3 py-2 rounded"
+    style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+    >
     <option *ngFor="let size of [5, 10, 20, 50]" [value]="size">
       {{ size }} per page
     </option>
@@ -15,24 +27,35 @@
 </div>
 
 <!-- 📋 Balance Due Table -->
-<div class="overflow-x-auto overflow-y-auto bg-slate-900 rounded-lg shadow-lg relative max-h-[500px]">
-  <table class="min-w-full text-white border-collapse text-sm md:text-base">
-    <thead class="bg-gradient-to-r from-slate-900 to-slate-800 text-[#00ffee]
-           uppercase tracking-wide sticky top-0 z-50">
+<div 
+ class="overflow-x-auto overflow-y-auto rounded-lg shadow-lg relative max-h-[500px]"
+  style="background: var(--card-bg); border: 1px solid var(--card-border);"
+>
+  <table class="min-w-full border-collapse" style="color: var(--card-text);">
+    <thead class="uppercase text-sm md:text-base tracking-wide sticky top-0 z-50"
+      style="
+        background: linear-gradient(to right, var(--card-bg), var(--input-bg));
+        color: var(--accent-1);" 
+          >
       <tr>
-        <th class="px-4 py-3 border-b border-slate-700 text-center w-16">#</th>
-        <th class="px-4 py-3 border-b border-slate-700 text-left">Customer Name</th>
-        <th class="px-4 py-3 border-b border-slate-700 text-left">Address</th>
-        <th class="px-4 py-3 border-b border-slate-700 text-center">Phone No</th>
-        <th class="px-4 py-3 border-b border-slate-700 text-left">Email</th>
-        <th class="px-4 py-3 border-b border-slate-700 text-right">Total Due</th>
-        <th class="px-4 py-3 border-b border-slate-700 text-center">Last Transaction</th>
-        <th class="px-4 py-3 border-b border-slate-700 text-center w-40">Action</th>
+        <th class="px-4 py-3 border-b text-center w-16" style="border-color: var(--input-border)">#</th>
+        <th class="px-4 py-3 border-b text-left" style="border-color: var(--input-border)">Customer Name</th>
+        <th class="px-4 py-3 border-b text-left" style="border-color: var(--input-border)">Address</th>
+        <th class="px-4 py-3 border-b text-center" style="border-color: var(--input-border)">Phone No</th>
+        <th class="px-4 py-3 border-b text-left" style="border-color: var(--input-border)">Email</th>
+        <th class="px-4 py-3 border-b text-right" style="border-color: var(--input-border)">Total Due</th>
+        <th class="px-4 py-3 border-b text-center" style="border-color: var(--input-border)">Last Transaction</th>
+        <th class="px-4 py-3 border-b text-center w-40" style="border-color: var(--input-border)">Action</th>
       </tr>
     </thead>
 
-    <tbody class="divide-y divide-slate-700">
-      <tr *ngFor="let due of BalanceDueDtos; let i = index" class="hover:bg-slate-800 transition duration-200">
+    <tbody>
+      <tr *ngFor="let due of BalanceDueDtos; let i = index"
+       class="transition"
+        style="border-color: var(--input-border);"
+        onmouseover="this.style.background='var(--accent-hover)'"
+        onmouseout="this.style.background='transparent'"
+       >
         <td class="px-4 py-2 text-center">
           {{ (pageNumber - 1) * pageSize + i + 1 }}
         </td>

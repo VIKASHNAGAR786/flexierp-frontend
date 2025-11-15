@@ -1,4 +1,8 @@
-<div class="fixed top-0 left-0 right-0 h-16 backdrop-blur-md bg-slate-900/80 text-white z-40 shadow-lg flex items-center px-4 md:pl-72 border-b border-slate-700">
+<div class="fixed top-0 left-0 right-0 h-16 backdrop-blur-md 
+            bg-[var(--header-bg)] text-[var(--text)]
+            z-40 shadow-lg flex items-center px-4 md:pl-72 
+            border-b border-[var(--header-border)]">
+
   <!-- Actions -->
   <div class="flex items-center gap-4 ml-auto">
 
@@ -8,41 +12,81 @@
       [tooltipFixed]="true"
       [tooltipPosition]="'bottom'"
       (click)="onBackup()"
-      class="relative p-2 rounded-full hover:bg-slate-800 transition text-[#00ffee]"
+      class="relative p-2 rounded-full 
+             hover:bg-[var(--hover-bg)] transition 
+             text-[var(--icon-color)]"
     >
       <i class="bi bi-cloud-arrow-up text-xl"></i>
     </button>
 
     <!-- Notes -->
-    <button 
+    <button
       appTooltip="Notes"
       [tooltipFixed]="true"
       [tooltipPosition]="'bottom'"
       (click)="openNotes()"
-      class="relative p-2 rounded-full hover:bg-slate-800 transition text-[#00ffee]"
+      class="relative p-2 rounded-full 
+             hover:bg-[var(--hover-bg)] transition 
+             text-[var(--icon-color)]"
     >
       <i class="bi bi-journal-text text-xl"></i>
     </button>
 
     <!-- User Dropdown -->
     <div class="relative">
-      <button 
-        (click)="toggleDropdown()" 
-        class="flex items-center gap-2 px-3 py-2 bg-slate-800/70 rounded-full hover:bg-slate-700 transition border border-slate-600 shadow-sm"
+
+      <button
+        (click)="toggleDropdown()"
+        class="flex items-center gap-2 px-3 py-2 
+               bg-[var(--hover-bg)] rounded-full 
+               hover:bg-[var(--hover-bg-strong)] 
+               transition border border-[var(--border)]
+               shadow-sm"
       >
-        <img src="assets/profile.png" alt="User" class="w-8 h-8 rounded-full shadow-md border border-[#00ffee]" />
-        <span class="hidden md:inline text-sm font-medium text-[#00ffee]">{{ username }}</span>
-        <i class="bi bi-chevron-down text-sm text-slate-400"></i>
+        <img
+          src="assets/profile.png"
+          alt="User"
+          class="w-8 h-8 rounded-full shadow-md 
+                    border border-[var(--icon-color)]"
+        />
+
+        <span class="hidden md:inline text-sm font-medium 
+                     text-[var(--icon-color)]">
+          {{ username }}
+        </span>
+
+        <i class="bi bi-chevron-down text-sm text-[var(--text-muted)]"></i>
       </button>
 
       <!-- Dropdown -->
-      <div 
-        *ngIf="isDropdownOpen" 
-        class="absolute right-0 mt-2 w-48 bg-slate-900 border border-slate-700 text-white rounded-lg shadow-xl transition duration-200 z-50 backdrop-blur-sm"
+      <div
+        *ngIf="isDropdownOpen"
+        class="absolute right-0 mt-2 w-48 
+               bg-[var(--card)] border border-[var(--border)] 
+               text-[var(--text)] rounded-lg shadow-xl 
+               transition duration-200 z-50 backdrop-blur-sm"
       >
-        <a (click)="openProfile()" class="block px-4 py-2 hover:bg-slate-800">👤 Profile</a>
-        <a (click)="openSettings()" class="block px-4 py-2 hover:bg-slate-800">⚙️ Settings</a>
-        <button (click)="onLogout()" class="block w-full text-left px-4 py-2 hover:bg-slate-800">🚪 Logout</button>
+        <a
+          (click)="openProfile()"
+          class="block px-4 py-2 hover:bg-[var(--hover-bg)]"
+        >
+          👤 Profile
+        </a>
+
+        <a
+          (click)="openSettings()"
+          class="block px-4 py-2 hover:bg-[var(--hover-bg)]"
+        >
+          ⚙️ Settings
+        </a>
+
+        <button
+          (click)="onLogout()"
+          class="block w-full text-left px-4 py-2 
+                       hover:bg-[var(--hover-bg)]"
+        >
+          🚪 Logout
+        </button>
       </div>
     </div>
   </div>

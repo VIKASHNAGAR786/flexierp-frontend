@@ -26,4 +26,17 @@ export class SalesComponent {
   switchTab(tabKey: string) {
     this.activeTab = tabKey;
   }
+
+      applyHover(event: MouseEvent) {
+  const el = event.target as HTMLElement;
+  if (!el) return;
+  el.style.background = 'var(--tab-hover-bg)';  
+}
+
+removeHover(event: MouseEvent) {
+  const el = event.target as HTMLElement;
+  if (!el) return;
+  el.style.background = 'transparent';
+}
+
 }

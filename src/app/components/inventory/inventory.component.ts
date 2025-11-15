@@ -8,7 +8,7 @@ import { SoldProductComponent } from './sold-product/sold-product.component';
 @Component({
   selector: 'app-inventory',
   standalone: true,
-  imports: [CommonModule, AddProductComponent, ProductListComponent],
+  imports: [CommonModule],
   templateUrl: './inventory.component.html',
   styleUrl: './inventory.component.css'
 })
@@ -35,5 +35,18 @@ export class InventoryComponent {
     switchTab(tabId: string) {
       this.activeTab = tabId;
     }
+
+    applyHover(event: MouseEvent) {
+  const el = event.target as HTMLElement;
+  if (!el) return;
+  el.style.background = 'var(--tab-hover-bg)';  
+}
+
+removeHover(event: MouseEvent) {
+  const el = event.target as HTMLElement;
+  if (!el) return;
+  el.style.background = 'transparent';
+}
+
 
 }

@@ -1,24 +1,48 @@
 <!-- 🔍 Search Bar + Actions -->
 <div class="flex justify-between items-center mb-4 gap-2 flex-wrap">
   <!-- Search Input -->
-  <input type="text" [(ngModel)]="filter.searchTerm" (ngModelChange)="getCustomerData()"
+  <input
+    type="text"
+    [(ngModel)]="filter.searchTerm"
+    (ngModelChange)="getCustomerData()"
     placeholder="Search customers..."
-    class="px-4 py-2 rounded-lg bg-slate-800 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-[#00ffee] w-1/3" />
+    class="px-4 py-2 rounded-lg focus:outline-none focus:ring-2 w-1/3"
+    style="
+      background: var(--input-bg);
+      color: var(--input-text);
+      border: 1px solid var(--input-border);
+      --tw-ring-color: var(--accent-1);
+    "
+  />
 
   <!-- 📑 Rows per page -->
-  <select [(ngModel)]="filter.pageSize" (change)="getCustomerData()"
-    class="px-3 py-2 rounded bg-slate-800 text-white border border-slate-600">
-    <option *ngFor="let size of pageSizes" [value]="size">{{ size }} per page</option>
+  <select
+    [(ngModel)]="filter.pageSize"
+    (change)="getCustomerData()"
+    class="px-3 py-2 rounded"
+    style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+  >
+    <option
+      *ngFor="let size of pageSizes"
+      [value]="size"
+    >{{ size }} per page</option>
   </select>
 
   <!-- 📤 Export Buttons -->
-  <div class="flex gap-2" *ngIf="customers.length > 0">
-    <button (click)="exportToPdflist()"
-      class="flex items-center gap-1 px-3 py-2 bg-red-600 hover:bg-red-700 rounded text-white">
+  <div
+    class="flex gap-2"
+    *ngIf="customers.length > 0"
+  >
+    <button
+      (click)="exportToPdflist()"
+      class="flex items-center gap-1 px-3 py-2 bg-red-600 hover:bg-red-700 rounded text-white"
+    >
       <i class="fas fa-file-pdf"></i> PDF
     </button>
-    <button (click)="exportToExcel()"
-      class="flex items-center gap-1 px-3 py-2 bg-green-600 hover:bg-green-700 rounded text-white">
+    <button
+      (click)="exportToExcel()"
+      class="flex items-center gap-1 px-3 py-2 bg-green-600 hover:bg-green-700 rounded text-white"
+    >
       <i class="fas fa-file-excel"></i> Excel
     </button>
   </div>
@@ -26,30 +50,42 @@
 
 
 <!-- 📋 Customer Table -->
-<div #customerTable class="overflow-x-auto overflow-y-auto bg-slate-900 rounded-lg shadow-lg relative max-h-[500px]">
-  <table class="min-w-full text-white border-collapse">
+<div
+  #customerTable
+   class="overflow-x-auto overflow-y-auto rounded-lg shadow-lg relative max-h-[500px]"
+  style="background: var(--card-bg); border: 1px solid var(--card-border);"
+>
+  <table class="min-w-full border-collapse" style="color: var(--card-text);">
     <thead
-      class="bg-gradient-to-r from-slate-900 to-slate-800 text-[#00ffee] uppercase text-sm md:text-base tracking-wide sticky top-0 z-50">
+class="uppercase text-sm md:text-base tracking-wide sticky top-0 z-50"
+      style="
+        background: linear-gradient(to right, var(--card-bg), var(--input-bg));
+        color: var(--accent-1);
+      "    >
       <tr>
-        <th class="px-4 py-2 border-b border-slate-700">Sr.No</th>
-        <th class="px-4 py-2 border-b border-slate-700">Customer Name</th>
-        <th class="px-4 py-2 border-b border-slate-700">Contact No.</th>
-        <th class="px-4 py-2 border-b border-slate-700">Email</th>
-        <th class="px-4 py-2 border-b border-slate-700">City</th>
-        <th class="px-4 py-2 border-b border-slate-700">Total Paid Amount</th>
-        <th class="px-4 py-2 border-b border-slate-700">Total Balance Due</th>
-        <th class="px-4 py-2 border-b border-slate-700">Last Transaction</th>
+        <th class="px-4 py-2 border-" style="border-color: var(--input-border)">Sr.No</th>
+        <th class="px-4 py-2 border-" style="border-color: var(--input-border)">Customer Name</th>
+        <th class="px-4 py-2 border-" style="border-color: var(--input-border)">Contact No.</th>
+        <th class="px-4 py-2 border-" style="border-color: var(--input-border)">Email</th>
+        <th class="px-4 py-2 border-" style="border-color: var(--input-border)">City</th>
+        <th class="px-4 py-2 border-" style="border-color: var(--input-border)">Total Paid Amount</th>
+        <th class="px-4 py-2 border-" style="border-color: var(--input-border)">Total Balance Due</th>
+        <th class="px-4 py-2 border-" style="border-color: var(--input-border)">Last Transaction</th>
       </tr>
     </thead>
-    <tbody class="divide-y divide-slate-700">
-      <tr *ngFor="let customer of customers; let i = index" 
-    class="hover:bg-slate-700 transition cursor-pointer"
-    (click)="viewCustomerStatement(customer.customerid)"
-    appTooltip="Click to view statement for {{ customer.customername }}"
-    [tooltipPosition]="'top'"
-    [tooltipFixed]="false"
-    [tooltipDelay]="800"
-    >
+    <tbody>
+      <tr
+        *ngFor="let customer of customers; let i = index"
+        class="transition"
+        style="border-color: var(--input-border);"
+        onmouseover="this.style.background='var(--accent-hover)'"
+        onmouseout="this.style.background='transparent'"
+        (click)="viewCustomerStatement(customer.customerid)"
+        appTooltip="Click to view statement for {{ customer.customername }}"
+        [tooltipPosition]="'top'"
+        [tooltipFixed]="false"
+        [tooltipDelay]="800"
+      >
         <td class="px-4 py-2 text-center">{{ (filter.pageNo - 1) * filter.pageSize + i + 1 }}</td>
         <td class="px-4 py-2 font-semibold">{{ customer.customername }}</td>
         <td class="px-4 py-2 text-center">{{ customer.contactNo }}</td>
@@ -62,7 +98,10 @@
 
       <!-- Empty State -->
       <tr *ngIf="customers.length === 0">
-        <td colspan="11" class="text-center py-4 text-gray-400">No customers found.</td>
+        <td
+          colspan="11"
+          class="text-center py-4 text-gray-400"
+        >No customers found.</td>
       </tr>
     </tbody>
   </table>
@@ -70,24 +109,32 @@
 
 <!-- 📄 Pagination Controls -->
 <div class="flex justify-between items-center mt-4 text-white">
-  <button (click)="prevPage()" [disabled]="filter.pageNo === 1"
-    class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50">Previous</button>
+  <button
+    (click)="prevPage()"
+    [disabled]="filter.pageNo === 1"
+    class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50"
+  >Previous</button>
   <span>Page {{ filter.pageNo }} </span>
-  <button (click)="nextPage()" class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50">Next</button>
+  <button
+    (click)="nextPage()"
+    class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50"
+  >Next</button>
 </div>
 
-
-
-
-
 <!-- Party Statement Popup -->
-<div *ngIf="showPartyStatement" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+<div
+  *ngIf="showPartyStatement"
+  class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+>
   <div
-    class="bg-slate-900 rounded-2xl shadow-2xl w-full max-w-5xl p-6 relative border border-slate-700 max-h-[90vh] overflow-y-auto">
+    class="bg-slate-900 rounded-2xl shadow-2xl w-full max-w-5xl p-6 relative border border-slate-700 max-h-[90vh] overflow-y-auto"
+  >
 
     <!-- Close Button -->
-    <button (click)="showPartyStatement = false"
-      class="absolute top-3 right-3 text-gray-400 hover:text-red-500 text-2xl font-bold">
+    <button
+      (click)="showPartyStatement = false"
+      class="absolute top-3 right-3 text-gray-400 hover:text-red-500 text-2xl font-bold"
+    >
       ✕
     </button>
 
@@ -98,7 +145,8 @@
 
     <!-- Party Info -->
     <div
-      class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-6 text-white text-base sm:text-lg bg-slate-800/60 px-6 py-3 rounded-xl shadow-md border border-[#00ffee]/30 backdrop-blur-sm">
+      class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-6 text-white text-base sm:text-lg bg-slate-800/60 px-6 py-3 rounded-xl shadow-md border border-[#00ffee]/30 backdrop-blur-sm"
+    >
       <div class="flex items-center gap-2">
         <span class="font-semibold text-[#00ffee]">Party Name:</span>
         <span class="text-red-500 font-semibold tracking-wide">
@@ -114,22 +162,31 @@
 
     <!-- 📅 Date Filters -->
     <div
-      class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-6 text-white text-base bg-slate-800/60 px-6 py-3 rounded-xl shadow-md border border-[#00ffee]/30 backdrop-blur-sm">
+      class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-6 text-white text-base bg-slate-800/60 px-6 py-3 rounded-xl shadow-md border border-[#00ffee]/30 backdrop-blur-sm"
+    >
 
       <div class="flex flex-col">
         <label class="text-sm font-semibold text-[#00ffee] mb-1">Start Date</label>
-        <input type="date" [(ngModel)]="startDate"
-          class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-gray-200 focus:outline-none focus:ring-2 focus:ring-[#00ffee]/50">
+        <input
+          type="date"
+          [(ngModel)]="startDate"
+          class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-gray-200 focus:outline-none focus:ring-2 focus:ring-[#00ffee]/50"
+        >
       </div>
 
       <div class="flex flex-col">
         <label class="text-sm font-semibold text-[#00ffee] mb-1">End Date</label>
-        <input type="date" [(ngModel)]="endDate"
-          class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-gray-200 focus:outline-none focus:ring-2 focus:ring-[#00ffee]/50">
+        <input
+          type="date"
+          [(ngModel)]="endDate"
+          class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-gray-200 focus:outline-none focus:ring-2 focus:ring-[#00ffee]/50"
+        >
       </div>
 
-      <button (click)="filterStatement(partyStatement[0].customerid)"
-        class="mt-4 sm:mt-0 px-5 py-2 bg-[#00ffee] text-slate-900 font-semibold rounded-lg hover:bg-[#00ffee]/80 transition shadow-md">
+      <button
+        (click)="filterStatement(partyStatement[0].customerid)"
+        class="mt-4 sm:mt-0 px-5 py-2 bg-[#00ffee] text-slate-900 font-semibold rounded-lg hover:bg-[#00ffee]/80 transition shadow-md"
+      >
         Filter
       </button>
     </div>
@@ -138,7 +195,8 @@
     <div class="overflow-x-auto bg-slate-800 rounded-lg shadow-inner">
       <table class="min-w-full text-white border-collapse">
         <thead
-          class="bg-gradient-to-r from-slate-900 to-slate-800 text-[#00ffee] uppercase text-sm md:text-base tracking-wide sticky top-0 z-10">
+          class="bg-gradient-to-r from-slate-900 to-slate-800 text-[#00ffee] uppercase text-sm md:text-base tracking-wide sticky top-0 z-10"
+        >
           <tr>
             <th class="px-4 py-2 border-b border-slate-700">Paid Amount</th>
             <th class="px-4 py-2 border-b border-slate-700">Balance Due</th>
@@ -153,13 +211,19 @@
           </tr>
         </thead>
         <tbody class="divide-y divide-slate-700">
-          <tr *ngFor="let record of partyStatement" class="hover:bg-slate-700 transition cursor-pointer">
+          <tr
+            *ngFor="let record of partyStatement"
+            class="hover:bg-slate-700 transition cursor-pointer"
+          >
             <td class="px-4 py-2 text-center">{{ record.paidamt }}</td>
             <td class="px-4 py-2 text-center">{{ record.balancedue }}</td>
             <td class="px-4 py-2 text-center">{{ record.totalamount }}</td>
             <td class="px-4 py-2 text-center">{{ record.paymentmode }}</td>
             <td class="px-4 py-2 text-center">{{ record.transactiontype }}</td>
-            <td class="px-4 py-2 text-center" style="white-space: nowrap;">{{ record.saledate }}</td>
+            <td
+              class="px-4 py-2 text-center"
+              style="white-space: nowrap;"
+            >{{ record.saledate }}</td>
             <td class="px-4 py-2 text-center">{{ record.totalitems }}</td>
             <td class="px-4 py-2 text-center">{{ record.totaldiscount }}</td>
             <td class="px-4 py-2 text-center">{{ record.tax }}</td>
@@ -167,7 +231,10 @@
           </tr>
 
           <tr *ngIf="partyStatement.length === 0">
-            <td colspan="10" class="text-center py-4 text-gray-400">No records found.</td>
+            <td
+              colspan="10"
+              class="text-center py-4 text-gray-400"
+            >No records found.</td>
           </tr>
         </tbody>
       </table>
@@ -175,13 +242,17 @@
 
     <!-- Footer -->
     <div class="flex flex-col sm:flex-row justify-between items-center mt-5 gap-3">
-      <button (click)="exportToPdf(partyStatement[0].customerid)"
-        class="flex items-center gap-2 px-5 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition shadow-md">
+      <button
+        (click)="exportToPdf(partyStatement[0].customerid)"
+        class="flex items-center gap-2 px-5 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition shadow-md"
+      >
         <i class="fas fa-file-pdf"></i> Export PDF
       </button>
 
-      <button (click)="showPartyStatement = false"
-        class="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition shadow-md">
+      <button
+        (click)="showPartyStatement = false"
+        class="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition shadow-md"
+      >
         Close
       </button>
     </div>

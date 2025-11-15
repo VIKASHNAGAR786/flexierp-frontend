@@ -7,6 +7,7 @@ import { PaginationFilter, UpdateCompanyInfo } from '../../MODEL/MODEL';
 import { CompanyInfoDTO, UserLoginHistoryDTO } from '../../DTO/DTO';
 import { AlertService } from '../../services/alert.service';
 import { environment } from '../../../environments/environment';
+import { ThemeServiceService } from '../../services/theme-service.service';
 
 @Component({
   selector: 'app-profile-view',
@@ -18,7 +19,8 @@ export class ProfileViewComponent implements OnInit {
   constructor(
     private userInfo: UserinfowithloginService,
     private commonService: CommonService,
-    private alertservice: AlertService
+    private alertservice: AlertService,
+    private themeService: ThemeServiceService
   ) { }
   // Dummy data - later connect with backend
   username = '';
@@ -133,5 +135,27 @@ onFileSelected(event: any) {
     this.UpdateCompanyInfo();
   }
 }
+
+get currentTheme() {
+  return this.themeService.currentTheme;
+}
+
+setTheme(theme: string) {
+  this.themeService.setTheme(theme as 'dark' | 'light');
+}
+
+applyHover(event: MouseEvent) {
+  const target = event.target as HTMLElement;
+  target.style.transition = "0.3s ease";
+  target.style.transform = "scale(1.05)";
+  target.style.boxShadow = "0 4px 12px rgba(0,0,0,0.25)";
+}
+
+removeHover(event: MouseEvent) {
+  const target = event.target as HTMLElement;
+  target.style.transform = "scale(1)";
+  target.style.boxShadow = "none";
+}
+
 
 }

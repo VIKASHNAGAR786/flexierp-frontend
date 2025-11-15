@@ -1,73 +1,154 @@
 <!-- dashboard.component.html -->
-<div class="min-h-screen bg-gray-900 text-white font-sans p-6">
+<div class="min-h-screen font-sans p-6"
+     [ngStyle]="{
+      'background': 'linear-gradient(to bottom, var(--bg-start), var(--bg-mid), var(--bg-end))',
+      'color': 'var(--text)'
+     }">
+
   <!-- Header -->
   <div class="mb-6">
-    <h1 class="text-3xl font-bold text-cyan-400">Finance Dashboard</h1>
-    <p class="text-gray-400">Overview of your cash & cheque transactions</p>
+    <h1 class="text-3xl font-bold" [style.color]="'var(--heading)'">
+      Finance Dashboard
+    </h1>
+    <p class="text-sm" [style.color]="'var(--text-muted)'">
+      Overview of your cash & cheque transactions
+    </p>
   </div>
 
   <!-- Filters -->
   <div class="flex flex-wrap gap-4 mb-6">
     <div>
-      <label class="block mb-1 text-gray-300">Date Range</label>
-      <select class="bg-gray-800 border border-cyan-500 rounded px-3 py-2 text-white" [(ngModel)]="selectedRange"
-        (change)="onDateRangeChange()">
+      <label class="block mb-1" [style.color]="'var(--text-muted)'">Date Range</label>
+      <select class="rounded px-3 py-2"
+              [ngStyle]="{
+                'background': 'var(--card)',
+                'border': '1px solid var(--border)',
+                'color': 'var(--text)'
+              }"
+              [(ngModel)]="selectedRange"
+              (change)="onDateRangeChange()">
         <option value="7">Last 7 Days</option>
         <option value="30">Last Month</option>
         <option value="365">Last Year</option>
       </select>
     </div>
 
-    <button (click)="exportToPdf()" class="bg-cyan-500 hover:bg-cyan-400 px-4 py-2 rounded font-semibold">Export
-      PDF</button>
-    <button (click)="exportToExcel()" class="bg-purple-500 hover:bg-purple-400 px-4 py-2 rounded font-semibold">Export
-      Excel</button>
+    <button
+      (click)="exportToPdf()"
+      class="px-4 py-2 rounded font-semibold transition"
+      [ngStyle]="{
+        'background':'var(--banner-start)',
+        'color':'var(--text)'
+      }">
+      Export PDF
+    </button>
+
+    <button
+      (click)="exportToExcel()"
+      class="px-4 py-2 rounded font-semibold transition"
+      [ngStyle]="{
+        'background':'var(--banner-end)',
+        'color':'var(--text)'
+      }">
+      Export Excel
+    </button>
   </div>
 
   <!-- Metrics Cards -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-    <div class="bg-gray-800 border border-cyan-500 rounded-xl p-4 shadow-lg hover:shadow-cyan-500/50 transition">
-      <p class="text-gray-400 uppercase text-sm">Total Cash Received</p>
-      <h2 class="text-2xl font-bold text-cyan-400">₹ {{dashboarddata.totalCashReceived}}</h2>
 
-      <!-- Conditional color based on value -->
-      <p [ngClass]="dashboarddata.cashGrowthPercent < 0 ? 'text-red-400' : 'text-green-400'" class="text-sm mt-1">₹
-        {{dashboarddata.cashGrowthPercent}} From Last Month
+    <!-- CASH CARD -->
+    <div class="rounded-xl p-4 shadow-lg transition"
+         [ngStyle]="{
+           'background':'var(--card)',
+           'border':'1px solid var(--border)'
+         }">
+      <p class="uppercase text-sm" [style.color]="'var(--text-muted)'">
+        Total Cash Received
+      </p>
+      <h2 class="text-2xl font-bold" [style.color]="'var(--heading)'">
+        ₹ {{ dashboarddata.totalCashReceived }}
+      </h2>
+
+      <p class="text-sm mt-1"
+         [ngClass]="dashboarddata.cashGrowthPercent < 0
+              ? 'text-red-400'
+              : 'text-green-400'">
+        ₹ {{ dashboarddata.cashGrowthPercent }} From Last Month
       </p>
     </div>
 
-
-    <div class="bg-gray-800 border border-purple-500 rounded-xl p-4 shadow-lg hover:shadow-purple-500/50 transition">
-      <p class="text-gray-400 uppercase text-sm">Total Cheque Received</p>
-      <h2 class="text-2xl font-bold text-purple-400">₹ {{dashboarddata.totalChequeReceived}}</h2>
-      <p [ngClass]="dashboarddata.chequeGrowthPercent < 0 ? 'text-red-400' : 'text-green-400'" class="text-sm mt-1">₹
-        {{dashboarddata.chequeGrowthPercent}} From Last Month
+    <!-- CHEQUE CARD -->
+    <div class="rounded-xl p-4 shadow-lg transition"
+         [ngStyle]="{
+           'background':'var(--card)',
+           'border':'1px solid var(--border)'
+         }">
+      <p class="uppercase text-sm" [style.color]="'var(--text-muted)'">
+        Total Cheque Received
+      </p>
+      <h2 class="text-2xl font-bold text-purple-400">
+        ₹ {{ dashboarddata.totalChequeReceived }}
+      </h2>
+      <p class="text-sm mt-1"
+         [ngClass]="dashboarddata.chequeGrowthPercent < 0
+              ? 'text-red-400'
+              : 'text-green-400'">
+        ₹ {{ dashboarddata.chequeGrowthPercent }} From Last Month
       </p>
     </div>
 
-    <div class="bg-gray-800 border border-yellow-500 rounded-xl p-4 shadow-lg hover:shadow-yellow-500/50 transition">
-      <p class="text-gray-400 uppercase text-sm">Total Balance Due</p>
-      <h2 class="text-2xl font-bold text-yellow-400">₹ {{dashboarddata.totalBalanceDue}}</h2>
+    <!-- BALANCE DUE -->
+    <div class="rounded-xl p-4 shadow-lg transition"
+         [ngStyle]="{
+           'background':'var(--card)',
+           'border':'1px solid var(--border)'
+         }">
+      <p class="uppercase text-sm" [style.color]="'var(--text-muted)'">
+        Total Balance Due
+      </p>
+      <h2 class="text-2xl font-bold text-yellow-400">
+        ₹ {{ dashboarddata.totalBalanceDue }}
+      </h2>
     </div>
 
-    <div class="bg-gray-800 border border-pink-500 rounded-xl p-4 shadow-lg hover:shadow-pink-500/50 transition">
-      <p class="text-gray-400 uppercase text-sm">Trends & Growth</p>
-      <h2 class="text-2xl font-bold text-pink-400">📈 Increasing</h2>
+    <!-- TRENDS CARD -->
+    <div class="rounded-xl p-4 shadow-lg transition"
+         [ngStyle]="{
+           'background':'var(--card)',
+           'border':'1px solid var(--border)'
+         }">
+      <p class="uppercase text-sm" [style.color]="'var(--text-muted)'">
+        Trends & Growth
+      </p>
+      <h2 class="text-2xl font-bold text-pink-400">
+        📈 Increasing
+      </h2>
     </div>
 
   </div>
 
-  <!-- Dummy Table -->
-  <div class="mt-8 bg-gray-800 rounded-xl p-4 border border-cyan-500 shadow-lg">
+  <!-- TABLE -->
+  <div class="mt-8 rounded-xl p-4 shadow-lg"
+       [ngStyle]="{
+         'background':'var(--card)',
+         'border':'1px solid var(--border)'
+       }">
     <div class="flex items-center justify-between mb-4">
-      <h3 class="text-xl font-semibold text-cyan-400">
+      <h3 class="text-xl font-semibold" [style.color]="'var(--heading)'">
         Recent Transactions
-        <span class="text-sm text-gray-400 ml-2">(Last 50 Records)</span>
+        <span class="text-sm ml-2" [style.color]="'var(--text-muted)'">
+          (Last 50 Records)
+        </span>
       </h3>
     </div>
+
     <table class="w-full text-left border-collapse">
       <thead>
-        <tr class="text-gray-300 border-b border-gray-700">
+        <tr [ngStyle]="{
+              'color':'var(--text-muted)',
+              'border-bottom':'1px solid var(--border)'
+            }">
           <th class="py-2 px-4">Date</th>
           <th class="py-2 px-4">Customer</th>
           <th class="py-2 px-4">Received Amount</th>
@@ -79,26 +160,31 @@
       </thead>
       <tbody>
         <tr *ngFor="let transaction of dashboarddata.recenttransaction"
-          class="border-b border-gray-700 hover:bg-gray-700/50 transition">
+            class="transition"
+            [ngStyle]="{
+              'border-bottom':'1px solid var(--border)'
+            }"
+            [ngClass]="'hover:bg-[var(--hover-bg)]'">
+
           <td class="py-2 px-4">{{ transaction.date }}</td>
           <td class="py-2 px-4">{{ transaction.customerName }}</td>
           <td class="py-2 px-4">₹ {{ transaction.receivedAmount | number:'1.0-2' }}</td>
           <td class="py-2 px-4">₹ {{ transaction.balanceDue | number:'1.0-2' }}</td>
           <td class="py-2 px-4">₹ {{ transaction.totalAmount | number:'1.0-2' }}</td>
-         <td 
-  [ngClass]="{
-    'text-green-500 font-bold border-l-4 border-green-500': transaction.paymentType === 'Cash',
-    'text-blue-500 font-bold border-l-4 border-blue-500': transaction.paymentType === 'Cheque'
-  }"
-  class="py-2 px-4">
-  {{ transaction.paymentType }}
-</td>
+
+          <td class="py-2 px-4"
+              [ngClass]="{
+                'text-green-500 font-bold border-l-4 border-green-500': transaction.paymentType === 'Cash',
+                'text-blue-500 font-bold border-l-4 border-blue-500': transaction.paymentType === 'Cheque'
+              }">
+            {{ transaction.paymentType }}
+          </td>
 
           <td class="py-2 px-4">{{ transaction.transactionType }}</td>
+
         </tr>
       </tbody>
     </table>
-
   </div>
 </div>
 

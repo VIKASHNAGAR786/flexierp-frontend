@@ -12,6 +12,7 @@ import { open } from '@tauri-apps/plugin-dialog';
 import { BackupRequest } from '../../MODEL/MODEL';
 import { getVersion } from '@tauri-apps/api/app';
 import { NotesComponent } from "../COMMON/notes/notes.component";
+import { ThemeServiceService } from '../../services/theme-service.service';
 
 
 
@@ -33,7 +34,8 @@ export class HeaderComponent implements OnInit {
     private userInfo: UserinfowithloginService,
     @Inject(PLATFORM_ID) private platformId: Object,
     private commonservice: CommonService,
-    private alertservice: AlertService
+    private alertservice: AlertService,
+    private themeService: ThemeServiceService
   ) { }
 
   ngOnInit() {
@@ -158,6 +160,10 @@ async isTauriEnvironment(): Promise<boolean> {
   }
 }
 
+
+    get currentTheme() {
+  return this.themeService.currentTheme;
+}
 
 }
 

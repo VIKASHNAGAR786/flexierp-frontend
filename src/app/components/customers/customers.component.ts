@@ -25,4 +25,17 @@ export class CustomersComponent {
     switchTab(tabId: string) {
       this.activeTab = tabId;
     }
+
+        applyHover(event: MouseEvent) {
+  const el = event.target as HTMLElement;
+  if (!el) return;
+  el.style.background = 'var(--tab-hover-bg)';  
+}
+
+removeHover(event: MouseEvent) {
+  const el = event.target as HTMLElement;
+  if (!el) return;
+  el.style.background = 'transparent';
+}
+
 }

@@ -1,20 +1,45 @@
 <!-- 🔍 Search Bar + Actions -->
 <div class="flex justify-between items-center mb-4 gap-2 flex-wrap">
   <!-- Search Input -->
-  <input type="text" [(ngModel)]="filter.searchTerm" (ngModelChange)="getProductData()" placeholder="Search products..."
-    class="px-4 py-2 rounded-lg bg-slate-800 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-[#00ffee] w-1/3" />
+ <input
+    type="text"
+    [(ngModel)]="filter.searchTerm"
+    (ngModelChange)="getProductData()"
+    placeholder="Search products..."
+    class="px-4 py-2 rounded-lg focus:outline-none focus:ring-2 w-1/3"
+    style="
+      background: var(--input-bg);
+      color: var(--input-text);
+      border: 1px solid var(--input-border);
+      --tw-ring-color: var(--accent-1);
+    "
+  />
 
   <!-- 📅 Date Range -->
+  <!-- Date Range -->
   <div class="flex gap-2">
-    <input type="date" [(ngModel)]="filter.startDate" (ngModelChange)="getProductData()"
-      class="px-3 py-2 rounded bg-slate-800 text-white border border-slate-600" />
-    <input type="date" [(ngModel)]="filter.endDate" (ngModelChange)="getProductData()"
-      class="px-3 py-2 rounded bg-slate-800 text-white border border-slate-600" />
+    <input
+      type="date"
+      [(ngModel)]="filter.startDate"
+      (ngModelChange)="getProductData()"
+      class="px-3 py-2 rounded"
+      style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+    />
+
+    <input
+      type="date"
+      [(ngModel)]="filter.endDate"
+      (ngModelChange)="getProductData()"
+      class="px-3 py-2 rounded"
+      style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+    />
   </div>
 
   <!-- 📑 Rows per page -->
-  <select [(ngModel)]="filter.pageSize" (change)="getProductData()"
-    class="px-3 py-2 rounded bg-slate-800 text-white border border-slate-600">
+  <select [(ngModel)]="filter.pageSize" 
+  (change)="getProductData()"
+        style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+        class="px-3 py-2 rounded">
     <option *ngFor="let size of pageSizes" [value]="size">{{ size }} per page</option>
   </select>
 
@@ -39,32 +64,44 @@
 
  
 <!-- 📋 Product Table -->
-<div #productTable class="overflow-x-auto overflow-y-auto bg-slate-900 rounded-lg shadow-lg relative max-h-[500px]">
-  <table class="min-w-full text-white border-collapse">
+<div #productTable 
+class="overflow-x-auto overflow-y-auto rounded-lg shadow-lg relative max-h-[500px]"
+  style="background: var(--card-bg); border: 1px solid var(--card-border);"
+  >
+  <table class="min-w-full border-collapse" style="color: var(--card-text);" >
     <thead
-      class="bg-gradient-to-r from-slate-900 to-slate-800 text-[#00ffee] uppercase text-sm md:text-base tracking-wide sticky top-0 z-50">
+class="uppercase text-sm md:text-base tracking-wide sticky top-0 z-50"
+      style="
+        background: linear-gradient(to right, var(--card-bg), var(--input-bg));
+        color: var(--accent-1);
+      "> 
       <tr>
-        <th class="px-4 py-2 border-b border-slate-700">Sr.No</th>
-        <th class="px-4 py-2 border-b border-slate-700">Code</th>
-        <th class="px-4 py-2 border-b border-slate-700">Name</th>
-        <th class="px-4 py-2 border-b border-slate-700">Category</th>
-        <th class="px-4 py-2 border-b border-slate-700">Packed Date</th>
-        <th class="px-4 py-2 border-b border-slate-700">SoldDate</th>
-        <th class="px-4 py-2 border-b border-slate-700">SoldQuantity</th>
-        <th class="px-4 py-2 border-b border-slate-700">AvailableQuantity</th>
-        <th class="px-4 py-2 border-b border-slate-700">Purchase Price</th>
-        <th class="px-4 py-2 border-b border-slate-700">Selling Price</th>
-        <th class="px-4 py-2 border-b border-slate-700">Weight (kg)</th>
-        <th class="px-4 py-2 border-b border-slate-700">HxWxD</th>
-        <th class="px-4 py-2 border-b border-slate-700">Perishable</th>
-        <th class="px-4 py-2 border-b border-slate-700">Created By</th>
-        <th class="px-4 py-2 border-b border-slate-700">Tax Rate</th>
-        <th class="px-4 py-2 border-b border-slate-700">Discount</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Sr.No</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Code</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Name</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Category</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Packed Date</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">SoldDate</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">SoldQuantity</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">AvailableQuantity</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Purchase Price</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Selling Price</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Weight (kg)</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">HxWxD</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Perishable</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Created By</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Tax Rate</th>
+        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Discount</th>
 
       </tr>
     </thead>
-    <tbody class="divide-y divide-slate-700">
-      <tr *ngFor="let product of products; let i = index" class="hover:bg-slate-700 transition">
+    <tbody>
+      <tr *ngFor="let product of products; let i = index" 
+      class="transition"
+        style="border-color: var(--input-border);"
+        onmouseover="this.style.background='var(--accent-hover)'"
+        onmouseout="this.style.background='transparent'"
+      >
         <td class="px-4 py-2 text-center">{{ (filter.pageNo - 1) * filter.pageSize + i + 1 }}</td>
         <td class="px-4 py-2 text-center">{{ product.productCode }}</td>
 
@@ -98,20 +135,27 @@
 </div>
 
 <!-- 📄 Pagination Controls -->
-<div class="flex justify-between items-center mt-4 text-white">
-  <button (click)="prevPage()" [disabled]="filter.pageNo === 1"
-    class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50">Previous</button>
-  <span>Page {{ filter.pageNo }} of {{ totalPages }}</span>
-  <button (click)="nextPage()" [disabled]="filter.pageNo === totalPages"
-    class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50">Next</button>
-</div>
+<div class="flex justify-between items-center mt-4">
+  <button
+    (click)="prevPage()"
+    [disabled]="filter.pageNo === 1"
+    class="px-3 py-1 rounded disabled:opacity-50"
+    style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+  >
+    Previous
+  </button>
 
-<!-- 🎯 Barcode Preview -->
-<div *ngIf="barcode" class="mt-4">
-  <h3>Barcode for: {{ barcodeText }}</h3>
-  <img [src]="barcode" alt="Barcode" />
-</div>
+  <span style="color: var(--card-text);">Page {{ filter.pageNo }} of {{ totalPages }}</span>
 
+  <button
+    (click)="nextPage()"
+    [disabled]="filter.pageNo === totalPages"
+    class="px-3 py-1 rounded disabled:opacity-50"
+    style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+  >
+    Next
+  </button>
+</div>
 
 <!-- for the big loader -->
  <div *ngIf="reportIsLoading" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">

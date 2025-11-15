@@ -12,6 +12,7 @@ import { ColorserviceService } from '../../services/colorservice.service';
 import { UserinfowithloginService } from '../../services/userinfowithlogin.service';
 import { CommonService } from '../../services/common.service';
 import { AlertService } from '../../services/alert.service';
+import { ThemeServiceService } from '../../services/theme-service.service';
 
 
 @Component({
@@ -57,7 +58,8 @@ futureLinks = [
     private colorService: ColorserviceService,
     private userInfo: UserinfowithloginService,
     private commonservice: CommonService,
-    private alertservices: AlertService
+    private alertservices: AlertService,
+    private themeService: ThemeServiceService
   ) {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
@@ -110,5 +112,38 @@ futureLinks = [
       this.isLoggedIn = !!this.userInfo.getToken();
     }
   }
+
+    get currentTheme() {
+  return this.themeService.currentTheme;
+}
+
+applyHover(event: any) {
+  const el = event.currentTarget;
+
+  if (this.themeService.currentTheme === 'dark') {
+    // DARK THEME HOVER
+    el.style.backgroundColor = '#00ffee';
+    el.style.color = 'black';
+  } else {
+    // LIGHT THEME HOVER
+    el.style.backgroundColor = '#e2e8f0'; // light grey (Tailwind slate-200)
+    el.style.color = '#0f172a'; // dark text
+  }
+}
+
+removeHover(event: any) {
+  const el = event.currentTarget;
+
+  if (this.themeService.currentTheme === 'dark') {
+    // BACK TO DARK DEFAULT
+    el.style.backgroundColor = '';
+    el.style.color = 'white';
+  } else {
+    // BACK TO LIGHT DEFAULT
+    el.style.backgroundColor = '';
+    el.style.color = '#0f172a';
+  }
+}
+
 
 }

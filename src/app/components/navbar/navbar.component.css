@@ -1,0 +1,9 @@
+.sidebar-link:hover {
+  background: var(--hover-bg);
+  color: var(--hover-text);
+}
+
+.active-sidebar-link {
+  background: var(--sidebar-hover-bg) !important;
+  color: var(--sidebar-hover-text) !important;
+}

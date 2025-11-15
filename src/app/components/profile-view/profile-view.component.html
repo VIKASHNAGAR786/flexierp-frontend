@@ -1,105 +1,161 @@
 <div class="max-w-9xl mx-auto p-6 space-y-12 text-white">
 
   <!-- Profile Header -->
-  <div class="relative rounded-3xl overflow-hidden shadow-lg border border-slate-800/50 
-              bg-slate-900/80 backdrop-blur-xl">
-    <!-- Banner -->
-    <div class="h-32 bg-gradient-to-r from-[#00ffee]/40 to-[#00b7ff]/30"></div>
+<div class="relative rounded-3xl overflow-hidden shadow-lg 
+            border border-[var(--border)] 
+            bg-[var(--card)] backdrop-blur-xl">
 
-    <!-- User Info -->
-    <div class="px-6 pb-6 -mt-16 flex items-center gap-8">
-      <img src="assets/profile.png" alt="User Avatar"
-        class="w-28 h-28 rounded-full border-4 border-slate-900 shadow-lg hover:ring-2 hover:ring-[#00ffee] transition" />
-      <div>
-        <h2 class="text-3xl font-bold text-[#00ffee]">{{ username }}</h2>
-        <p class="text-slate-300 text-sm">{{ email }}</p>
-        <p class="text-slate-400 text-sm">{{ phone }}</p>
-      </div>
+  <!-- Banner -->
+  <div class="h-32 
+      bg-gradient-to-r 
+      from-[var(--banner-start)] 
+      to-[var(--banner-end)]">
+  </div>
+
+  <!-- User Info -->
+  <div class="px-6 pb-6 -mt-16 flex items-center gap-8">
+
+    <img src="assets/profile.png" alt="User Avatar"
+      class="w-28 h-28 rounded-full border-4 
+             border-[var(--card)] shadow-lg 
+             hover:ring-2 hover:ring-[var(--heading)] transition" />
+
+    <div>
+      <h2 class="text-3xl font-bold text-[var(--heading)]">
+        {{ username }}
+      </h2>
+
+      <p class="text-[var(--text-muted)] text-sm">{{ email }}</p>
+      <p class="text-[var(--text-muted)] text-sm">{{ phone }}</p>
     </div>
   </div>
+</div>
+
 
   <!-- Profile Information Card -->
-  <div class="rounded-3xl bg-slate-900/80 backdrop-blur-xl p-8 border border-slate-800/50 shadow-lg">
-    <h3 class="text-2xl font-bold text-[#00ffee] mb-6">Profile Information</h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div>
-        <label class="text-slate-400 text-sm">Full Name</label>
-        <p class="text-lg font-medium">{{username}}</p>
-      </div>
-      <div>
-        <label class="text-slate-400 text-sm">Email</label>
-        <p class="text-lg font-medium">{{ email }}</p>
-      </div>
-      <div>
-        <label class="text-slate-400 text-sm">Phone</label>
-        <p class="text-lg font-medium">{{ phone }}</p>
-      </div>
-      <div>
-        <label class="text-slate-400 text-sm">Role</label>
-        <p class="text-lg font-medium">Administrator</p>
-      </div>
+<div class="rounded-3xl p-8 shadow-lg backdrop-blur-xl
+            bg-[var(--card)] border border-[var(--border)]">
+
+  <h3 class="text-2xl font-bold mb-6 text-[var(--heading)]">
+    Profile Information
+  </h3>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <div>
+      <label class="text-[var(--text-muted)] text-sm">Full Name</label>
+      <p class="text-lg font-medium text-[var(--text)]">{{ username }}</p>
     </div>
+
+    <div>
+      <label class="text-[var(--text-muted)] text-sm">Email</label>
+      <p class="text-lg font-medium text-[var(--text)]">{{ email }}</p>
+    </div>
+
+    <div>
+      <label class="text-[var(--text-muted)] text-sm">Phone</label>
+      <p class="text-lg font-medium text-[var(--text)]">{{ phone }}</p>
+    </div>
+
+    <div>
+      <label class="text-[var(--text-muted)] text-sm">Role</label>
+      <p class="text-lg font-medium text-[var(--text)]">Administrator</p>
+    </div>
+
   </div>
+</div>
+
+
 
   <!-- Company Profile -->
-  <div class="rounded-3xl bg-slate-900/80 backdrop-blur-xl p-8 border border-slate-800/50 shadow-lg space-y-10">
-    <div class="flex items-center justify-between border-b border-slate-700 pb-4">
+  <div class="rounded-3xl p-8 shadow-lg space-y-10" [ngStyle]="{
+       'background': 'var(--card)',
+       'backdrop-filter': 'blur(12px)',
+       'border': '1px solid var(--border)',
+       'color': 'var(--text)'
+     }">
+
+    <div class="flex items-center justify-between pb-4" [ngStyle]="{ 'border-bottom': '1px solid var(--border)' }">
+
       <div>
-        <h2 class="text-2xl font-bold text-[#00ffee]">Company Profile</h2>
-        <p class="text-slate-400 text-sm">Details used on invoices & official docs</p>
+        <h2 class="text-2xl font-bold mb-6 text-[var(--heading)]">
+          Company Profile
+        </h2>
+
+        <p class="text-sm" [style.color]="'var(--text-muted)'">
+          Details used on invoices & official docs
+        </p>
       </div>
-      <button (click)="editingProfile()"
-        class="px-5 py-2 bg-gradient-to-r from-[#00ffee] to-[#00b7ff] text-slate-900 rounded-lg font-semibold hover:scale-[1.02] hover:shadow-lg transition">
+
+      <button (click)="editingProfile()" class="px-5 py-2 rounded-lg font-semibold transition" [ngStyle]="{
+              'background': 'var(--icon-bg)',
+              'color': 'var(--icon-color)',
+              'border': '1px solid var(--icon-border)'
+            }" (mouseover)="applyHover($event)" (mouseout)="removeHover($event)">
         Edit Profile
       </button>
+
     </div>
 
     <!-- Company Info -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+
       <!-- Logo -->
       <div class="flex flex-col items-center space-y-3">
-        <!-- Show current logo -->
-        <img 
-  [src]="logoPreview || companyInfo.companyLogo" 
-  alt="Company Logo"
-  class="w-32 h-32 rounded-xl border border-slate-700 shadow-md object-cover" />
+        <img [src]="logoPreview || companyInfo.companyLogo" class="w-32 h-32 rounded-xl shadow-md object-cover"
+          [ngStyle]="{
+          'border': '1px solid var(--border)'
+        }" />
 
-        <!-- Hidden file input -->
         <input type="file" #fileInput accept="image/*" class="hidden" (change)="onFileSelected($event)" />
 
-        <!-- Styled button -->
-        <button type="button" (click)="fileInput.click()"
-          class="px-3 py-1 text-sm bg-[#00ffee] text-slate-900 rounded-lg hover:bg-[#00ddcc] transition">
+        <button type="button" (click)="fileInput.click()" class="px-3 py-1 text-sm rounded-lg transition" [ngStyle]="{
+                'background': 'var(--icon-bg)',
+                'color': 'var(--icon-color)',
+                'border': '1px solid var(--icon-border)'
+              }">
           Change Logo
         </button>
       </div>
 
-
       <!-- Details -->
       <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+
         <div>
-          <label class="text-slate-400 text-sm">Company Name</label>
-          <p class="text-lg font-medium">{{ companyInfo.companyName }}</p>
+          <label class="text-sm" [style.color]="'var(--text-muted)'">Company Name</label>
+          <p class="text-lg font-medium" [style.color]="'var(--text)'">
+            {{ companyInfo.companyName }}
+          </p>
         </div>
 
         <div>
-          <label class="text-slate-400 text-sm">Contact No.</label>
-          <p class="text-lg font-medium">{{ companyInfo.contactNo }}</p>
+          <label class="text-sm" [style.color]="'var(--text-muted)'">Contact No.</label>
+          <p class="text-lg font-medium" [style.color]="'var(--text)'">
+            {{ companyInfo.contactNo }}
+          </p>
         </div>
+
         <div>
-          <label class="text-slate-400 text-sm">WhatsApp No.</label>
-          <p class="text-lg font-medium">{{ companyInfo.whatsAppNo }}</p>
+          <label class="text-sm" [style.color]="'var(--text-muted)'">WhatsApp No.</label>
+          <p class="text-lg font-medium" [style.color]="'var(--text)'">
+            {{ companyInfo.whatsAppNo }}
+          </p>
         </div>
+
         <div class="md:col-span-2">
-          <label class="text-slate-400 text-sm">Email</label>
-          <p class="text-lg font-medium">{{ companyInfo.email }}</p>
+          <label class="text-sm" [style.color]="'var(--text-muted)'">Email</label>
+          <p class="text-lg font-medium" [style.color]="'var(--text)'">
+            {{ companyInfo.email }}
+          </p>
         </div>
+
         <div class="md:col-span-2">
-          <label class="text-slate-400 text-sm">Address</label>
-          <p class="text-lg font-medium">
+          <label class="text-sm" [style.color]="'var(--text-muted)'">Address</label>
+          <p class="text-lg font-medium" [style.color]="'var(--text)'">
             {{ companyInfo.address }}
           </p>
         </div>
+
       </div>
     </div>
   </div>
@@ -107,58 +163,86 @@
   <!-- Preferences + Log History + Activity History -->
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-    <!-- Preferences - Coming Soon -->
-<div class="relative rounded-3xl bg-slate-900/80 backdrop-blur-xl p-6 border border-slate-800/50 shadow-lg">
-  <!-- Overlay label -->
-  <div class="absolute inset-0 bg-black/50 flex items-center justify-center rounded-3xl z-10">
-    <span class="text-white font-bold text-lg uppercase">Coming Soon</span>
-  </div>
+    <!-- Preferences -->
+    <div class="relative rounded-3xl p-6 border shadow-lg
+     bg-[var(--card)] text-[var(--text)] backdrop-blur-xl">
 
-  <!-- Original content (optional, blurred behind overlay) -->
-  <h3 class="text-lg font-semibold mb-4 flex items-center gap-2 opacity-50">
-    ⚙️ <span>Preferences</span>
-  </h3>
-  <div class="space-y-4 text-sm opacity-50">
-    <div class="flex items-center justify-between">
-      <span>🌙 Dark Mode</span>
-      <input type="checkbox" class="w-4 h-4 accent-[#00ffee]" />
+      <!-- Title -->
+      <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+        🎨 <span>Theme Preferences</span>
+      </h3>
+
+      <div class="space-y-4 text-sm">
+
+        <!-- Dark Neon Theme -->
+        <div class="flex items-center justify-between cursor-pointer p-3 rounded-xl
+         hover:bg-[var(--hover)] transition-all duration-300 group" (click)="setTheme('dark')">
+
+          <div class="flex items-center gap-3">
+            <div class="w-6 h-6 rounded-full bg-[#00ffee] shadow-[0_0_10px_#00ffee]"></div>
+            <span class="font-medium group-hover:text-[#00ffee] transition">
+              Dark Blue Neon
+            </span>
+          </div>
+
+          <input type="radio" name="theme" value="dark" [checked]="currentTheme === 'dark'"
+            class="w-4 h-4 accent-[#00ffee]" />
+        </div>
+
+        <!-- Light Theme -->
+        <div class="flex items-center justify-between cursor-pointer p-3 rounded-xl
+         hover:bg-[var(--hover)] transition-all duration-300 group" (click)="setTheme('light')">
+
+          <div class="flex items-center gap-3">
+            <div class="w-6 h-6 rounded-full bg-white border border-slate-300"></div>
+            <span class="font-medium group-hover:text-blue-500 transition">
+              Light White
+            </span>
+          </div>
+
+          <input type="radio" name="theme" value="light" [checked]="currentTheme === 'light'"
+            class="w-4 h-4 accent-blue-500" />
+        </div>
+
+      </div>
     </div>
-    <div class="flex items-center justify-between">
-      <span>📧 Email Notifications</span>
-      <input type="checkbox" class="w-4 h-4 accent-[#00ffee]" checked />
-    </div>
-    <div class="flex items-center justify-between">
-      <span>📲 SMS Alerts</span>
-      <input type="checkbox" class="w-4 h-4 accent-[#00ffee]" />
-    </div>
-  </div>
-</div>
+
+
 
 
     <!-- Log History -->
-    <div class="rounded-3xl bg-slate-900/80 backdrop-blur-xl p-6 border border-slate-800/50 shadow-lg">
+    <div class="rounded-3xl p-6 shadow-lg backdrop-blur-xl 
+     bg-[var(--card)] border border-[var(--border)] text-[var(--text)]">
+
       <h3 class="text-lg font-semibold mb-6 flex items-center gap-2">
         📑 <span>Log History</span>
       </h3>
 
       <!-- Scrollable container -->
-      <div class="relative border-l-2 border-slate-700 pl-6 space-y-6 max-h-96 overflow-y-auto">
+      <div class="relative border-l-2 pl-6 space-y-6 max-h-96 overflow-y-auto
+              border-[var(--timeline-line)]">
+
         <div *ngFor="let log of historyList" class="relative pl-10">
-          <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
-                  border border-[#00ffee] flex items-center justify-center">
-            <!-- Icon based on login/logout -->
-            <span class="text-[#00ffee] text-xs">
+
+          <div class="absolute -left-3 top-0 w-6 h-6 rounded-full 
+           bg-[var(--icon-bg)] border border-[var(--icon-border)]
+           flex items-center justify-center">
+            <span class="text-[var(--icon-color)] text-xs">
               {{ log.logoutTime !== 'N/A' ? '🔒' : (log.status === 'Success' ? '✔' : '❌') }}
             </span>
           </div>
-          <p class="text-white">
+
+          <p class="text-[var(--text)]">
             {{ log.username }}
             {{ log.logoutTime !== 'N/A' ? 'logged out' : 'logged in' }}
             from {{ log.deviceInfo }}
           </p>
-          <span class="text-slate-400 text-xs">
-            {{ log.logoutTime !== 'N/A' ? (log.logoutTime | date:'medium') : (log.loginTime | date:'medium') }}
+
+          <span class="text-[var(--text-muted)] text-xs">
+            {{ log.logoutTime !== 'N/A' ? (log.logoutTime | date:'medium')
+            : (log.loginTime | date:'medium') }}
           </span>
+
         </div>
       </div>
     </div>
@@ -166,44 +250,59 @@
 
 
 
+
     <!-- Activity History -->
-<div class="relative rounded-3xl bg-slate-900/80 backdrop-blur-xl p-6 border border-slate-800/50 shadow-lg">
+    <div class="relative rounded-3xl p-6 shadow-lg backdrop-blur-xl 
+            bg-[var(--card)] border border-[var(--border)]">
+
   <!-- Overlay label -->
-  <div class="absolute inset-0 bg-black/50 flex items-center justify-center rounded-3xl z-10">
-    <span class="text-white font-bold text-lg uppercase">Coming Soon</span>
+  <div class="absolute inset-0 bg-[var(--overlay)] 
+              flex items-center justify-center rounded-3xl z-10">
+    <span class="text-[var(--text)] font-bold text-lg uppercase">
+      Coming Soon
+    </span>
   </div>
 
-  <!-- Original content (optional, blurred behind overlay) -->
-  <h3 class="text-lg font-semibold mb-6 flex items-center gap-2 opacity-50">
-    📜 <span>Activity History</span>
+  <!-- Original content (blurred/disabled behind overlay) -->
+  <h3 class="text-lg font-semibold mb-6 flex items-center gap-2 opacity-40">
+    📜 <span class="text-[var(--heading)]">Activity History</span>
   </h3>
-  <div class="relative border-l-2 border-slate-700 pl-6 space-y-6 opacity-50">
+
+  <div class="relative border-l-2 border-[var(--timeline-line)] pl-6 space-y-6 opacity-40">
+
     <div class="relative pl-10">
-      <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
-                  border border-[#00ffee] flex items-center justify-center">
-        <span class="text-[#00ffee] text-xs">✅</span>
+      <div class="absolute -left-3 top-0 w-6 h-6 rounded-full 
+                  bg-[var(--icon-bg)] border border-[var(--icon-border)]
+                  flex items-center justify-center">
+        <span class="text-[var(--icon-color)] text-xs">✅</span>
       </div>
-      <p class="text-white">Company details updated</p>
-      <span class="text-slate-400 text-xs">28 Sep 2025, 10:45 AM</span>
+      <p class="text-[var(--text)]">Company details updated</p>
+      <span class="text-[var(--text-muted)] text-xs">28 Sep 2025, 10:45 AM</span>
     </div>
+
     <div class="relative pl-10">
-      <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
-                  border border-[#00ffee] flex items-center justify-center">
-        <span class="text-[#00ffee] text-xs">📄</span>
+      <div class="absolute -left-3 top-0 w-6 h-6 rounded-full 
+                  bg-[var(--icon-bg)] border border-[var(--icon-border)]
+                  flex items-center justify-center">
+        <span class="text-[var(--icon-color)] text-xs">📄</span>
       </div>
-      <p class="text-white">New Invoice Prefix added</p>
-      <span class="text-slate-400 text-xs">20 Sep 2025, 03:15 PM</span>
+      <p class="text-[var(--text)]">New Invoice Prefix added</p>
+      <span class="text-[var(--text-muted)] text-xs">20 Sep 2025, 03:15 PM</span>
     </div>
+
     <div class="relative pl-10">
-      <div class="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#00ffee]/20 
-                  border border-[#00ffee] flex items-center justify-center">
-        <span class="text-[#00ffee] text-xs">📧</span>
+      <div class="absolute -left-3 top-0 w-6 h-6 rounded-full 
+                  bg-[var(--icon-bg)] border border-[var(--icon-border)]
+                  flex items-center justify-center">
+        <span class="text-[var(--icon-color)] text-xs">📧</span>
       </div>
-      <p class="text-white">Email changed from <i>support.com</i></p>
-      <span class="text-slate-400 text-xs">12 Sep 2025, 06:30 PM</span>
+      <p class="text-[var(--text)]">Email changed from <i>support.com</i></p>
+      <span class="text-[var(--text-muted)] text-xs">12 Sep 2025, 06:30 PM</span>
     </div>
+
   </div>
 </div>
+
 
   </div>
 

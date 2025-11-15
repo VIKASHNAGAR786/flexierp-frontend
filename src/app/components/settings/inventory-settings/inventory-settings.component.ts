@@ -126,4 +126,16 @@ set activeTab(value: 'category' | 'warehouse') {
     this.loadCategories();
   }
 }
+
+
+hoverRow(event: Event) {
+  const el = event.currentTarget as HTMLElement;
+  el.style.background = "var(--hover-bg)";
+}
+
+unhoverRow(event: Event) {
+  const el = event.currentTarget as HTMLElement;
+  el.style.background = "transparent";
+}
+
 }
