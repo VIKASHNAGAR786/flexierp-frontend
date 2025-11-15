@@ -264,6 +264,8 @@ html.dark-theme {
   --input-bg: #1e293b;
   --input-text: #ffffff;
   --input-border: #334155;
+
+  --modal-overlay: rgba(0,0,0,0.6);
   
 }
 
@@ -347,6 +349,7 @@ html.light-theme {
   --input-bg: #f8fafc;          /* Very soft gray input background */
   --input-text: #0f172a;        /* Deep slate text */
   --input-border: #cbd5e1;      /* Light border */
+  --modal-overlay: rgba(0,0,0,0.2);
 }
 
 

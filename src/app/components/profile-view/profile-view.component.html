@@ -1,97 +1,115 @@
 <div class="max-w-9xl mx-auto p-6 space-y-12 text-white">
 
   <!-- Profile Header -->
-<div class="relative rounded-3xl overflow-hidden shadow-lg 
+  <div class="relative rounded-3xl overflow-hidden shadow-lg 
             border border-[var(--border)] 
             bg-[var(--card)] backdrop-blur-xl">
 
-  <!-- Banner -->
-  <div class="h-32 
+    <!-- Banner -->
+    <div class="h-32 
       bg-gradient-to-r 
       from-[var(--banner-start)] 
       to-[var(--banner-end)]">
-  </div>
+    </div>
 
-  <!-- User Info -->
-  <div class="px-6 pb-6 -mt-16 flex items-center gap-8">
+    <!-- User Info -->
+    <div class="px-6 pb-6 -mt-16 flex items-center gap-8">
 
-    <img src="assets/profile.png" alt="User Avatar"
-      class="w-28 h-28 rounded-full border-4 
+      <img
+        src="assets/profile.png"
+        alt="User Avatar"
+        class="w-28 h-28 rounded-full border-4 
              border-[var(--card)] shadow-lg 
-             hover:ring-2 hover:ring-[var(--heading)] transition" />
+             hover:ring-2 hover:ring-[var(--heading)] transition"
+      />
 
-    <div>
-      <h2 class="text-3xl font-bold text-[var(--heading)]">
-        {{ username }}
-      </h2>
+      <div>
+        <h2 class="text-3xl font-bold text-[var(--heading)]">
+          {{ username }}
+        </h2>
 
-      <p class="text-[var(--text-muted)] text-sm">{{ email }}</p>
-      <p class="text-[var(--text-muted)] text-sm">{{ phone }}</p>
+        <p class="text-[var(--text-muted)] text-sm">{{ email }}</p>
+        <p class="text-[var(--text-muted)] text-sm">{{ phone }}</p>
+      </div>
     </div>
   </div>
-</div>
 
 
   <!-- Profile Information Card -->
-<div class="rounded-3xl p-8 shadow-lg backdrop-blur-xl
+  <div class="rounded-3xl p-8 shadow-lg backdrop-blur-xl
             bg-[var(--card)] border border-[var(--border)]">
 
-  <h3 class="text-2xl font-bold mb-6 text-[var(--heading)]">
-    Profile Information
-  </h3>
+    <h3 class="text-2xl font-bold mb-6 text-[var(--heading)]">
+      Profile Information
+    </h3>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-    <div>
-      <label class="text-[var(--text-muted)] text-sm">Full Name</label>
-      <p class="text-lg font-medium text-[var(--text)]">{{ username }}</p>
+      <div>
+        <label class="text-[var(--text-muted)] text-sm">Full Name</label>
+        <p class="text-lg font-medium text-[var(--text)]">{{ username }}</p>
+      </div>
+
+      <div>
+        <label class="text-[var(--text-muted)] text-sm">Email</label>
+        <p class="text-lg font-medium text-[var(--text)]">{{ email }}</p>
+      </div>
+
+      <div>
+        <label class="text-[var(--text-muted)] text-sm">Phone</label>
+        <p class="text-lg font-medium text-[var(--text)]">{{ phone }}</p>
+      </div>
+
+      <div>
+        <label class="text-[var(--text-muted)] text-sm">Role</label>
+        <p class="text-lg font-medium text-[var(--text)]">Administrator</p>
+      </div>
+
     </div>
-
-    <div>
-      <label class="text-[var(--text-muted)] text-sm">Email</label>
-      <p class="text-lg font-medium text-[var(--text)]">{{ email }}</p>
-    </div>
-
-    <div>
-      <label class="text-[var(--text-muted)] text-sm">Phone</label>
-      <p class="text-lg font-medium text-[var(--text)]">{{ phone }}</p>
-    </div>
-
-    <div>
-      <label class="text-[var(--text-muted)] text-sm">Role</label>
-      <p class="text-lg font-medium text-[var(--text)]">Administrator</p>
-    </div>
-
   </div>
-</div>
 
 
 
   <!-- Company Profile -->
-  <div class="rounded-3xl p-8 shadow-lg space-y-10" [ngStyle]="{
+  <div
+    class="rounded-3xl p-8 shadow-lg space-y-10"
+    [ngStyle]="{
        'background': 'var(--card)',
        'backdrop-filter': 'blur(12px)',
        'border': '1px solid var(--border)',
        'color': 'var(--text)'
-     }">
+     }"
+  >
 
-    <div class="flex items-center justify-between pb-4" [ngStyle]="{ 'border-bottom': '1px solid var(--border)' }">
+    <div
+      class="flex items-center justify-between pb-4"
+      [ngStyle]="{ 'border-bottom': '1px solid var(--border)' }"
+    >
 
       <div>
         <h2 class="text-2xl font-bold mb-6 text-[var(--heading)]">
           Company Profile
         </h2>
 
-        <p class="text-sm" [style.color]="'var(--text-muted)'">
+        <p
+          class="text-sm"
+          [style.color]="'var(--text-muted)'"
+        >
           Details used on invoices & official docs
         </p>
       </div>
 
-      <button (click)="editingProfile()" class="px-5 py-2 rounded-lg font-semibold transition" [ngStyle]="{
+      <button
+        (click)="editingProfile()"
+        class="px-5 py-2 rounded-lg font-semibold transition"
+        [ngStyle]="{
               'background': 'var(--icon-bg)',
               'color': 'var(--icon-color)',
               'border': '1px solid var(--icon-border)'
-            }" (mouseover)="applyHover($event)" (mouseout)="removeHover($event)">
+            }"
+        (mouseover)="applyHover($event)"
+        (mouseout)="removeHover($event)"
+      >
         Edit Profile
       </button>
 
@@ -102,18 +120,32 @@
 
       <!-- Logo -->
       <div class="flex flex-col items-center space-y-3">
-        <img [src]="logoPreview || companyInfo.companyLogo" class="w-32 h-32 rounded-xl shadow-md object-cover"
+        <img
+          [src]="logoPreview || companyInfo.companyLogo"
+          class="w-32 h-32 rounded-xl shadow-md object-cover"
           [ngStyle]="{
           'border': '1px solid var(--border)'
-        }" />
+        }"
+        />
 
-        <input type="file" #fileInput accept="image/*" class="hidden" (change)="onFileSelected($event)" />
+        <input
+          type="file"
+          #fileInput
+          accept="image/*"
+          class="hidden"
+          (change)="onFileSelected($event)"
+        />
 
-        <button type="button" (click)="fileInput.click()" class="px-3 py-1 text-sm rounded-lg transition" [ngStyle]="{
+        <button
+          type="button"
+          (click)="fileInput.click()"
+          class="px-3 py-1 text-sm rounded-lg transition"
+          [ngStyle]="{
                 'background': 'var(--icon-bg)',
                 'color': 'var(--icon-color)',
                 'border': '1px solid var(--icon-border)'
-              }">
+              }"
+        >
           Change Logo
         </button>
       </div>
@@ -122,36 +154,66 @@
       <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
 
         <div>
-          <label class="text-sm" [style.color]="'var(--text-muted)'">Company Name</label>
-          <p class="text-lg font-medium" [style.color]="'var(--text)'">
+          <label
+            class="text-sm"
+            [style.color]="'var(--text-muted)'"
+          >Company Name</label>
+          <p
+            class="text-lg font-medium"
+            [style.color]="'var(--text)'"
+          >
             {{ companyInfo.companyName }}
           </p>
         </div>
 
         <div>
-          <label class="text-sm" [style.color]="'var(--text-muted)'">Contact No.</label>
-          <p class="text-lg font-medium" [style.color]="'var(--text)'">
+          <label
+            class="text-sm"
+            [style.color]="'var(--text-muted)'"
+          >Contact No.</label>
+          <p
+            class="text-lg font-medium"
+            [style.color]="'var(--text)'"
+          >
             {{ companyInfo.contactNo }}
           </p>
         </div>
 
         <div>
-          <label class="text-sm" [style.color]="'var(--text-muted)'">WhatsApp No.</label>
-          <p class="text-lg font-medium" [style.color]="'var(--text)'">
+          <label
+            class="text-sm"
+            [style.color]="'var(--text-muted)'"
+          >WhatsApp No.</label>
+          <p
+            class="text-lg font-medium"
+            [style.color]="'var(--text)'"
+          >
             {{ companyInfo.whatsAppNo }}
           </p>
         </div>
 
         <div class="md:col-span-2">
-          <label class="text-sm" [style.color]="'var(--text-muted)'">Email</label>
-          <p class="text-lg font-medium" [style.color]="'var(--text)'">
+          <label
+            class="text-sm"
+            [style.color]="'var(--text-muted)'"
+          >Email</label>
+          <p
+            class="text-lg font-medium"
+            [style.color]="'var(--text)'"
+          >
             {{ companyInfo.email }}
           </p>
         </div>
 
         <div class="md:col-span-2">
-          <label class="text-sm" [style.color]="'var(--text-muted)'">Address</label>
-          <p class="text-lg font-medium" [style.color]="'var(--text)'">
+          <label
+            class="text-sm"
+            [style.color]="'var(--text-muted)'"
+          >Address</label>
+          <p
+            class="text-lg font-medium"
+            [style.color]="'var(--text)'"
+          >
             {{ companyInfo.address }}
           </p>
         </div>
@@ -175,8 +237,11 @@
       <div class="space-y-4 text-sm">
 
         <!-- Dark Neon Theme -->
-        <div class="flex items-center justify-between cursor-pointer p-3 rounded-xl
-         hover:bg-[var(--hover)] transition-all duration-300 group" (click)="setTheme('dark')">
+        <div
+          class="flex items-center justify-between cursor-pointer p-3 rounded-xl
+         hover:bg-[var(--hover)] transition-all duration-300 group"
+          (click)="setTheme('dark')"
+        >
 
           <div class="flex items-center gap-3">
             <div class="w-6 h-6 rounded-full bg-[#00ffee] shadow-[0_0_10px_#00ffee]"></div>
@@ -185,13 +250,21 @@
             </span>
           </div>
 
-          <input type="radio" name="theme" value="dark" [checked]="currentTheme === 'dark'"
-            class="w-4 h-4 accent-[#00ffee]" />
+          <input
+            type="radio"
+            name="theme"
+            value="dark"
+            [checked]="currentTheme === 'dark'"
+            class="w-4 h-4 accent-[#00ffee]"
+          />
         </div>
 
         <!-- Light Theme -->
-        <div class="flex items-center justify-between cursor-pointer p-3 rounded-xl
-         hover:bg-[var(--hover)] transition-all duration-300 group" (click)="setTheme('light')">
+        <div
+          class="flex items-center justify-between cursor-pointer p-3 rounded-xl
+         hover:bg-[var(--hover)] transition-all duration-300 group"
+          (click)="setTheme('light')"
+        >
 
           <div class="flex items-center gap-3">
             <div class="w-6 h-6 rounded-full bg-white border border-slate-300"></div>
@@ -200,8 +273,13 @@
             </span>
           </div>
 
-          <input type="radio" name="theme" value="light" [checked]="currentTheme === 'light'"
-            class="w-4 h-4 accent-blue-500" />
+          <input
+            type="radio"
+            name="theme"
+            value="light"
+            [checked]="currentTheme === 'light'"
+            class="w-4 h-4 accent-blue-500"
+          />
         </div>
 
       </div>
@@ -222,7 +300,10 @@
       <div class="relative border-l-2 pl-6 space-y-6 max-h-96 overflow-y-auto
               border-[var(--timeline-line)]">
 
-        <div *ngFor="let log of historyList" class="relative pl-10">
+        <div
+          *ngFor="let log of historyList"
+          class="relative pl-10"
+        >
 
           <div class="absolute -left-3 top-0 w-6 h-6 rounded-full 
            bg-[var(--icon-bg)] border border-[var(--icon-border)]
@@ -255,127 +336,189 @@
     <div class="relative rounded-3xl p-6 shadow-lg backdrop-blur-xl 
             bg-[var(--card)] border border-[var(--border)]">
 
-  <!-- Overlay label -->
-  <div class="absolute inset-0 bg-[var(--overlay)] 
+      <!-- Overlay label -->
+      <div class="absolute inset-0 bg-[var(--overlay)] 
               flex items-center justify-center rounded-3xl z-10">
-    <span class="text-[var(--text)] font-bold text-lg uppercase">
-      Coming Soon
-    </span>
-  </div>
+        <span class="text-[var(--text)] font-bold text-lg uppercase">
+          Coming Soon
+        </span>
+      </div>
 
-  <!-- Original content (blurred/disabled behind overlay) -->
-  <h3 class="text-lg font-semibold mb-6 flex items-center gap-2 opacity-40">
-    📜 <span class="text-[var(--heading)]">Activity History</span>
-  </h3>
+      <!-- Original content (blurred/disabled behind overlay) -->
+      <h3 class="text-lg font-semibold mb-6 flex items-center gap-2 opacity-40">
+        📜 <span class="text-[var(--heading)]">Activity History</span>
+      </h3>
 
-  <div class="relative border-l-2 border-[var(--timeline-line)] pl-6 space-y-6 opacity-40">
+      <div class="relative border-l-2 border-[var(--timeline-line)] pl-6 space-y-6 opacity-40">
 
-    <div class="relative pl-10">
-      <div class="absolute -left-3 top-0 w-6 h-6 rounded-full 
+        <div class="relative pl-10">
+          <div class="absolute -left-3 top-0 w-6 h-6 rounded-full 
                   bg-[var(--icon-bg)] border border-[var(--icon-border)]
                   flex items-center justify-center">
-        <span class="text-[var(--icon-color)] text-xs">✅</span>
-      </div>
-      <p class="text-[var(--text)]">Company details updated</p>
-      <span class="text-[var(--text-muted)] text-xs">28 Sep 2025, 10:45 AM</span>
-    </div>
+            <span class="text-[var(--icon-color)] text-xs">✅</span>
+          </div>
+          <p class="text-[var(--text)]">Company details updated</p>
+          <span class="text-[var(--text-muted)] text-xs">28 Sep 2025, 10:45 AM</span>
+        </div>
 
-    <div class="relative pl-10">
-      <div class="absolute -left-3 top-0 w-6 h-6 rounded-full 
+        <div class="relative pl-10">
+          <div class="absolute -left-3 top-0 w-6 h-6 rounded-full 
                   bg-[var(--icon-bg)] border border-[var(--icon-border)]
                   flex items-center justify-center">
-        <span class="text-[var(--icon-color)] text-xs">📄</span>
-      </div>
-      <p class="text-[var(--text)]">New Invoice Prefix added</p>
-      <span class="text-[var(--text-muted)] text-xs">20 Sep 2025, 03:15 PM</span>
-    </div>
+            <span class="text-[var(--icon-color)] text-xs">📄</span>
+          </div>
+          <p class="text-[var(--text)]">New Invoice Prefix added</p>
+          <span class="text-[var(--text-muted)] text-xs">20 Sep 2025, 03:15 PM</span>
+        </div>
 
-    <div class="relative pl-10">
-      <div class="absolute -left-3 top-0 w-6 h-6 rounded-full 
+        <div class="relative pl-10">
+          <div class="absolute -left-3 top-0 w-6 h-6 rounded-full 
                   bg-[var(--icon-bg)] border border-[var(--icon-border)]
                   flex items-center justify-center">
-        <span class="text-[var(--icon-color)] text-xs">📧</span>
-      </div>
-      <p class="text-[var(--text)]">Email changed from <i>support.com</i></p>
-      <span class="text-[var(--text-muted)] text-xs">12 Sep 2025, 06:30 PM</span>
-    </div>
+            <span class="text-[var(--icon-color)] text-xs">📧</span>
+          </div>
+          <p class="text-[var(--text)]">Email changed from <i>support.com</i></p>
+          <span class="text-[var(--text-muted)] text-xs">12 Sep 2025, 06:30 PM</span>
+        </div>
 
-  </div>
-</div>
+      </div>
+    </div>
 
 
   </div>
 
   <!-- Edit Profile Modal -->
-  <div *ngIf="showwditprofile"
-    class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn">
+  <div
+  *ngIf="showwditprofile"
+  class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn"
+>
+  <div
+    class="rounded-2xl shadow-2xl border p-8 relative transform animate-scaleIn"
+    style="
+      background: var(--card-bg);
+      color: var(--card-text);
+      border-color: var(--card-border);
+    "
+  >
 
-    <div class="bg-slate-900 text-white rounded-2xl shadow-2xl border border-slate-700 
-              w-full max-w-3xl p-8 relative transform animate-scaleIn">
+    <!-- Close -->
+    <button
+      (click)="closeEdit()"
+      class="absolute top-4 right-4 text-slate-400 hover:text-white hover:bg-slate-700/40 
+             rounded-full p-2 transition"
+    >
+      <i class="bi bi-x-lg text-xl"></i>
+    </button>
 
-      <!-- Close Button -->
-      <button (click)="closeEdit()" class="absolute top-4 right-4 text-slate-400 hover:text-white hover:bg-slate-700/40 
-                   rounded-full p-2 transition">
-        <i class="bi bi-x-lg text-xl"></i>
-      </button>
+    <!-- Heading -->
+    <h2
+  class="text-2xl font-bold mb-6 pb-3"
+  style="
+    color: var(--heading);
+    border-bottom: 1px solid var(--border);
+  "
+>
+  ✨ Edit Company Profile
+</h2>
 
-      <!-- Title -->
-      <h2 class="text-2xl font-bold mb-6 text-[#00ffee] border-b border-slate-700 pb-3">
-        ✨ Edit Company Profile
-      </h2>
+    <!-- Form -->
+    <form (ngSubmit)="saveProfile()" class="space-y-8 max-h-[75vh] overflow-y-auto pr-2 custom-scroll">
 
-      <!-- Form -->
-      <form (ngSubmit)="saveProfile()" class="space-y-8 max-h-[75vh] overflow-y-auto pr-2 custom-scroll">
-
-        <!-- Company Info -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label class="label-style">🏢 Company Name</label>
-            <input type="text" [(ngModel)]="updatecompany.company_Name" name="companyName" required
-              class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30" />
-          </div>
-
-          <div>
-            <label class="label-style">📞 Contact No.</label>
-            <input type="text" [(ngModel)]="updatecompany.contact_No" name="contactNo"
-              class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30" />
-          </div>
-
-          <div>
-            <label class="label-style">💬 WhatsApp No.</label>
-            <input type="text" [(ngModel)]="updatecompany.whatsApp_No" name="whatsappNo"
-              class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30" />
-          </div>
-
-          <div class="md:col-span-2">
-            <label class="label-style">📧 Email</label>
-            <input type="email" [(ngModel)]="updatecompany.email" name="email" required
-              class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30" />
-          </div>
-
-          <div class="md:col-span-2">
-            <label class="label-style">📍 Address</label>
-            <textarea [(ngModel)]="updatecompany.address" name="address" rows="3"
-              class="input-style focus:border-[#00ffee] focus:ring focus:ring-[#00ffee]/30"></textarea>
-          </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <div>
+          <label class="label-style">🏢 Company Name</label>
+          <input type="text" [(ngModel)]="updatecompany.company_Name" name="companyName"
+            required class="input-style" 
+            style="
+    background: var(--input-bg);
+    color: var(--input-text);
+    border-color: var(--input-border);
+  "/>
         </div>
 
-
-
-        <!-- Buttons -->
-        <div class="flex justify-end space-x-4 pt-4">
-          <button type="button" (click)="closeEdit()" class="px-5 py-2 rounded-lg bg-slate-700/70 text-slate-300 hover:bg-slate-600 
-                       transition shadow-md">
-            Cancel
-          </button>
-          <button (click)="UpdateCompanyInfo()" type="submit" class="px-5 py-2 rounded-lg bg-gradient-to-r from-[#00ffee] to-[#00b7ff] 
-                       text-slate-900 font-semibold hover:scale-[1.03] hover:shadow-lg transition">
-            💾 Save Changes
-          </button>
+        <div>
+          <label class="label-style">📞 Contact No.</label>
+          <input type="text" [(ngModel)]="updatecompany.contact_No" name="contactNo"
+            class="input-style" 
+            style="
+    background: var(--input-bg);
+    color: var(--input-text);
+    border-color: var(--input-border);
+  "/>
         </div>
-      </form>
-    </div>
+
+        <div>
+          <label class="label-style">💬 WhatsApp No.</label>
+          <input type="text" [(ngModel)]="updatecompany.whatsApp_No" name="whatsappNo"
+            class="input-style" 
+            style="
+    background: var(--input-bg);
+    color: var(--input-text);
+    border-color: var(--input-border);
+  "/>
+        </div>
+
+        <div class="md:col-span-2">
+          <label class="label-style">📧 Email</label>
+          <input type="email" [(ngModel)]="updatecompany.email" name="email"
+            required class="input-style" 
+            style="
+    background: var(--input-bg);
+    color: var(--input-text);
+    border-color: var(--input-border);
+  "/>
+        </div>
+
+        <div class="md:col-span-2">
+          <label class="label-style">📍 Address</label>
+          <textarea [(ngModel)]="updatecompany.address" name="address" rows="3"
+            class="input-style"
+            style="
+    background: var(--input-bg);
+    color: var(--input-text);
+    border-color: var(--input-border);
+  "></textarea>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex justify-end space-x-4 pt-4">
+<button
+  type="button"
+  (click)="closeEdit()"
+  class="px-5 py-2 rounded-lg transition shadow-md
+         hover:opacity-90"
+  style="
+    background: var(--hover-bg);
+    color: var(--text-muted);
+  "
+>
+  Cancel
+</button>
+
+
+
+      <button
+  type="submit"
+  (click)="UpdateCompanyInfo()"
+  class="px-5 py-2 rounded-lg font-semibold transition shadow-md
+         hover:scale-[1.03]"
+  style="
+    background: var(--accent-1);
+    color: #000;
+  "
+>
+  💾 Save Changes
+</button>
+
+
+      </div>
+
+    </form>
+
   </div>
+</div>
 
   <!-- Animations & Custom Scroll -->
   <style>
