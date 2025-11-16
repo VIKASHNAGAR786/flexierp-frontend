@@ -60,3 +60,12 @@
   cursor: pointer;
   font-size: 16px;
 }
+
+:root {
+  --overlay: rgba(0,0,0,0.7);
+
+  --text-secondary: #7a7a7a;
+
+  --input-bg: var(--card-bg);
+  --accent-light: rgba(var(--accent-rgb), 0.1);
+}

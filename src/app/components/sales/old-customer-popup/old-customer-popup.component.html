@@ -1,53 +1,91 @@
-<!-- Overlay (blurred background) -->
-<div class="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center z-50 px-2 sm:px-4 pt-32 sm:pt-36">
-
-
+<!-- Overlay -->
+<div
+  class="fixed inset-0 flex justify-center z-50 px-2 sm:px-4 pt-32 sm:pt-36 backdrop-blur-sm"
+  style="background: var(--modal-overlay);"
+>
 
   <!-- Popup Box -->
-  <div class="bg-slate-900 text-white p-6 sm:p-8 rounded-2xl shadow-2xl w-full max-w-sm sm:max-w-2xl lg:max-w-4xl max-h-[85vh] overflow-y-auto relative">
+  <div
+    class="rounded-2xl shadow-2xl w-full max-w-sm sm:max-w-2xl lg:max-w-4xl max-h-[85vh] overflow-y-auto relative p-6 sm:p-8"
+    style="background: var(--card-bg); color: var(--text); border: 1px solid var(--card-border);"
+  >
 
     <!-- Close Button -->
-    <button class="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-white text-xl sm:text-2xl"
-      (click)="closePopup()">
+    <button
+      class="absolute top-3 right-3 sm:top-4 sm:right-4 text-xl sm:text-2xl transition"
+      style="color: var(--text-muted);"
+      (click)="closePopup()"
+    >
       ✕
     </button>
 
     <!-- Title -->
-    <h2 class="text-xl sm:text-2xl font-bold text-[#00ffee] mb-4">Old Customers</h2>
+    <h2
+      class="text-xl sm:text-2xl font-bold mb-4"
+      style="color: var(--heading);"
+    >
+      Old Customers
+    </h2>
 
-    <!-- 🔍 Search Bar -->
+    <!-- Search Bar -->
     <div class="mb-4">
-      <input type="text"
-             [(ngModel)]="searchTerm"
-             placeholder="Search customers..."
-             class="w-full px-3 py-2 sm:px-4 sm:py-2 rounded-lg bg-slate-800 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-[#00ffee]"
-             (input)="loadCustomers()" />
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        placeholder="Search customers..."
+        class="w-full px-3 py-2 sm:px-4 sm:py-2 rounded-lg outline-none"
+        style="
+          background: var(--input-bg);
+          border: 1px solid var(--input-border);
+          color: var(--input-text);
+        "
+        (input)="loadCustomers()"
+      />
     </div>
 
     <!-- Loader -->
     <div *ngIf="isLoading" class="flex justify-center items-center py-8">
-      <div class="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-t-4 border-b-4 border-[#00ffee]"></div>
+      <div
+        class="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-t-4 border-b-4"
+        style="border-color: var(--accent-1);"
+      ></div>
     </div>
 
     <!-- Customer Table -->
-    <div *ngIf="!isLoading" class="overflow-x-auto border border-slate-700 rounded-lg">
-      <table class="w-full min-w-[600px] border-collapse text-white text-sm sm:text-base">
-        <thead class="bg-slate-800 sticky top-0 z-10 text-xs sm:text-sm">
+    <div
+      *ngIf="!isLoading"
+      class="overflow-x-auto rounded-lg"
+      style="border: 1px solid var(--table-border);"
+    >
+      <table
+        class="w-full min-w-[600px] border-collapse text-sm sm:text-base"
+        style="color: var(--text);"
+      >
+        <thead
+          class="sticky top-0 z-10 text-xs sm:text-sm"
+          style="background: var(--table-header-bg); color: var(--table-header-text);"
+        >
           <tr>
-            <th class="p-2 sm:p-4 border border-slate-700">Name</th>
-            <th class="p-2 sm:p-4 border border-slate-700">Mobile No</th>
-            <th class="p-2 sm:p-4 border border-slate-700">Email</th>
-            <th class="p-2 sm:p-4 border border-slate-700">Notes</th>
+            <th class="p-2 sm:p-4" style="border: 1px solid var(--table-border);">Name</th>
+            <th class="p-2 sm:p-4" style="border: 1px solid var(--table-border);">Mobile No</th>
+            <th class="p-2 sm:p-4" style="border: 1px solid var(--table-border);">Email</th>
+            <th class="p-2 sm:p-4" style="border: 1px solid var(--table-border);">Notes</th>
           </tr>
         </thead>
+
         <tbody>
-          <tr *ngFor="let customer of getFilteredCustomers()" 
-              class="hover:bg-slate-700 cursor-pointer transition"
-              (click)="selectCustomer(customer)">
-            <td class="p-2 sm:p-4 border border-slate-700 truncate">{{ customer.customerName }}</td>
-            <td class="p-2 sm:p-4 border border-slate-700 truncate">{{ customer.phoneNo }}</td>
-            <td class="p-2 sm:p-4 border border-slate-700 truncate">{{ customer.email }}</td>
-            <td class="p-2 sm:p-4 border border-slate-700 truncate">{{ customer.remark }}</td>
+          <tr
+            *ngFor="let customer of getFilteredCustomers()"
+            class="cursor-pointer transition"
+            (click)="selectCustomer(customer)"
+            style="border-bottom: 1px solid var(--table-border);"
+            onmouseover="this.style.background='var(--table-row-hover)'"
+            onmouseout="this.style.background='transparent'"
+          >
+            <td class="p-2 sm:p-4 truncate">{{ customer.customerName }}</td>
+            <td class="p-2 sm:p-4 truncate">{{ customer.phoneNo }}</td>
+            <td class="p-2 sm:p-4 truncate">{{ customer.email }}</td>
+            <td class="p-2 sm:p-4 truncate">{{ customer.remark }}</td>
           </tr>
         </tbody>
       </table>
