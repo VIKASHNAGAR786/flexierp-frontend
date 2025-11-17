@@ -1,4 +1,5 @@
 # barcode_service.py
+import math
 from fastapi import FastAPI, HTTPException, Response, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
@@ -6,15 +7,13 @@ import barcode
 from barcode.writer import ImageWriter
 from io import BytesIO
 from reportlab.lib.pagesizes import A4
-from reportlab.pdfgen import canvas
 from PIL import Image
-import datetime
-from reportlab.lib.utils import ImageReader
-from models import GenerateReceiptPDF  # Your Pydantic models
 import os
 import sys
 from io import BytesIO
 from fpdf import FPDF # fpdf2
+import tempfile
+from typing import List, Dict
 
 
 app = FastAPI(
@@ -73,137 +72,176 @@ def generate_barcode_png(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Barcode generation failed: {str(e)}")
 
-@app.post("/generate-receipt")
-async def generate_receipt(data: GenerateReceiptPDF):
-    buffer = BytesIO()
-    pdf = canvas.Canvas(buffer, pagesize=A4)
-    width, height = A4
-
-    # Generate barcode image
-    barcode_class = barcode.get_barcode_class('code128')
-    barcode_img_buffer = BytesIO()
-    ean = barcode_class(data.barcode, writer=ImageWriter())
-    ean.write(barcode_img_buffer)
-    barcode_img_buffer.seek(0)
-    barcode_img = Image.open(barcode_img_buffer)
-    barcode_reader = ImageReader(barcode_img)
-
-    # Company Info
-    pdf.setFont("Helvetica-Bold", 14)
-    pdf.drawString(50, height - 40, "🏢 My Company Pvt. Ltd.")
-    pdf.setFont("Helvetica", 10)
-    pdf.drawString(50, height - 55, "123, Main Street, City, Country")
-    pdf.drawString(50, height - 70, "Phone: +91 1234567890 | Email: info@mycompany.com")
-
-    # Header
-    pdf.setFont("Helvetica-Bold", 16)
-    pdf.drawString(50, height - 100, "🧾 Invoice / Receipt")
-    pdf.setFont("Helvetica", 10)
-    pdf.drawString(50, height - 120, f"Invoice No: {data.barcode}")
-    pdf.drawString(300, height - 120, f"Date: {datetime.datetime.now().strftime('%d-%m-%Y %H:%M')}")
-
-    # Draw Barcode
-    pdf.drawImage(barcode_reader, 400, height - 150, width=150, height=50)
-
-    # Customer Details
-    y = height - 200
-    if data.customer:
-        pdf.setFont("Helvetica-Bold", 12)
-        pdf.drawString(50, y, "Customer Information")
-        pdf.setFont("Helvetica", 10)
-        y -= 20
-        pdf.drawString(60, y, f"Name: {data.customer.customerName}")
-        y -= 15
-        pdf.drawString(60, y, f"Address: {data.customer.customerAddress}")
-        y -= 15
-        pdf.drawString(60, y, f"Phone: {data.customer.phoneNo}")
-        y -= 15
-        pdf.drawString(60, y, f"Email: {data.customer.email}")
-        y -= 15
-        if data.customer.paymentMode is not None:
-            pdf.drawString(60, y, f"Payment Mode: {data.customer.paymentMode}")
-            y -= 15
-        if data.customer.remark:
-            pdf.drawString(60, y, f"Remark: {data.customer.remark}")
-            y -= 15
-
-    # Cart Table
-    y -= 20
-    pdf.setFont("Helvetica-Bold", 11)
-    pdf.drawString(50, y, "Product")
-    pdf.drawString(200, y, "Qty")
-    pdf.drawString(250, y, "Price")
-    pdf.drawString(320, y, "Discount")
-    pdf.drawString(400, y, "Tax")
-    pdf.drawString(470, y, "Total")
-    y -= 10
-    pdf.line(50, y, 550, y)
-
-    # Cart Items
-    pdf.setFont("Helvetica", 10)
-    grand_total = 0
-    for item in data.cart:
-        y -= 20
-        if y < 100:
-            pdf.showPage()
-            y = height - 100
-        pdf.drawString(50, y, item.name)
-        pdf.drawString(200, y, str(item.qty))
-        pdf.drawString(250, y, f"{item.sellingPrice:.2f}")
-        pdf.drawString(320, y, f"{item.discountAmt:.2f}")
-        pdf.drawString(400, y, f"{item.taxAmt:.2f}")
-        pdf.drawString(470, y, f"{item.total:.2f}")
-        grand_total += item.total
-
-    # Grand Total
-    y -= 30
-    pdf.setFont("Helvetica-Bold", 12)
-    pdf.drawString(400, y, "Grand Total:")
-    pdf.drawString(500, y, f"{grand_total:.2f}")
-
-    pdf.showPage()
-    pdf.save()
-    buffer.seek(0)
-
-    return Response(
-        buffer.getvalue(),
-        media_type="application/pdf",
-        headers={"Content-Disposition": f"inline; filename=invoice_{data.barcode}.pdf"}
-    )
-
 @app.post("/barcode/pdf")
-def generate_barcode_pdf(barcodes: list[str]):
+def generate_barcode_pdf(
+    barcode_items: List[Dict],
+    columns: int = Query(2, ge=1, le=6),            # how many columns per row (2 is default)
+    items_per_page: int = Query(8, ge=1),           # maximum barcodes allowed per page
+    show_text: bool = Query(False)                  # whether to show human-readable barcode numbers
+):
+    """
+    barcode_items: list of dicts { "code": "12345", "name": "Item name" }
+    columns: number of columns (e.g. 2 -> produces 2 barcode+name pairs per row)
+    items_per_page: how many barcode items on each PDF page (controls rows)
+    show_text: if True prints barcode number under barcode; if False, hides it
+    """
+
     try:
-        pdf = FPDF()
-        pdf.set_auto_page_break(auto=True, margin=15)
-        pdf.add_page()
-        pdf.set_font("helvetica", size=12)
+        # -- PDF / page settings --
+        pdf = FPDF(orientation="P", unit="mm", format="A4")
+        pdf.set_auto_page_break(auto=False)  # we'll control pages manually
+        pdf.set_font("helvetica", size=10)
 
-        x, y = 10, 10
-        for code in barcodes:
-            ean = barcode.get("code128", code, writer=ImageWriter())
-            ean.writer.set_options({
-                "font_path": font_path,   # 👈 ensures font exists even in .exe
-                "font_size": 10,
-                "text_distance": 1.0,
+        margin = 10  # left/right/top margin
+        page_w = pdf.w
+        page_h = pdf.h
+        usable_w = page_w - 2 * margin
+        usable_h = page_h - 2 * margin
+
+        # Repeatable header height (space used for header row)
+        header_h = 10
+
+        # Layout derived from columns and items_per_page
+        cols = max(1, int(columns))
+        ipp = max(1, int(items_per_page))
+        rows_per_page = math.ceil(ipp / cols)
+
+        # cell width and row height
+        cell_w = usable_w / cols
+        # leave small vertical gap between rows => compute row height to fit rows_per_page
+        vert_gap = 4
+        cell_h = (usable_h - header_h - (rows_per_page - 1) * vert_gap) / rows_per_page
+
+        # inner paddings inside each cell (so barcode doesn't touch border)
+        pad_x = 6
+        pad_y = 6
+
+        def draw_page_header(y0):
+            pdf.set_xy(margin, y0)
+            pdf.set_font("helvetica", size=11, style="B")
+            # create simple header with repeated columns: Barcode | Name ...
+            # we will make each cell half cell for barcode & name visualization
+            half_w = cell_w / 2
+            for c in range(cols):
+                pdf.cell(half_w, header_h, "Barcode", border=1, ln=0, align="C")
+                pdf.cell(half_w, header_h, "Name", border=1, ln=0, align="C")
+            pdf.ln()
+            return y0 + header_h
+
+        # helper to generate barcode image bytes (PIL image) and return temp path
+        def make_barcode_image(code_value: str, write_text: bool):
+            # Using code128 (change as needed). The writer returns PNG bytes.
+            ean = barcode.get("code128", code_value, writer=ImageWriter())
+            buf = BytesIO()
+            ean.write(buf, {
+                "write_text": write_text,
+                "module_width": 0.21,
+                "module_height": 12,
+                "quiet_zone": 1,
+                # font_path / font_size can be provided if needed
             })
+            buf.seek(0)
+            img = Image.open(buf).convert("RGB")
+            # Save to a temp file so fpdf.image can read it
+            tmp = tempfile.NamedTemporaryFile(suffix=".png", delete=False)
+            img.save(tmp, format="PNG")
+            tmp.flush()
+            tmp.close()
+            return tmp.name, img.size  # return path and (w,h)
 
-            buffer = BytesIO()
-            ean.write(buffer)
-            buffer.seek(0)
-
-            img = Image.open(buffer)
-            temp_img = BytesIO()
-            img.save(temp_img, format="PNG")
-            temp_img.seek(0)
-
-            pdf.image(temp_img, x=x, y=y, w=50, h=20)
-
-            y += 30
-            if y > 250:
-                y = 10
+        # iterate items and place them page by page
+        tmp_files_to_cleanup = []
+        try:
+            total = len(barcode_items)
+            if total == 0:
+                # Return empty pdf
+                output = BytesIO()
                 pdf.add_page()
+                pdf.output(output)
+                output.seek(0)
+                return StreamingResponse(output, media_type="application/pdf")
 
+            # We'll iterate items and create pages when needed
+            index = 0
+            while index < total:
+                pdf.add_page()
+                y_cursor = margin
+                # draw header row
+                y_cursor = draw_page_header(y_cursor)
+
+                # for each page draw up to ipp items
+                page_end = min(index + ipp, total)
+                page_slice = barcode_items[index:page_end]
+
+                for i_on_page, item in enumerate(page_slice):
+                    code = str(item.get("code", "") or "")
+                    name = str(item.get("name", "Unnamed"))
+
+                    # compute row and column on current page
+                    page_pos = i_on_page
+                    row = page_pos // cols
+                    col = page_pos % cols
+
+                    # top-left of the cell
+                    x_cell = margin + col * cell_w
+                    y_cell = y_cursor + row * (cell_h + vert_gap)
+
+                    # cell split: left half is barcode, right half is name (as earlier)
+                    left_w = cell_w / 2
+                    right_w = cell_w / 2
+
+                    # draw cell borders for both halves (so table looks consistent)
+                    pdf.set_xy(x_cell, y_cell)
+                    pdf.cell(left_w, cell_h, border=1, ln=0)
+                    pdf.set_xy(x_cell + left_w, y_cell)
+                    pdf.cell(right_w, cell_h, border=1, ln=0)
+
+                    # create barcode image file
+                    tmp_path, (img_w_px, img_h_px) = make_barcode_image(code, write_text=show_text)
+                    tmp_files_to_cleanup.append(tmp_path)
+
+                    # Now compute desired image size in mm to fit inside left half with padding
+                    # FPDF uses mm. Assume image DPI 96 if needed; better approach: keep aspect ratio using pixel ratio,
+                    # we don't need DPI because FPDF scales by the width/height in mm relative to page.
+                    max_img_w = left_w - 2 * pad_x
+                    max_img_h = cell_h - 2 * pad_y
+
+                    # compute image aspect ratio from PIL pixels
+                    aspect = img_h_px / img_w_px if img_w_px else 1.0
+
+                    # attempt to fit width first
+                    disp_w = max_img_w
+                    disp_h = disp_w * aspect
+                    if disp_h > max_img_h:
+                        # too tall => fit by height
+                        disp_h = max_img_h
+                        disp_w = disp_h / aspect
+
+                    # center image inside left half
+                    img_x_mm = x_cell + (left_w - disp_w) / 2
+                    img_y_mm = y_cell + (cell_h - disp_h) / 2
+
+                    # insert image
+                    pdf.image(tmp_path, x=img_x_mm, y=img_y_mm, w=disp_w, h=disp_h)
+
+                    # draw name centered in right half (auto-wrap if needed)
+                    pdf.set_xy(x_cell + left_w, y_cell + (cell_h / 2) - 3)
+                    pdf.set_font("helvetica", size=10)
+                    pdf.multi_cell(right_w, 6, txt=name, border=0, align="C")
+                    # continue to next item
+
+                # move to next page
+                index = page_end
+
+        finally:
+            # cleanup temp files
+            for f in tmp_files_to_cleanup:
+                try:
+                    os.unlink(f)
+                except Exception:
+                    pass
+
+        # return PDF
         output = BytesIO()
         pdf.output(output)
         output.seek(0)
@@ -211,5 +249,3 @@ def generate_barcode_pdf(barcodes: list[str]):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-
-

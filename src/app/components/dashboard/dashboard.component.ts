@@ -33,7 +33,17 @@ export class DashboardComponent implements OnInit {
 
   /** Called whenever user changes the dropdown */
   onDateRangeChange() {
-    this.setDateRange(+this.selectedRange);
+     if (this.selectedRange === 'today') {
+    this.setToday();
+  } 
+  else if (this.selectedRange === 'yesterday') {
+    this.setYesterday();
+  } 
+  else {
+    // convert string to number
+    const days = Number(this.selectedRange);
+    this.setDateRange(days);
+  }
     this.loaddashboarddata();
   }
 
@@ -49,6 +59,23 @@ export class DashboardComponent implements OnInit {
     this.endDate = end.toISOString().split('T')[0];
   }
 
+  setToday() {
+  const today = new Date();
+  const formatted = today.toISOString().split('T')[0];
+
+  this.startDate = formatted;
+  this.endDate = formatted;
+}
+
+setYesterday() {
+  const today = new Date();
+  const yesterday = new Date();
+
+  yesterday.setDate(today.getDate() - 1);
+
+  this.startDate = yesterday.toISOString().split('T')[0];
+  this.endDate = yesterday.toISOString().split('T')[0];
+}
   /** Calls your API */
   loaddashboarddata() {
     this.commonservice.GetDashboardMetricsAsync(this.startDate, this.endDate).subscribe({

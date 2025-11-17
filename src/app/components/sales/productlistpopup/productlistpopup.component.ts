@@ -94,33 +94,33 @@ export class ProductlistpopupComponent implements OnInit {
   }
 
   // 🔹 Selection
-  toggleAll(event: any) {
-    const checked = event.target.checked;
-    this.selectedBarcodes = checked ? this.products.map(p => p.barCode) : [];
-  }
+  // toggleAll(event: any) {
+  //   const checked = event.target.checked;
+  //   this.selectedBarcodes = checked ? this.products.map(p => p.barCode) : [];
+  // }
 
-  toggleSelection(event: any) {
-    const value = event.target.value;
-    if (event.target.checked) {
-      this.selectedBarcodes.push(value);
-    } else {
-      this.selectedBarcodes = this.selectedBarcodes.filter(b => b !== value);
-    }
-  }
+  // toggleSelection(event: any) {
+  //   const value = event.target.value;
+  //   if (event.target.checked) {
+  //     this.selectedBarcodes.push(value);
+  //   } else {
+  //     this.selectedBarcodes = this.selectedBarcodes.filter(b => b !== value);
+  //   }
+  // }
 
-  generateBarcodePDF() {
-    if (!this.selectedBarcodes.length) return;
+  // generateBarcodePDF() {
+  //   if (!this.selectedBarcodes.length) return;
 
-    this.barcodeService.generateBarcodePDF(this.selectedBarcodes).subscribe({
-      next: (blob) => {
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'barcodes.pdf';
-        link.click();
-      },
-      error: (err) => console.error('Error generating PDF', err)
-    });
-  }
+  //   this.barcodeService.generateBarcodePDF(this.selectedBarcodes).subscribe({
+  //     next: (blob) => {
+  //       const url = window.URL.createObjectURL(blob);
+  //       const link = document.createElement('a');
+  //       link.href = url;
+  //       link.download = 'barcodes.pdf';
+  //       link.click();
+  //     },
+  //     error: (err) => console.error('Error generating PDF', err)
+  //   });
+  // }
 
 }

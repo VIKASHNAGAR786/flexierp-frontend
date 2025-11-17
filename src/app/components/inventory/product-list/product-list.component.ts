@@ -15,10 +15,11 @@ import { TooltipDirective } from '../../../shared/tooltip.directive';
   templateUrl: './product-list.component.html'
 })
 export class ProductListComponent implements OnInit {
-   @ViewChild('productTable', { static: false }) productTable!: ElementRef;
+  @ViewChild('productTable', { static: false }) productTable!: ElementRef;
   @ViewChildren('tooltipTarget') tooltipTargets!: QueryList<ElementRef>;
   @Input() products: ProductDTO[] = [];
-  selectedBarcodes: string[] = [];
+selectedBarcodes: { code: string; name: string }[] = [];
+
   barcode: string | null = null;
   barcodeText: string = '';
   totalRecords: number = 0;
@@ -33,7 +34,7 @@ export class ProductListComponent implements OnInit {
     private inventoryService: InventoryService,
     private ngZone: NgZone,
     private cdr: ChangeDetectorRef,
-    private alertservice:AlertService
+    private alertservice: AlertService
 
   ) {
     const now = new Date();
@@ -63,7 +64,7 @@ export class ProductListComponent implements OnInit {
         if (data) {
           this.products = data;
           this.totalRecords = data.length > 0 ? data[0].totalRecords : 0;
-         this.cdr.detectChanges(); // force Angular to render table rows
+          this.cdr.detectChanges(); // force Angular to render table rows
         }
       },
       error: (err) => console.error(err)
@@ -105,9 +106,9 @@ export class ProductListComponent implements OnInit {
     this.reportIsLoading = true;
     this.inventoryService.getProductReportExcel(this.filter).subscribe(blob => {
       this.reportIsLoading = false;
-      if (blob){
-         this.inventoryService.downloadFile(blob, 'ProductReport.xlsx');
-         this.alertservice.showAlert("File Downloaded Successfully Inside Download Folder", 'success');
+      if (blob) {
+        this.inventoryService.downloadFile(blob, 'ProductReport.xlsx');
+        this.alertservice.showAlert("File Downloaded Successfully Inside Download Folder", 'success');
       }
     });
   }
@@ -130,32 +131,57 @@ export class ProductListComponent implements OnInit {
 
   // 🔹 Selection
   toggleAll(event: any) {
-    const checked = event.target.checked;
-    this.selectedBarcodes = checked ? this.products.map(p => p.barCode) : [];
-  }
+  const checked = event.target.checked;
+  this.selectedBarcodes = checked
+    ? this.products.map(p => ({ code: p.barCode, name: p.productName }))
+    : [];
+}
 
-  toggleSelection(event: any) {
-    const value = event.target.value;
-    if (event.target.checked) {
-      this.selectedBarcodes.push(value);
-    } else {
-      this.selectedBarcodes = this.selectedBarcodes.filter(b => b !== value);
-    }
+toggleSelection(event: any) {
+  const product = event.target.value;
+  const item = { code: product.barCode, name: product.name };
+
+  if (event.target.checked) {
+    this.selectedBarcodes.push(item);
+  } else {
+    this.selectedBarcodes = this.selectedBarcodes.filter(
+      b => b.code !== item.code
+    );
   }
+}
+
 
   generateBarcodePDF() {
-    if (!this.selectedBarcodes.length) return;
+  if (!this.selectedBarcodes.length) return;
 
+  try {
     this.barcodeService.generateBarcodePDF(this.selectedBarcodes).subscribe({
       next: (blob) => {
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = 'barcodes.pdf';
+
+        const now = new Date();
+        const options: Intl.DateTimeFormatOptions = {
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: true,
+        };
+        const timeString = now.toLocaleTimeString('en-US', options).toLowerCase();
+        const dateString = now.toISOString().split('T')[0];
+
+        link.download = `barcodes_${dateString}_${timeString}.pdf`;
         link.click();
+
+        this.alertservice.showAlert('PDF generated successfully in Download Folder ✅', 'success');
       },
-      error: (err) => console.error('Error generating PDF', err)
+      error: (err) => {
+        console.error('Error generating PDF ❌', err);
+      }
     });
+  } catch (error) {
+    console.error('Unexpected error in generateBarcodePDF:', error);
   }
+}
 
 }

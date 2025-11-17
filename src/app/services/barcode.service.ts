@@ -16,9 +16,9 @@ private apiUrl = 'http://127.0.0.1:5001';  // Python exe service
   return this.http.get(url, { responseType: 'blob' }); // Get the PNG as a Blob
 }
 
- generateBarcodePDF(barcodes: string[]): Observable<Blob> {
-    return this.http.post(`${this.apiUrl}/barcode/pdf`, barcodes, { responseType: 'blob' });
-  }
+generateBarcodePDF(barcodeItems: { code: string; name: string }[]): Observable<Blob> {
+  return this.http.post(`${this.apiUrl}/barcode/pdf`, barcodeItems, { responseType: 'blob' });
+}
 
    generateReceiptPDF(data: generateReceiptpdf): Observable<Blob> {
     return this.http.post(`${this.apiUrl}/generate-receipt`, data, { responseType: 'blob' });

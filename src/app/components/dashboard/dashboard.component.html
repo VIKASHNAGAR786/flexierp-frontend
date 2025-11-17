@@ -1,16 +1,24 @@
 <!-- dashboard.component.html -->
-<div class="min-h-screen font-sans p-6"
-     [ngStyle]="{
+<div
+  class="min-h-screen font-sans p-6"
+  [ngStyle]="{
       'background': 'linear-gradient(to bottom, var(--bg-start), var(--bg-mid), var(--bg-end))',
       'color': 'var(--text)'
-     }">
+     }"
+>
 
   <!-- Header -->
   <div class="mb-6">
-    <h1 class="text-3xl font-bold" [style.color]="'var(--heading)'">
+    <h1
+      class="text-3xl font-bold"
+      [style.color]="'var(--heading)'"
+    >
       Finance Dashboard
     </h1>
-    <p class="text-sm" [style.color]="'var(--text-muted)'">
+    <p
+      class="text-sm"
+      [style.color]="'var(--text-muted)'"
+    >
       Overview of your cash & cheque transactions
     </p>
   </div>
@@ -18,20 +26,32 @@
   <!-- Filters -->
   <div class="flex flex-wrap gap-4 mb-6">
     <div>
-      <label class="block mb-1" [style.color]="'var(--text-muted)'">Date Range</label>
-      <select class="rounded px-3 py-2"
-              [ngStyle]="{
-                'background': 'var(--card)',
-                'border': '1px solid var(--border)',
-                'color': 'var(--text)'
-              }"
-              [(ngModel)]="selectedRange"
-              (change)="onDateRangeChange()">
+      <label
+        class="block mb-1"
+        [style.color]="'var(--text-muted)'"
+      >Date Range</label>
+
+      <select
+        class="rounded px-3 py-2"
+        [ngStyle]="{
+            'background': 'var(--card)',
+            'border': '1px solid var(--border)',
+            'color': 'var(--text)'
+          }"
+        [(ngModel)]="selectedRange"
+        (change)="onDateRangeChange()"
+      >
+
+        <option value="today">Today</option>
+        <option value="yesterday">Yesterday</option>
+
         <option value="7">Last 7 Days</option>
         <option value="30">Last Month</option>
         <option value="365">Last Year</option>
+
       </select>
     </div>
+
 
     <button
       (click)="exportToPdf()"
@@ -39,7 +59,8 @@
       [ngStyle]="{
         'background':'var(--banner-start)',
         'color':'var(--text)'
-      }">
+      }"
+    >
       Export PDF
     </button>
 
@@ -49,7 +70,8 @@
       [ngStyle]="{
         'background':'var(--banner-end)',
         'color':'var(--text)'
-      }">
+      }"
+    >
       Export Excel
     </button>
   </div>
@@ -58,53 +80,75 @@
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
     <!-- CASH CARD -->
-    <div class="rounded-xl p-4 shadow-lg transition"
-         [ngStyle]="{
+    <div
+      class="rounded-xl p-4 shadow-lg transition"
+      [ngStyle]="{
            'background':'var(--card)',
            'border':'1px solid var(--border)'
-         }">
-      <p class="uppercase text-sm" [style.color]="'var(--text-muted)'">
+         }"
+    >
+      <p
+        class="uppercase text-sm"
+        [style.color]="'var(--text-muted)'"
+      >
         Total Cash Received
       </p>
-      <h2 class="text-2xl font-bold" [style.color]="'var(--heading)'">
+      <h2
+        class="text-2xl font-bold"
+        [style.color]="'var(--heading)'"
+      >
         ₹ {{ dashboarddata.totalCashReceived }}
       </h2>
 
-      <p class="text-sm mt-1"
-         [ngClass]="dashboarddata.cashGrowthPercent < 0
+      <p
+        class="text-sm mt-1"
+        [ngClass]="dashboarddata.cashGrowthPercent < 0
               ? 'text-red-400'
-              : 'text-green-400'">
+              : 'text-green-400'"
+      >
         ₹ {{ dashboarddata.cashGrowthPercent }} From Last Month
       </p>
     </div>
 
     <!-- CHEQUE CARD -->
-    <div class="rounded-xl p-4 shadow-lg transition"
-         [ngStyle]="{
+    <div
+      class="rounded-xl p-4 shadow-lg transition"
+      [ngStyle]="{
            'background':'var(--card)',
            'border':'1px solid var(--border)'
-         }">
-      <p class="uppercase text-sm" [style.color]="'var(--text-muted)'">
+         }"
+    >
+      <p
+        class="uppercase text-sm"
+        [style.color]="'var(--text-muted)'"
+      >
         Total Cheque Received
       </p>
       <h2 class="text-2xl font-bold text-purple-400">
         ₹ {{ dashboarddata.totalChequeReceived }}
       </h2>
-      <p class="text-sm mt-1"
-         [ngClass]="dashboarddata.chequeGrowthPercent < 0
+      <p
+        class="text-sm mt-1"
+        [ngClass]="dashboarddata.chequeGrowthPercent < 0
               ? 'text-red-400'
-              : 'text-green-400'">
+              : 'text-green-400'"
+      >
         ₹ {{ dashboarddata.chequeGrowthPercent }} From Last Month
       </p>
     </div>
 
     <!-- BALANCE DUE -->
-    <div class="rounded-xl p-4 shadow-lg transition"
-         [ngStyle]="{
+    <div
+      class="rounded-xl p-4 shadow-lg transition"
+      [ngStyle]="{
            'background':'var(--card)',
            'border':'1px solid var(--border)'
-         }">
-      <p class="uppercase text-sm" [style.color]="'var(--text-muted)'">
+         }"
+    >
+      <p
+        class="uppercase text-sm"
+        [style.color]="'var(--text-muted)'"
+      >
         Total Balance Due
       </p>
       <h2 class="text-2xl font-bold text-yellow-400">
@@ -113,12 +157,17 @@
     </div>
 
     <!-- TRENDS CARD -->
-    <div class="rounded-xl p-4 shadow-lg transition"
-         [ngStyle]="{
+    <div
+      class="rounded-xl p-4 shadow-lg transition"
+      [ngStyle]="{
            'background':'var(--card)',
            'border':'1px solid var(--border)'
-         }">
-      <p class="uppercase text-sm" [style.color]="'var(--text-muted)'">
+         }"
+    >
+      <p
+        class="uppercase text-sm"
+        [style.color]="'var(--text-muted)'"
+      >
         Trends & Growth
       </p>
       <h2 class="text-2xl font-bold text-pink-400">
@@ -129,15 +178,23 @@
   </div>
 
   <!-- TABLE -->
-  <div class="mt-8 rounded-xl p-4 shadow-lg"
-       [ngStyle]="{
+  <div
+    class="mt-8 rounded-xl p-4 shadow-lg"
+    [ngStyle]="{
          'background':'var(--card)',
          'border':'1px solid var(--border)'
-       }">
+       }"
+  >
     <div class="flex items-center justify-between mb-4">
-      <h3 class="text-xl font-semibold" [style.color]="'var(--heading)'">
+      <h3
+        class="text-xl font-semibold"
+        [style.color]="'var(--heading)'"
+      >
         Recent Transactions
-        <span class="text-sm ml-2" [style.color]="'var(--text-muted)'">
+        <span
+          class="text-sm ml-2"
+          [style.color]="'var(--text-muted)'"
+        >
           (Last 50 Records)
         </span>
       </h3>
@@ -159,12 +216,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let transaction of dashboarddata.recenttransaction"
-            class="transition"
-            [ngStyle]="{
+        <tr
+          *ngFor="let transaction of dashboarddata.recenttransaction"
+          class="transition"
+          [ngStyle]="{
               'border-bottom':'1px solid var(--border)'
             }"
-            [ngClass]="'hover:bg-[var(--hover-bg)]'">
+          [ngClass]="'hover:bg-[var(--hover-bg)]'"
+        >
 
           <td class="py-2 px-4">{{ transaction.date }}</td>
           <td class="py-2 px-4">{{ transaction.customerName }}</td>
@@ -172,11 +231,13 @@
           <td class="py-2 px-4">₹ {{ transaction.balanceDue | number:'1.0-2' }}</td>
           <td class="py-2 px-4">₹ {{ transaction.totalAmount | number:'1.0-2' }}</td>
 
-          <td class="py-2 px-4"
-              [ngClass]="{
+          <td
+            class="py-2 px-4"
+            [ngClass]="{
                 'text-green-500 font-bold border-l-4 border-green-500': transaction.paymentType === 'Cash',
                 'text-blue-500 font-bold border-l-4 border-blue-500': transaction.paymentType === 'Cheque'
-              }">
+              }"
+          >
             {{ transaction.paymentType }}
           </td>
 
@@ -191,7 +252,10 @@
 <!-- loader -->
 
 <!-- for the big loader -->
-<div *ngIf="reportIsLoading" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+<div
+  *ngIf="reportIsLoading"
+  class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
+>
   <div class="text-center space-y-4">
 
     <!-- Animated FLEXIERP text -->
