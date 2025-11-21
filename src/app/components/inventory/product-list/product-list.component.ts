@@ -11,7 +11,7 @@ import { TooltipDirective } from '../../../shared/tooltip.directive';
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, TooltipDirective],
+  imports: [CommonModule, FormsModule],
   templateUrl: './product-list.component.html'
 })
 export class ProductListComponent implements OnInit {

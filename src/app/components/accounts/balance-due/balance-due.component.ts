@@ -6,10 +6,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TooltipDirective } from '../../../shared/tooltip.directive';
 import { SaveChequePaymentDto, SettleBalance } from '../../../MODEL/MODEL';
 import { AlertService } from '../../../services/alert.service';
+import { ChequePopupComponent } from "../../../shared/cheque-popup/cheque-popup.component";
 
 @Component({
   selector: 'app-balance-due',
-  imports: [CommonModule, FormsModule, TooltipDirective, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, TooltipDirective, ReactiveFormsModule, ChequePopupComponent],
   templateUrl: './balance-due.component.html',
   styleUrl: './balance-due.component.css'
 })
@@ -181,16 +182,22 @@ export class BalanceDueComponent implements OnInit {
     };
   }
 
-  saveCheque() {
-    console.log('Cheque Details:', this.cheque);
-    this.showChequePopup = false;
-    this.settleBalance.chequepayment = this.cheque;
-    this.settleBalance.settledamount = this.cheque.amount;
-    this.settleBalance.remainingamount = this.totalamountforseleceddue - this.cheque.amount;
-    if (this.cheque.amount <= 0) {
-      this.alertservice.showAlert("⚠️ Invalid cheque amount.", "error");
-      this.settleBalance.paymode = 1;
-    }
+  saveCheque(event: SaveChequePaymentDto) {
+  this.cheque = event;   // <--- received from popup
+  console.log("Cheque Details FROM POPUP:", this.cheque);
 
+  this.showChequePopup = false;
+  this.settleBalance.chequepayment = this.cheque;
+
+  this.settleBalance.settledamount = this.cheque.amount;
+  this.settleBalance.remainingamount =
+    this.totalamountforseleceddue - this.cheque.amount;
+
+  if (this.cheque.amount <= 0) {
+    this.alertservice.showAlert("⚠️ Invalid cheque amount.", "error");
+    this.settleBalance.paymode = 1;
   }
+}
+
+
 }

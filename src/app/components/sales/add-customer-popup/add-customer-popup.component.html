@@ -1,0 +1,108 @@
+<div *ngIf="isOpen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+
+  <div class="bg-slate-800 text-white p-6 rounded-lg w-[350px] md:w-[420px] shadow-xl">
+
+    <h2 class="text-xl font-bold mb-4 text-center">Add Customer</h2>
+
+    <div class="space-y-4">
+
+      <!-- Customer Name -->
+      <div class="flex flex-col">
+        <label class="mb-1 font-bold uppercase text-sm" style="color: var(--heading);">
+          Customer Name <span class="text-red-500">*</span>
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="customer.customerName"
+          name="customerName"
+          required minlength="3"
+          #customerName="ngModel"
+          placeholder="Enter Customer Name"
+          class="p-2 rounded-lg outline-none"
+          style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+        />
+
+        <span *ngIf="customerName.invalid && customerName.touched" class="text-red-500 text-xs">
+          Name is required (min 3 chars).
+        </span>
+      </div>
+
+      <!-- Customer Email -->
+      <div class="flex flex-col">
+        <label class="mb-1 font-bold uppercase text-sm" style="color: var(--heading);">
+          Email <span class="text-red-500">*</span>
+        </label>
+
+        <input
+          type="email"
+          [(ngModel)]="customer.email"
+          name="email"
+          required email
+          #email="ngModel"
+          placeholder="Enter Email"
+          class="p-2 rounded-lg outline-none"
+          style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+        />
+
+        <span *ngIf="email.invalid && email.touched" class="text-red-500 text-xs">
+          Valid email is required.
+        </span>
+      </div>
+
+      <!-- Phone -->
+      <div class="flex flex-col">
+        <label class="mb-1 font-bold uppercase text-sm" style="color: var(--heading);">
+          Phone <span class="text-red-500">*</span>
+        </label>
+
+        <input
+          type="tel"
+          [(ngModel)]="customer.phoneNo"
+          name="phoneNo"
+          required
+          maxlength="10"
+          pattern="^[0-9]{10}$"
+          #phoneNo="ngModel"
+          placeholder="Enter Phone Number"
+          class="p-2 rounded-lg outline-none"
+          style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+        />
+
+        <span *ngIf="phoneNo.invalid && phoneNo.touched" class="text-red-500 text-xs">
+          Enter a valid 10-digit phone number.
+        </span>
+      </div>
+
+      <!-- Address -->
+      <div class="flex flex-col">
+        <label class="mb-1 font-bold uppercase text-sm" style="color: var(--heading);">
+          Address <span class="text-red-500">*</span>
+        </label>
+
+        <textarea
+          [(ngModel)]="customer.customerAddress"
+          name="customerAddress"
+          required
+          rows="2"
+          #customerAddress="ngModel"
+          placeholder="Enter Address"
+          class="p-2 rounded-lg outline-none resize-none"
+          style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+        ></textarea>
+
+        <span *ngIf="customerAddress.invalid && customerAddress.touched" class="text-red-500 text-xs">
+          Address is required.
+        </span>
+      </div>
+
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex justify-between mt-6">
+      <button (click)="onClose()" class="px-4 py-2 bg-gray-600 rounded-lg hover:bg-gray-700">Cancel</button>
+      <button (click)="onSave()" class="px-4 py-2 bg-green-600 rounded-lg hover:bg-green-700">Save</button>
+    </div>
+
+  </div>
+</div>

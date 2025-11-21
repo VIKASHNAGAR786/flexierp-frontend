@@ -16,6 +16,8 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TooltipDirective } from '../../../shared/tooltip.directive';
+import { ChequePopupComponent } from "../../../shared/cheque-popup/cheque-popup.component";
+import { AddCustomerPopupComponent } from "../add-customer-popup/add-customer-popup.component";
 
 @Component({
   selector: 'app-add-sale',
@@ -23,11 +25,13 @@ import { TooltipDirective } from '../../../shared/tooltip.directive';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,   // ✅ Add this line
+    ReactiveFormsModule, // ✅ Add this line
     ScanBarcodeComponent,
     OldCustomerPopupComponent,
-    TooltipDirective
-  ],
+    TooltipDirective,
+    ChequePopupComponent,
+    AddCustomerPopupComponent
+],
   templateUrl: './add-sale.component.html',
   styleUrls: ['./add-sale.component.css']
 })
@@ -214,6 +218,15 @@ export class AddSaleComponent {
     this.showOldCustomer = true;
   }
 
+  isAddcustomerPopupOpen = false;
+  openAddCustomerPopup() {
+    this.isAddcustomerPopupOpen = true;
+  }
+  saveCustomer(event: any) {
+    this.customer = event;
+    this.isAddcustomerPopupOpen = false;
+  }
+   
   onCustomerSelected(customer: any) {
     this.customer = customer;
     this.customer.paymentMode = "";
@@ -302,7 +315,8 @@ export class AddSaleComponent {
     }
   }
 
-  saveCheque() {
+  saveCheque(event: SaveChequePaymentDto) {
+    this.cheque = event;   // <--- received from popup
     console.log('Cheque Details:', this.cheque);
     this.showChequePopup = false;
     this.customer.chequepayment = this.cheque;

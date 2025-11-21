@@ -1,0 +1,126 @@
+<div
+    *ngIf="show"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
+>
+    <div class="bg-[var(--card-bg)] text-[var(--text)] rounded-2xl shadow-2xl w-full 
+        max-w-lg p-6 relative border border-[var(--border)] max-h-[90vh] overflow-y-auto">
+
+        <!-- Close Button -->
+        <button
+            (click)="closePopup()"
+            class="absolute top-3 right-3 text-[var(--text)] hover:text-[var(--danger)]
+             text-2xl font-bold"
+        >
+            ✕
+        </button>
+
+        <!-- Title -->
+        <h2 class="text-2xl font-bold mb-4 text-[var(--accent)]
+              text-center uppercase tracking-wide">
+            Enter Cheque Details
+        </h2>
+
+        <form
+            #chequeForm="ngForm"
+            class="grid grid-cols-1 md:grid-cols-2 gap-4"
+        >
+
+            <div class="flex flex-col">
+                <label class="label-style">Cheque Number *</label>
+                <input
+                    type="text"
+                    [(ngModel)]="cheque.chequeNumber"
+                    name="chequeNumber"
+                                        class="w-full bg-[var(--input-bg)] border border-[var(--border)] text-[var(--text)] rounded-md p-2 focus:ring-2 focus:ring-[var(--accent)]"
+
+                    required
+                >
+            </div>
+
+            <div class="flex flex-col">
+                <label class="label-style">Bank Name *</label>
+                <input
+                    type="text"
+                    [(ngModel)]="cheque.bankName"
+                    name="bankName"
+                                        class="w-full bg-[var(--input-bg)] border border-[var(--border)] text-[var(--text)] rounded-md p-2 focus:ring-2 focus:ring-[var(--accent)]"
+
+                    required
+                >
+            </div>
+
+            <div class="flex flex-col">
+                <label class="label-style">Branch Name *</label>
+                <input
+                    type="text"
+                    [(ngModel)]="cheque.branchName"
+                    name="branchName"
+                                        class="w-full bg-[var(--input-bg)] border border-[var(--border)] text-[var(--text)] rounded-md p-2 focus:ring-2 focus:ring-[var(--accent)]"
+
+                    required
+                >
+            </div>
+
+            <div class="flex flex-col">
+                <label class="label-style">IFSC Code *</label>
+                <input
+                    type="text"
+                    [(ngModel)]="cheque.ifsc_Code"
+                    name="ifsc_Code"
+                                        class="w-full bg-[var(--input-bg)] border border-[var(--border)] text-[var(--text)] rounded-md p-2 focus:ring-2 focus:ring-[var(--accent)]"
+
+                    required
+                >
+            </div>
+
+            <div class="flex flex-col">
+                <label class="label-style">Cheque Date *</label>
+                <input
+                    type="date"
+                    [(ngModel)]="cheque.chequeDate"
+                    name="chequeDate"
+                                        class="w-full bg-[var(--input-bg)] border border-[var(--border)] text-[var(--text)] rounded-md p-2 focus:ring-2 focus:ring-[var(--accent)]"
+
+                    required
+                >
+            </div>
+
+            <div class="flex flex-col">
+                <label class="label-style">Amount *</label>
+                <input
+                    type="number"
+                    [(ngModel)]="cheque.amount"
+                    name="amount"
+                                        class="w-full bg-[var(--input-bg)] border border-[var(--border)] text-[var(--text)] rounded-md p-2 focus:ring-2 focus:ring-[var(--accent)]"
+
+                    required
+                >
+            </div>
+
+            <div class="col-span-2 flex justify-end mt-4 gap-2">
+                <button
+                    type="button"
+                    class="btn-secondary"
+                    (click)="closePopup()"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="button"
+                    class="btn-primary"
+                    [disabled]="!chequeForm.form.valid"
+                    (click)="saveCheque()"
+                >
+                    Save
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+
+
+    
