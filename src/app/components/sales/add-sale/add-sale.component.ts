@@ -224,6 +224,11 @@ export class AddSaleComponent {
   }
   saveCustomer(event: any) {
     this.customer = event;
+    this.saledata.customerID = null;
+    this.customer.paymentMode = "";
+    this.customer.totalAmt = this.grandTotal;
+    this.customer.paidAmt = this.grandTotal;
+    this.customer.balanceDue = 0;
     this.isAddcustomerPopupOpen = false;
   }
    

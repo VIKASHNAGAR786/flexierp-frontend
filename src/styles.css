@@ -350,6 +350,8 @@ html.light-theme {
   --input-text: #0f172a;        /* Deep slate text */
   --input-border: #cbd5e1;      /* Light border */
   --modal-overlay: rgba(0,0,0,0.2);
+  --danger: #ef4444; /* Tailwind Red-500 */
+--danger-hover: rgba(239, 68, 68, 0.18);
 }
 
 

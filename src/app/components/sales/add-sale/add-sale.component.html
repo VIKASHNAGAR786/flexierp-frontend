@@ -508,11 +508,11 @@
         Add New Customer
       </button>
 
-      <app-add-customer-popup
-  [isOpen]="isAddcustomerPopupOpen"
-  (close)="isAddcustomerPopupOpen = false"
-  (save)="saveCustomer($event)"
-></app-add-customer-popup>
+      @if(isAddcustomerPopupOpen){<app-add-customer-popup
+        [isOpen]="isAddcustomerPopupOpen"
+        (close)="isAddcustomerPopupOpen = false"
+        (save)="saveCustomer($event)"
+      ></app-add-customer-popup>}
 
       <!-- Conditional render -->
       @if(showOldCustomer){
@@ -549,6 +549,7 @@
             minlength="3"
             #customerName="ngModel"
             class="p-2 rounded-lg outline-none"
+            [readonly]="true"
             style="
             background: var(--input-bg);
             color: var(--input-text);
@@ -582,6 +583,7 @@
             required
             email
             #email="ngModel"
+            [readonly]="true"
             class="p-2 rounded-lg outline-none"
             style="
             background: var(--input-bg);
@@ -617,6 +619,7 @@
             pattern="^[0-9]{10}$"
             maxlength="10"
             #phoneNo="ngModel"
+            [readonly]="true"
             class="p-2 rounded-lg outline-none"
             style="
             background: var(--input-bg);
@@ -650,6 +653,7 @@
             placeholder="Enter Address"
             required
             #customerAddress="ngModel"
+            [readonly]="true"
             class="p-2 rounded-lg resize-none outline-none"
             style="
             background: var(--input-bg);

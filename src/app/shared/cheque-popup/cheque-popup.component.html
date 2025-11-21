@@ -31,8 +31,7 @@
                     type="text"
                     [(ngModel)]="cheque.chequeNumber"
                     name="chequeNumber"
-                                        class="w-full bg-[var(--input-bg)] border border-[var(--border)] text-[var(--text)] rounded-md p-2 focus:ring-2 focus:ring-[var(--accent)]"
-
+                    class="w-full bg-[var(--input-bg)] border border-[var(--border)] text-[var(--text)] rounded-md p-2 focus:ring-2 focus:ring-[var(--accent)]"
                     required
                 >
             </div>
@@ -43,8 +42,7 @@
                     type="text"
                     [(ngModel)]="cheque.bankName"
                     name="bankName"
-                                        class="w-full bg-[var(--input-bg)] border border-[var(--border)] text-[var(--text)] rounded-md p-2 focus:ring-2 focus:ring-[var(--accent)]"
-
+                    class="w-full bg-[var(--input-bg)] border border-[var(--border)] text-[var(--text)] rounded-md p-2 focus:ring-2 focus:ring-[var(--accent)]"
                     required
                 >
             </div>
@@ -55,8 +53,7 @@
                     type="text"
                     [(ngModel)]="cheque.branchName"
                     name="branchName"
-                                        class="w-full bg-[var(--input-bg)] border border-[var(--border)] text-[var(--text)] rounded-md p-2 focus:ring-2 focus:ring-[var(--accent)]"
-
+                    class="w-full bg-[var(--input-bg)] border border-[var(--border)] text-[var(--text)] rounded-md p-2 focus:ring-2 focus:ring-[var(--accent)]"
                     required
                 >
             </div>
@@ -67,8 +64,7 @@
                     type="text"
                     [(ngModel)]="cheque.ifsc_Code"
                     name="ifsc_Code"
-                                        class="w-full bg-[var(--input-bg)] border border-[var(--border)] text-[var(--text)] rounded-md p-2 focus:ring-2 focus:ring-[var(--accent)]"
-
+                    class="w-full bg-[var(--input-bg)] border border-[var(--border)] text-[var(--text)] rounded-md p-2 focus:ring-2 focus:ring-[var(--accent)]"
                     required
                 >
             </div>
@@ -79,8 +75,7 @@
                     type="date"
                     [(ngModel)]="cheque.chequeDate"
                     name="chequeDate"
-                                        class="w-full bg-[var(--input-bg)] border border-[var(--border)] text-[var(--text)] rounded-md p-2 focus:ring-2 focus:ring-[var(--accent)]"
-
+                    class="w-full bg-[var(--input-bg)] border border-[var(--border)] text-[var(--text)] rounded-md p-2 focus:ring-2 focus:ring-[var(--accent)]"
                     required
                 >
             </div>
@@ -91,36 +86,45 @@
                     type="number"
                     [(ngModel)]="cheque.amount"
                     name="amount"
-                                        class="w-full bg-[var(--input-bg)] border border-[var(--border)] text-[var(--text)] rounded-md p-2 focus:ring-2 focus:ring-[var(--accent)]"
-
+                    class="w-full bg-[var(--input-bg)] border border-[var(--border)] text-[var(--text)] rounded-md p-2 focus:ring-2 focus:ring-[var(--accent)]"
                     required
                 >
             </div>
 
             <div class="col-span-2 flex justify-end mt-4 gap-2">
+
+                <!-- CANCEL BUTTON -->
                 <button
                     type="button"
-                    class="btn-secondary"
                     (click)="closePopup()"
+                  class="px-5 py-2.5 rounded-md font-semibold transition-all duration-200
+         bg-[var(--danger)] text-white
+         hover:bg-[var(--danger-hover)]
+         hover:shadow-[0_0_10px_var(--danger)]
+         hover:brightness-110
+         hover:text-black"
                 >
                     Cancel
                 </button>
 
+                <!-- SAVE BUTTON -->
                 <button
                     type="button"
-                    class="btn-primary"
                     [disabled]="!chequeForm.form.valid"
                     (click)="saveCheque()"
+                    class="px-5 py-2.5 rounded-md font-semibold transition-all duration-200
+           bg-[var(--accent-1)] text-[var(--card-bg)]
+           hover:brightness-110
+           hover:shadow-[0_0_12px_var(--accent-1)]
+           hover:text-black
+           disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none"
                 >
                     Save
                 </button>
+
             </div>
+
 
         </form>
     </div>
 </div>
-
-
-
-
-    
