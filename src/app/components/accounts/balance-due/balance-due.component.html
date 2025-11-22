@@ -298,6 +298,7 @@
             <option value="" disabled>Select Mode</option>
             <option value="1">Cash</option>
             <option value="2">Cheque</option>
+            <option value="3">Bank Transfer</option>
           </select>
         </div>
 
@@ -365,3 +366,10 @@
   (save)="saveCheque($event)"
 >
 </app-cheque-popup>
+
+<app-banktransferpopup
+  [show]="showBankTransferPopup"
+  (close)="cancelBanktransfer()"
+  (save)="saveCheque($event)"
+>
+</app-banktransferpopup>

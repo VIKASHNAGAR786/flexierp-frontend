@@ -33,16 +33,17 @@
     </button>
 
     <!-- User Dropdown -->
-    <div class="relative">
+    <div class="dropdown-wrapper relative" >
 
       <button
-        (click)="toggleDropdown()"
-        class="flex items-center gap-2 px-3 py-2 
-               bg-[var(--hover-bg)] rounded-full 
-               hover:bg-[var(--hover-bg-strong)] 
-               transition border border-[var(--border)]
-               shadow-sm"
-      >
+  (click)="toggleDropdown($event); $event.stopPropagation()"
+  class="flex items-center gap-2 px-3 py-2 
+         bg-[var(--hover-bg)] rounded-full 
+         hover:bg-[var(--hover-bg-strong)] 
+         transition border border-[var(--border)]
+         shadow-sm"
+>
+
         <img
           src="assets/profile.png"
           alt="User"
@@ -60,34 +61,43 @@
 
       <!-- Dropdown -->
       <div
-        *ngIf="isDropdownOpen"
-        class="absolute right-0 mt-2 w-48 
-               bg-[var(--card)] border border-[var(--border)] 
-               text-[var(--text)] rounded-lg shadow-xl 
-               transition duration-200 z-50 backdrop-blur-sm"
-      >
-        <a
-          (click)="openProfile()"
-          class="block px-4 py-2 hover:bg-[var(--hover-bg)]"
-        >
-          👤 Profile
-        </a>
+  *ngIf="isDropdownOpen"
+  class="absolute right-0 mt-2 w-56 dropdown-wrapper
+   bg-[var(--card)] border border-[var(--border)]
+   text-[var(--text)] rounded-lg shadow-xl
+   transition duration-200 z-50 backdrop-blur-sm"
+  (click)="$event.stopPropagation()"
+>
 
-        <a
-          (click)="openSettings()"
-          class="block px-4 py-2 hover:bg-[var(--hover-bg)]"
+        <button
+          (click)="openProfile()"
+          class="dropdown-item"
         >
-          ⚙️ Settings
-        </a>
+          <span class="icon">👤</span> Profile
+        </button>
+
+        <button
+          (click)="openSettings()"
+          class="dropdown-item"
+        >
+          <span class="icon">⚙️</span> Settings
+        </button>
+
+        <button
+          (click)="openBankAccounts()"
+          class="dropdown-item"
+        >
+          <span class="icon">🏦</span> My Bank Accounts
+        </button>
 
         <button
           (click)="onLogout()"
-          class="block w-full text-left px-4 py-2 
-                       hover:bg-[var(--hover-bg)]"
+          class="dropdown-item"
         >
-          🚪 Logout
+          <span class="icon">📦</span> Logout
         </button>
       </div>
+
     </div>
   </div>
 </div>

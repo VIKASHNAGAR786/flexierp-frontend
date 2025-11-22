@@ -7,10 +7,11 @@ import { TooltipDirective } from '../../../shared/tooltip.directive';
 import { SaveChequePaymentDto, SettleBalance } from '../../../MODEL/MODEL';
 import { AlertService } from '../../../services/alert.service';
 import { ChequePopupComponent } from "../../../shared/cheque-popup/cheque-popup.component";
+import { BanktransferpopupComponent } from "../../../shared/banktransferpopup/banktransferpopup.component";
 
 @Component({
   selector: 'app-balance-due',
-  imports: [CommonModule, FormsModule, TooltipDirective, ReactiveFormsModule, ChequePopupComponent],
+  imports: [CommonModule, FormsModule, TooltipDirective, ReactiveFormsModule, ChequePopupComponent, BanktransferpopupComponent],
   templateUrl: './balance-due.component.html',
   styleUrl: './balance-due.component.css'
 })
@@ -24,6 +25,7 @@ export class BalanceDueComponent implements OnInit {
   settleBalance: Partial<SettleBalance> = {};
   totalamountforseleceddue = 0;
   showChequePopup = false;
+  showBankTransferPopup = false;
 
   cheque: SaveChequePaymentDto = this.resetCheque();
   ngOnInit(): void {
@@ -159,6 +161,9 @@ export class BalanceDueComponent implements OnInit {
     this.cheque = this.resetCheque();
     if (this.settleBalance.paymode == 2) { // Assuming '2' represents Cheque
       this.showChequePopup = true;
+    }else if (this.settleBalance.paymode == 3) { // Assuming '3' represents Bank Transfer
+      this.showBankTransferPopup = true;
+      this.showSettlePopup = false;
     }
   }
 
@@ -199,5 +204,16 @@ export class BalanceDueComponent implements OnInit {
   }
 }
 
+//#region 🟢 Popup Controls
+  cancelBanktransfer() {
+    this.showBankTransferPopup = false;
+    this.settleBalance.paymode = 1;
+    this.showSettlePopup = true;
+  }
 
+  saveBankTransfer(event: any) {
+  this.showBankTransferPopup = false;
+  this.showSettlePopup = true;
+}
+//#endregion
 }

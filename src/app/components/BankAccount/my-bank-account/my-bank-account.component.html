@@ -1,0 +1,249 @@
+<div class="max-w-9xl mx-auto mt-10 relative">
+
+
+  <!-- Card -->
+  <div class="p-6 rounded-2xl shadow-xl border"
+       style="background: var(--card); border-color: var(--border);">
+
+    <!-- Title -->
+    <h2 class="text-2xl font-semibold mb-6"
+        style="color: var(--heading);">
+      Bank Account Details
+    </h2>
+
+    <!-- FORM GRID -->
+    <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- Account Name -->
+      <div>
+        <label class="block mb-1 text-sm" style="color: var(--text-muted);">
+          Account Name
+        </label>
+        <input
+          type="text"
+          [(ngModel)]="bank.account_name"
+          name="account_name"
+          class="w-full px-3 py-2 rounded-lg border text-sm"
+          style="background: var(--input-bg); color: var(--input-text); border-color: var(--input-border);" />
+      </div>
+
+      <!-- Bank Name -->
+      <div>
+        <label class="block mb-1 text-sm" style="color: var(--text-muted);">
+          Bank Name
+        </label>
+        <input
+          type="text"
+          [(ngModel)]="bank.bank_name"
+          name="bank_name"
+          class="w-full px-3 py-2 rounded-lg border text-sm"
+          style="background: var(--input-bg); color: var(--input-text); border-color: var(--input-border);" />
+      </div>
+
+      <!-- Account Number -->
+      <div>
+        <label class="block mb-1 text-sm" style="color: var(--text-muted);">
+          Account Number
+        </label>
+        <input
+          type="text"
+          [(ngModel)]="bank.account_number"
+          name="account_number"
+          class="w-full px-3 py-2 rounded-lg border text-sm"
+          style="background: var(--input-bg); color: var(--input-text); border-color: var(--input-border);" />
+      </div>
+
+      <!-- IFSC Code -->
+      <div>
+        <label class="block mb-1 text-sm" style="color: var(--text-muted);">
+          IFSC Code
+        </label>
+        <input
+          type="text"
+          [(ngModel)]="bank.ifsc_code"
+          name="ifsc_code"
+          class="w-full px-3 py-2 rounded-lg border text-sm uppercase"
+          style="background: var(--input-bg); color: var(--input-text); border-color: var(--input-border);" />
+      </div>
+
+      <!-- Branch Name -->
+      <div>
+        <label class="block mb-1 text-sm" style="color: var(--text-muted);">
+          Branch Name (optional)
+        </label>
+        <input
+          type="text"
+          [(ngModel)]="bank.branch_name"
+          name="branch_name"
+          class="w-full px-3 py-2 rounded-lg border text-sm"
+          style="background: var(--input-bg); color: var(--input-text); border-color: var(--input-border);" />
+      </div>
+
+      <!-- Account Type -->
+      <div>
+        <label class="block mb-1 text-sm" style="color: var(--text-muted);">
+          Account Type
+        </label>
+        <select
+          [(ngModel)]="bank.account_type"
+          name="account_type"
+          class="w-full px-3 py-2 rounded-lg border text-sm"
+          style="background: var(--input-bg); color: var(--input-text); border-color: var(--input-border);">
+          <option value="CURRENT">Current</option>
+          <option value="SAVINGS">Savings</option>
+        </select>
+      </div>
+
+      <!-- Status -->
+      <div>
+        <label class="block mb-1 text-sm" style="color: var(--text-muted);">
+          Status
+        </label>
+        <select
+          [(ngModel)]="bank.status"
+          name="status"
+          class="w-full px-3 py-2 rounded-lg border text-sm"
+          style="background: var(--input-bg); color: var(--input-text); border-color: var(--input-border);">
+          <option [value]="1">Active</option>
+          <option [value]="0">Inactive</option>
+        </select>
+      </div>
+
+      <!-- Created At (read only) -->
+      <div>
+        <label class="block mb-1 text-sm" style="color: var(--text-muted);">
+          Created At
+        </label>
+        <input
+          type="text"
+          [value]="bank.created_at | date:'dd MMM yyyy, hh:mm a'"
+          readonly
+          class="w-full px-3 py-2 rounded-lg border text-sm opacity-70 cursor-not-allowed"
+          style="background: var(--input-bg); color: var(--input-text); border-color: var(--input-border);" />
+      </div>
+
+    </form>
+
+    <!-- ACTION BUTTONS -->
+    <div class="flex justify-end gap-4 mt-8">
+
+      <!-- Cancel -->
+      <button
+        (click)="cancel()"
+        class="px-4 py-2 rounded-lg border transition"
+        style="border-color: var(--input-border); color: var(--text); background: var(--hover-bg);">
+        Cancel
+      </button>
+
+      <!-- Save -->
+      <button
+        (click)="saveBankAccount()"
+        class="px-5 py-2 rounded-lg font-medium transition"
+        style="
+          background: var(--accent-1);
+          color: #000;
+        "
+        (mouseenter)="isHoverSave = true"
+        (mouseleave)="isHoverSave = false">
+        Save Changes
+      </button>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Table Card -->
+<div
+  class="p-6 rounded-2xl shadow-xl border mt-10 relative"
+  style="background: var(--card); border-color: var(--border);"
+>
+
+  <!-- Title Row -->
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-xl font-semibold" style="color: var(--heading);">
+      Saved Bank Accounts
+    </h2>
+
+    <button
+      class="px-4 py-2 rounded-lg text-sm"
+      style="background: var(--accent-1); color: #000;"
+      (click)="addNewBank()"
+    >
+      + Add New
+    </button>
+  </div>
+
+  <!-- Table -->
+  <div class="overflow-x-auto">
+    <table class="min-w-full border rounded-lg overflow-hidden">
+      <thead style="background: var(--hover-bg);">
+        <tr class="text-left text-sm" style="color: var(--text-muted);">
+          <th class="px-4 py-3">Account Name</th>
+          <th class="px-4 py-3">Bank Name</th>
+          <th class="px-4 py-3">Account No</th>
+          <th class="px-4 py-3">IFSC</th>
+          <th class="px-4 py-3">Branch Name</th>
+          <th class="px-4 py-3">Type</th>
+          <th class="px-4 py-3">Status</th>
+          <th class="px-4 py-3 text-center">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr
+          *ngFor="let item of bankList"
+          class="border-b text-sm"
+          style="border-color: var(--border); color: var(--text);"
+        >
+          <td class="px-4 py-3">{{ item.account_name }}</td>
+          <td class="px-4 py-3">{{ item.bank_name }}</td>
+          <td class="px-4 py-3">{{ item.account_number }}</td>
+          <td class="px-4 py-3">{{ item.ifsc_code }}</td>
+          <td class="px-4 py-3">{{ item.branch_name }}</td>
+          <td class="px-4 py-3">{{ item.account_type }}</td>
+
+          <!-- Status Badge -->
+          <td class="px-4 py-3">
+            <span
+              class="px-2 py-1 rounded text-xs"
+              [ngStyle]="{
+                'background': item.status ? 'var(--accent-1)' : 'var(--hover-bg)',
+                'color': item.status ? '#000' : 'var(--text-muted)'
+              }"
+            >
+              {{ item.status ? 'Active' : 'Inactive' }}
+            </span>
+          </td>
+
+          <!-- ACTION BUTTONS -->
+          <td class="px-4 py-3 text-center space-x-3">
+            <button
+              class="text-blue-500 underline"
+              (click)="editBank(item)"
+            >
+              Edit
+            </button>
+
+            <button
+              class="text-red-500 underline"
+              (click)="deleteBank(1)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+
+        <!-- Empty State -->
+        <tr *ngIf="bankList.length === 0">
+          <td colspan="6" class="px-4 py-6 text-center text-sm"
+              style="color: var(--text-muted);">
+            No bank accounts found.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

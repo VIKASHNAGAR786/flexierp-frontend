@@ -43,16 +43,18 @@ export class HeaderComponent implements OnInit {
   }
 
   // ✅ Close dropdown when clicking outside
-  @HostListener('document:click', ['$event'])
-  clickOutside(event: Event) {
-    const target = event.target as HTMLElement;
-    if (!target.closest('.relative')) {
-      this.isDropdownOpen = false;
-    }
+@HostListener('document:click', ['$event'])
+clickOutside(event: Event) {
+  const target = event.target as HTMLElement;
+  if (!target.closest('.dropdown-wrapper')) {
+    this.isDropdownOpen = false;
   }
+}
+
 
   // ✅ Toggle dropdown
-  toggleDropdown() {
+  toggleDropdown(event: Event) {
+    // event.stopPropagation();  // <--- VERY IMPORTANT
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
@@ -148,6 +150,11 @@ async onBackup() {
 
 openNotes() {
   this.router.navigate(['/notes']);
+}
+
+openBankAccounts() {
+  this.router.navigate(['/my-bank-account']);
+  this.isDropdownOpen = false;
 }
 
   

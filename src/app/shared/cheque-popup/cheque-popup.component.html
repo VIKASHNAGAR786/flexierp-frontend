@@ -26,51 +26,70 @@
         >
 
             <div class="flex flex-col">
-                <label class="label-style">Cheque Number *</label>
+                <label
+                    class="label-style"
+                    style="color: var(--heading);"
+                >Cheque Number *</label>
                 <input
                     type="text"
                     [(ngModel)]="cheque.chequeNumber"
                     name="chequeNumber"
+                    placeholder="Enter Cheque Number"
                     class="w-full bg-[var(--input-bg)] border border-[var(--border)] text-[var(--text)] rounded-md p-2 focus:ring-2 focus:ring-[var(--accent)]"
                     required
                 >
             </div>
 
             <div class="flex flex-col">
-                <label class="label-style">Bank Name *</label>
+                <label
+                    class="label-style"
+                    style="color: var(--heading);"
+                >Bank Name *</label>
                 <input
                     type="text"
                     [(ngModel)]="cheque.bankName"
                     name="bankName"
+                    placeholder="Enter Bank Name"
                     class="w-full bg-[var(--input-bg)] border border-[var(--border)] text-[var(--text)] rounded-md p-2 focus:ring-2 focus:ring-[var(--accent)]"
                     required
                 >
             </div>
 
             <div class="flex flex-col">
-                <label class="label-style">Branch Name *</label>
+                <label
+                    class="label-style"
+                    style="color: var(--heading);"
+                >Branch Name *</label>
                 <input
                     type="text"
                     [(ngModel)]="cheque.branchName"
                     name="branchName"
+                    placeholder="Enter Branch Name"
                     class="w-full bg-[var(--input-bg)] border border-[var(--border)] text-[var(--text)] rounded-md p-2 focus:ring-2 focus:ring-[var(--accent)]"
                     required
                 >
             </div>
 
             <div class="flex flex-col">
-                <label class="label-style">IFSC Code *</label>
+                <label
+                    class="label-style"
+                    style="color: var(--heading);"
+                >IFSC Code *</label>
                 <input
                     type="text"
                     [(ngModel)]="cheque.ifsc_Code"
                     name="ifsc_Code"
+                    placeholder="Enter IFSC Code"
                     class="w-full bg-[var(--input-bg)] border border-[var(--border)] text-[var(--text)] rounded-md p-2 focus:ring-2 focus:ring-[var(--accent)]"
                     required
                 >
             </div>
 
             <div class="flex flex-col">
-                <label class="label-style">Cheque Date *</label>
+                <label
+                    class="label-style"
+                    style="color: var(--heading);"
+                >Cheque Date *</label>
                 <input
                     type="date"
                     [(ngModel)]="cheque.chequeDate"
@@ -81,11 +100,15 @@
             </div>
 
             <div class="flex flex-col">
-                <label class="label-style">Amount *</label>
+                <label
+                    class="label-style"
+                    style="color: var(--heading);"
+                >Amount *</label>
                 <input
                     type="number"
                     [(ngModel)]="cheque.amount"
                     name="amount"
+                    placeholder="Enter Amount"
                     class="w-full bg-[var(--input-bg)] border border-[var(--border)] text-[var(--text)] rounded-md p-2 focus:ring-2 focus:ring-[var(--accent)]"
                     required
                 >
@@ -97,7 +120,7 @@
                 <button
                     type="button"
                     (click)="closePopup()"
-                  class="px-5 py-2.5 rounded-md font-semibold transition-all duration-200
+                    class="px-5 py-2.5 rounded-md font-semibold transition-all duration-200
          bg-[var(--danger)] text-white
          hover:bg-[var(--danger-hover)]
          hover:shadow-[0_0_10px_var(--danger)]

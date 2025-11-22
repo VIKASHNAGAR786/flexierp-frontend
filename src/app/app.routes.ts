@@ -15,6 +15,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { VendorsComponent } from './components/vendors/vendors.component';
 import { ProfileViewComponent } from './components/profile-view/profile-view.component';
 import { NotesComponent } from './components/COMMON/notes/notes.component';
+import { MyBankAccountComponent } from './components/BankAccount/my-bank-account/my-bank-account.component';
 
 export const routes: Routes = [
   // Default redirect
@@ -39,6 +40,7 @@ export const routes: Routes = [
       { path: 'vendors', component: VendorsComponent },
       { path: 'profileview', component: ProfileViewComponent },
       { path: 'notes', component: NotesComponent },
+      { path: 'my-bank-account', component: MyBankAccountComponent },
     ]
   },
 
