@@ -33,6 +33,11 @@ export class MyBankAccountComponent {
   // Example
   { account_name: 'Vikash', bank_name: 'SBI', account_number: '1234', ifsc_code: 'SBIN0001234', account_type: 'CURRENT', status: 1, branch_name: 'Main Branch' },
   { account_name: 'John Doe', bank_name: 'HDFC', account_number: '5678', ifsc_code: 'HDFC0005678', account_type: 'SAVINGS', status: 1, branch_name: 'City Branch' },
+  { account_name: 'John Doe', bank_name: 'HDFC', account_number: '5678', ifsc_code: 'HDFC0005678', account_type: 'SAVINGS', status: 1, branch_name: 'City Branch' },
+  { account_name: 'John Doe', bank_name: 'HDFC', account_number: '5678', ifsc_code: 'HDFC0005678', account_type: 'SAVINGS', status: 1, branch_name: 'City Branch' },
+  { account_name: 'John Doe', bank_name: 'HDFC', account_number: '5678', ifsc_code: 'HDFC0005678', account_type: 'SAVINGS', status: 1, branch_name: 'City Branch' },
+  { account_name: 'John Doe', bank_name: 'HDFC', account_number: '5678', ifsc_code: 'HDFC0005678', account_type: 'SAVINGS', status: 1, branch_name: 'City Branch' },
+  { account_name: 'John Doe', bank_name: 'HDFC', account_number: '5678', ifsc_code: 'HDFC0005678', account_type: 'SAVINGS', status: 1, branch_name: 'City Branch' },
 ];
 
 addNewBank() {

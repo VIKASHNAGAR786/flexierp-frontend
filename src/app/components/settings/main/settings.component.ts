@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ProductCategory, Tab } from '../../MODEL/MODEL';
-import { InventoryService } from '../../services/inventory.service';
+import { ProductCategory, Tab } from '../../../MODEL/MODEL';
+import { InventoryService } from '../../../services/inventory.service';
 import { CommonModule } from '@angular/common';
-import { InventorySettingsComponent } from "./inventory-settings/inventory-settings.component";
-import { SaleSettingsComponent } from "./sale-settings/sale-settings.component";
+import { InventorySettingsComponent } from '../Tabs/inventory-settings/inventory-settings.component';
+import { SaleSettingsComponent } from '../Tabs/sale-settings/sale-settings.component';
+import { VersionControlComponent } from '../Tabs/version-control/version-control.component';
 
 @Component({
   selector: 'app-settings',
@@ -18,7 +19,8 @@ export class SettingsComponent {
   // Array of tabs
   tabs: Tab[] = [
     { id: 'inventory', label: 'Inventory Settings', component: InventorySettingsComponent },
-    { id: 'sale', label: 'Sale Settings', component: SaleSettingsComponent }
+    { id: 'sale', label: 'Sale Settings', component: SaleSettingsComponent },
+    { id: 'version', label: 'Version Control', component: VersionControlComponent }
   ];
 
   switchTab(tabId: string) {

@@ -1,0 +1,5 @@
+/* Optional: make scroll smooth inside version box */
+.history-container {
+  max-height: 300px;
+  overflow-y: auto;
+}

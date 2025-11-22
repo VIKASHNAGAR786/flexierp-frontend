@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ProductCategory, WarehouseModel } from '../../../MODEL/MODEL';
-import { InventoryService } from '../../../services/inventory.service';
-import { ProductCategoryListDto, WarehouseDTO } from '../../../DTO/DTO';
+import { ProductCategory, WarehouseModel } from '../../../../MODEL/MODEL';
+import { InventoryService } from '../../../../services/inventory.service';
+import { ProductCategoryListDto, WarehouseDTO } from '../../../../DTO/DTO';
 
 @Component({
   selector: 'app-inventory-settings',

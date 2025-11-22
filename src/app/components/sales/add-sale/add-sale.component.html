@@ -29,7 +29,7 @@
       Product Details
     </h3>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
       <!-- Barcode -->
       <div class="flex flex-col">
         <label
@@ -191,35 +191,30 @@
         />
       </div>
 
-      <!-- Boolean Switches -->
-      <div class="flex items-center gap-3">
+      <!-- Perishable (Readonly Boolean Display) -->
+      <div class="flex flex-col">
+        <label
+          class="label-style"
+          style="color: var(--text)">
+          Perishable
+        </label>
+
         <input
-          type="checkbox"
-          [(ngModel)]="saleProduct.isPerishable"
-          name="isPerishable"
-          class="w-4 h-4"
+          type="text"
+          [value]="saleProduct.isPerishable ? 'Yes' : 'No'"
+          readonly
+          class="input-style"
           style="background: var(--input-bg);
                  color: var(--input-text);
                  border: 1px solid var(--input-border)"
         />
-        <label class="text-white">Perishable</label>
       </div>
 
-      <div class="flex items-center gap-3">
-        <input
-          type="checkbox"
-          [(ngModel)]="saleProduct.status"
-          name="status"
-          class="w-4 h-4"
-          disabled
-        />
-        <label class="text-white">Active</label>
-      </div>
     </div>
 
     <!-- 🔹 Financial / Pricing Section -->
     <h4 class="text-lg font-bold text-[#00ffee] mt-6">Pricing</h4>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
       <div class="flex flex-col">
         <label
           class="label-style"
