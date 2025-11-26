@@ -3,7 +3,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BarcodeFormat } from '@zxing/library';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
-import { ProductlistpopupComponent } from "../productlistpopup/productlistpopup.component";
+import { ProductlistpopupComponent } from '../../PopUps/productlistpopup/productlistpopup.component';
 
 @Component({
   selector: 'app-scan-barcode',

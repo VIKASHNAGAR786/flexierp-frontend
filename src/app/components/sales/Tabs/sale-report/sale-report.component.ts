@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { SaleDTO } from '../../../DTO/DTO';
 import { finalize } from 'rxjs/operators';
-import { SaleserviceService } from '../../../services/saleservice.service';
-import { PaginationFilter } from '../../../MODEL/MODEL';
-import { AlertService } from '../../../services/alert.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { firstValueFrom } from 'rxjs';
+import { SaleDTO } from '../../../../DTO/DTO';
+import { PaginationFilter } from '../../../../MODEL/MODEL';
+import { AlertService } from '../../../../services/alert.service';
+import { SaleserviceService } from '../../../../services/saleservice.service';
 
 @Component({
   selector: 'app-sale-report',

@@ -1,0 +1,62 @@
+<div class="p-6">
+
+  <!-- Header -->
+  <div class="flex justify-between items-center mb-6 border-b pb-3">
+    <h2 class="text-2xl font-bold text-gray-800">Template Editor</h2>
+
+    <!-- Dropdown for template selection -->
+    <select [(ngModel)]="selectedTemplateKey"
+            class="px-3 py-2 border rounded-lg text-gray-700 bg-white shadow">
+      <option *ngFor="let template of (templates | keyvalue)" [value]="template.key">
+        {{ template.key | titlecase }}
+      </option>
+    </select>
+
+    <button
+      class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow transition">
+      Save Template
+    </button>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+
+    <!-- Sidebar Fields -->
+    <div class="lg:col-span-1 border rounded-xl p-4 shadow bg-[var(--card)]">
+  <h3 class="font-semibold mb-3 text-gray-700">
+    {{ selectedTemplateKey | titlecase }}
+  </h3>
+
+  <ul class="space-y-2 text-sm text-gray-700">
+    <li *ngFor="let field of (selectedTemplate | keyvalue)"
+        (click)="insertField(field.value)"
+        class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-100 cursor-pointer transition">
+      
+      <!-- Field Label -->
+      <span class="font-medium">{{ field.key }}</span>
+      
+      <!-- Plus Icon -->
+      <i class="bi bi-plus-circle text-blue-600 hover:text-blue-800"></i>
+    </li>
+  </ul>
+</div>
+
+    <!-- Editor -->
+    <div class="lg:col-span-3">
+      <div class="p-6 border rounded-xl shadow bg-white">
+        <editor
+          [(ngModel)]="templateContent"
+          [init]="editorInit"
+          [licenseKey]="licenseKey"
+        ></editor>
+
+        <div class="flex justify-end mt-4">
+          <button
+            class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow transition">
+            Save Template
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

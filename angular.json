@@ -25,7 +25,13 @@
     "glob": "**/*",
     "input": "public",
     "output": ""
+  },
+  {
+    "glob": "**/*",
+    "input": "node_modules/tinymce",
+    "output": "tinymce"
   }
+
 ],
             "styles": [
               "src/styles.css",

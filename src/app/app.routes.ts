@@ -10,12 +10,12 @@ import { CustomersComponent } from './components/customers/customers.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { ReportsComponent } from './components/reports/reports.component';
-import { SalesComponent } from './components/sales/sales.component';
 import { SettingsComponent } from './components/settings/main/settings.component';
 import { VendorsComponent } from './components/vendors/vendors.component';
 import { ProfileViewComponent } from './components/profile-view/profile-view.component';
 import { NotesComponent } from './components/COMMON/notes/notes.component';
 import { MyBankAccountComponent } from './components/BankAccount/my-bank-account/my-bank-account.component';
+import { SalesComponent } from './components/sales/Main/sales.component';
 
 export const routes: Routes = [
   // Default redirect

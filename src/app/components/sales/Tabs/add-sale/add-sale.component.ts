@@ -2,22 +2,24 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ScanBarcodeComponent } from "../scan-barcode/scan-barcode.component";
-import { SaleserviceService } from '../../../services/saleservice.service';
 import { catchError } from 'rxjs/operators';
 import { firstValueFrom, of } from 'rxjs';
-import { ProductByBarcodeDTO } from '../../../DTO/DTO';
-import { AlertService } from '../../../services/alert.service';
-import { CartItemDTO, Customer, generateReceiptpdf, Sale, SaleDetail, SaveChequePaymentDto } from '../../../MODEL/MODEL';
-import { OldCustomerPopupComponent } from "../old-customer-popup/old-customer-popup.component";
-import { BarcodeService } from '../../../services/barcode.service';
+
+
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 // 🟩 Added for extra charges handling
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TooltipDirective } from '../../../shared/tooltip.directive';
-import { ChequePopupComponent } from "../../../shared/cheque-popup/cheque-popup.component";
-import { AddCustomerPopupComponent } from "../add-customer-popup/add-customer-popup.component";
+import { ProductByBarcodeDTO } from '../../../../DTO/DTO';
+import { AlertService } from '../../../../services/alert.service';
+import { BarcodeService } from '../../../../services/barcode.service';
+import { SaleserviceService } from '../../../../services/saleservice.service';
+import { ChequePopupComponent } from '../../../../shared/cheque-popup/cheque-popup.component';
+import { TooltipDirective } from '../../../../shared/tooltip.directive';
+import { AddCustomerPopupComponent } from '../../PopUps/add-customer-popup/add-customer-popup.component';
+import { OldCustomerPopupComponent } from '../../PopUps/old-customer-popup/old-customer-popup.component';
+import { Sale, CartItemDTO, Customer, SaleDetail, generateReceiptpdf, SaveChequePaymentDto } from '../../../../MODEL/MODEL';
 
 @Component({
   selector: 'app-add-sale',

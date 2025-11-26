@@ -1,10 +1,10 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { ProductDTO } from '../../../DTO/DTO';
-import { PaginationFilter } from '../../../MODEL/MODEL';
-import { BarcodeService } from '../../../services/barcode.service';
-import { InventoryService } from '../../../services/inventory.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ProductDTO } from '../../../../DTO/DTO';
+import { PaginationFilter } from '../../../../MODEL/MODEL';
+import { BarcodeService } from '../../../../services/barcode.service';
+import { InventoryService } from '../../../../services/inventory.service';
 
 @Component({
   selector: 'app-productlistpopup',

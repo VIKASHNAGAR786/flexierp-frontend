@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, Type } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AddSaleComponent } from "./add-sale/add-sale.component";
-import { ScanBarcodeComponent } from './scan-barcode/scan-barcode.component';
-import { SaleReportComponent } from "./sale-report/sale-report.component";
-import { Tab } from '../../MODEL/MODEL';
+import { Tab } from '../../../MODEL/MODEL';
+import { AddSaleComponent } from '../Tabs/add-sale/add-sale.component';
+import { SaleReportComponent } from '../Tabs/sale-report/sale-report.component';
 
 @Component({
   selector: 'app-sales',

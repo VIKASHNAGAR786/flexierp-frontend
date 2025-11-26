@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { OldCustomerDTO } from '../../../DTO/DTO';
-import { PaginationFilter } from '../../../MODEL/MODEL';
-import { SaleserviceService } from '../../../services/saleservice.service';
+import { OldCustomerDTO } from '../../../../DTO/DTO';
+import { PaginationFilter } from '../../../../MODEL/MODEL';
+import { SaleserviceService } from '../../../../services/saleservice.service';
 
 @Component({
   selector: 'app-old-customer-popup',

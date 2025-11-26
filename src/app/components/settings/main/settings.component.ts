@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { InventorySettingsComponent } from '../Tabs/inventory-settings/inventory-settings.component';
 import { SaleSettingsComponent } from '../Tabs/sale-settings/sale-settings.component';
 import { VersionControlComponent } from '../Tabs/version-control/version-control.component';
+import { FormateEditorComponent } from '../Tabs/formate-editor/formate-editor.component';
 
 @Component({
   selector: 'app-settings',
@@ -20,6 +21,7 @@ export class SettingsComponent {
   tabs: Tab[] = [
     { id: 'inventory', label: 'Inventory Settings', component: InventorySettingsComponent },
     { id: 'sale', label: 'Sale Settings', component: SaleSettingsComponent },
+    {id: 'formate', label: 'Formate Editor', component: FormateEditorComponent },
     { id: 'version', label: 'Version Control', component: VersionControlComponent }
   ];
 

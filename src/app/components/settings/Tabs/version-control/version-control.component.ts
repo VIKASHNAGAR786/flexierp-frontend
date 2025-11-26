@@ -25,24 +25,6 @@ export class VersionControlComponent {
         "Billing module added"
       ]
     },
-    {
-      version: "1.1.0",
-      date: "2025-02-10",
-      changes: [
-        "Improved UI",
-        "Added theme switcher",
-        "Minor performance upgrades"
-      ]
-    },
-    {
-      version: "1.2.0",
-      date: "2025-03-20",
-      changes: [
-        "Fixed bugs in billing",
-        "New reporting module",
-        "Faster loading time"
-      ]
-    }
   ];
 
   // Dummy update check
