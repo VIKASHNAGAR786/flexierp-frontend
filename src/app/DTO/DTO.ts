@@ -272,3 +272,8 @@ export interface SoldProductDTO {
   soldquantity: number | null;
   availablequantity: number | null;
 }
+
+export interface TemplateOption {
+  id?: number;   
+  name?: string;
+}

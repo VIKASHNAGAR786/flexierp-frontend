@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { EditorModule } from '@tinymce/tinymce-angular';
 
@@ -35,6 +35,9 @@ import 'tinymce/plugins/visualchars';
 import 'tinymce/plugins/wordcount';
 import { TEMPLATES, TemplateKey } from '../ADDONS/templates.data';
 import { CommonModule } from '@angular/common';
+import { CommonService } from '../../../../services/common.service';
+import { AlertService } from '../../../../services/alert.service';
+import { TemplateOption } from '../../../../DTO/DTO';
 
 @Component({
   selector: 'app-formate-editor',
@@ -43,8 +46,28 @@ import { CommonModule } from '@angular/common';
   templateUrl: './formate-editor.component.html',
   styleUrls: ['./formate-editor.component.css']
 })
-export class FormateEditorComponent {
+export class FormateEditorComponent implements OnInit {
 
+  alltemplates: TemplateOption[] = [];
+  constructor(
+    private commonservice : CommonService,
+    private alertservice : AlertService
+  ) { }
+  ngOnInit(): void {
+      this.loadTemplates();
+  }
+    loadTemplates() {
+    this.commonservice.GetTemplates().subscribe({
+      next: (res) => {
+        if (res) {
+          this.alltemplates = res;
+        }
+      },
+      error: (err) => {
+        this.alertservice.showAlert('Failed to load notes:', err);
+      }
+    });
+  }
   templateContent = '<p>Start writing your template...</p>';
   author = "Vikash Nagar";
 

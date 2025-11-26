@@ -5,7 +5,7 @@ import { UserinfowithloginService } from './userinfowithlogin.service';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { BackupRequest, PaginationFilter, ProductCategory, ProductModel, ProviderModel, SaveNote, SettleBalance, UpdateCompanyInfo, WarehouseModel } from '../MODEL/MODEL';
-import { BalanceDueDto, CompanyInfoDTO, DashboardMetricsDto, NoteDetailsDto, NoteDto, ProductCategoryDTO, ProductDTO, ProviderDTO, ReceivedChequeDto, UserLoginHistoryDTO, WarehouseDTO } from '../DTO/DTO';
+import { BalanceDueDto, CompanyInfoDTO, DashboardMetricsDto, NoteDetailsDto, NoteDto, ProductCategoryDTO, ProductDTO, ProviderDTO, ReceivedChequeDto, TemplateOption, UserLoginHistoryDTO, WarehouseDTO } from '../DTO/DTO';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +44,7 @@ export class CommonService {
   private readonly MarkPinnedUrl = environment.BASE_URL + '/CommonMaster/MarkPinned';
   private readonly GetBalanceDueListAsyncUrl = environment.AccountApiUrl + 'GetBalanceDueListAsync';
   private readonly SaveCustomerBalanceSettlementUrl = environment.AccountApiUrl + 'SaveCustomerBalanceSettlement';
+  private readonly GetTemplatesUrl = environment.BASE_URL + '/CommonMaster/GetTemplates';
 
   logout(): Observable<string> {
     const headers = this.getAuthHeaders();
@@ -219,5 +220,12 @@ GetAllNotes(): Observable<NoteDto[] | null> {
   if (!headers) return of("");
   return this.http.post<string>(this.SaveCustomerBalanceSettlementUrl, settlebalance, { headers });
 }
+
+GetTemplates(): Observable<TemplateOption[] | null> {
+    const headers = this.getAuthHeaders();
+    if (!headers) return of(null);
+
+    return this.http.get<TemplateOption[]>(this.GetTemplatesUrl, { headers });
+  }
 
 }
