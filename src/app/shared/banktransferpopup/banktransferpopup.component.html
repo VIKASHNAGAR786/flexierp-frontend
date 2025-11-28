@@ -43,6 +43,29 @@
                 </select>
             </div>
 
+            <div class="flex flex-col">
+                <label
+                    class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
+                    style="color: var(--heading);"
+                >
+                    Received Bank Account *
+                </label>
+                <select
+                    [(ngModel)]="transfer.company_bank_id"
+                    name="company_bank_id"
+                    class="input-style"
+                    required
+                >
+                    <option value="">Select Bank Account</option>
+                    <option
+                        *ngFor="let bank of bankList"
+                        [value]="bank.company_bank_id"
+                    >
+                        {{ bank.bank_name }} ({{ bank.branch_name }})
+                    </option>
+                </select>
+            </div>
+
             <!-- AMOUNT -->
             <div class="flex flex-col">
                 <label

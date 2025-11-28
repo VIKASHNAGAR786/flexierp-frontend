@@ -369,7 +369,8 @@
 
 <app-banktransferpopup
   [show]="showBankTransferPopup"
+  [transfer]="banktransfer"
   (close)="cancelBanktransfer()"
-  (save)="saveCheque($event)"
+  (save)="saveBankTransfer($event)"
 >
 </app-banktransferpopup>

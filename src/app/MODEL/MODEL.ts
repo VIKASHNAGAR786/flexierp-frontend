@@ -40,7 +40,28 @@ export interface SaveChequePaymentDto {
   createdBy?: number;
 }
 
-
+export interface SaveBankTransferPaymentDto {
+  company_bank_id: number;              // required
+  transfer_type: string;                // required, default ""
+  amount: number;                       // required
+  currency?: string;                    // optional, default "INR"
+  charges?: number;                     // optional, default 0
+  final_amount_received?: number;       // optional
+  transaction_date: string;             // required (ISO date string)
+  received_date?: string;               // optional
+  posted_date?: string;                 // optional
+  status?: string;                      // optional, default "Pending"
+  is_reconciled: boolean;               // required, default false
+  reconciliation_date?: string;         // optional
+  customer_bank_name?: string;          // optional
+  customer_account_number?: string;     // optional
+  customer_ifsc?: string;               // optional
+  customer_branch?: string;             // optional
+  utr_number: string;                   // required, default ""
+  reference_number?: string;            // optional
+  payment_description?: string;         // optional
+  remarks?: string;                     // optional, default " "
+}
 
 export interface ProductCategory {
   categoryName: string;       // required
@@ -202,4 +223,28 @@ export interface SettleBalance {
   customerid: number;        // ID of the customer
   dueid: number;             // ID of the due entry
   chequepayment?: SaveChequePaymentDto; // optional cheque details
+  banktransfer?: SaveBankTransferPaymentDto;   // optional bank transfer details
+}
+
+
+// save-template.dto.ts
+export interface SaveTemplate {
+  categoryid: number;       // Required
+  name: string;             // Required
+  htmlcontent: string;      // Required
+  csscontent?: string;
+  jscontent?: string;
+  schemajson?: string;
+  isdefault: boolean;       // true/false
+}
+
+export interface SaveCompanyBankAccounts {
+  accountname?: string;        // required
+  bankname?: string;           // required
+  accountnumber?: string;      // required
+  ifsccode?: string;           // required
+  branchname?: string;        // optional
+  accounttype?: string;       // optional, default "CURRENT"
+  rowid?: number;       // optional, default "CURRENT"
+  useonprint?: number;       // optional, default "CURRENT"
 }

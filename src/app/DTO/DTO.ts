@@ -276,4 +276,28 @@ export interface SoldProductDTO {
 export interface TemplateOption {
   id?: number;   
   name?: string;
+  key?: string;
+}
+
+export interface TemplateData {
+  htmlcontent?: string;   // optional
+  csscontent?: string;    // optional
+  jscontent?: string;     // optional
+  schemajson?: string;    // optional
+  isdefault?: number;     // optional (0 or 1)
+}
+
+export interface CompanyBankAccountDto {
+  company_bank_id: number;       // required
+  account_name?: string;         // optional
+  bank_name?: string;            // optional
+  account_number?: string;       // optional
+  ifsc_code?: string;            // optional
+  branch_name?: string;          // optional
+  account_type?: string;         // optional
+  created_by: number;            // required
+  created_by_name?: string;      // optional
+  status: number;                // required
+  created_at?: string;           // optional (formatted date string)
+  useonprint: number;          // required (0 or 1)
 }

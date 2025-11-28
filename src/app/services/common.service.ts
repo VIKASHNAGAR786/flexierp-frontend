@@ -4,8 +4,8 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { UserinfowithloginService } from './userinfowithlogin.service';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { BackupRequest, PaginationFilter, ProductCategory, ProductModel, ProviderModel, SaveNote, SettleBalance, UpdateCompanyInfo, WarehouseModel } from '../MODEL/MODEL';
-import { BalanceDueDto, CompanyInfoDTO, DashboardMetricsDto, NoteDetailsDto, NoteDto, ProductCategoryDTO, ProductDTO, ProviderDTO, ReceivedChequeDto, TemplateOption, UserLoginHistoryDTO, WarehouseDTO } from '../DTO/DTO';
+import { BackupRequest, PaginationFilter, ProductCategory, ProductModel, ProviderModel, SaveCompanyBankAccounts, SaveNote, SaveTemplate, SettleBalance, UpdateCompanyInfo, WarehouseModel } from '../MODEL/MODEL';
+import { BalanceDueDto, CompanyBankAccountDto, CompanyInfoDTO, DashboardMetricsDto, NoteDetailsDto, NoteDto, ProductCategoryDTO, ProductDTO, ProviderDTO, ReceivedChequeDto, TemplateData, TemplateOption, UserLoginHistoryDTO, WarehouseDTO } from '../DTO/DTO';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +45,11 @@ export class CommonService {
   private readonly GetBalanceDueListAsyncUrl = environment.AccountApiUrl + 'GetBalanceDueListAsync';
   private readonly SaveCustomerBalanceSettlementUrl = environment.AccountApiUrl + 'SaveCustomerBalanceSettlement';
   private readonly GetTemplatesUrl = environment.BASE_URL + '/CommonMaster/GetTemplates';
+  private readonly SaveTemplateAsyncUrl = environment.BASE_URL + '/CommonMaster/SaveTemplateAsync';
+  private readonly GetTemplateAsyncUrl = environment.BASE_URL + '/CommonMaster/GetTemplateAsync';
+  private readonly SaveCompanyBankAccountsUrl = environment.BASE_URL + '/CommonMaster/SaveCompanyBankAccounts';
+  private readonly GetCompanyBankAccountsUrl = environment.BASE_URL + '/CommonMaster/GetCompanyBankAccounts';
+
 
   logout(): Observable<string> {
     const headers = this.getAuthHeaders();
@@ -228,4 +233,33 @@ GetTemplates(): Observable<TemplateOption[] | null> {
     return this.http.get<TemplateOption[]>(this.GetTemplatesUrl, { headers });
   }
 
+   SaveTemplateAsync(template: SaveTemplate): Observable<string> {
+  const headers = this.getAuthHeaders(); // should include 'Authorization' if needed
+  if (!headers) return of("");
+  return this.http.post<string>(this.SaveTemplateAsyncUrl, template, { headers });
+}
+
+GetTemplateAsync(categorid: number, isdefault: number): Observable<TemplateData | null> {
+    const headers = this.getAuthHeaders();
+    if (!headers) return of(null);
+
+    let params = new HttpParams()
+      .set('categorid', categorid.toString())
+      .set('isdefault', isdefault.toString());
+
+    return this.http.get<TemplateData>(this.GetTemplateAsyncUrl, { headers, params });
+  }
+
+  SaveCompanyBankAccounts(bankAccounts: SaveCompanyBankAccounts): Observable<string> {
+  const headers = this.getAuthHeaders(); // should include 'Authorization' if needed
+  if (!headers) return of("");
+  return this.http.post<string>(this.SaveCompanyBankAccountsUrl, bankAccounts, { headers });
+}
+
+GetCompanyBankAccounts(): Observable<CompanyBankAccountDto[] | null> {
+    const headers = this.getAuthHeaders();
+    if (!headers) return of(null);
+
+    return this.http.get<CompanyBankAccountDto[]>(this.GetCompanyBankAccountsUrl, { headers });
+  }
 }

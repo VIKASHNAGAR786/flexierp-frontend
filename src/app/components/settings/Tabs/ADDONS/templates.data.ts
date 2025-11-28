@@ -3,11 +3,37 @@ export type TemplateKey = 'receipt' | 'orderreceipt' | 'purchase';
 
 export const TEMPLATES: Record<TemplateKey, Record<string, string>> = {
   receipt: {
-    'First Names': 'FirstName',
-    'Email Address': 'Email',
-    'Phone Number': 'Phone',
-    'Receipt No': 'receiptno'
-  },
+  "Customer Name": "CustomerName",
+  "Phone Number": "PhoneNo",
+  "Cus. Email Address": "Email",
+  "Payment Mode": "PaymentMode",
+  "Remark": "Remark",
+  "Total Items": "TotalItems",
+  "Total Amount": "TotalAmount",
+  "Total Discount": "TotalDiscount",
+  "Paid Amount": "paidamt",
+  "Balance Due": "baldue",
+  "Invoice No": "invoiceno",
+
+  "Company Name": "CompanyName",
+  "CompanyContactNumber": "ContactNo",
+  "CompanyWhatsAppNumber": "WhatsAppNo",
+  "CompanyAddress": "Address",
+  "CompanyFullName": "FullName",
+  "CompanyLogo": "CompanyLogo",
+  "CompanyEmail": "CompanyEmail",
+  "Invoice Date": "InvoiceDate",
+
+
+  "SaleDetailsTable" : "SaleDetailsTable",
+  "ExtraChargesTable": "ExtraCharges",
+
+  "AccountName": "AccountName",
+  "BankName": "BankName",
+  "AccountNumber": "AccountNumber",
+  "IFSCCode": "IFSCCode",
+  "BranchName": "BranchName",
+},
   orderreceipt: {
     'Order Id': 'orderid',
     'Order Date': 'orderdate',

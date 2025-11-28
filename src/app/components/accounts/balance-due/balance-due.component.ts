@@ -4,7 +4,7 @@ import { BalanceDueDto } from '../../../DTO/DTO';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TooltipDirective } from '../../../shared/tooltip.directive';
-import { SaveChequePaymentDto, SettleBalance } from '../../../MODEL/MODEL';
+import { SaveBankTransferPaymentDto, SaveChequePaymentDto, SettleBalance } from '../../../MODEL/MODEL';
 import { AlertService } from '../../../services/alert.service';
 import { ChequePopupComponent } from "../../../shared/cheque-popup/cheque-popup.component";
 import { BanktransferpopupComponent } from "../../../shared/banktransferpopup/banktransferpopup.component";
@@ -28,6 +28,7 @@ export class BalanceDueComponent implements OnInit {
   showBankTransferPopup = false;
 
   cheque: SaveChequePaymentDto = this.resetCheque();
+  banktransfer: SaveBankTransferPaymentDto = this.resetBankTransfer();
   ngOnInit(): void {
     this.loadBalanceDueList();
   }
@@ -70,6 +71,8 @@ export class BalanceDueComponent implements OnInit {
     this.settleBalance.customerid = balance.customerId;
     this.settleBalance.dueid = balance.dueId;
     this.settleBalance.remainingamount = 0; // default
+    this.cheque = this.resetCheque();
+    this.banktransfer = this.resetBankTransfer();
     console.log('🧾 Settling Balance for Amount:', balance);
   }
 
@@ -77,13 +80,16 @@ export class BalanceDueComponent implements OnInit {
   closePopup() {
     this.showSettlePopup = false;
     this.settleBalance = {}; // Reset form
+    this.cheque = this.resetCheque();
+    this.banktransfer = this.resetBankTransfer();
   }
 
   confirmSettle() {
     try {
       console.log('🧾 Settlement Details:', this.settleBalance);
       this.showSettlePopup = false;
-
+      this.cheque = this.resetCheque();
+    this.banktransfer = this.resetBankTransfer();
       // ✅ Validate required fields before sending
       if (
         !this.settleBalance ||
@@ -104,7 +110,8 @@ export class BalanceDueComponent implements OnInit {
         dueid: this.settleBalance.dueid!,
         remainingamount: this.settleBalance.remainingamount!,
         paymode: this.settleBalance.paymode!,
-        chequepayment: this.settleBalance.paymode == 2 ? this.settleBalance.chequepayment : undefined
+        chequepayment: this.settleBalance.paymode == 2 ? this.settleBalance.chequepayment : undefined,
+        banktransfer: this.settleBalance.paymode == 3 ? this.settleBalance.banktransfer : undefined
       };
 
 
@@ -204,7 +211,8 @@ export class BalanceDueComponent implements OnInit {
   }
 }
 
-//#region 🟢 Popup Controls
+//#region Bank Transfer
+
   cancelBanktransfer() {
     this.showBankTransferPopup = false;
     this.settleBalance.paymode = 1;
@@ -212,8 +220,50 @@ export class BalanceDueComponent implements OnInit {
   }
 
   saveBankTransfer(event: any) {
+  console.log("Bank Transfer Details FROM POPUP:", this.banktransfer);
+
+  this.settleBalance.banktransfer = this.banktransfer;
+
+  this.settleBalance.settledamount = this.banktransfer.amount;
+  this.settleBalance.remainingamount =
+    this.totalamountforseleceddue - this.banktransfer.amount;
+
+  if (this.banktransfer.amount <= 0) {
+    this.alertservice.showAlert("⚠️ Invalid bank transfer amount.", "error");
+    this.settleBalance.paymode = 1;
+  }
   this.showBankTransferPopup = false;
   this.showSettlePopup = true;
 }
+
+resetBankTransfer(): SaveBankTransferPaymentDto {
+  const today = new Date();
+  const formattedDate = today.toISOString().split('T')[0]; // yyyy-MM-dd
+
+  return {
+    company_bank_id: 0,
+    transfer_type: '',
+    amount: 0,
+    currency: 'INR',
+    charges: 0,
+    final_amount_received: undefined,
+    transaction_date: formattedDate,
+    received_date: undefined,
+    posted_date: undefined,
+    status: 'Pending',
+    is_reconciled: false,
+    reconciliation_date: undefined,
+    customer_bank_name: '',
+    customer_account_number: '',
+    customer_ifsc: '',
+    customer_branch: '',
+    utr_number: '',
+    reference_number: '',
+    payment_description: '',
+    remarks: ' ',
+  };
+}
+
 //#endregion
+
 }
