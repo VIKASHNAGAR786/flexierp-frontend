@@ -48,6 +48,7 @@ export class BanktransferpopupComponent implements OnInit {
       this.commonservice.GetCompanyBankAccounts().subscribe({
         next: (data) => {
           this.bankList = data || [];
+          console.log('Bank accounts loaded:', this.show);
         }
       });
     } catch (err) {

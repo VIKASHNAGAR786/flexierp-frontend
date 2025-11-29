@@ -700,6 +700,7 @@
                 >Select a payment method</option>
                 <option value="1">Cash</option>
                 <option value="2">Cheque</option>
+                <option value="3">Bank Transfer</option>
               </select>
 
               <!-- Tooltip icon -->
@@ -880,15 +881,6 @@
   </div>
 
 
-  <!-- Cheque Payment Modal (Dark Theme) -->
-  <app-cheque-popup
-    [show]="showChequePopup"
-    [cheque]="cheque"
-    (close)="cancelCheque()"
-    (save)="saveCheque($event)"
-  >
-  </app-cheque-popup>
-
   <!-- Extra Charges Popup -->
   <div
     *ngIf="showExtraChargesPopup"
@@ -1026,3 +1018,23 @@
       </form>
     </div>
   </div>
+</div>
+
+ <!-- Cheque Payment Modal (Dark Theme) -->
+  @if(customer.paymentMode === '2'){<app-cheque-popup
+    [show]="showChequePopup"
+    [cheque]="cheque"
+    (close)="cancelCheque()"
+    (save)="saveCheque($event)"
+  >
+  </app-cheque-popup>
+}
+@else if(customer.paymentMode === '3'){
+  <app-banktransferpopup
+  [show]="showBankTransferPopup"
+  [transfer]="banktransfer"
+  (close)="cancelBanktransfer()"
+  (save)="saveBankTransfer($event)"
+>
+</app-banktransferpopup>
+}

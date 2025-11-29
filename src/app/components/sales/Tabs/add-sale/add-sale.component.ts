@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ScanBarcodeComponent } from "../scan-barcode/scan-barcode.component";
 import { catchError } from 'rxjs/operators';
@@ -19,7 +19,8 @@ import { ChequePopupComponent } from '../../../../shared/cheque-popup/cheque-pop
 import { TooltipDirective } from '../../../../shared/tooltip.directive';
 import { AddCustomerPopupComponent } from '../../PopUps/add-customer-popup/add-customer-popup.component';
 import { OldCustomerPopupComponent } from '../../PopUps/old-customer-popup/old-customer-popup.component';
-import { Sale, CartItemDTO, Customer, SaleDetail, generateReceiptpdf, SaveChequePaymentDto } from '../../../../MODEL/MODEL';
+import { Sale, CartItemDTO, Customer, SaleDetail, generateReceiptpdf, SaveChequePaymentDto, SettleBalance, SaveBankTransferPaymentDto } from '../../../../MODEL/MODEL';
+import { BanktransferpopupComponent } from "../../../../shared/banktransferpopup/banktransferpopup.component";
 
 @Component({
   selector: 'app-add-sale',
@@ -32,13 +33,15 @@ import { Sale, CartItemDTO, Customer, SaleDetail, generateReceiptpdf, SaveCheque
     OldCustomerPopupComponent,
     TooltipDirective,
     ChequePopupComponent,
-    AddCustomerPopupComponent
+    AddCustomerPopupComponent,
+    BanktransferpopupComponent
 ],
   templateUrl: './add-sale.component.html',
   styleUrls: ['./add-sale.component.css']
 })
 
 export class AddSaleComponent {
+
 
   saleProduct: ProductByBarcodeDTO | any = {};
   saledata: Sale | any = {};
@@ -55,7 +58,10 @@ export class AddSaleComponent {
   grandTotal: number = 0;
   receiptPdfData: generateReceiptpdf | any = {};
   barcode: string = '';
+  showBankTransferPopup = false;
+   banktransfer: SaveBankTransferPaymentDto = this.resetBankTransfer();
 
+  
   constructor(
     private saleservice: SaleserviceService,
     private alertservice: AlertService,
@@ -70,6 +76,8 @@ export class AddSaleComponent {
 
   // --------------------------------------
   // Existing code (unchanged)
+
+  //region Fetch Product By Barcode
   fetchProductByBarcode(barcode: string) {
     if (!barcode) return;
 
@@ -100,8 +108,10 @@ export class AddSaleComponent {
       });
   }
 
-  editfromcartdata: ProductByBarcodeDTO[] = [];
+  //endregion
 
+  // #region CART MANAGMENT
+  editfromcartdata: ProductByBarcodeDTO[] = [];
   
   addToCart() {
     if (!this.saleProduct.productID || !this.saleProduct.productName) {
@@ -165,6 +175,7 @@ export class AddSaleComponent {
     }
   }
 
+  // #endregion
   clearSale() {
     this.saleProduct = {};
     this.customer = { paymentMode: '' };
@@ -179,6 +190,7 @@ export class AddSaleComponent {
     return total;
   }
 
+  // #region MAKE THE SALE
   MakeTheSale(): void { 
 
     const sale: Sale = {
@@ -204,6 +216,7 @@ export class AddSaleComponent {
         }
       });
   }
+  // #endregion
 
   updateGrandTotal() {
     let productTotal = this.cart.reduce((sum, item) => sum + item.total, 0);
@@ -319,9 +332,14 @@ export class AddSaleComponent {
     this.cheque = this.resetCheque();
     if (this.customer.paymentMode === '2') {
       this.showChequePopup = true;
+    }else if (this.customer.paymentMode === '3') { 
+      console.log("Bank Transfer Selected");
+      this.showBankTransferPopup = true;
+      console.log("Bank Transfer Selected", this.showBankTransferPopup);
     }
   }
 
+ // #region Cheque Payments
   saveCheque(event: SaveChequePaymentDto) {
     this.cheque = event;   // <--- received from popup
     console.log('Cheque Details:', this.cheque);
@@ -351,7 +369,9 @@ export class AddSaleComponent {
     };
   }
 
+ // #endregion
 
+ // #region Extra Charges
   // 🟩 Extra Charges Handling
 
   showExtraChargesPopup = false;
@@ -414,6 +434,60 @@ isFormValid(): boolean {
       ctrl.get('name')?.value?.trim()
   );
 }
+ // #endregion
+
+//#region Bank Transfer
+
+  cancelBanktransfer() {
+    this.showBankTransferPopup = false;
+    this.customer.paymode = 1;
+  }
+
+  saveBankTransfer(event: any) {
+  console.log("Bank Transfer Details FROM POPUP:", this.banktransfer);
+
+  this.customer.banktransfer = this.banktransfer;
+
+    this.customer.paidAmt = this.banktransfer.amount;
+    this.customer.balanceDue = this.customer.totalAmt - this.customer.paidAmt;
+
+  if (this.banktransfer.amount <= 0) {
+    this.alertservice.showAlert("⚠️ Invalid bank transfer amount.", "error");
+    this.customer.paymode = 1;
+  }
+  this.showBankTransferPopup = false;
+}
+
+resetBankTransfer(): SaveBankTransferPaymentDto {
+  const today = new Date();
+  const formattedDate = today.toISOString().split('T')[0]; // yyyy-MM-dd
+
+  return {
+    company_bank_id: 0,
+    transfer_type: '',
+    amount: 0,
+    currency: 'INR',
+    charges: 0,
+    final_amount_received: undefined,
+    transaction_date: formattedDate,
+    received_date: undefined,
+    posted_date: undefined,
+    status: 'Pending',
+    is_reconciled: false,
+    reconciliation_date: undefined,
+    customer_bank_name: '',
+    customer_account_number: '',
+    customer_ifsc: '',
+    customer_branch: '',
+    utr_number: '',
+    reference_number: '',
+    payment_description: '',
+    remarks: ' ',
+  };
+}
+
+//#endregion
 
 }
+
 

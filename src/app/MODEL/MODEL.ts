@@ -113,6 +113,7 @@ export interface Customer {
   totalAmt?: number;          // @total_amt
   transactionType?: string;   // @transaction_type
   chequepayment?: SaveChequePaymentDto; // optional cheque details
+  banktransfer?: SaveBankTransferPaymentDto;   // optional bank transfer details
 
 }
 

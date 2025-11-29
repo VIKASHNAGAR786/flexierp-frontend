@@ -1,9 +1,10 @@
 <div
     *ngIf="show"
-    class="relative inset-0 z-50 flex items-center justify-center bg-black/70"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
 >
     <div class="bg-[var(--card-bg)] text-[var(--text)] rounded-2xl shadow-2xl w-full 
-        max-w-6xl p-6 fixed border border-[var(--border)] max-h-[90vh] overflow-y-auto">
+           max-w-6xl p-6 relative border border-[var(--border)] max-h-[90vh] overflow-y-auto">
+
         <!-- Close -->
         <button
             (click)="closePopup()"
