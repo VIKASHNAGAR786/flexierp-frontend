@@ -1276,6 +1276,66 @@
   ('base64', 'C:\\Python312\\Lib\\base64.py', 'PYMODULE'),
   ('bdb', 'C:\\Python312\\Lib\\bdb.py', 'PYMODULE'),
   ('bisect', 'C:\\Python312\\Lib\\bisect.py', 'PYMODULE'),
+  ('brotli',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\brotli.py',
+   'PYMODULE'),
+  ('bs4',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\bs4\\__init__.py',
+   'PYMODULE'),
+  ('bs4._deprecation',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\bs4\\_deprecation.py',
+   'PYMODULE'),
+  ('bs4._typing',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\bs4\\_typing.py',
+   'PYMODULE'),
+  ('bs4._warnings',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\bs4\\_warnings.py',
+   'PYMODULE'),
+  ('bs4.builder',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\bs4\\builder\\__init__.py',
+   'PYMODULE'),
+  ('bs4.builder._html5lib',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\bs4\\builder\\_html5lib.py',
+   'PYMODULE'),
+  ('bs4.builder._htmlparser',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\bs4\\builder\\_htmlparser.py',
+   'PYMODULE'),
+  ('bs4.builder._lxml',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\bs4\\builder\\_lxml.py',
+   'PYMODULE'),
+  ('bs4.css',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\bs4\\css.py',
+   'PYMODULE'),
+  ('bs4.dammit',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\bs4\\dammit.py',
+   'PYMODULE'),
+  ('bs4.element',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\bs4\\element.py',
+   'PYMODULE'),
+  ('bs4.exceptions',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\bs4\\exceptions.py',
+   'PYMODULE'),
+  ('bs4.filter',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\bs4\\filter.py',
+   'PYMODULE'),
+  ('bs4.formatter',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\bs4\\formatter.py',
+   'PYMODULE'),
   ('bz2', 'C:\\Python312\\Lib\\bz2.py', 'PYMODULE'),
   ('cProfile', 'C:\\Python312\\Lib\\cProfile.py', 'PYMODULE'),
   ('calendar', 'C:\\Python312\\Lib\\calendar.py', 'PYMODULE'),
@@ -1351,6 +1411,7 @@
    'C:\\Users\\VIKAS '
    'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cffi\\verifier.py',
    'PYMODULE'),
+  ('cgi', 'C:\\Python312\\Lib\\cgi.py', 'PYMODULE'),
   ('charset_normalizer',
    'C:\\Users\\VIKAS '
    'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\charset_normalizer\\__init__.py',
@@ -1496,6 +1557,210 @@
   ('contextlib', 'C:\\Python312\\Lib\\contextlib.py', 'PYMODULE'),
   ('contextvars', 'C:\\Python312\\Lib\\contextvars.py', 'PYMODULE'),
   ('copy', 'C:\\Python312\\Lib\\copy.py', 'PYMODULE'),
+  ('cryptography',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\__init__.py',
+   'PYMODULE'),
+  ('cryptography.__about__',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\__about__.py',
+   'PYMODULE'),
+  ('cryptography.exceptions',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\exceptions.py',
+   'PYMODULE'),
+  ('cryptography.hazmat',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\__init__.py',
+   'PYMODULE'),
+  ('cryptography.hazmat._oid',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\_oid.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.backends',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\backends\\__init__.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.backends.openssl',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\backends\\openssl\\__init__.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.backends.openssl.backend',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\backends\\openssl\\backend.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.bindings',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\bindings\\__init__.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.bindings.openssl',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\bindings\\openssl\\__init__.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.bindings.openssl._conditional',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\bindings\\openssl\\_conditional.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.bindings.openssl.binding',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\bindings\\openssl\\binding.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.decrepit',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\decrepit\\__init__.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.decrepit.ciphers',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\decrepit\\ciphers\\__init__.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.decrepit.ciphers.algorithms',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\decrepit\\ciphers\\algorithms.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\__init__.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives._asymmetric',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\_asymmetric.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives._cipheralgorithm',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\_cipheralgorithm.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives._serialization',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\_serialization.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives.asymmetric',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\asymmetric\\__init__.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives.asymmetric.dh',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\asymmetric\\dh.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives.asymmetric.dsa',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\asymmetric\\dsa.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives.asymmetric.ec',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\asymmetric\\ec.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives.asymmetric.ed25519',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\asymmetric\\ed25519.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives.asymmetric.ed448',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\asymmetric\\ed448.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives.asymmetric.padding',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\asymmetric\\padding.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives.asymmetric.rsa',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\asymmetric\\rsa.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives.asymmetric.types',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\asymmetric\\types.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives.asymmetric.utils',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\asymmetric\\utils.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives.asymmetric.x25519',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\asymmetric\\x25519.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives.asymmetric.x448',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\asymmetric\\x448.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives.ciphers',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\ciphers\\__init__.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives.ciphers.algorithms',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\ciphers\\algorithms.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives.ciphers.base',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\ciphers\\base.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives.ciphers.modes',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\ciphers\\modes.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives.constant_time',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\constant_time.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives.hashes',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\hashes.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives.padding',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\padding.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives.serialization',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\serialization\\__init__.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives.serialization.base',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\serialization\\base.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives.serialization.pkcs12',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\serialization\\pkcs12.py',
+   'PYMODULE'),
+  ('cryptography.hazmat.primitives.serialization.ssh',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\hazmat\\primitives\\serialization\\ssh.py',
+   'PYMODULE'),
+  ('cryptography.utils',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\utils.py',
+   'PYMODULE'),
+  ('cryptography.x509',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\x509\\__init__.py',
+   'PYMODULE'),
+  ('cryptography.x509.base',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\x509\\base.py',
+   'PYMODULE'),
+  ('cryptography.x509.certificate_transparency',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\x509\\certificate_transparency.py',
+   'PYMODULE'),
+  ('cryptography.x509.extensions',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\x509\\extensions.py',
+   'PYMODULE'),
+  ('cryptography.x509.general_name',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\x509\\general_name.py',
+   'PYMODULE'),
+  ('cryptography.x509.name',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\x509\\name.py',
+   'PYMODULE'),
+  ('cryptography.x509.oid',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\x509\\oid.py',
+   'PYMODULE'),
+  ('cryptography.x509.verification',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\cryptography\\x509\\verification.py',
+   'PYMODULE'),
   ('csv', 'C:\\Python312\\Lib\\csv.py', 'PYMODULE'),
   ('ctypes', 'C:\\Python312\\Lib\\ctypes\\__init__.py', 'PYMODULE'),
   ('ctypes._aix', 'C:\\Python312\\Lib\\ctypes\\_aix.py', 'PYMODULE'),
@@ -2947,6 +3212,122 @@
   ('html', 'C:\\Python312\\Lib\\html\\__init__.py', 'PYMODULE'),
   ('html.entities', 'C:\\Python312\\Lib\\html\\entities.py', 'PYMODULE'),
   ('html.parser', 'C:\\Python312\\Lib\\html\\parser.py', 'PYMODULE'),
+  ('html5lib',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\__init__.py',
+   'PYMODULE'),
+  ('html5lib._ihatexml',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\_ihatexml.py',
+   'PYMODULE'),
+  ('html5lib._inputstream',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\_inputstream.py',
+   'PYMODULE'),
+  ('html5lib._tokenizer',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\_tokenizer.py',
+   'PYMODULE'),
+  ('html5lib._trie',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\_trie\\__init__.py',
+   'PYMODULE'),
+  ('html5lib._trie._base',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\_trie\\_base.py',
+   'PYMODULE'),
+  ('html5lib._trie.py',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\_trie\\py.py',
+   'PYMODULE'),
+  ('html5lib._utils',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\_utils.py',
+   'PYMODULE'),
+  ('html5lib.constants',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\constants.py',
+   'PYMODULE'),
+  ('html5lib.filters',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\filters\\__init__.py',
+   'PYMODULE'),
+  ('html5lib.filters.alphabeticalattributes',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\filters\\alphabeticalattributes.py',
+   'PYMODULE'),
+  ('html5lib.filters.base',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\filters\\base.py',
+   'PYMODULE'),
+  ('html5lib.filters.inject_meta_charset',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\filters\\inject_meta_charset.py',
+   'PYMODULE'),
+  ('html5lib.filters.optionaltags',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\filters\\optionaltags.py',
+   'PYMODULE'),
+  ('html5lib.filters.sanitizer',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\filters\\sanitizer.py',
+   'PYMODULE'),
+  ('html5lib.filters.whitespace',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\filters\\whitespace.py',
+   'PYMODULE'),
+  ('html5lib.html5parser',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\html5parser.py',
+   'PYMODULE'),
+  ('html5lib.serializer',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\serializer.py',
+   'PYMODULE'),
+  ('html5lib.treebuilders',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\treebuilders\\__init__.py',
+   'PYMODULE'),
+  ('html5lib.treebuilders.base',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\treebuilders\\base.py',
+   'PYMODULE'),
+  ('html5lib.treebuilders.dom',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\treebuilders\\dom.py',
+   'PYMODULE'),
+  ('html5lib.treebuilders.etree',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\treebuilders\\etree.py',
+   'PYMODULE'),
+  ('html5lib.treebuilders.etree_lxml',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\treebuilders\\etree_lxml.py',
+   'PYMODULE'),
+  ('html5lib.treewalkers',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\treewalkers\\__init__.py',
+   'PYMODULE'),
+  ('html5lib.treewalkers.base',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\treewalkers\\base.py',
+   'PYMODULE'),
+  ('html5lib.treewalkers.dom',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\treewalkers\\dom.py',
+   'PYMODULE'),
+  ('html5lib.treewalkers.etree',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\treewalkers\\etree.py',
+   'PYMODULE'),
+  ('html5lib.treewalkers.etree_lxml',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\treewalkers\\etree_lxml.py',
+   'PYMODULE'),
+  ('html5lib.treewalkers.genshi',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\html5lib\\treewalkers\\genshi.py',
+   'PYMODULE'),
   ('http', 'C:\\Python312\\Lib\\http\\__init__.py', 'PYMODULE'),
   ('http.client', 'C:\\Python312\\Lib\\http\\client.py', 'PYMODULE'),
   ('http.cookiejar', 'C:\\Python312\\Lib\\http\\cookiejar.py', 'PYMODULE'),
@@ -3804,6 +4185,102 @@
   ('logging', 'C:\\Python312\\Lib\\logging\\__init__.py', 'PYMODULE'),
   ('logging.config', 'C:\\Python312\\Lib\\logging\\config.py', 'PYMODULE'),
   ('logging.handlers', 'C:\\Python312\\Lib\\logging\\handlers.py', 'PYMODULE'),
+  ('lxml',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\lxml\\__init__.py',
+   'PYMODULE'),
+  ('lxml.ElementInclude',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\lxml\\ElementInclude.py',
+   'PYMODULE'),
+  ('lxml.cssselect',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\lxml\\cssselect.py',
+   'PYMODULE'),
+  ('lxml.doctestcompare',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\lxml\\doctestcompare.py',
+   'PYMODULE'),
+  ('lxml.html',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\lxml\\html\\__init__.py',
+   'PYMODULE'),
+  ('lxml.html.ElementSoup',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\lxml\\html\\ElementSoup.py',
+   'PYMODULE'),
+  ('lxml.html._diffcommand',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\lxml\\html\\_diffcommand.py',
+   'PYMODULE'),
+  ('lxml.html._html5builder',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\lxml\\html\\_html5builder.py',
+   'PYMODULE'),
+  ('lxml.html._setmixin',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\lxml\\html\\_setmixin.py',
+   'PYMODULE'),
+  ('lxml.html.builder',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\lxml\\html\\builder.py',
+   'PYMODULE'),
+  ('lxml.html.clean',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\lxml\\html\\clean.py',
+   'PYMODULE'),
+  ('lxml.html.defs',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\lxml\\html\\defs.py',
+   'PYMODULE'),
+  ('lxml.html.formfill',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\lxml\\html\\formfill.py',
+   'PYMODULE'),
+  ('lxml.html.html5parser',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\lxml\\html\\html5parser.py',
+   'PYMODULE'),
+  ('lxml.html.soupparser',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\lxml\\html\\soupparser.py',
+   'PYMODULE'),
+  ('lxml.html.usedoctest',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\lxml\\html\\usedoctest.py',
+   'PYMODULE'),
+  ('lxml.includes',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\lxml\\includes\\__init__.py',
+   'PYMODULE'),
+  ('lxml.includes.extlibs',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\lxml\\includes\\extlibs\\__init__.py',
+   'PYMODULE'),
+  ('lxml.includes.libexslt',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\lxml\\includes\\libexslt\\__init__.py',
+   'PYMODULE'),
+  ('lxml.includes.libxml',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\lxml\\includes\\libxml\\__init__.py',
+   'PYMODULE'),
+  ('lxml.includes.libxslt',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\lxml\\includes\\libxslt\\__init__.py',
+   'PYMODULE'),
+  ('lxml.isoschematron',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\lxml\\isoschematron\\__init__.py',
+   'PYMODULE'),
+  ('lxml.pyclasslookup',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\lxml\\pyclasslookup.py',
+   'PYMODULE'),
+  ('lxml.usedoctest',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\lxml\\usedoctest.py',
+   'PYMODULE'),
   ('lzma', 'C:\\Python312\\Lib\\lzma.py', 'PYMODULE'),
   ('markdown_it',
    'C:\\Users\\VIKAS '
@@ -4094,10 +4571,6 @@
    'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\mdurl\\_url.py',
    'PYMODULE'),
   ('mimetypes', 'C:\\Python312\\Lib\\mimetypes.py', 'PYMODULE'),
-  ('models',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\Desktop\\flexierp-frontend\\Pyhon-Services\\models.py',
-   'PYMODULE'),
   ('multiprocessing',
    'C:\\Python312\\Lib\\multiprocessing\\__init__.py',
    'PYMODULE'),
@@ -7471,389 +7944,17 @@
    'C:\\Users\\VIKAS '
    'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\__init__.py',
    'PYMODULE'),
-  ('reportlab.graphics',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\__init__.py',
-   'PYMODULE'),
-  ('reportlab.graphics.charts',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\charts\\__init__.py',
-   'PYMODULE'),
-  ('reportlab.graphics.charts.areas',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\charts\\areas.py',
-   'PYMODULE'),
-  ('reportlab.graphics.charts.legends',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\charts\\legends.py',
-   'PYMODULE'),
-  ('reportlab.graphics.charts.piecharts',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\charts\\piecharts.py',
-   'PYMODULE'),
-  ('reportlab.graphics.charts.textlabels',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\charts\\textlabels.py',
-   'PYMODULE'),
-  ('reportlab.graphics.charts.utils',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\charts\\utils.py',
-   'PYMODULE'),
-  ('reportlab.graphics.charts.utils3d',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\charts\\utils3d.py',
-   'PYMODULE'),
-  ('reportlab.graphics.renderPDF',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\renderPDF.py',
-   'PYMODULE'),
-  ('reportlab.graphics.renderPM',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\renderPM.py',
-   'PYMODULE'),
-  ('reportlab.graphics.renderPS',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\renderPS.py',
-   'PYMODULE'),
-  ('reportlab.graphics.renderSVG',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\renderSVG.py',
-   'PYMODULE'),
-  ('reportlab.graphics.renderbase',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\renderbase.py',
-   'PYMODULE'),
-  ('reportlab.graphics.shapes',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\shapes.py',
-   'PYMODULE'),
-  ('reportlab.graphics.testshapes',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\testshapes.py',
-   'PYMODULE'),
-  ('reportlab.graphics.transform',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\transform.py',
-   'PYMODULE'),
-  ('reportlab.graphics.utils',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\utils.py',
-   'PYMODULE'),
-  ('reportlab.graphics.widgetbase',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\widgetbase.py',
-   'PYMODULE'),
-  ('reportlab.graphics.widgets',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\widgets\\__init__.py',
-   'PYMODULE'),
-  ('reportlab.graphics.widgets.flags',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\widgets\\flags.py',
-   'PYMODULE'),
-  ('reportlab.graphics.widgets.markers',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\widgets\\markers.py',
-   'PYMODULE'),
-  ('reportlab.graphics.widgets.signsandsymbols',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\graphics\\widgets\\signsandsymbols.py',
-   'PYMODULE'),
   ('reportlab.lib',
    'C:\\Users\\VIKAS '
    'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\__init__.py',
-   'PYMODULE'),
-  ('reportlab.lib.PyFontify',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\PyFontify.py',
-   'PYMODULE'),
-  ('reportlab.lib.abag',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\abag.py',
-   'PYMODULE'),
-  ('reportlab.lib.arciv',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\arciv.py',
-   'PYMODULE'),
-  ('reportlab.lib.attrmap',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\attrmap.py',
-   'PYMODULE'),
-  ('reportlab.lib.boxstuff',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\boxstuff.py',
-   'PYMODULE'),
-  ('reportlab.lib.colors',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\colors.py',
-   'PYMODULE'),
-  ('reportlab.lib.corp',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\corp.py',
-   'PYMODULE'),
-  ('reportlab.lib.enums',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\enums.py',
-   'PYMODULE'),
-  ('reportlab.lib.fonts',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\fonts.py',
-   'PYMODULE'),
-  ('reportlab.lib.formatters',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\formatters.py',
-   'PYMODULE'),
-  ('reportlab.lib.geomutils',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\geomutils.py',
-   'PYMODULE'),
-  ('reportlab.lib.logger',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\logger.py',
-   'PYMODULE'),
-  ('reportlab.lib.normalDate',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\normalDate.py',
    'PYMODULE'),
   ('reportlab.lib.pagesizes',
    'C:\\Users\\VIKAS '
    'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\pagesizes.py',
    'PYMODULE'),
-  ('reportlab.lib.pdfencrypt',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\pdfencrypt.py',
-   'PYMODULE'),
-  ('reportlab.lib.randomtext',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\randomtext.py',
-   'PYMODULE'),
-  ('reportlab.lib.rl_accel',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\rl_accel.py',
-   'PYMODULE'),
-  ('reportlab.lib.rl_safe_eval',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\rl_safe_eval.py',
-   'PYMODULE'),
-  ('reportlab.lib.rltempfile',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\rltempfile.py',
-   'PYMODULE'),
-  ('reportlab.lib.rparsexml',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\rparsexml.py',
-   'PYMODULE'),
-  ('reportlab.lib.sequencer',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\sequencer.py',
-   'PYMODULE'),
-  ('reportlab.lib.styles',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\styles.py',
-   'PYMODULE'),
-  ('reportlab.lib.textsplit',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\textsplit.py',
-   'PYMODULE'),
   ('reportlab.lib.units',
    'C:\\Users\\VIKAS '
    'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\units.py',
-   'PYMODULE'),
-  ('reportlab.lib.utils',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\utils.py',
-   'PYMODULE'),
-  ('reportlab.lib.validators',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\lib\\validators.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\__init__.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase._fontdata',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase._fontdata_enc_macexpert',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_enc_macexpert.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase._fontdata_enc_macroman',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_enc_macroman.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase._fontdata_enc_pdfdoc',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_enc_pdfdoc.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase._fontdata_enc_standard',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_enc_standard.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase._fontdata_enc_symbol',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_enc_symbol.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase._fontdata_enc_winansi',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_enc_winansi.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase._fontdata_enc_zapfdingbats',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_enc_zapfdingbats.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase._fontdata_widths_courier',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_courier.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase._fontdata_widths_courierbold',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_courierbold.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase._fontdata_widths_courierboldoblique',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_courierboldoblique.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase._fontdata_widths_courieroblique',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_courieroblique.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase._fontdata_widths_helvetica',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_helvetica.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase._fontdata_widths_helveticabold',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_helveticabold.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase._fontdata_widths_helveticaboldoblique',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_helveticaboldoblique.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase._fontdata_widths_helveticaoblique',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_helveticaoblique.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase._fontdata_widths_symbol',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_symbol.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase._fontdata_widths_timesbold',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_timesbold.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase._fontdata_widths_timesbolditalic',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_timesbolditalic.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase._fontdata_widths_timesitalic',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_timesitalic.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase._fontdata_widths_timesroman',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_timesroman.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase._fontdata_widths_zapfdingbats',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_fontdata_widths_zapfdingbats.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase._glyphlist',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\_glyphlist.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase.acroform',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\acroform.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase.pdfdoc',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\pdfdoc.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase.pdfmetrics',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\pdfmetrics.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase.pdfutils',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\pdfutils.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase.rl_codecs',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\rl_codecs.py',
-   'PYMODULE'),
-  ('reportlab.pdfbase.ttfonts',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfbase\\ttfonts.py',
-   'PYMODULE'),
-  ('reportlab.pdfgen',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfgen\\__init__.py',
-   'PYMODULE'),
-  ('reportlab.pdfgen.canvas',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfgen\\canvas.py',
-   'PYMODULE'),
-  ('reportlab.pdfgen.pathobject',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfgen\\pathobject.py',
-   'PYMODULE'),
-  ('reportlab.pdfgen.pdfgeom',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfgen\\pdfgeom.py',
-   'PYMODULE'),
-  ('reportlab.pdfgen.pdfimages',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfgen\\pdfimages.py',
-   'PYMODULE'),
-  ('reportlab.pdfgen.textobject',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\pdfgen\\textobject.py',
-   'PYMODULE'),
-  ('reportlab.platypus',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\platypus\\__init__.py',
-   'PYMODULE'),
-  ('reportlab.platypus.doctemplate',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\platypus\\doctemplate.py',
-   'PYMODULE'),
-  ('reportlab.platypus.flowables',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\platypus\\flowables.py',
-   'PYMODULE'),
-  ('reportlab.platypus.frames',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\platypus\\frames.py',
-   'PYMODULE'),
-  ('reportlab.platypus.multicol',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\platypus\\multicol.py',
-   'PYMODULE'),
-  ('reportlab.platypus.paragraph',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\platypus\\paragraph.py',
-   'PYMODULE'),
-  ('reportlab.platypus.paraparser',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\platypus\\paraparser.py',
-   'PYMODULE'),
-  ('reportlab.platypus.tables',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\platypus\\tables.py',
-   'PYMODULE'),
-  ('reportlab.platypus.xpreformatted',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\platypus\\xpreformatted.py',
-   'PYMODULE'),
-  ('reportlab.rl_config',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\rl_config.py',
-   'PYMODULE'),
-  ('reportlab.rl_settings',
-   'C:\\Users\\VIKAS '
-   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\reportlab\\rl_settings.py',
    'PYMODULE'),
   ('requests',
    'C:\\Users\\VIKAS '
@@ -8786,6 +8887,34 @@
    'C:\\Users\\VIKAS '
    'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\sortedcontainers\\sortedset.py',
    'PYMODULE'),
+  ('soupsieve',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\soupsieve\\__init__.py',
+   'PYMODULE'),
+  ('soupsieve.__meta__',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\soupsieve\\__meta__.py',
+   'PYMODULE'),
+  ('soupsieve.css_match',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\soupsieve\\css_match.py',
+   'PYMODULE'),
+  ('soupsieve.css_parser',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\soupsieve\\css_parser.py',
+   'PYMODULE'),
+  ('soupsieve.css_types',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\soupsieve\\css_types.py',
+   'PYMODULE'),
+  ('soupsieve.pretty',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\soupsieve\\pretty.py',
+   'PYMODULE'),
+  ('soupsieve.util',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\soupsieve\\util.py',
+   'PYMODULE'),
   ('sqlite3', 'C:\\Python312\\Lib\\sqlite3\\__init__.py', 'PYMODULE'),
   ('sqlite3.__main__', 'C:\\Python312\\Lib\\sqlite3\\__main__.py', 'PYMODULE'),
   ('sqlite3.dbapi2', 'C:\\Python312\\Lib\\sqlite3\\dbapi2.py', 'PYMODULE'),
@@ -9354,6 +9483,94 @@
    'C:\\Users\\VIKAS '
    'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\typing_inspection\\typing_objects.py',
    'PYMODULE'),
+  ('tzdata',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\tzdata\\__init__.py',
+   'PYMODULE'),
+  ('tzdata.zoneinfo',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\tzdata\\zoneinfo\\__init__.py',
+   'PYMODULE'),
+  ('tzdata.zoneinfo.Africa',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\tzdata\\zoneinfo\\Africa\\__init__.py',
+   'PYMODULE'),
+  ('tzdata.zoneinfo.America',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\tzdata\\zoneinfo\\America\\__init__.py',
+   'PYMODULE'),
+  ('tzdata.zoneinfo.America.Argentina',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\tzdata\\zoneinfo\\America\\Argentina\\__init__.py',
+   'PYMODULE'),
+  ('tzdata.zoneinfo.America.Indiana',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\tzdata\\zoneinfo\\America\\Indiana\\__init__.py',
+   'PYMODULE'),
+  ('tzdata.zoneinfo.America.Kentucky',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\tzdata\\zoneinfo\\America\\Kentucky\\__init__.py',
+   'PYMODULE'),
+  ('tzdata.zoneinfo.America.North_Dakota',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\tzdata\\zoneinfo\\America\\North_Dakota\\__init__.py',
+   'PYMODULE'),
+  ('tzdata.zoneinfo.Antarctica',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\tzdata\\zoneinfo\\Antarctica\\__init__.py',
+   'PYMODULE'),
+  ('tzdata.zoneinfo.Arctic',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\tzdata\\zoneinfo\\Arctic\\__init__.py',
+   'PYMODULE'),
+  ('tzdata.zoneinfo.Asia',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\tzdata\\zoneinfo\\Asia\\__init__.py',
+   'PYMODULE'),
+  ('tzdata.zoneinfo.Atlantic',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\tzdata\\zoneinfo\\Atlantic\\__init__.py',
+   'PYMODULE'),
+  ('tzdata.zoneinfo.Australia',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\tzdata\\zoneinfo\\Australia\\__init__.py',
+   'PYMODULE'),
+  ('tzdata.zoneinfo.Brazil',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\tzdata\\zoneinfo\\Brazil\\__init__.py',
+   'PYMODULE'),
+  ('tzdata.zoneinfo.Canada',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\tzdata\\zoneinfo\\Canada\\__init__.py',
+   'PYMODULE'),
+  ('tzdata.zoneinfo.Chile',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\tzdata\\zoneinfo\\Chile\\__init__.py',
+   'PYMODULE'),
+  ('tzdata.zoneinfo.Etc',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\tzdata\\zoneinfo\\Etc\\__init__.py',
+   'PYMODULE'),
+  ('tzdata.zoneinfo.Europe',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\tzdata\\zoneinfo\\Europe\\__init__.py',
+   'PYMODULE'),
+  ('tzdata.zoneinfo.Indian',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\tzdata\\zoneinfo\\Indian\\__init__.py',
+   'PYMODULE'),
+  ('tzdata.zoneinfo.Mexico',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\tzdata\\zoneinfo\\Mexico\\__init__.py',
+   'PYMODULE'),
+  ('tzdata.zoneinfo.Pacific',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\tzdata\\zoneinfo\\Pacific\\__init__.py',
+   'PYMODULE'),
+  ('tzdata.zoneinfo.US',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\tzdata\\zoneinfo\\US\\__init__.py',
+   'PYMODULE'),
   ('unittest', 'C:\\Python312\\Lib\\unittest\\__init__.py', 'PYMODULE'),
   ('unittest._log', 'C:\\Python312\\Lib\\unittest\\_log.py', 'PYMODULE'),
   ('unittest.async_case',
@@ -9748,6 +9965,18 @@
    'C:\\Users\\VIKAS '
    'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\webcolors\\_types.py',
    'PYMODULE'),
+  ('webencodings',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\webencodings\\__init__.py',
+   'PYMODULE'),
+  ('webencodings.labels',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\webencodings\\labels.py',
+   'PYMODULE'),
+  ('webencodings.x_user_defined',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\webencodings\\x_user_defined.py',
+   'PYMODULE'),
   ('wheel',
    'C:\\Users\\VIKAS '
    'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\wheel\\__init__.py',
@@ -10130,4 +10359,16 @@
   ('zoneinfo._tzpath', 'C:\\Python312\\Lib\\zoneinfo\\_tzpath.py', 'PYMODULE'),
   ('zoneinfo._zoneinfo',
    'C:\\Python312\\Lib\\zoneinfo\\_zoneinfo.py',
+   'PYMODULE'),
+  ('zopfli',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\zopfli\\__init__.py',
+   'PYMODULE'),
+  ('zopfli._version',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\zopfli\\_version.py',
+   'PYMODULE'),
+  ('zopfli.zlib',
+   'C:\\Users\\VIKAS '
+   'NAGAR\\AppData\\Roaming\\Python\\Python312\\site-packages\\zopfli\\zlib.py',
    'PYMODULE')])

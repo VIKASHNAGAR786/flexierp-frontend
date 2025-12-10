@@ -267,6 +267,10 @@ html.dark-theme {
   --input-border: #334155;
 
   --modal-overlay: rgba(0,0,0,0.6);
+
+   --total-color: #00ffee;          /* neon cyan for strong visibility */
+  --total-shadow: 0 0 6px #00ffee; /* glowing effect */
+
   
 }
 
@@ -353,6 +357,10 @@ html.light-theme {
   --modal-overlay: rgba(0,0,0,0.2);
   --danger: #ef4444; /* Tailwind Red-500 */
 --danger-hover: rgba(239, 68, 68, 0.18);
+
+ --total-color: #00bcd4;          /* cyan for contrast on white */
+  --total-shadow: 0 0 4px #00bcd4; /* subtle glow */
+
 }
 
 

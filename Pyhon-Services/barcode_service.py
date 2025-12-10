@@ -39,10 +39,19 @@ else:
 
 font_path = os.path.join(base_path, "fonts", "DejaVuSans.ttf")
 
+SUPPORTED_BARCODES = ["code128", "ean13"]
+
+if getattr(sys, 'frozen', False):
+    base_path = sys._MEIPASS
+else:
+    base_path = os.path.dirname(__file__)
+
+font_path = os.path.join(base_path, "fonts", "DejaVuSans.ttf")
+
 @app.get("/barcode/png/{text}")
 def generate_barcode_png(
     text: str,
-    barcode_type: str = Query("code128"),
+    barcode_type: str = Query("ean13"),   # default to EAN-13 now
     module_width: float = Query(0.2),
     module_height: float = Query(15.0)
 ):
@@ -50,7 +59,15 @@ def generate_barcode_png(
         barcode_type = barcode_type.lower()
         if barcode_type not in SUPPORTED_BARCODES:
             raise HTTPException(status_code=400, detail=f"Unsupported barcode type")
-        
+
+        # EAN-13 requires exactly 12 digits (check digit auto-calculated)
+        if barcode_type == "ean13":
+            if not text.isdigit() or len(text) != 12:
+                raise HTTPException(
+                    status_code=400,
+                    detail="EAN-13 requires a 12-digit numeric string"
+                )
+
         barcode_class = barcode.get_barcode_class(barcode_type)
         ean = barcode_class(text, writer=ImageWriter())
         ean.writer.set_options({
@@ -62,7 +79,6 @@ def generate_barcode_png(
             "font_path": font_path
         })
 
-
         buffer = BytesIO()
         ean.write(buffer)
         buffer.seek(0)
@@ -71,7 +87,7 @@ def generate_barcode_png(
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Barcode generation failed: {str(e)}")
-
+    
 @app.post("/barcode/pdf")
 def generate_barcode_pdf(
     barcode_items: List[Dict],
@@ -130,25 +146,29 @@ def generate_barcode_pdf(
 
         # helper to generate barcode image bytes (PIL image) and return temp path
         def make_barcode_image(code_value: str, write_text: bool):
-            # Using code128 (change as needed). The writer returns PNG bytes.
-            ean = barcode.get("code128", code_value, writer=ImageWriter())
+    # EAN-13 requires 12 digits input (numeric only)
+            if not code_value.isdigit() or len(code_value) != 12:
+                raise HTTPException(
+                    status_code=400,
+                    detail="EAN-13 requires a 12-digit numeric string"
+                )
+
+            ean = barcode.get("ean13", code_value, writer=ImageWriter())
             buf = BytesIO()
             ean.write(buf, {
                 "write_text": write_text,
                 "module_width": 0.21,
                 "module_height": 12,
                 "quiet_zone": 1,
-                # font_path / font_size can be provided if needed
             })
             buf.seek(0)
             img = Image.open(buf).convert("RGB")
-            # Save to a temp file so fpdf.image can read it
+
             tmp = tempfile.NamedTemporaryFile(suffix=".png", delete=False)
             img.save(tmp, format="PNG")
             tmp.flush()
             tmp.close()
-            return tmp.name, img.size  # return path and (w,h)
-
+            return tmp.name, img.size
         # iterate items and place them page by page
         tmp_files_to_cleanup = []
         try:
