@@ -1,91 +1,322 @@
-<div class="p-6 space-y-6">
-
-  <!-- Header -->
-  <div class="flex flex-wrap items-center justify-between gap-4 border-b pb-3">
-    <h2 class="text-2xl font-bold text-gray-800">Template Editor</h2>
-
-    <div class="flex items-center gap-4">
-      <!-- Dropdown -->
-      <select
-        [(ngModel)]="selectedTemplateKey"
-        class="px-3 py-2 border rounded-lg text-gray-700 bg-white shadow"
-      >
-        <option
-          *ngFor="let template of alltemplates"
-          [value]="template.key!"
-          [attr.selectedid]="template.id"
-        >
-          {{ template.name | titlecase }}
-        </option>
-      </select>
-
-      <!-- Save Button -->
-      <button
-        (click)="saveTemplate()"
-        class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow transition"
-      >
-        Save Template
-      </button>
+<div class="p-4 md:p-6 space-y-4 md:space-y-6 bg-gray-50 min-h-screen">
+  
+  <!-- HEADER -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-white rounded-xl shadow-sm border">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+        <i class="bi bi-layout-text-window text-blue-600"></i>
+        Template Editor
+      </h1>
+      <p class="text-gray-600 text-sm mt-1">Design your {{selectedTemplateKey | titlecase}} templates easily</p>
+    </div>
+    
+    <div class="flex flex-wrap items-center gap-3">
+      <!-- Undo/Redo -->
+      <div class="flex gap-1">
+        <button (click)="undo()" [disabled]="currentHistoryIndex <= 0"
+          class="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+          title="Undo">
+          <i class="bi bi-arrow-counterclockwise"></i>
+        </button>
+        <button (click)="redo()" [disabled]="currentHistoryIndex >= contentHistory.length - 1"
+          class="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+          title="Redo">
+          <i class="bi bi-arrow-clockwise"></i>
+        </button>
+      </div>
+      
+      <!-- Template Selector -->
+      <div class="relative">
+        <select [(ngModel)]="selectedTemplateKey"
+          class="pl-10 pr-8 py-2.5 border rounded-lg text-gray-700 bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none w-full sm:w-auto"
+          (change)="GetTemplateAsync()">
+          <option *ngFor="let template of alltemplates" [value]="template.key!">
+            <div class="flex items-center gap-2">
+              <i class="bi" [class]="getTemplateIcon(template.key)"></i>
+              {{ template.name | titlecase }}
+            </div>
+          </option>
+        </select>
+        <i class="bi bi-file-earmark-text absolute left-3 top-3 text-gray-400"></i>
+        <i class="bi bi-chevron-down absolute right-3 top-3 text-gray-400"></i>
+      </div>
+      
+      <!-- Action Buttons -->
+      <div class="flex gap-2">
+        <button (click)="togglePreview()" [class.bg-blue-600]="isPreviewVisible"
+          class="px-4 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium rounded-lg shadow-sm transition flex items-center gap-2">
+          <i class="bi bi-eye"></i>
+          {{ isPreviewVisible ? 'Hide Preview' : 'Show Preview' }}
+        </button>
+        <button (click)="saveTemplate()"
+          class="px-5 py-2.5 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg shadow-sm transition flex items-center gap-2">
+          <i class="bi bi-check-circle"></i>
+          Save Template
+        </button>
+      </div>
     </div>
   </div>
 
-  <!-- Main Grid -->
-  <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-
-    <!-- Sidebar -->
-    <div class="lg:col-span-1 border rounded-xl p-4 shadow bg-[var(--card)] h-[550px] flex flex-col">
-      <h3 class="font-semibold mb-3 text-gray-700">
-        {{ selectedTemplateKey | titlecase }}
-      </h3>
-
-      <!-- Search -->
-      <input
-        type="text"
-        [(ngModel)]="addonSearch"
-        placeholder="Search addons..."
-        class="mb-3 px-3 py-2 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-
-      <!-- Addon List -->
-      <div class="overflow-y-auto flex-1">
-        <ul class="space-y-2 text-sm text-gray-700">
-          <li
-            *ngFor="let field of (selectedTemplate | keyvalue) | filterBySearch:addonSearch"
-            (click)="insertField(field.value)"
-            class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-100 cursor-pointer transition"
-          >
-            <span class="font-medium">{{ field.key }}</span>
-            <i class="bi bi-plus-circle text-blue-600 hover:text-blue-800"></i>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Editor -->
-    <div class="lg:col-span-3">
-      <div class="p-6 border rounded-xl shadow bg-white flex flex-col items-center">
-        <div
-          class="border rounded overflow-auto"
-          style="width:1000px; height:1414px;"
-        >
-          <editor
-            [(ngModel)]="templateContent"
-            [init]="editorInit"
-            [licenseKey]="licenseKey"
-            class="w-full h-full"
-          ></editor>
+  <!-- MAIN CONTENT GRID -->
+  <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+    
+    <!-- LEFT SIDEBAR - FIELDS PANEL -->
+    <div class="xl:col-span-3 space-y-6">
+      
+      <!-- Search Box -->
+      <div class="bg-white p-4 rounded-xl shadow-sm border">
+        <div class="relative">
+          <i class="bi bi-search absolute left-3 top-3 text-gray-400"></i>
+          <input type="text" [(ngModel)]="addonSearch" 
+            placeholder="Search fields..."
+            class="w-full pl-10 pr-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
         </div>
-
-        <div class="mt-4 w-full flex justify-end">
-          <button
-            (click)="saveTemplate()"
-            class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow transition"
-          >
-            Save Template
+        
+        <!-- Categories Filter -->
+        <div class="mt-4">
+          <div class="flex flex-wrap gap-2">
+            <button *ngFor="let cat of fieldCategories"
+              (click)="selectedCategory = cat.id"
+              [class.bg-blue-600]="selectedCategory === cat.id"
+              [class]="selectedCategory === cat.id ? 'text-white' : cat.color"
+              class="px-3 py-1.5 rounded-full text-sm font-medium transition flex items-center gap-1.5">
+              <i [class]="cat.icon"></i>
+              {{ cat.name }}
+            </button>
+            <button (click)="selectedCategory = 'all'"
+              [class.bg-blue-600]="selectedCategory === 'all'"
+              class="px-3 py-1.5 bg-gray-200 hover:bg-gray-300 rounded-full text-sm font-medium transition">
+              All Fields
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Recently Used Fields -->
+      <div *ngIf="recentlyUsedFields.length > 0" class="bg-white p-4 rounded-xl shadow-sm border">
+        <h3 class="font-semibold text-gray-700 mb-3 flex items-center gap-2">
+          <i class="bi bi-clock-history text-orange-500"></i>
+          Recently Used
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          <button *ngFor="let field of recentlyUsedFields"
+            (click)="insertField(field, getFieldName(field))"
+            class="px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-lg text-sm transition flex items-center gap-1.5">
+            <i class="bi bi-plus-circle text-xs"></i>
+            {{ getFieldName(field) }}
+          </button>
+        </div>
+      </div>
+      
+      <!-- Fields List -->
+      <div class="bg-white p-4 rounded-xl shadow-sm border h-[500px] flex flex-col">
+        <h3 class="font-semibold text-gray-700 mb-3 flex items-center justify-between">
+          <span>Available Fields</span>
+          <span class="text-sm font-normal text-gray-500">{{ filteredFields.length }} fields</span>
+        </h3>
+        
+        <div class="overflow-y-auto flex-1">
+          <div class="space-y-2">
+            <div *ngFor="let field of filteredFields"
+              (click)="insertField(field.value, field.key)"
+              class="group p-3 rounded-lg border hover:border-blue-300 hover:bg-blue-50 cursor-pointer transition-all duration-200 flex items-center justify-between"
+              [cdkDragData]="field.value"
+              cdkDrag>
+              <div class="flex items-center gap-3">
+                <div class="p-2 bg-gray-100 rounded-lg group-hover:bg-blue-100">
+                  <i class="bi bi-card-text text-gray-600 group-hover:text-blue-600"></i>
+                </div>
+                <div>
+                  <p class="font-medium text-gray-800">{{ field.key }}</p>
+                  <p class="text-xs text-gray-500">Insert: <code class="bg-gray-100 px-1 rounded">{{ field.value }}</code></p>
+                </div>
+              </div>
+              <i class="bi bi-plus-circle text-blue-500 opacity-0 group-hover:opacity-100 transition"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Quick Layouts -->
+      <div class="bg-white p-4 rounded-xl shadow-sm border">
+        <h3 class="font-semibold text-gray-700 mb-3 flex items-center gap-2">
+          <i class="bi bi-lightning text-yellow-500"></i>
+          Quick Layouts
+        </h3>
+        <div class="grid grid-cols-2 gap-2">
+          <button (click)="insertCommonLayout('header')"
+            class="p-3 border rounded-lg hover:border-blue-300 hover:bg-blue-50 text-left transition">
+            <i class="bi bi-type-h1 text-blue-600 mb-1 block"></i>
+            <span class="font-medium text-sm">Header</span>
+          </button>
+          <button (click)="insertCommonLayout('footer')"
+            class="p-3 border rounded-lg hover:border-blue-300 hover:bg-blue-50 text-left transition">
+            <i class="bi bi-type-h6 text-blue-600 mb-1 block"></i>
+            <span class="font-medium text-sm">Footer</span>
+          </button>
+          <button (click)="insertCommonLayout('table')"
+            class="p-3 border rounded-lg hover:border-blue-300 hover:bg-blue-50 text-left transition">
+            <i class="bi bi-table text-blue-600 mb-1 block"></i>
+            <span class="font-medium text-sm">Table</span>
+          </button>
+          <button (click)="insertCommonLayout('signature')"
+            class="p-3 border rounded-lg hover:border-blue-300 hover:bg-blue-50 text-left transition">
+            <i class="bi bi-pen text-blue-600 mb-1 block"></i>
+            <span class="font-medium text-sm">Signature</span>
           </button>
         </div>
       </div>
     </div>
-
-  </div>
-</div>
+    
+    <!-- MAIN EDITOR AREA -->
+    <div class="xl:col-span-6">
+      <div class="bg-white p-4 rounded-xl shadow-sm border h-[700px] flex flex-col">
+        <!-- Editor Toolbar -->
+        <div class="flex items-center justify-between mb-4 pb-3 border-b">
+          <div class="flex items-center gap-2">
+            <div class="p-2 bg-blue-100 rounded-lg">
+              <i class="bi bi-file-earmark-text text-blue-600"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-800">{{ selectedTemplateKey | titlecase }} Template</h3>
+              <p class="text-xs text-gray-500">Click fields on left to insert</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button (click)="openTemplateGallery()"
+              class="px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-50 flex items-center gap-1.5">
+              <i class="bi bi-grid"></i>
+              Templates
+            </button>
+          </div>
+        </div>
+        
+        <!-- TinyMCE Editor -->
+        <div class="flex-1 overflow-hidden border rounded-lg">
+          <editor [(ngModel)]="templateContent" [init]="editorInit" [licenseKey]="licenseKey"
+            class="h-full min-h-[600px]"></editor>
+        </div>
+        
+        <!-- Editor Status Bar -->
+        <div class="mt-4 flex items-center justify-between text-sm text-gray-500">
+          <div class="flex items-center gap-4">
+            <span><i class="bi bi-check-circle text-green-500"></i> Auto-save enabled</span>
+            <span><i class="bi bi-clock"></i> Last saved: Just now</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button (click)="saveTemplate()"
+              class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg shadow-sm transition flex items-center gap-2">
+              <i class="bi bi-check-circle"></i>
+              Save Template
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- RIGHT SIDEBAR - PREVIEW & INFO -->
+    <div class="xl:col-span-3 space-y-6">
+      
+      <!-- Live Preview Panel -->
+      <div class="bg-white p-4 rounded-xl shadow-sm border" *ngIf="isPreviewVisible">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="font-semibold text-gray-700 flex items-center gap-2">
+            <i class="bi bi-eye text-purple-500"></i>
+            Live Preview
+          </h3>
+          <button (click)="togglePreview()" class="p-1 hover:bg-gray-100 rounded">
+            <i class="bi bi-x-lg text-gray-500"></i>
+          </button>
+        </div>
+        <div class="border rounded-lg p-4 bg-gray-50 max-h-[300px] overflow-y-auto">
+          <div [innerHTML]="previewContent" class="preview-content"></div>
+        </div>
+        <p class="text-xs text-gray-500 mt-2">
+          <i class="bi bi-info-circle"></i>
+          Preview shows sample data. Actual data will appear in generated documents.
+        </p>
+      </div>
+      
+      <!-- Template Info -->
+      <div class="bg-white p-4 rounded-xl shadow-sm border">
+        <h3 class="font-semibold text-gray-700 mb-3 flex items-center gap-2">
+          <i class="bi bi-info-circle text-blue-500"></i>
+          Template Information
+        </h3>
+        <div class="space-y-3">
+          <div class="flex justify-between">
+            <span class="text-gray-600">Template Type:</span>
+            <span class="font-medium">{{ selectedTemplateKey | titlecase }}</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-600">Fields Available:</span>
+            <span class="font-medium">{{ filteredFields.length }}</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-600">Last Modified:</span>
+            <span class="font-medium">Today</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Tips & Tricks -->
+      <div class="bg-white p-4 rounded-xl shadow-sm border">
+        <h3 class="font-semibold text-gray-700 mb-3 flex items-center gap-2">
+          <i class="bi bi-lightbulb text-yellow-500"></i>
+          Quick Tips
+        </h3>
+        <ul class="space-y-2 text-sm text-gray-600">
+          <li class="flex items-start gap-2">
+            <i class="bi bi-check text-green-500 mt-0.5"></i>
+            Click any field on the left to insert it
+          </li>
+          <li class="flex items-start gap-2">
+            <i class="bi bi-check text-green-500 mt-0.5"></i>
+            Drag & drop fields into the editor
+          </li>
+          <li class="flex items-start gap-2">
+            <i class="bi bi-check text-green-500 mt-0.5"></i>
+            Use Ctrl+Z to undo, Ctrl+Y to redo
+          </li>
+          <li class="flex items-start gap-2">
+            <i class="bi bi-check text-green-500 mt-0.5"></i>
+            Save frequently to avoid losing work
+          </li>
+        </ul>
+      </div>
+      
+      <!-- Field Groups -->
+      <div class="bg-white p-4 rounded-xl shadow-sm border">
+        <h3 class="font-semibold text-gray-700 mb-3 flex items-center gap-2">
+          <i class="bi bi-collection text-purple-500"></i>
+          Insert Field Groups
+        </h3>
+        <div class="grid grid-cols-1 gap-2">
+          <button (click)="insertMultipleFields(['CustomerName', 'PhoneNo', 'Email'])"
+            class="p-3 border rounded-lg hover:border-blue-300 hover:bg-blue-50 text-left transition flex items-center gap-3">
+            <div class="p-2 bg-blue-100 rounded">
+              <i class="bi bi-person text-blue-600"></i>
+            </div>
+            <div>
+              <p class="font-medium">Customer Info</p>
+              <p class="text-xs text-gray-500">Name, Phone, Email</p>
+            </div>
+          </button>
+          <button (click)="insertMultipleFields(['CompanyName', 'Address', 'ContactNo'])"
+            class="p-3 border rounded-lg hover:border-blue-300 hover:bg-blue-50 text-left transition flex items-center gap-3">
+            <div class="p-2 bg-green-100 rounded">
+              <i class="bi bi-building text-green-600"></i>
+            </div>
+            <div>
+              <p class="font-medium">Company Info</p>
+              <p class="text-xs text-gray-500">Name, Address, Contact</p>
+            </div>
+          </button>
+          <button (click)="insertMultipleFields(['TotalAmount', 'TotalDiscount', 'paidamt', 'baldue'])"
+            class="p-3 border rounded-lg hover:border-blue-300 hover:bg-blue-50 text-left transition flex items-center gap-3">
+            <div class="p-2 bg-yellow-100 rounded">
+              <i class="bi bi-cash-coin text-yellow-600"></i>
+            </div>
+            <div>
+              <p class="font-medium">Payment Summary</p>
+              <p class="text-xs text-gray-500">Total

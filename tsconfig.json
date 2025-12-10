@@ -17,8 +17,9 @@
     "lib": ["ES2022", "DOM"],
 
     // 👇 add these two lines
-    "types": ["@tauri-apps/api"],
-    "allowSyntheticDefaultImports": true
+    "types": [
+      "@tauri-apps/api"
+    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
