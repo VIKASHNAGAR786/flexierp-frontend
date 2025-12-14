@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { on } from 'events';
@@ -9,7 +9,7 @@ import { CompanyBankAccountDto } from '../../DTO/DTO';
 
 @Component({
   selector: 'app-banktransferpopup',
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './banktransferpopup.component.html',
   styleUrl: './banktransferpopup.component.css'
 })

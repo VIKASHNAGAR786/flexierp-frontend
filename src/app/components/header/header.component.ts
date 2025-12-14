@@ -1,6 +1,6 @@
 import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
-import { isPlatformBrowser, CommonModule } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { environment } from '../../../environments/environment';
 import { UserinfowithloginService } from '../../services/userinfowithlogin.service';
 import { CommonService } from '../../services/common.service';
@@ -19,7 +19,7 @@ import { ThemeServiceService } from '../../services/theme-service.service';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, TooltipDirective],
+  imports: [TooltipDirective],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })

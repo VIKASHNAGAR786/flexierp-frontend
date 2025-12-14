@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { OldCustomerDTO } from '../../../../DTO/DTO';
@@ -10,7 +10,7 @@ import { SaleserviceService } from '../../../../services/saleservice.service';
   standalone: true,
   templateUrl: './old-customer-popup.component.html',
   styleUrls: ['./old-customer-popup.component.css'],
-  imports: [CommonModule, FormsModule]
+  imports: [FormsModule]
 })
 export class OldCustomerPopupComponent implements OnInit {
   @Output() close = new EventEmitter<void>();

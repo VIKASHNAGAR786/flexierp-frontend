@@ -12,145 +12,151 @@
       border: 1px solid var(--input-border);
       --tw-ring-color: var(--accent-1);
     "
-  />
-
-  <!-- Date Filters -->
-  <div class="flex gap-2">
-    <input
-      type="date"
-      [(ngModel)]="filter.startDate"
-      (ngModelChange)="onSearchChange()"
-      class="px-3 py-2 rounded"
-      style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
     />
 
-    <input
-      type="date"
-      [(ngModel)]="filter.endDate"
-      (ngModelChange)="onSearchChange()"
-      class="px-3 py-2 rounded"
-      style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
-    />
-  </div>
+    <!-- Date Filters -->
+    <div class="flex gap-2">
+      <input
+        type="date"
+        [(ngModel)]="filter.startDate"
+        (ngModelChange)="onSearchChange()"
+        class="px-3 py-2 rounded"
+        style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+        />
 
-  <!-- Page Size -->
-  <select
-    [(ngModel)]="filter.pageSize"
-    (change)="onPageSizeChange()"
-    class="px-3 py-2 rounded"
-    style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
-  >
-    <option
-      *ngFor="let size of pageSizes"
-      [value]="size"
-    >{{ size }} per page</option>
-  </select>
-</div>
+        <input
+          type="date"
+          [(ngModel)]="filter.endDate"
+          (ngModelChange)="onSearchChange()"
+          class="px-3 py-2 rounded"
+          style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+          />
+        </div>
 
-<!-- 📋 Customers Table -->
-<div
-  class="overflow-x-auto overflow-y-auto rounded-lg shadow-lg relative max-h-[500px]"
-  style="background: var(--card-bg); border: 1px solid var(--card-border);"
->
-  <table
-    class="min-w-full border-collapse"
-    style="color: var(--card-text);"
-    [class.opacity-50]="isLoading"
-  >
-    <thead
-      class="uppercase text-sm md:text-base tracking-wide sticky top-0 z-50"
+        <!-- Page Size -->
+        <select
+          [(ngModel)]="filter.pageSize"
+          (change)="onPageSizeChange()"
+          class="px-3 py-2 rounded"
+          style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+          >
+          @for (size of pageSizes; track size) {
+            <option
+              [value]="size"
+            >{{ size }} per page</option>
+          }
+        </select>
+      </div>
+
+      <!-- 📋 Customers Table -->
+      <div
+        class="overflow-x-auto overflow-y-auto rounded-lg shadow-lg relative max-h-[500px]"
+        style="background: var(--card-bg); border: 1px solid var(--card-border);"
+        >
+        <table
+          class="min-w-full border-collapse"
+          style="color: var(--card-text);"
+          [class.opacity-50]="isLoading"
+          >
+          <thead
+            class="uppercase text-sm md:text-base tracking-wide sticky top-0 z-50"
       style="
         background: linear-gradient(to right, var(--card-bg), var(--input-bg));
         color: var(--accent-1);"
-    >
-      <tr>
-        <th
-          class="px-4 py-2 border-b"
-          style="border-color: var(--input-border)"
-        >Sr.No</th>
-        <th
-          class="px-4 py-2 border-b"
-          style="border-color: var(--input-border)"
-        >Customer Name</th>
-        <th
-          class="px-4 py-2 border-b"
-          style="border-color: var(--input-border)"
-        >Address</th>
-        <th
-          class="px-4 py-2 border-b"
-          style="border-color: var(--input-border)"
-        >Phone</th>
-        <th
-          class="px-4 py-2 border-b"
-          style="border-color: var(--input-border)"
-        >Email</th>
-        <th
-          class="px-4 py-2 border-b"
-          style="border-color: var(--input-border)"
-        >Remark</th>
-        <th
-          class="px-4 py-2 border-b"
-          style="border-color: var(--input-border)"
-        >Created Date</th>
-        <th
-          class="px-4 py-2 border-b"
-          style="border-color: var(--input-border)"
-        >Created By</th>
-      </tr>
-    </thead>
+            >
+            <tr>
+              <th
+                class="px-4 py-2 border-b"
+                style="border-color: var(--input-border)"
+              >Sr.No</th>
+              <th
+                class="px-4 py-2 border-b"
+                style="border-color: var(--input-border)"
+              >Customer Name</th>
+              <th
+                class="px-4 py-2 border-b"
+                style="border-color: var(--input-border)"
+              >Address</th>
+              <th
+                class="px-4 py-2 border-b"
+                style="border-color: var(--input-border)"
+              >Phone</th>
+              <th
+                class="px-4 py-2 border-b"
+                style="border-color: var(--input-border)"
+              >Email</th>
+              <th
+                class="px-4 py-2 border-b"
+                style="border-color: var(--input-border)"
+              >Remark</th>
+              <th
+                class="px-4 py-2 border-b"
+                style="border-color: var(--input-border)"
+              >Created Date</th>
+              <th
+                class="px-4 py-2 border-b"
+                style="border-color: var(--input-border)"
+              >Created By</th>
+            </tr>
+          </thead>
 
-    <!-- Loader row just below the thead -->
-    <tbody *ngIf="isLoading">
-      <tr>
-        <td
-          colspan="12"
-          class="py-8 text-center"
-        >
-          <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#00ffee]"></div>
-        </td>
-      </tr>
-    </tbody>
+          <!-- Loader row just below the thead -->
+          @if (isLoading) {
+            <tbody>
+              <tr>
+                <td
+                  colspan="12"
+                  class="py-8 text-center"
+                  >
+                  <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#00ffee]"></div>
+                </td>
+              </tr>
+            </tbody>
+          }
 
-    <tbody class="divide-y divide-slate-700">
-      <tr
-        *ngFor="let c of customers"
-        class="transition"
-        style="border-color: var(--input-border);"
-        onmouseover="this.style.background='var(--accent-hover)'"
-        onmouseout="this.style.background='transparent'"
-      >
-        <td class="px-4 py-2 text-center">{{ c.srNo }}</td>
-        <td class="px-4 py-2">{{ c.customerName }}</td>
-        <td class="px-4 py-2">{{ c.customerAddress }}</td>
-        <td class="px-4 py-2">{{ c.phoneNo }}</td>
-        <td class="px-4 py-2">{{ c.email }}</td>
-        <td class="px-4 py-2">{{ c.remark }}</td>
-        <td class="px-4 py-2 text-center">{{ c.createdDate | date:'short' }}</td>
-        <td class="px-4 py-2 text-center">{{ c.fullName }}</td>
-      </tr>
+          <tbody class="divide-y divide-slate-700">
+            @for (c of customers; track c) {
+              <tr
+                class="transition"
+                style="border-color: var(--input-border);"
+                onmouseover="this.style.background='var(--accent-hover)'"
+                onmouseout="this.style.background='transparent'"
+                >
+                <td class="px-4 py-2 text-center">{{ c.srNo }}</td>
+                <td class="px-4 py-2">{{ c.customerName }}</td>
+                <td class="px-4 py-2">{{ c.customerAddress }}</td>
+                <td class="px-4 py-2">{{ c.phoneNo }}</td>
+                <td class="px-4 py-2">{{ c.email }}</td>
+                <td class="px-4 py-2">{{ c.remark }}</td>
+                <td class="px-4 py-2 text-center">{{ c.createdDate | date:'short' }}</td>
+                <td class="px-4 py-2 text-center">{{ c.fullName }}</td>
+              </tr>
+            }
 
-      <tr *ngIf="!isLoading && customers.length === 0">
-        <td
-          colspan="10"
-          class="text-center py-4 text-gray-400"
-        >No customers found.</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+            @if (!isLoading && customers.length === 0) {
+              <tr>
+                <td
+                  colspan="10"
+                  class="text-center py-4 text-gray-400"
+                >No customers found.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
 
 
-<!-- 📄 Pagination Controls -->
-<div class="flex justify-between items-center mt-4 text-white">
-  <button
-    (click)="prevPage()"
-    [disabled]="filter.pageNo === 1"
-    class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50"
-  >Previous</button>
-  <span>Page {{ filter.pageNo }} of {{ totalPages }}</span>
-  <button
-    (click)="nextPage()"
-    [disabled]="filter.pageNo === totalPages"
-    class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50"
-  >Next</button>
-</div>
+      <!-- 📄 Pagination Controls -->
+      <div class="flex justify-between items-center mt-4 text-white">
+        <button
+          (click)="prevPage()"
+          [disabled]="filter.pageNo === 1"
+          class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50"
+        >Previous</button>
+        <span>Page {{ filter.pageNo }} of {{ totalPages }}</span>
+        <button
+          (click)="nextPage()"
+          [disabled]="filter.pageNo === totalPages"
+          class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50"
+        >Next</button>
+      </div>

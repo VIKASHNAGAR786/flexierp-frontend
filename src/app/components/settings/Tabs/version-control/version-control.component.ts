@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-version-control',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './version-control.component.html',
   styleUrls: ['./version-control.component.css']
 })

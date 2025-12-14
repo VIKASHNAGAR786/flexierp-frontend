@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BarcodeFormat } from '@zxing/library';
@@ -8,7 +8,7 @@ import { ProductlistpopupComponent } from '../../PopUps/productlistpopup/product
 @Component({
   selector: 'app-scan-barcode',
   standalone: true,
-  imports: [CommonModule, FormsModule, ZXingScannerModule, ProductlistpopupComponent],
+  imports: [FormsModule, ZXingScannerModule, ProductlistpopupComponent],
   templateUrl: './scan-barcode.component.html',
   styleUrls: ['./scan-barcode.component.css']
 })

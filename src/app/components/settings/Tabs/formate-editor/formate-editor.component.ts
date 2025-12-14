@@ -1,36 +1,68 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { EditorModule } from '@tinymce/tinymce-angular';
-import { CommonModule } from '@angular/common';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import { EditorComponent } from '@tinymce/tinymce-angular';
+import { CommonModule, TitleCasePipe } from '@angular/common';
+import { CdkDrag, CdkDropList, DragDropModule } from '@angular/cdk/drag-drop';
 import { Subject, takeUntil } from 'rxjs';
+import { AfterViewInit } from '@angular/core';
+// import { CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
 
 // TinyMCE imports (keep as is)
 import 'tinymce/tinymce';
 import 'tinymce/icons/default';
 import 'tinymce/themes/silver';
-// ... other plugin imports
+import 'tinymce/plugins/advlist';
+import 'tinymce/plugins/anchor';
+import 'tinymce/plugins/autolink';
+import 'tinymce/plugins/autoresize';
+import 'tinymce/plugins/autosave';
+import 'tinymce/plugins/charmap';
+import 'tinymce/plugins/code';
+import 'tinymce/plugins/codesample';
+import 'tinymce/plugins/directionality';
+import 'tinymce/plugins/emoticons';
+import 'tinymce/plugins/fullscreen';
+import 'tinymce/plugins/help';
+import 'tinymce/plugins/image';
+import 'tinymce/plugins/insertdatetime';
+import 'tinymce/plugins/link';
+import 'tinymce/plugins/lists';
+import 'tinymce/plugins/media';
+import 'tinymce/plugins/nonbreaking';
+import 'tinymce/plugins/pagebreak';
+import 'tinymce/plugins/preview';
+import 'tinymce/plugins/quickbars';
+import 'tinymce/plugins/save';
+import 'tinymce/plugins/searchreplace';
+import 'tinymce/plugins/table';
+import 'tinymce/plugins/visualblocks';
+import 'tinymce/plugins/visualchars';
+import 'tinymce/plugins/wordcount';
 
 import { TEMPLATES, TemplateKey, FieldCategory, FIELD_CATEGORIES } from '../ADDONS/templates.data';
 import { CommonService } from '../../../../services/common.service';
 import { AlertService } from '../../../../services/alert.service';
-import { TemplateOption, SaveTemplate } from '../../../../MODEL/MODEL';
+import {  SaveTemplate } from '../../../../MODEL/MODEL';
 import { FilterBySearchPipe } from '../ADDONS/filter-by-search.pipe';
+import { TemplateOption } from '../../../../DTO/DTO';
 
 @Component({
   selector: 'app-formate-editor',
   standalone: true,
   imports: [
-    EditorModule, 
+    EditorComponent, 
     FormsModule, 
     CommonModule, 
-    FilterBySearchPipe,
-    DragDropModule
+    // FilterBySearchPipe,
+  //  CdkDrag,
+    // CdkDropList,
+    TitleCasePipe
   ],
   templateUrl: './formate-editor.component.html',
   styleUrls: ['./formate-editor.component.css']
 })
 export class FormateEditorComponent implements OnInit, OnDestroy {
+[x: string]: any;
   private destroy$ = new Subject<void>();
   
   // Search & Filter
@@ -115,13 +147,16 @@ export class FormateEditorComponent implements OnInit, OnDestroy {
     branding: false,
     promotion: false,
     licenseKey: this.licenseKey,
+    toolbar_sticky: true,
+    toolbar_sticky_offset: 0,
+    menubar_sticky: true,
     content_css: '/assets/editor-styles.css',
     plugins: [
       'advlist', 'anchor', 'autolink', 'autoresize', 'autosave',
       'charmap', 'code', 'codesample', 'directionality', 'emoticons',
       'fullscreen', 'help', 'image', 'insertdatetime', 'link',
       'lists', 'media', 'nonbreaking', 'pagebreak', 'preview', 'quickbars',
-      'save', 'searchreplace', 'table', 'visualblocks', 'visualchars', 'wordcount'
+      'save', 'searchreplace', 'table', 'visualblocks', 'visualchars', 'wordcount','sticky'
     ],
     toolbar:
       'undo redo | formatselect | bold italic underline | ' +
@@ -139,6 +174,19 @@ export class FormateEditorComponent implements OnInit, OnDestroy {
         }
       });
 
+      editor.on('init', () => {
+        console.log('✅ TinyMCE initialized');
+        
+        // Manually apply sticky styles
+        setTimeout(() => {
+          this.forceStickyToolbar();
+        }, 300);
+      });
+
+      // Re-apply on scroll
+      editor.on('ScrollWindow', () => {
+        this.forceStickyToolbar();
+      });
       // Insert box button
       editor.ui.registry.addButton('insertbox', {
         text: 'Box',
@@ -165,12 +213,53 @@ export class FormateEditorComponent implements OnInit, OnDestroy {
     }
   };
 
+  forceStickyToolbar() {
+  setTimeout(() => {
+    // Find TinyMCE elements
+    const menubar = document.querySelector('.tox-menubar') as HTMLElement;
+    const toolbar = document.querySelector('.tox-toolbar__primary') as HTMLElement;
+    const editorContainer = document.querySelector('.tox-tinymce') as HTMLElement;
+    
+    if (editorContainer) {
+      // Force flex layout
+      editorContainer.style.display = 'flex';
+      editorContainer.style.flexDirection = 'column';
+      editorContainer.style.height = '100%';
+    }
+    
+    if (menubar) {
+      menubar.style.position = 'sticky';
+      menubar.style.top = '0';
+      menubar.style.zIndex = '1000';
+      menubar.style.backgroundColor = 'white';
+      menubar.style.borderBottom = '1px solid #e5e7eb';
+      menubar.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+    }
+    
+    if (toolbar) {
+      toolbar.style.position = 'sticky';
+      toolbar.style.top = menubar ? '39px' : '0';
+      toolbar.style.zIndex = '999';
+      toolbar.style.backgroundColor = 'white';
+      toolbar.style.borderBottom = '1px solid #e5e7eb';
+      toolbar.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+    }
+    
+    // Ensure edit area scrolls
+    const editArea = document.querySelector('.tox-edit-area') as HTMLElement;
+    if (editArea) {
+      editArea.style.flex = '1';
+      editArea.style.overflowY = 'auto';
+    }
+  }, 100);
+}
   templates = TEMPLATES;
 
   get selectedTemplate(): Record<string, string> {
     return this.templates[this.selectedTemplateKey] || {};
   }
 
+  
   get filteredFields(): {key: string, value: string}[] {
     const fields = Object.entries(this.selectedTemplate)
       .map(([key, value]) => ({ key, value }));
@@ -219,7 +308,6 @@ export class FormateEditorComponent implements OnInit, OnDestroy {
     this.alertservice.showAlert(
       `Field "${fieldName || fieldValue}" inserted`, 
       'success', 
-      2000
     );
     
     // Update preview
@@ -317,12 +405,12 @@ export class FormateEditorComponent implements OnInit, OnDestroy {
     this.previewContent = preview;
   }
 
-  togglePreview() {
-    this.isPreviewVisible = !this.isPreviewVisible;
-    if (this.isPreviewVisible) {
-      this.updatePreview();
-    }
-  }
+  // togglePreview() {
+  //   this.isPreviewVisible = !this.isPreviewVisible;
+  //   if (this.isPreviewVisible) {
+  //     this.updatePreview();
+  //   }
+  // }
 
   // ========== TEMPLATE MANAGEMENT ==========
   saveTemplate() {
@@ -340,7 +428,7 @@ export class FormateEditorComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response) => {
-          this.alertservice.showAlert('Template saved successfully!', 'success', 3000);
+          this.alertservice.showAlert('Template saved successfully!', 'success');
         },
         error: (error) => {
           this.alertservice.showAlert('Failed to save template', 'error');
@@ -394,9 +482,120 @@ export class FormateEditorComponent implements OnInit, OnDestroy {
           </p>
         </div>
       `,
-      // ... other layouts
+      table: `
+        <table style="width: 100%; border-collapse: collapse;">
+          <tr style="background: #f3f4f6;">
+            <th style="border: 1px solid #d1d5db; padding: 8px;">Column 1</th>
+            <th style="border: 1px solid #d1d5db; padding: 8px;">Column 2</th>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #d1d5db; padding: 8px;">{{Field1}}</td>
+            <td style="border: 1px solid #d1d5db; padding: 8px;">{{Field2}}</td>
+          </tr>
+        </table>
+      `,
+      signature: `
+        <div style="margin-top: 40px;">
+          <p>Sincerely,</p>
+          <p style="margin-top: 30px;">{{AuthorName}}</p>
+          <p style="color: #6b7280; font-size: 12px;">{{AuthorTitle}}</p>
+        </div>
+      `
     };
     
     this.insertField(layouts[layoutType]);
   }
+  getTemplateIcon(templateKey: any) {
+    
+    
+  }
+  getFieldName(fieldValue: string): string {
+    return "";
+  }
+  // Add to your component class
+trackByTemplate(index: number, template: TemplateOption): string {
+  return template.key || index.toString();
+}
+
+trackByField(index: number, field: {key: string, value: string}): string {
+  return field.value || index.toString();
+}
+
+trackByCategory(index: number, cat: FieldCategory): string {
+  return cat.id || index.toString();
+}
+
+
+  isSidebarVisible = true;
+  isRightPreviewVisible = true;
+
+  // toggleSidebar() {
+  //   this.isSidebarVisible = !this.isSidebarVisible;
+  // }
+
+  toggleRightPreview() {
+    this.isPreviewVisible = !this.isPreviewVisible;
+  }
+
+  // Component properties
+// isSidebarVisible = false;
+isLeftSidebarVisible = true;
+// isPreviewVisible = false;
+activeInfoPanel: string | null = null;
+
+// Toggle methods
+toggleSidebar() {
+  this.isSidebarVisible = !this.isSidebarVisible;
+  if (this.isSidebarVisible && !this.activeInfoPanel) {
+    this.activeInfoPanel = 'template-info';
+  }
+}
+
+toggleLeftSidebar() {
+  this.isLeftSidebarVisible = !this.isLeftSidebarVisible;
+}
+
+togglePreview() {
+  this.isPreviewVisible = !this.isPreviewVisible;
+  this.activeInfoPanel = 'preview';
+  this.isSidebarVisible = true;
+}
+
+toggleInfoPanel(panel: string) {
+  this.activeInfoPanel = this.activeInfoPanel === panel ? null : panel;
+  this.isSidebarVisible = true;
+}
+
+closeInfoPanel() {
+  this.activeInfoPanel = null;
+  if (this.isMobile()) {
+    this.isSidebarVisible = false;
+  }
+}
+
+// Helper methods
+getPanelIcon(panel: string): string {
+  const icons: {[key: string]: string} = {
+    'preview': 'bi-eye text-purple-500',
+    'template-info': 'bi-info-circle text-blue-500',
+    'tips': 'bi-lightbulb text-yellow-500',
+    'field-groups': 'bi-collection text-purple-500'
+  };
+  return icons[panel] || 'bi-info-circle';
+}
+
+getPanelTitle(panel: string): string {
+  const titles: {[key: string]: string} = {
+    'preview': 'Live Preview',
+    'template-info': 'Template Information',
+    'tips': 'Quick Tips',
+    'field-groups': 'Field Groups'
+  };
+  return titles[panel] || 'Information';
+}
+
+isMobile(): boolean {
+  return window.innerWidth < 1024;
+}
+
 }

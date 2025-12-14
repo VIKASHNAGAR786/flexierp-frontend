@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import { ColorserviceService } from '../../services/colorservice.service';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { ThemeServiceService } from '../../services/theme-service.service';
 
@@ -13,8 +13,8 @@ import { ThemeServiceService } from '../../services/theme-service.service';
   selector: 'app-design',
   templateUrl: './design.component.html',
   imports: [
-    FormsModule,CommonModule
-  ],
+    FormsModule
+],
   styleUrls: ['./design.component.css']
 })
 export class DesignComponent  {

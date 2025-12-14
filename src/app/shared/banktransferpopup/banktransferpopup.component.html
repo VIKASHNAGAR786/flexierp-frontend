@@ -1,327 +1,303 @@
-<div
-    *ngIf="show"
+@if (show) {
+  <div
     class="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
->
+    >
     <div class="bg-[var(--card-bg)] text-[var(--text)] rounded-2xl shadow-2xl w-full 
            max-w-6xl p-6 relative border border-[var(--border)] max-h-[90vh] overflow-y-auto">
-
-        <!-- Close -->
-        <button
-            (click)="closePopup()"
+      <!-- Close -->
+      <button
+        (click)="closePopup()"
             class="absolute top-3 right-3 text-[var(--text)] hover:text-[var(--danger)]
             text-2xl font-bold"
         >
-            ✕
-        </button>
-
-        <!-- Title -->
+        ✕
+      </button>
+      <!-- Title -->
         <h2 class="text-2xl font-bold mb-6 text-[var(--accent)]
               text-center uppercase tracking-wide">
-            Bank Transfer Payment Details
-        </h2>
-
-        <form
-            #transferForm="ngForm"
-            class="grid grid-cols-1 md:grid-cols-4 gap-4"
+        Bank Transfer Payment Details
+      </h2>
+      <form
+        #transferForm="ngForm"
+        class="grid grid-cols-1 md:grid-cols-4 gap-4"
         >
-
-            <!-- TRANSFER TYPE -->
-            <div class="flex flex-col">
-                <label
-                    class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
-                    style="color: var(--heading);"
-                >Transfer Type *</label>
-                <select
-                    [(ngModel)]="transfer.transfer_type"
-                    name="transfer_type"
-                    class="input-style"
-                    required
+        <!-- TRANSFER TYPE -->
+        <div class="flex flex-col">
+          <label
+            class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
+            style="color: var(--heading);"
+          >Transfer Type *</label>
+          <select
+            [(ngModel)]="transfer.transfer_type"
+            name="transfer_type"
+            class="input-style"
+            required
+            >
+            <option value="">Select Type</option>
+            <option value="NEFT">NEFT</option>
+            <option value="RTGS">RTGS</option>
+            <option value="IMPS">IMPS</option>
+          </select>
+        </div>
+        <div class="flex flex-col">
+          <label
+            class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
+            style="color: var(--heading);"
+            >
+            Received Bank Account *
+          </label>
+          <select
+            [(ngModel)]="transfer.company_bank_id"
+            name="company_bank_id"
+            class="input-style"
+            required
+            >
+            <option value="">Select Bank Account</option>
+            @for (bank of bankList; track bank) {
+              <option
+                [value]="bank.company_bank_id"
                 >
-                    <option value="">Select Type</option>
-                    <option value="NEFT">NEFT</option>
-                    <option value="RTGS">RTGS</option>
-                    <option value="IMPS">IMPS</option>
-                </select>
+                {{ bank.bank_name }} ({{ bank.branch_name }})
+              </option>
+            }
+          </select>
+        </div>
+        <!-- AMOUNT -->
+        <div class="flex flex-col">
+          <label
+            class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
+            style="color: var(--heading);"
+          >Amount *</label>
+          <input
+            type="number"
+            [(ngModel)]="transfer.amount"
+            name="amount"
+            class="input-style"
+            placeholder="Enter Amount"
+            required
+            />
+          </div>
+          <!-- CURRENCY -->
+          <div class="flex flex-col">
+            <label
+              class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
+              style="color: var(--heading);"
+            >Currency</label>
+            <input
+              type="text"
+              [(ngModel)]="transfer.currency"
+              name="currency"
+              class="input-style"
+              value="INR"
+              />
             </div>
-
-            <div class="flex flex-col">
-                <label
-                    class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
-                    style="color: var(--heading);"
-                >
-                    Received Bank Account *
-                </label>
-                <select
-                    [(ngModel)]="transfer.company_bank_id"
-                    name="company_bank_id"
-                    class="input-style"
-                    required
-                >
-                    <option value="">Select Bank Account</option>
-                    <option
-                        *ngFor="let bank of bankList"
-                        [value]="bank.company_bank_id"
-                    >
-                        {{ bank.bank_name }} ({{ bank.branch_name }})
-                    </option>
-                </select>
-            </div>
-
-            <!-- AMOUNT -->
-            <div class="flex flex-col">
-                <label
-                    class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
-                    style="color: var(--heading);"
-                >Amount *</label>
-
-                <input
-                    type="number"
-                    [(ngModel)]="transfer.amount"
-                    name="amount"
-                    class="input-style"
-                    placeholder="Enter Amount"
-                    required
-                />
-            </div>
-
-            <!-- CURRENCY -->
-            <div class="flex flex-col">
-                <label
-                    class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
-                    style="color: var(--heading);"
-                >Currency</label>
-                <input
-                    type="text"
-                    [(ngModel)]="transfer.currency"
-                    name="currency"
-                    class="input-style"
-                    value="INR"
-                />
-            </div>
-
             <!-- CHARGES -->
             <div class="flex flex-col">
-                <label
-                    class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
-                    style="color: var(--heading);"
-                >Bank Charges</label>
-                <input
-                    type="number"
-                    [(ngModel)]="transfer.charges"
-                    name="charges"
-                    class="input-style"
-                    placeholder="Enter Bank Charges"
+              <label
+                class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
+                style="color: var(--heading);"
+              >Bank Charges</label>
+              <input
+                type="number"
+                [(ngModel)]="transfer.charges"
+                name="charges"
+                class="input-style"
+                placeholder="Enter Bank Charges"
                 />
-            </div>
-
-            <!-- TRANSACTION DATE -->
-            <div class="flex flex-col">
+              </div>
+              <!-- TRANSACTION DATE -->
+              <div class="flex flex-col">
                 <label
-                    class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
-                    style="color: var(--heading);"
+                  class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
+                  style="color: var(--heading);"
                 >Customer Transfer Date *</label>
                 <input
-                    type="datetime-local"
-                    [(ngModel)]="transfer.transaction_date"
-                    name="transaction_date"
-                    class="input-style"
-                    required
-                />
-            </div>
-
-            <!-- RECEIVED DATE -->
-            <div class="flex flex-col">
-                <label
+                  type="datetime-local"
+                  [(ngModel)]="transfer.transaction_date"
+                  name="transaction_date"
+                  class="input-style"
+                  required
+                  />
+                </div>
+                <!-- RECEIVED DATE -->
+                <div class="flex flex-col">
+                  <label
                     class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
                     style="color: var(--heading);"
-                >Received Date</label>
-                <input
+                  >Received Date</label>
+                  <input
                     type="datetime-local"
                     [(ngModel)]="transfer.received_date"
                     name="received_date"
                     class="input-style"
-                />
-            </div>
-
-            <!-- POSTED DATE -->
-            <div class="flex flex-col">
-                <label
-                    class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
-                    style="color: var(--heading);"
-                >Bank Posted Date</label>
-                <input
-                    type="datetime-local"
-                    [(ngModel)]="transfer.posted_date"
-                    name="posted_date"
-                    class="input-style"
-                />
-            </div>
-
-            <!-- STATUS -->
-            <div class="flex flex-col">
-                <label
-                    class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
-                    style="color: var(--heading);"
-                >Status *</label>
-                <select
-                    [(ngModel)]="transfer.status"
-                    name="status"
-                    class="input-style"
-                    required
-                >
-                    <option value="Pending">Pending</option>
-                    <option value="Success">Success</option>
-                    <option value="Failed">Failed</option>
-                </select>
-            </div>
-
-            <!-- UTR -->
-            <div class="flex flex-col">
-                <label
-                    class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
-                    style="color: var(--heading);"
-                >UTR Number *</label>
-                <input
-                    type="text"
-                    [(ngModel)]="transfer.utr_number"
-                    name="utr_number"
-                    class="input-style"
-                    placeholder="Enter UTR Number"
-                    required
-                />
-            </div>
-
-            <!-- REFERENCE NUMBER -->
-            <div class="flex flex-col">
-                <label
-                    class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
-                    style="color: var(--heading);"
-                >Reference Number</label>
-                <input
-                    type="text"
-                    [(ngModel)]="transfer.reference_number"
-                    name="reference_number"
-                    class="input-style"
-                    placeholder="Enter Reference Number"
-                />
-            </div>
-
-            <!-- SECTION TITLE -->
-            <!-- CUSTOMER BANK DETAILS -->
-            <div class="col-span-1 md:col-span-4 mt-4">
-                <h3 class="text-lg font-semibold text-[var(--accent)]">Customer Bank Details</h3>
-            </div>
-
-            <!-- Wrap these in a grid -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 col-span-1 md:col-span-4">
-
-                <!-- CUSTOMER BANK NAME -->
-                <div class="flex flex-col">
-                    <label
-                        class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
-                        style="color: var(--heading);"
-                    >Customer Bank Name</label>
-                    <input
-                        type="text"
-                        [(ngModel)]="transfer.customer_bank_name"
-                        name="customer_bank_name"
-                        class="input-style"
-                        placeholder="Enter Bank Name"
                     />
-                </div>
-
-                <!-- CUSTOMER ACCOUNT NUMBER -->
-                <div class="flex flex-col">
+                  </div>
+                  <!-- POSTED DATE -->
+                  <div class="flex flex-col">
                     <label
-                        class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
-                        style="color: var(--heading);"
-                    >Customer Account Number</label>
+                      class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
+                      style="color: var(--heading);"
+                    >Bank Posted Date</label>
                     <input
+                      type="datetime-local"
+                      [(ngModel)]="transfer.posted_date"
+                      name="posted_date"
+                      class="input-style"
+                      />
+                    </div>
+                    <!-- STATUS -->
+                    <div class="flex flex-col">
+                      <label
+                        class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
+                        style="color: var(--heading);"
+                      >Status *</label>
+                      <select
+                        [(ngModel)]="transfer.status"
+                        name="status"
+                        class="input-style"
+                        required
+                        >
+                        <option value="Pending">Pending</option>
+                        <option value="Success">Success</option>
+                        <option value="Failed">Failed</option>
+                      </select>
+                    </div>
+                    <!-- UTR -->
+                    <div class="flex flex-col">
+                      <label
+                        class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
+                        style="color: var(--heading);"
+                      >UTR Number *</label>
+                      <input
                         type="text"
-                        [(ngModel)]="transfer.customer_account_number"
-                        name="customer_account_number"
+                        [(ngModel)]="transfer.utr_number"
+                        name="utr_number"
                         class="input-style"
-                        placeholder="Enter Account Number"
-                    />
-                </div>
-
-                <!-- CUSTOMER IFSC -->
-                <div class="flex flex-col">
-                    <label
-                        class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
-                        style="color: var(--heading);"
-                    >Customer IFSC Code</label>
-                    <input
-                        type="text"
-                        [(ngModel)]="transfer.customer_ifsc"
-                        name="customer_ifsc"
-                        class="input-style"
-                        placeholder="Enter IFSC Code"
-                    />
-                </div>
-
-                <!-- CUSTOMER BRANCH -->
-                <div class="flex flex-col">
-                    <label
-                        class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
-                        style="color: var(--heading);"
-                    >Customer Branch</label>
-                    <input
-                        type="text"
-                        [(ngModel)]="transfer.customer_branch"
-                        name="customer_branch"
-                        class="input-style"
-                        placeholder="Enter Branch"
-                    />
-                </div>
-
-                <!-- PAYMENT DESCRIPTION -->
-                <div class="col-span-1 md:col-span-4">
-                    <label
-                        class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
-                        style="color: var(--heading);"
-                    >Payment Description</label>
-                    <textarea
-                        [(ngModel)]="transfer.payment_description"
-                        name="payment_description"
-                        class="input-style"
-                        rows="2"
-                        placeholder="Enter Payment Description"
-                    ></textarea>
-                </div>
-
-                <!-- REMARKS -->
-                <div class="col-span-1 md:col-span-4">
-                    <label
-                        class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
-                        style="color: var(--heading);"
-                    >Remarks</label>
-                    <textarea
-                        [(ngModel)]="transfer.remarks"
-                        name="remarks"
-                        class="input-style"
-                        placeholder="Enter Remarks"
-                        rows="2"
-                    ></textarea>
-                </div>
-
-            </div>
-
-            <!-- BUTTONS -->
-            <div class="col-span-1 md:col-span-3 flex justify-end mt-4 gap-2">
-                <button
-                    type="button"
-                    (click)="closePopup()"
-                    class="cancel-btn"
-                >Cancel</button>
-                <button
-                    type="button"
-                    [disabled]="!transferForm.form.valid"
-                    (click)="saveTransfer()"
-                    class="save-btn"
-                >Save</button>
-            </div>
-        </form>
-
-    </div>
-</div>
+                        placeholder="Enter UTR Number"
+                        required
+                        />
+                      </div>
+                      <!-- REFERENCE NUMBER -->
+                      <div class="flex flex-col">
+                        <label
+                          class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
+                          style="color: var(--heading);"
+                        >Reference Number</label>
+                        <input
+                          type="text"
+                          [(ngModel)]="transfer.reference_number"
+                          name="reference_number"
+                          class="input-style"
+                          placeholder="Enter Reference Number"
+                          />
+                        </div>
+                        <!-- SECTION TITLE -->
+                        <!-- CUSTOMER BANK DETAILS -->
+                        <div class="col-span-1 md:col-span-4 mt-4">
+                          <h3 class="text-lg font-semibold text-[var(--accent)]">Customer Bank Details</h3>
+                        </div>
+                        <!-- Wrap these in a grid -->
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 col-span-1 md:col-span-4">
+                          <!-- CUSTOMER BANK NAME -->
+                          <div class="flex flex-col">
+                            <label
+                              class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
+                              style="color: var(--heading);"
+                            >Customer Bank Name</label>
+                            <input
+                              type="text"
+                              [(ngModel)]="transfer.customer_bank_name"
+                              name="customer_bank_name"
+                              class="input-style"
+                              placeholder="Enter Bank Name"
+                              />
+                            </div>
+                            <!-- CUSTOMER ACCOUNT NUMBER -->
+                            <div class="flex flex-col">
+                              <label
+                                class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
+                                style="color: var(--heading);"
+                              >Customer Account Number</label>
+                              <input
+                                type="text"
+                                [(ngModel)]="transfer.customer_account_number"
+                                name="customer_account_number"
+                                class="input-style"
+                                placeholder="Enter Account Number"
+                                />
+                              </div>
+                              <!-- CUSTOMER IFSC -->
+                              <div class="flex flex-col">
+                                <label
+                                  class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
+                                  style="color: var(--heading);"
+                                >Customer IFSC Code</label>
+                                <input
+                                  type="text"
+                                  [(ngModel)]="transfer.customer_ifsc"
+                                  name="customer_ifsc"
+                                  class="input-style"
+                                  placeholder="Enter IFSC Code"
+                                  />
+                                </div>
+                                <!-- CUSTOMER BRANCH -->
+                                <div class="flex flex-col">
+                                  <label
+                                    class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
+                                    style="color: var(--heading);"
+                                  >Customer Branch</label>
+                                  <input
+                                    type="text"
+                                    [(ngModel)]="transfer.customer_branch"
+                                    name="customer_branch"
+                                    class="input-style"
+                                    placeholder="Enter Branch"
+                                    />
+                                  </div>
+                                  <!-- PAYMENT DESCRIPTION -->
+                                  <div class="col-span-1 md:col-span-4">
+                                    <label
+                                      class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
+                                      style="color: var(--heading);"
+                                    >Payment Description</label>
+                                    <textarea
+                                      [(ngModel)]="transfer.payment_description"
+                                      name="payment_description"
+                                      class="input-style"
+                                      rows="2"
+                                      placeholder="Enter Payment Description"
+                                    ></textarea>
+                                  </div>
+                                  <!-- REMARKS -->
+                                  <div class="col-span-1 md:col-span-4">
+                                    <label
+                                      class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
+                                      style="color: var(--heading);"
+                                    >Remarks</label>
+                                    <textarea
+                                      [(ngModel)]="transfer.remarks"
+                                      name="remarks"
+                                      class="input-style"
+                                      placeholder="Enter Remarks"
+                                      rows="2"
+                                    ></textarea>
+                                  </div>
+                                </div>
+                                <!-- BUTTONS -->
+                                <div class="col-span-1 md:col-span-3 flex justify-end mt-4 gap-2">
+                                  <button
+                                    type="button"
+                                    (click)="closePopup()"
+                                    class="cancel-btn"
+                                  >Cancel</button>
+                                  <button
+                                    type="button"
+                                    [disabled]="!transferForm.form.valid"
+                                    (click)="saveTransfer()"
+                                    class="save-btn"
+                                  >Save</button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        }

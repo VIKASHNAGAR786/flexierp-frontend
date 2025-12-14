@@ -1,13 +1,12 @@
 <!-- Fixed Tabs -->
 <div class="fixed top-[64px] left-0 right-0 z-[9999] shadow-lg border-b"
-     style="background: var(--bg); border-color: var(--border);">
-  
+  style="background: var(--bg); border-color: var(--border);">
+
   <div class="px-4 py-3 flex space-x-4 md:space-x-6 justify-center md:justify-start md:ml-64">
-    
-    <a
-  *ngFor="let tab of tabs"
-  class="px-5 py-2 rounded-full font-semibold text-sm md:text-base transition-all duration-300 cursor-pointer relative overflow-hidden"
-  
+
+    @for (tab of tabs; track tab) {
+      <a
+        class="px-5 py-2 rounded-full font-semibold text-sm md:text-base transition-all duration-300 cursor-pointer relative overflow-hidden"
   [ngStyle]="activeTab === tab.id 
     ? { 
         'background': 'var(--accent-1)', 
@@ -16,41 +15,41 @@
       } 
     : { 
         'color': 'var(--tab-text)' }"
-  
-  (mouseover)="activeTab !== tab.id ? applyHover($event) : null"
-  (mouseout)="activeTab !== tab.id ? removeHover($event) : null"
-  (click)="switchTab(tab.id)"
->
-  <span class="relative z-10">{{ tab.label }}</span>
+      (mouseover)="activeTab !== tab.id ? applyHover($event) : null"
+      (mouseout)="activeTab !== tab.id ? removeHover($event) : null"
+      (click)="switchTab(tab.id)"
+      >
+      <span class="relative z-10">{{ tab.label }}</span>
+      @if (activeTab === tab.id) {
+        <span
+          class="absolute left-0 bottom-0 w-full h-1 rounded-full animate-slide-in"
+          style="background: var(--accent-1);"
+        ></span>
+      }
+    </a>
+  }
 
-  <span
-    *ngIf="activeTab === tab.id"
-    class="absolute left-0 bottom-0 w-full h-1 rounded-full animate-slide-in"
-    style="background: var(--accent-1);"
-  ></span>
-</a>
-
-  </div>
+</div>
 </div>
 
 <!-- Tab Content -->
 <div class="tab-content p-6 mt-24 rounded-xl shadow-xl transition-all duration-300 border"
-     style="background: var(--card); color: var(--text); border-color: var(--border);">
+  style="background: var(--card); color: var(--text); border-color: var(--border);">
 
-  <ng-container *ngFor="let tab of tabs">
-    <ng-container *ngIf="activeTab === tab.id">
+  @for (tab of tabs; track tab) {
+    @if (activeTab === tab.id) {
       <ng-container *ngComponentOutlet="tab.component"></ng-container>
-    </ng-container>
-  </ng-container>
+    }
+  }
 
 </div>
 
 <style>
   @keyframes slide-in {
-    0% { width: 0; opacity: 0; }
-    100% { width: 100%; opacity: 1; }
-  }
-  .animate-slide-in {
-    animation: slide-in 0.3s ease-out forwards;
-  }
+  0% { width: 0; opacity: 0; }
+  100% { width: 100%; opacity: 1; }
+}
+.animate-slide-in {
+animation: slide-in 0.3s ease-out forwards;
+}
 </style>

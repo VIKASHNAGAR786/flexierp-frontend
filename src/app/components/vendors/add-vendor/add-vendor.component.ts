@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProviderModel } from '../../../MODEL/MODEL';
@@ -8,7 +8,7 @@ import { AlertService } from '../../../services/alert.service';
 @Component({
   selector: 'app-add-vendor',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './add-vendor.component.html',
   styleUrls: ['./add-vendor.component.css']
 })

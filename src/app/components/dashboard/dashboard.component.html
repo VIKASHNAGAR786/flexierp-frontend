@@ -5,20 +5,20 @@
       'background': 'linear-gradient(to bottom, var(--bg-start), var(--bg-mid), var(--bg-end))',
       'color': 'var(--text)'
      }"
->
+  >
 
   <!-- Header -->
   <div class="mb-6">
     <h1
       class="text-3xl font-bold"
       [style.color]="'var(--heading)'"
-    >
+      >
       Finance Dashboard
     </h1>
     <p
       class="text-sm"
       [style.color]="'var(--text-muted)'"
-    >
+      >
       Overview of your cash & cheque transactions
     </p>
   </div>
@@ -40,7 +40,7 @@
           }"
         [(ngModel)]="selectedRange"
         (change)="onDateRangeChange()"
-      >
+        >
 
         <option value="today">Today</option>
         <option value="yesterday">Yesterday</option>
@@ -60,7 +60,7 @@
         'background':'var(--banner-start)',
         'color':'var(--text)'
       }"
-    >
+      >
       Export PDF
     </button>
 
@@ -71,7 +71,7 @@
         'background':'var(--banner-end)',
         'color':'var(--text)'
       }"
-    >
+      >
       Export Excel
     </button>
   </div>
@@ -86,17 +86,17 @@
            'background':'var(--card)',
            'border':'1px solid var(--border)'
          }"
-    >
+      >
       <p
         class="uppercase text-sm"
         [style.color]="'var(--text-muted)'"
-      >
+        >
         Total Cash Received
       </p>
       <h2
         class="text-2xl font-bold"
         [style.color]="'var(--heading)'"
-      >
+        >
         ₹ {{ dashboarddata.totalCashReceived }}
       </h2>
 
@@ -105,7 +105,7 @@
         [ngClass]="dashboarddata.cashGrowthPercent < 0
               ? 'text-red-400'
               : 'text-green-400'"
-      >
+        >
         ₹ {{ dashboarddata.cashGrowthPercent }} From Last Month
       </p>
     </div>
@@ -117,11 +117,11 @@
            'background':'var(--card)',
            'border':'1px solid var(--border)'
          }"
-    >
+      >
       <p
         class="uppercase text-sm"
         [style.color]="'var(--text-muted)'"
-      >
+        >
         Total Cheque Received
       </p>
       <h2 class="text-2xl font-bold text-purple-400">
@@ -132,7 +132,7 @@
         [ngClass]="dashboarddata.chequeGrowthPercent < 0
               ? 'text-red-400'
               : 'text-green-400'"
-      >
+        >
         ₹ {{ dashboarddata.chequeGrowthPercent }} From Last Month
       </p>
     </div>
@@ -144,11 +144,11 @@
            'background':'var(--card)',
            'border':'1px solid var(--border)'
          }"
-    >
+      >
       <p
         class="uppercase text-sm"
         [style.color]="'var(--text-muted)'"
-      >
+        >
         Total Balance Due
       </p>
       <h2 class="text-2xl font-bold text-yellow-400">
@@ -163,11 +163,11 @@
            'background':'var(--card)',
            'border':'1px solid var(--border)'
          }"
-    >
+      >
       <p
         class="uppercase text-sm"
         [style.color]="'var(--text-muted)'"
-      >
+        >
         Trends & Growth
       </p>
       <h2 class="text-2xl font-bold text-pink-400">
@@ -184,17 +184,17 @@
          'background':'var(--card)',
          'border':'1px solid var(--border)'
        }"
-  >
+    >
     <div class="flex items-center justify-between mb-4">
       <h3
         class="text-xl font-semibold"
         [style.color]="'var(--heading)'"
-      >
+        >
         Recent Transactions
         <span
           class="text-sm ml-2"
           [style.color]="'var(--text-muted)'"
-        >
+          >
           (Last 50 Records)
         </span>
       </h3>
@@ -216,34 +216,31 @@
         </tr>
       </thead>
       <tbody>
-        <tr
-          *ngFor="let transaction of dashboarddata.recenttransaction"
-          class="transition"
+        @for (transaction of dashboarddata.recenttransaction; track transaction) {
+          <tr
+            class="transition"
           [ngStyle]="{
               'border-bottom':'1px solid var(--border)'
             }"
-          [ngClass]="'hover:bg-[var(--hover-bg)]'"
-        >
-
-          <td class="py-2 px-4">{{ transaction.date }}</td>
-          <td class="py-2 px-4">{{ transaction.customerName }}</td>
-          <td class="py-2 px-4">₹ {{ transaction.receivedAmount | number:'1.0-2' }}</td>
-          <td class="py-2 px-4">₹ {{ transaction.balanceDue | number:'1.0-2' }}</td>
-          <td class="py-2 px-4">₹ {{ transaction.totalAmount | number:'1.0-2' }}</td>
-
-          <td
-            class="py-2 px-4"
+            [ngClass]="'hover:bg-[var(--hover-bg)]'"
+            >
+            <td class="py-2 px-4">{{ transaction.date }}</td>
+            <td class="py-2 px-4">{{ transaction.customerName }}</td>
+            <td class="py-2 px-4">₹ {{ transaction.receivedAmount | number:'1.0-2' }}</td>
+            <td class="py-2 px-4">₹ {{ transaction.balanceDue | number:'1.0-2' }}</td>
+            <td class="py-2 px-4">₹ {{ transaction.totalAmount | number:'1.0-2' }}</td>
+            <td
+              class="py-2 px-4"
             [ngClass]="{
                 'text-green-500 font-bold border-l-4 border-green-500': transaction.paymentType === 'Cash',
                 'text-blue-500 font-bold border-l-4 border-blue-500': transaction.paymentType === 'Cheque'
               }"
-          >
-            {{ transaction.paymentType }}
-          </td>
-
-          <td class="py-2 px-4">{{ transaction.transactionType }}</td>
-
-        </tr>
+              >
+              {{ transaction.paymentType }}
+            </td>
+            <td class="py-2 px-4">{{ transaction.transactionType }}</td>
+          </tr>
+        }
       </tbody>
     </table>
   </div>
@@ -252,22 +249,20 @@
 <!-- loader -->
 
 <!-- for the big loader -->
-<div
-  *ngIf="reportIsLoading"
-  class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
->
-  <div class="text-center space-y-4">
-
-    <!-- Animated FLEXIERP text -->
-    <h1 class="text-5xl font-extrabold text-[#00ffee] animate-bounce">FLEXIERP</h1>
-
-    <!-- Bouncing dots -->
-    <div class="flex justify-center space-x-2">
-      <span class="w-4 h-4 bg-[#00ffee] rounded-full animate-bounce delay-100"></span>
-      <span class="w-4 h-4 bg-[#00ffee] rounded-full animate-bounce delay-200"></span>
-      <span class="w-4 h-4 bg-[#00ffee] rounded-full animate-bounce delay-300"></span>
+@if (reportIsLoading) {
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
+    >
+    <div class="text-center space-y-4">
+      <!-- Animated FLEXIERP text -->
+      <h1 class="text-5xl font-extrabold text-[#00ffee] animate-bounce">FLEXIERP</h1>
+      <!-- Bouncing dots -->
+      <div class="flex justify-center space-x-2">
+        <span class="w-4 h-4 bg-[#00ffee] rounded-full animate-bounce delay-100"></span>
+        <span class="w-4 h-4 bg-[#00ffee] rounded-full animate-bounce delay-200"></span>
+        <span class="w-4 h-4 bg-[#00ffee] rounded-full animate-bounce delay-300"></span>
+      </div>
+      <p class="text-white text-lg font-semibold animate-pulse">Loading report, please wait...</p>
     </div>
-
-    <p class="text-white text-lg font-semibold animate-pulse">Loading report, please wait...</p>
   </div>
-</div>
+}

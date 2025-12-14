@@ -2,20 +2,20 @@
 <div
   class="fixed inset-0 flex justify-center z-50 px-2 sm:px-4 pt-32 sm:pt-36 backdrop-blur-sm"
   style="background: var(--modal-overlay);"
->
+  >
 
   <!-- Popup Box -->
   <div
     class="rounded-2xl shadow-2xl w-full max-w-sm sm:max-w-2xl lg:max-w-4xl max-h-[85vh] overflow-y-auto relative p-6 sm:p-8"
     style="background: var(--card-bg); color: var(--text); border: 1px solid var(--card-border);"
-  >
+    >
 
     <!-- Close Button -->
     <button
       class="absolute top-3 right-3 sm:top-4 sm:right-4 text-xl sm:text-2xl transition"
       style="color: var(--text-muted);"
       (click)="closePopup()"
-    >
+      >
       ✕
     </button>
 
@@ -23,7 +23,7 @@
     <h2
       class="text-xl sm:text-2xl font-bold mb-4"
       style="color: var(--heading);"
-    >
+      >
       Old Customers
     </h2>
 
@@ -40,56 +40,59 @@
           color: var(--input-text);
         "
         (input)="loadCustomers()"
-      />
-    </div>
+        />
+      </div>
 
-    <!-- Loader -->
-    <div *ngIf="isLoading" class="flex justify-center items-center py-8">
-      <div
-        class="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-t-4 border-b-4"
-        style="border-color: var(--accent-1);"
-      ></div>
-    </div>
+      <!-- Loader -->
+      @if (isLoading) {
+        <div class="flex justify-center items-center py-8">
+          <div
+            class="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-t-4 border-b-4"
+            style="border-color: var(--accent-1);"
+          ></div>
+        </div>
+      }
 
-    <!-- Customer Table -->
-    <div
-      *ngIf="!isLoading"
-      class="overflow-x-auto rounded-lg"
-      style="border: 1px solid var(--table-border);"
-    >
-      <table
-        class="w-full min-w-[600px] border-collapse text-sm sm:text-base"
-        style="color: var(--text);"
-      >
-        <thead
-          class="sticky top-0 z-10 text-xs sm:text-sm"
-          style="background: var(--table-header-bg); color: var(--table-header-text);"
-        >
-          <tr>
-            <th class="p-2 sm:p-4" style="border: 1px solid var(--table-border);">Name</th>
-            <th class="p-2 sm:p-4" style="border: 1px solid var(--table-border);">Mobile No</th>
-            <th class="p-2 sm:p-4" style="border: 1px solid var(--table-border);">Email</th>
-            <th class="p-2 sm:p-4" style="border: 1px solid var(--table-border);">Notes</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr
-            *ngFor="let customer of getFilteredCustomers()"
-            class="cursor-pointer transition"
-            (click)="selectCustomer(customer)"
-            style="border-bottom: 1px solid var(--table-border);"
-            onmouseover="this.style.background='var(--table-row-hover)'"
-            onmouseout="this.style.background='transparent'"
+      <!-- Customer Table -->
+      @if (!isLoading) {
+        <div
+          class="overflow-x-auto rounded-lg"
+          style="border: 1px solid var(--table-border);"
           >
-            <td class="p-2 sm:p-4 truncate">{{ customer.customerName }}</td>
-            <td class="p-2 sm:p-4 truncate">{{ customer.phoneNo }}</td>
-            <td class="p-2 sm:p-4 truncate">{{ customer.email }}</td>
-            <td class="p-2 sm:p-4 truncate">{{ customer.remark }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+          <table
+            class="w-full min-w-[600px] border-collapse text-sm sm:text-base"
+            style="color: var(--text);"
+            >
+            <thead
+              class="sticky top-0 z-10 text-xs sm:text-sm"
+              style="background: var(--table-header-bg); color: var(--table-header-text);"
+              >
+              <tr>
+                <th class="p-2 sm:p-4" style="border: 1px solid var(--table-border);">Name</th>
+                <th class="p-2 sm:p-4" style="border: 1px solid var(--table-border);">Mobile No</th>
+                <th class="p-2 sm:p-4" style="border: 1px solid var(--table-border);">Email</th>
+                <th class="p-2 sm:p-4" style="border: 1px solid var(--table-border);">Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (customer of getFilteredCustomers(); track customer) {
+                <tr
+                  class="cursor-pointer transition"
+                  (click)="selectCustomer(customer)"
+                  style="border-bottom: 1px solid var(--table-border);"
+                  onmouseover="this.style.background='var(--table-row-hover)'"
+                  onmouseout="this.style.background='transparent'"
+                  >
+                  <td class="p-2 sm:p-4 truncate">{{ customer.customerName }}</td>
+                  <td class="p-2 sm:p-4 truncate">{{ customer.phoneNo }}</td>
+                  <td class="p-2 sm:p-4 truncate">{{ customer.email }}</td>
+                  <td class="p-2 sm:p-4 truncate">{{ customer.remark }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
 
+    </div>
   </div>
-</div>

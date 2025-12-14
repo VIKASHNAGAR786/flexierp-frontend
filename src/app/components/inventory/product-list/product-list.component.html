@@ -14,202 +14,210 @@
       border: 1px solid var(--input-border);
       --tw-ring-color: var(--accent-1);
     "
-  />
-
-  <!-- Date Range -->
-  <div class="flex gap-2">
-    <input
-      type="date"
-      [(ngModel)]="filter.startDate"
-      (ngModelChange)="getProductData()"
-      class="px-3 py-2 rounded"
-      style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
     />
 
-    <input
-      type="date"
-      [(ngModel)]="filter.endDate"
-      (ngModelChange)="getProductData()"
-      class="px-3 py-2 rounded"
-      style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
-    />
-  </div>
+    <!-- Date Range -->
+    <div class="flex gap-2">
+      <input
+        type="date"
+        [(ngModel)]="filter.startDate"
+        (ngModelChange)="getProductData()"
+        class="px-3 py-2 rounded"
+        style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+        />
 
-  <!-- Rows per page -->
-  <select
-    [(ngModel)]="filter.pageSize"
-    (change)="getProductData()"
-    class="px-3 py-2 rounded"
-    style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
-  >
-    <option *ngFor="let size of pageSizes" [value]="size">{{ size }} per page</option>
-  </select>
+        <input
+          type="date"
+          [(ngModel)]="filter.endDate"
+          (ngModelChange)="getProductData()"
+          class="px-3 py-2 rounded"
+          style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+          />
+        </div>
 
-  <!-- Export Buttons -->
-  <div class="flex gap-2" *ngIf="products.length > 0">
-    <button
-      (click)="exportToPdf()"
-      class="flex items-center gap-1 px-3 py-2 rounded"
-      style="background: #dc2626; color: white;"
-    >
-      <i class="fas fa-file-pdf"></i> PDF
-    </button>
+        <!-- Rows per page -->
+        <select
+          [(ngModel)]="filter.pageSize"
+          (change)="getProductData()"
+          class="px-3 py-2 rounded"
+          style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+          >
+          @for (size of pageSizes; track size) {
+            <option [value]="size">{{ size }} per page</option>
+          }
+        </select>
 
-    <button
-      (click)="exportToExcel()"
-      class="flex items-center gap-1 px-3 py-2 rounded"
-      style="background: #16a34a; color: white;"
-    >
-      <i class="fas fa-file-excel"></i> Excel
-    </button>
-  </div>
-</div>
+        <!-- Export Buttons -->
+        @if (products.length > 0) {
+          <div class="flex gap-2">
+            <button
+              (click)="exportToPdf()"
+              class="flex items-center gap-1 px-3 py-2 rounded"
+              style="background: #dc2626; color: white;"
+              >
+              <i class="fas fa-file-pdf"></i> PDF
+            </button>
+            <button
+              (click)="exportToExcel()"
+              class="flex items-center gap-1 px-3 py-2 rounded"
+              style="background: #16a34a; color: white;"
+              >
+              <i class="fas fa-file-excel"></i> Excel
+            </button>
+          </div>
+        }
+      </div>
 
 
-  <!-- 📋 Product Table -->
-<div
-  #productTable
-  class="overflow-x-auto overflow-y-auto rounded-lg shadow-lg relative max-h-[500px]"
-  style="background: var(--card-bg); border: 1px solid var(--card-border);"
->
-  <table class="min-w-full border-collapse" style="color: var(--card-text);">
+      <!-- 📋 Product Table -->
+      <div
+        #productTable
+        class="overflow-x-auto overflow-y-auto rounded-lg shadow-lg relative max-h-[500px]"
+        style="background: var(--card-bg); border: 1px solid var(--card-border);"
+        >
+        <table class="min-w-full border-collapse" style="color: var(--card-text);">
 
-    <thead
-      class="uppercase text-sm md:text-base tracking-wide sticky top-0 z-50"
+          <thead
+            class="uppercase text-sm md:text-base tracking-wide sticky top-0 z-50"
       style="
         background: linear-gradient(to right, var(--card-bg), var(--input-bg));
         color: var(--accent-1);
       "
-    >
-      <tr>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Sr.No</th>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Code</th>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Barcode</th>
-        <th class="px-4 py-2"><input type="checkbox" (change)="toggleAll($event)" /></th>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Name</th>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Category</th>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Product Type</th>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Packed Date</th>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Weight (kg)</th>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">HxWxD</th>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Perishable</th>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Created By</th>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Purchase Price</th>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Selling Price</th>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Tax Rate</th>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Discount</th>
-      </tr>
-    </thead>
+            >
+            <tr>
+              <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Sr.No</th>
+              <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Code</th>
+              <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Barcode</th>
+              <th class="px-4 py-2"><input type="checkbox" (change)="toggleAll($event)" /></th>
+              <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Name</th>
+              <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Category</th>
+              <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Product Type</th>
+              <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Packed Date</th>
+              <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Weight (kg)</th>
+              <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">HxWxD</th>
+              <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Perishable</th>
+              <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Created By</th>
+              <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Purchase Price</th>
+              <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Selling Price</th>
+              <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Tax Rate</th>
+              <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Discount</th>
+            </tr>
+          </thead>
 
-    <tbody>
-      <tr
-        *ngFor="let product of products; let i = index"
-        class="transition"
-        style="border-color: var(--input-border);"
-        onmouseover="this.style.background='var(--accent-hover)'"
-        onmouseout="this.style.background='transparent'"
-      >
-        <td class="px-4 py-2 text-center">{{ (filter.pageNo - 1) * filter.pageSize + i + 1 }}</td>
-        <td class="px-4 py-2 text-center">{{ product.productCode }}</td>
+          <tbody>
+            @for (product of products; track product; let i = $index) {
+              <tr
+                class="transition"
+                style="border-color: var(--input-border);"
+                onmouseover="this.style.background='var(--accent-hover)'"
+                onmouseout="this.style.background='transparent'"
+                >
+                <td class="px-4 py-2 text-center">{{ (filter.pageNo - 1) * filter.pageSize + i + 1 }}</td>
+                <td class="px-4 py-2 text-center">{{ product.productCode }}</td>
+                <!-- Barcode -->
+                <td
+                  class="px-4 py-2 cursor-pointer font-semibold rounded flex justify-center items-center gap-2 text-center transition"
+                  style="background: var(--input-bg); color: var(--accent-1);"
+                  (click)="showBarcode(product.barCode)"
+                  >
+                  <i class="fas fa-barcode"></i>
+                  <span>{{ product.barCode }}</span>
+                </td>
+                <!-- Checkbox -->
+                <td class="px-4 py-2 text-center">
+                  <input type="checkbox" [value]="product" (change)="toggleSelection($event)" />
+                </td>
+                <td class="px-4 py-2">{{ product.productName }}</td>
+                <td class="px-4 py-2">{{ product.categoryName }}</td>
+                <td class="px-4 py-2">{{ product.productType }}</td>
+                <td class="px-4 py-2 text-center">{{ product.packedDate | date:'yyyy-MM-dd' }}</td>
+                <td class="px-4 py-2 text-center">{{ product.packedWeight }}</td>
+                <td class="px-4 py-2 text-center">{{ product.packedHeight }}x{{ product.packedWidth }}x{{ product.packedDepth }}</td>
+                <td class="px-4 py-2 text-center">
+                  @if (product.isPerishable) {
+                    <span style="color: var(--accent-1); font-weight: bold">Yes</span>
+                  }
+                  @if (!product.isPerishable) {
+                    <span>No</span>
+                  }
+                </td>
+                <td class="px-4 py-2">{{ product.fullName }}</td>
+                <td class="px-4 py-2 text-center">{{ product.purchasePrice }}</td>
+                <td class="px-4 py-2 text-center">{{ product.sellingPrice }}</td>
+                <td class="px-4 py-2 text-center">{{ product.taxRate }}%</td>
+                <td class="px-4 py-2 text-center">{{ product.discount }}%</td>
+              </tr>
+            }
 
-        <!-- Barcode -->
-        <td
-          class="px-4 py-2 cursor-pointer font-semibold rounded flex justify-center items-center gap-2 text-center transition"
-          style="background: var(--input-bg); color: var(--accent-1);"
-          (click)="showBarcode(product.barCode)"
-        >
-          <i class="fas fa-barcode"></i>
-          <span>{{ product.barCode }}</span>
-        </td>
-
-        <!-- Checkbox -->
-        <td class="px-4 py-2 text-center">
-          <input type="checkbox" [value]="product" (change)="toggleSelection($event)" />
-        </td>
-
-        <td class="px-4 py-2">{{ product.productName }}</td>
-        <td class="px-4 py-2">{{ product.categoryName }}</td>
-        <td class="px-4 py-2">{{ product.productType }}</td>
-        <td class="px-4 py-2 text-center">{{ product.packedDate | date:'yyyy-MM-dd' }}</td>
-        <td class="px-4 py-2 text-center">{{ product.packedWeight }}</td>
-        <td class="px-4 py-2 text-center">{{ product.packedHeight }}x{{ product.packedWidth }}x{{ product.packedDepth }}</td>
-        <td class="px-4 py-2 text-center">
-          <span *ngIf="product.isPerishable" style="color: var(--accent-1); font-weight: bold">Yes</span>
-          <span *ngIf="!product.isPerishable">No</span>
-        </td>
-        <td class="px-4 py-2">{{ product.fullName }}</td>
-        <td class="px-4 py-2 text-center">{{ product.purchasePrice }}</td>
-        <td class="px-4 py-2 text-center">{{ product.sellingPrice }}</td>
-        <td class="px-4 py-2 text-center">{{ product.taxRate }}%</td>
-        <td class="px-4 py-2 text-center">{{ product.discount }}%</td>
-      </tr>
-
-      <!-- Empty State -->
-      <tr *ngIf="products.length === 0">
-        <td colspan="16" class="text-center py-4" style="color: gray;">No products available.</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-
-  <!-- 📦 Generate Barcode PDF -->
- <div class="flex justify-center mt-4">
-  <button
-    (click)="generateBarcodePDF()"
-    [disabled]="selectedBarcodes.length === 0"
-    class="px-4 py-2 rounded disabled:bg-gray-400 disabled:cursor-not-allowed"
-    style="background: var(--accent-1); color: black;"
-  >
-    Generate Bar Code PDF
-  </button>
-</div>
-
-
-  <div class="flex justify-between items-center mt-4">
-  <button
-    (click)="prevPage()"
-    [disabled]="filter.pageNo === 1"
-    class="px-3 py-1 rounded disabled:opacity-50"
-    style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
-  >
-    Previous
-  </button>
-
-  <span style="color: var(--card-text);">Page {{ filter.pageNo }} of {{ totalPages }}</span>
-
-  <button
-    (click)="nextPage()"
-    [disabled]="filter.pageNo === totalPages"
-    class="px-3 py-1 rounded disabled:opacity-50"
-    style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
-  >
-    Next
-  </button>
-</div>
-
-
-  <!-- 🎯 Barcode Preview -->
-  <div *ngIf="barcode" class="mt-4">
-    <h3>Barcode for: {{ barcodeText }}</h3>
-    <img [src]="barcode" alt="Barcode" />
-  </div>
-
-
-  <!-- for the big loader -->
-  <div *ngIf="reportIsLoading" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
-    <div class="text-center space-y-4">
-
-      <!-- Animated FLEXIERP text -->
-      <h1 class="text-5xl font-extrabold text-[#00ffee] animate-bounce">FLEXIERP</h1>
-
-      <!-- Bouncing dots -->
-      <div class="flex justify-center space-x-2">
-        <span class="w-4 h-4 bg-[#00ffee] rounded-full animate-bounce delay-100"></span>
-        <span class="w-4 h-4 bg-[#00ffee] rounded-full animate-bounce delay-200"></span>
-        <span class="w-4 h-4 bg-[#00ffee] rounded-full animate-bounce delay-300"></span>
+            <!-- Empty State -->
+            @if (products.length === 0) {
+              <tr>
+                <td colspan="16" class="text-center py-4" style="color: gray;">No products available.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
       </div>
 
-      <p class="text-white text-lg font-semibold animate-pulse">Loading report, please wait...</p>
-    </div>
-  </div>
+
+      <!-- 📦 Generate Barcode PDF -->
+      <div class="flex justify-center mt-4">
+        <button
+          (click)="generateBarcodePDF()"
+          [disabled]="selectedBarcodes.length === 0"
+          class="px-4 py-2 rounded disabled:bg-gray-400 disabled:cursor-not-allowed"
+          style="background: var(--accent-1); color: black;"
+          >
+          Generate Bar Code PDF
+        </button>
+      </div>
+
+
+      <div class="flex justify-between items-center mt-4">
+        <button
+          (click)="prevPage()"
+          [disabled]="filter.pageNo === 1"
+          class="px-3 py-1 rounded disabled:opacity-50"
+          style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+          >
+          Previous
+        </button>
+
+        <span style="color: var(--card-text);">Page {{ filter.pageNo }} of {{ totalPages }}</span>
+
+        <button
+          (click)="nextPage()"
+          [disabled]="filter.pageNo === totalPages"
+          class="px-3 py-1 rounded disabled:opacity-50"
+          style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+          >
+          Next
+        </button>
+      </div>
+
+
+      <!-- 🎯 Barcode Preview -->
+      @if (barcode) {
+        <div class="mt-4">
+          <h3>Barcode for: {{ barcodeText }}</h3>
+          <img [src]="barcode" alt="Barcode" />
+        </div>
+      }
+
+
+      <!-- for the big loader -->
+      @if (reportIsLoading) {
+        <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+          <div class="text-center space-y-4">
+            <!-- Animated FLEXIERP text -->
+            <h1 class="text-5xl font-extrabold text-[#00ffee] animate-bounce">FLEXIERP</h1>
+            <!-- Bouncing dots -->
+            <div class="flex justify-center space-x-2">
+              <span class="w-4 h-4 bg-[#00ffee] rounded-full animate-bounce delay-100"></span>
+              <span class="w-4 h-4 bg-[#00ffee] rounded-full animate-bounce delay-200"></span>
+              <span class="w-4 h-4 bg-[#00ffee] rounded-full animate-bounce delay-300"></span>
+            </div>
+            <p class="text-white text-lg font-semibold animate-pulse">Loading report, please wait...</p>
+          </div>
+        </div>
+      }

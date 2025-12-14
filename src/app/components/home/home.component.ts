@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { RouterModule, Router } from '@angular/router';
 import { ColorserviceService } from '../../services/colorservice.service';
 
 @Component({
   selector: 'app-home',
   standalone: true, // 👈 Add this line
-  imports: [CommonModule, RouterModule], // 👈 This makes ngFor and routing work
+  imports: [RouterModule], // 👈 This makes ngFor and routing work
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

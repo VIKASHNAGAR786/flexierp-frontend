@@ -1,9 +1,39 @@
-.preview-area {
-  font-family: Arial, sans-serif;
-  padding: 10px;
-  border: 1px solid var(--border);
-  background: #fff;
-  min-height: 200px;
-  max-height: 500px;
-  overflow-y: auto;
+/* Force TinyMCE toolbar to stay sticky */
+::ng-deep .tox.tox-tinymce {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+
+::ng-deep .tox-menubar {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  background: white !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+::ng-deep .tox-toolbar__primary {
+  position: sticky !important;
+  top: 39px !important;
+  z-index: 999 !important;
+  background: white !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+::ng-deep .tox-edit-area {
+  flex: 1 !important;
+  overflow-y: auto !important;
+}
+
+::ng-deep .tox-editor-container {
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+::ng-deep .tox-edit-area__iframe {
+  min-height: 400px !important;
 }

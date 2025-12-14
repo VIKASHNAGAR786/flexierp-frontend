@@ -4,148 +4,156 @@
   <div class="flex justify-between items-center mb-4 gap-2 flex-wrap">
 
     <!-- Search -->
-    <input 
-      type="text" 
-      [(ngModel)]="filter.searchTerm" 
-      (ngModelChange)="onSearchChange()" 
+    <input
+      type="text"
+      [(ngModel)]="filter.searchTerm"
+      (ngModelChange)="onSearchChange()"
       placeholder="Search customer..."
       class="px-4 py-2 rounded-lg w-1/3
              bg-[var(--input-bg)] 
              text-[var(--input-text)]
              border border-[var(--input-border)]" />
 
-    <!-- Date Filters -->
-    <div class="flex gap-2 flex-wrap items-center">
+      <!-- Date Filters -->
+      <div class="flex gap-2 flex-wrap items-center">
 
-      <!-- Start Date -->
-      <div class="relative w-44 md:w-52">
-        <input 
-          type="date" 
-          [(ngModel)]="filter.startDate" 
-          (ngModelChange)="onSearchChange()"
+        <!-- Start Date -->
+        <div class="relative w-44 md:w-52">
+          <input
+            type="date"
+            [(ngModel)]="filter.startDate"
+            (ngModelChange)="onSearchChange()"
           class="w-full px-10 py-2 rounded-lg shadow-sm 
                  bg-[var(--input-bg)] text-[var(--input-text)]
                  border border-[var(--input-border)]
                  focus:outline-none focus:ring-2 focus:ring-[var(--highlight-color)]"
-          placeholder="Start Date" />
+            placeholder="Start Date" />
 
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--highlight-color)]">
-          <i class="fas fa-calendar-alt"></i>
-        </span>
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--highlight-color)]">
+              <i class="fas fa-calendar-alt"></i>
+            </span>
 
-        <button 
-          *ngIf="filter.startDate" 
-          (click)="filter.startDate=''; onSearchChange()"
-          class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-red-500" 
-          type="button">
-          <i class="fas fa-times-circle"></i>
-        </button>
-      </div>
+            @if (filter.startDate) {
+              <button
+                (click)="filter.startDate=''; onSearchChange()"
+                class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-red-500"
+                type="button">
+                <i class="fas fa-times-circle"></i>
+              </button>
+            }
+          </div>
 
-      <!-- End Date -->
-      <div class="relative w-44 md:w-52">
-        <input 
-          type="date" 
-          [(ngModel)]="filter.endDate" 
-          (ngModelChange)="onSearchChange()"
+          <!-- End Date -->
+          <div class="relative w-44 md:w-52">
+            <input
+              type="date"
+              [(ngModel)]="filter.endDate"
+              (ngModelChange)="onSearchChange()"
           class="w-full px-10 py-2 rounded-lg shadow-sm 
                  bg-[var(--input-bg)] text-[var(--input-text)]
                  border border-[var(--input-border)]
                  focus:outline-none focus:ring-2 focus:ring-[var(--highlight-color)]"
-          placeholder="End Date" />
+              placeholder="End Date" />
 
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--highlight-color)]">
-          <i class="fas fa-calendar-alt"></i>
-        </span>
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--highlight-color)]">
+                <i class="fas fa-calendar-alt"></i>
+              </span>
 
-        <button 
-          *ngIf="filter.endDate" 
-          (click)="filter.endDate=''; onSearchChange()"
-          class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-red-500" 
-          type="button">
-          <i class="fas fa-times-circle"></i>
-        </button>
-      </div>
+              @if (filter.endDate) {
+                <button
+                  (click)="filter.endDate=''; onSearchChange()"
+                  class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-red-500"
+                  type="button">
+                  <i class="fas fa-times-circle"></i>
+                </button>
+              }
+            </div>
 
-    </div>
+          </div>
 
-    <!-- Page Size -->
-    <select 
-      [(ngModel)]="filter.pageSize" 
-      (change)="onPageSizeChange()"
+          <!-- Page Size -->
+          <select
+            [(ngModel)]="filter.pageSize"
+            (change)="onPageSizeChange()"
       class="px-3 py-2 rounded
              bg-[var(--input-bg)]
              text-[var(--input-text)]
              border border-[var(--input-border)]">
-      <option *ngFor="let size of pageSizes" [value]="size">
-        {{ size }} per page
-      </option>
-    </select>
+            @for (size of pageSizes; track size) {
+              <option [value]="size">
+                {{ size }} per page
+              </option>
+            }
+          </select>
 
-  </div>
+        </div>
 
-  <!-- Table Container -->
+        <!-- Table Container -->
   <div class="relative overflow-x-auto overflow-y-auto rounded-lg shadow-lg max-h-[500px]
               bg-[var(--card-bg)]">
 
-    <table class="min-w-full border-collapse text-[var(--card-text)]">
+          <table class="min-w-full border-collapse text-[var(--card-text)]">
 
       <thead class="sticky top-0 z-40
                     bg-[var(--card-bg)]
                     text-[var(--highlight-color)] uppercase text-sm md:text-base tracking-wide">
-        <tr>
-          <th class="px-4 py-2 border-b border-[var(--card-border)]">Sr.No</th>
-          <th class="px-4 py-2 border-b border-[var(--card-border)]">Provider Name</th>
-          <th class="px-4 py-2 border-b border-[var(--card-border)]">Provider Type</th>
-          <th class="px-4 py-2 border-b border-[var(--card-border)]">Contact Person</th>
-          <th class="px-4 py-2 border-b border-[var(--card-border)]">Email</th>
-          <th class="px-4 py-2 border-b border-[var(--card-border)]">Phone</th>
-          <th class="px-4 py-2 border-b border-[var(--card-border)]">City</th>
-          <th class="px-4 py-2 border-b border-[var(--card-border)]">State</th>
-          <th class="px-4 py-2 border-b border-[var(--card-border)]">Country</th>
-          <th class="px-4 py-2 border-b border-[var(--card-border)]">Payment Terms</th>
-          <th class="px-4 py-2 border-b border-[var(--card-border)]">Created By</th>
-          <th class="px-4 py-2 border-b border-[var(--card-border)]">Created Date</th>
-        </tr>
-      </thead>
+              <tr>
+                <th class="px-4 py-2 border-b border-[var(--card-border)]">Sr.No</th>
+                <th class="px-4 py-2 border-b border-[var(--card-border)]">Provider Name</th>
+                <th class="px-4 py-2 border-b border-[var(--card-border)]">Provider Type</th>
+                <th class="px-4 py-2 border-b border-[var(--card-border)]">Contact Person</th>
+                <th class="px-4 py-2 border-b border-[var(--card-border)]">Email</th>
+                <th class="px-4 py-2 border-b border-[var(--card-border)]">Phone</th>
+                <th class="px-4 py-2 border-b border-[var(--card-border)]">City</th>
+                <th class="px-4 py-2 border-b border-[var(--card-border)]">State</th>
+                <th class="px-4 py-2 border-b border-[var(--card-border)]">Country</th>
+                <th class="px-4 py-2 border-b border-[var(--card-border)]">Payment Terms</th>
+                <th class="px-4 py-2 border-b border-[var(--card-border)]">Created By</th>
+                <th class="px-4 py-2 border-b border-[var(--card-border)]">Created Date</th>
+              </tr>
+            </thead>
 
-      <!-- Loader -->
-      <tbody *ngIf="loading">
-        <tr>
-          <td colspan="12" class="py-8 text-center">
-            <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[var(--highlight-color)]"></div>
-          </td>
-        </tr>
-      </tbody>
+            <!-- Loader -->
+            @if (loading) {
+              <tbody>
+                <tr>
+                  <td colspan="12" class="py-8 text-center">
+                    <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[var(--highlight-color)]"></div>
+                  </td>
+                </tr>
+              </tbody>
+            }
 
-      <tbody *ngIf="!loading" class="divide-y divide-[var(--card-border)]">
-        <tr *ngFor="let provider of providers; let i = index"
-            class="transition hover:bg-[var(--hover-bg)]">
-          
-          <td class="px-4 py-2 text-center">{{ provider.srNo }}</td>
-          <td class="px-4 py-2">{{ provider.providerName }}</td>
-          <td class="px-4 py-2">{{ provider.providerType }}</td>
-          <td class="px-4 py-2">{{ provider.contactPerson }}</td>
-          <td class="px-4 py-2">{{ provider.contactEmail }}</td>
-          <td class="px-4 py-2">{{ provider.contactPhone }}</td>
-          <td class="px-4 py-2">{{ provider.city }}</td>
-          <td class="px-4 py-2">{{ provider.state }}</td>
-          <td class="px-4 py-2">{{ provider.country }}</td>
-          <td class="px-4 py-2">{{ provider.paymentTerms }}</td>
-          <td class="px-4 py-2 text-center">{{ provider.createdByName }}</td>
-          <td class="px-4 py-2 text-center">{{ provider.createdDate | date:'short' }}</td>
+            @if (!loading) {
+              <tbody class="divide-y divide-[var(--card-border)]">
+                @for (provider of providers; track provider; let i = $index) {
+                  <tr
+                    class="transition hover:bg-[var(--hover-bg)]">
+                    <td class="px-4 py-2 text-center">{{ provider.srNo }}</td>
+                    <td class="px-4 py-2">{{ provider.providerName }}</td>
+                    <td class="px-4 py-2">{{ provider.providerType }}</td>
+                    <td class="px-4 py-2">{{ provider.contactPerson }}</td>
+                    <td class="px-4 py-2">{{ provider.contactEmail }}</td>
+                    <td class="px-4 py-2">{{ provider.contactPhone }}</td>
+                    <td class="px-4 py-2">{{ provider.city }}</td>
+                    <td class="px-4 py-2">{{ provider.state }}</td>
+                    <td class="px-4 py-2">{{ provider.country }}</td>
+                    <td class="px-4 py-2">{{ provider.paymentTerms }}</td>
+                    <td class="px-4 py-2 text-center">{{ provider.createdByName }}</td>
+                    <td class="px-4 py-2 text-center">{{ provider.createdDate | date:'short' }}</td>
+                  </tr>
+                }
+                @if (providers.length === 0) {
+                  <tr>
+                    <td colspan="12" class="text-center py-4 text-gray-400">
+                      No providers available.
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            }
+          </table>
 
-        </tr>
+        </div>
 
-        <tr *ngIf="providers.length === 0">
-          <td colspan="12" class="text-center py-4 text-gray-400">
-            No providers available.
-          </td>
-        </tr>
-
-      </tbody>
-    </table>
-
-  </div>
-
-</div>
+      </div>

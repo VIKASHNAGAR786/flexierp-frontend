@@ -13,99 +13,104 @@
       border: 1px solid var(--input-border);
       --tw-ring-color: var(--accent-1);
     " 
-  />
+    />
 
-  <!-- 📑 Rows Per Page -->
-  <select
-    [(ngModel)]="filter.pageSize"
-    (change)="loadGetReceivedCheques()"
-   class="px-3 py-2 rounded"
-    style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
-  >
-    <option *ngFor="let size of pageSizes" [value]="size">
-      {{ size }} per page
-    </option>
-  </select>
+    <!-- 📑 Rows Per Page -->
+    <select
+      [(ngModel)]="filter.pageSize"
+      (change)="loadGetReceivedCheques()"
+      class="px-3 py-2 rounded"
+      style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+      >
+      @for (size of pageSizes; track size) {
+        <option [value]="size">
+          {{ size }} per page
+        </option>
+      }
+    </select>
 
-  
-</div>
 
-<!-- 📋 Received Cheques Table -->
-<div
-  #productTable
-   class="overflow-x-auto overflow-y-auto rounded-lg shadow-lg relative max-h-[500px]"
-  style="background: var(--card-bg); border: 1px solid var(--card-border);"
-  >
-  <table class="min-w-full border-collapse" style="color: var(--card-text);">
-    <thead
-      class="uppercase text-sm md:text-base tracking-wide sticky top-0 z-50"
+  </div>
+
+  <!-- 📋 Received Cheques Table -->
+  <div
+    #productTable
+    class="overflow-x-auto overflow-y-auto rounded-lg shadow-lg relative max-h-[500px]"
+    style="background: var(--card-bg); border: 1px solid var(--card-border);"
+    >
+    <table class="min-w-full border-collapse" style="color: var(--card-text);">
+      <thead
+        class="uppercase text-sm md:text-base tracking-wide sticky top-0 z-50"
       style="
         background: linear-gradient(to right, var(--card-bg), var(--input-bg));
         color: var(--accent-1);" 
-    >
-      <tr>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Sr No</th>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Customer Name</th>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Customer Address</th>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Phone No</th>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Bank Name</th>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Branch Name</th>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">IFSC Code</th>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Cheque No</th>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Amount</th>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Created At</th>
-        <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Added By</th>
-      </tr>
-    </thead>
+        >
+        <tr>
+          <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Sr No</th>
+          <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Customer Name</th>
+          <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Customer Address</th>
+          <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Phone No</th>
+          <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Bank Name</th>
+          <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Branch Name</th>
+          <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">IFSC Code</th>
+          <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Cheque No</th>
+          <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Amount</th>
+          <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Created At</th>
+          <th class="px-4 py-2 border-b" style="border-color: var(--input-border)">Added By</th>
+        </tr>
+      </thead>
 
-    <tbody>
-      <tr
-        *ngFor="let cheque of chequedata; let i = index"
-        class="transition"
-        style="border-color: var(--input-border);"
-        onmouseover="this.style.background='var(--accent-hover)'"
-        onmouseout="this.style.background='transparent'"
+      <tbody>
+        @for (cheque of chequedata; track cheque; let i = $index) {
+          <tr
+            class="transition"
+            style="border-color: var(--input-border);"
+            onmouseover="this.style.background='var(--accent-hover)'"
+            onmouseout="this.style.background='transparent'"
+            >
+            <td class="px-4 py-2 text-center">{{ cheque.srNo }}</td>
+            <td class="px-4 py-2 text-center">{{ cheque.customerName }}</td>
+            <td class="px-4 py-2 text-center">{{ cheque.customerAddress }}</td>
+            <td class="px-4 py-2 text-center">{{ cheque.phoneNo }}</td>
+            <td class="px-4 py-2 text-center">{{ cheque.bankName }}</td>
+            <td class="px-4 py-2 text-center">{{ cheque.branchName }}</td>
+            <td class="px-4 py-2 text-center">{{ cheque.ifsc_Code }}</td>
+            <td class="px-4 py-2 text-center">{{ cheque.chequeNumber }}</td>
+            <td class="px-4 py-2 text-center">{{ cheque.amount | currency:'INR' }}</td>
+            <td class="px-4 py-2 text-center">{{ cheque.createdAt | date:'short' }}</td>
+            <td class="px-4 py-2 text-center">{{ cheque.fullName }}</td>
+          </tr>
+        }
+
+        <!-- 💤 Empty State -->
+        @if (chequedata.length === 0) {
+          <tr>
+            <td colspan="11" class="text-center py-4 text-gray-400">
+              No cheques found.
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 📄 Pagination Controls -->
+  <div class="flex justify-between items-center mt-4 text-white">
+    <button
+      (click)="prevPage()"
+      [disabled]="filter.pageNo === 1"
+      class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50"
       >
-        <td class="px-4 py-2 text-center">{{ cheque.srNo }}</td>
-        <td class="px-4 py-2 text-center">{{ cheque.customerName }}</td>
-        <td class="px-4 py-2 text-center">{{ cheque.customerAddress }}</td>
-        <td class="px-4 py-2 text-center">{{ cheque.phoneNo }}</td>
-        <td class="px-4 py-2 text-center">{{ cheque.bankName }}</td>
-        <td class="px-4 py-2 text-center">{{ cheque.branchName }}</td>
-        <td class="px-4 py-2 text-center">{{ cheque.ifsc_Code }}</td>
-        <td class="px-4 py-2 text-center">{{ cheque.chequeNumber }}</td>
-        <td class="px-4 py-2 text-center">{{ cheque.amount | currency:'INR' }}</td>
-        <td class="px-4 py-2 text-center">{{ cheque.createdAt | date:'short' }}</td>
-        <td class="px-4 py-2 text-center">{{ cheque.fullName }}</td>
-      </tr>
+      Previous
+    </button>
 
-      <!-- 💤 Empty State -->
-      <tr *ngIf="chequedata.length === 0">
-        <td colspan="11" class="text-center py-4 text-gray-400">
-          No cheques found.
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+    <span>Page {{ filter.pageNo }} of {{ totalPages }}</span>
 
-<!-- 📄 Pagination Controls -->
-<div class="flex justify-between items-center mt-4 text-white">
-  <button
-    (click)="prevPage()"
-    [disabled]="filter.pageNo === 1"
-    class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50"
-  >
-    Previous
-  </button>
-
-  <span>Page {{ filter.pageNo }} of {{ totalPages }}</span>
-
-  <button
-    (click)="nextPage()"
-    [disabled]="filter.pageNo === totalPages"
-    class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50"
-  >
-    Next
-  </button>
-</div>
+    <button
+      (click)="nextPage()"
+      [disabled]="filter.pageNo === totalPages"
+      class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50"
+      >
+      Next
+    </button>
+  </div>

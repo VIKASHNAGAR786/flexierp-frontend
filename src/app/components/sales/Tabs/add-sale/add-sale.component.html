@@ -4,7 +4,7 @@
     style="background: var(--card-bg);
             color: var(--card-text);
             border: 1px solid var(--card-border)"
-  >
+    >
 
     <!-- for barcode scan -->
     <app-scan-barcode (barcodeScanned)="fetchProductByBarcode($event)"></app-scan-barcode>
@@ -19,13 +19,13 @@
     style="background: var(--card-bg);
          color: var(--card-text);
          border: 1px solid var(--card-border)"
-  >
+    >
 
     <!-- Heading -->
     <h3
       class="text-xl font-extrabold mb-4 uppercase tracking-wide drop-shadow-md"
       style="color: var(--heading)"
-    >
+      >
       Product Details
     </h3>
 
@@ -45,996 +45,1003 @@
           style="background: var(--input-bg);
                color: var(--input-text);
                border: 1px solid var(--input-border)"
-        />
-      </div>
+          />
+        </div>
 
-      <!-- Product Name -->
-      <div class="flex flex-col">
-        <label
-          class="label-style"
-          style="color: var(--text)"
-        >Product Name</label>
-        <input
-          type="text"
-          [(ngModel)]="saleProduct.productName"
-          name="productName"
-          class="input-style"
-          readonly
+        <!-- Product Name -->
+        <div class="flex flex-col">
+          <label
+            class="label-style"
+            style="color: var(--text)"
+          >Product Name</label>
+          <input
+            type="text"
+            [(ngModel)]="saleProduct.productName"
+            name="productName"
+            class="input-style"
+            readonly
           style="background: var(--input-bg);
                color: var(--input-text);
                border: 1px solid var(--input-border)"
-        />
-      </div>
+            />
+          </div>
 
-      <!-- Category -->
-      <div class="flex flex-col">
-        <label
-          class="label-style"
-          style="color: var(--text)"
-        >Category</label>
-        <input
-          type="text"
-          [(ngModel)]="saleProduct.categoryName"
-          name="categoryName"
-          class="input-style"
-          readonly
+          <!-- Category -->
+          <div class="flex flex-col">
+            <label
+              class="label-style"
+              style="color: var(--text)"
+            >Category</label>
+            <input
+              type="text"
+              [(ngModel)]="saleProduct.categoryName"
+              name="categoryName"
+              class="input-style"
+              readonly
           style="background: var(--input-bg);
                color: var(--input-text);
                border: 1px solid var(--input-border)"
-        />
-      </div>
+              />
+            </div>
 
-      <!-- Product Type -->
-      <div class="flex flex-col">
-        <label
-          class="label-style"
-          style="color: var(--text)"
-        >Product Type</label>
-        <input
-          type="text"
-          [(ngModel)]="saleProduct.productType"
-          name="productType"
-          class="input-style"
-          readonly
+            <!-- Product Type -->
+            <div class="flex flex-col">
+              <label
+                class="label-style"
+                style="color: var(--text)"
+              >Product Type</label>
+              <input
+                type="text"
+                [(ngModel)]="saleProduct.productType"
+                name="productType"
+                class="input-style"
+                readonly
           style="background: var(--input-bg);
                color: var(--input-text);
                border: 1px solid var(--input-border)"
-        />
-      </div>
+                />
+              </div>
 
-      <!-- Packed Date -->
-      <div class="flex flex-col">
-        <label
-          class="label-style"
-          style="color: var(--text)"
-        >Packed Date</label>
-        <input
-          type="date"
-          [ngModel]="saleProduct.packedDate | date:'yyyy-MM-dd'"
-          (ngModelChange)="saleProduct.packedDate = $event"
-          name="packedDate"
-          class="input-style"
-          readonly
+              <!-- Packed Date -->
+              <div class="flex flex-col">
+                <label
+                  class="label-style"
+                  style="color: var(--text)"
+                >Packed Date</label>
+                <input
+                  type="date"
+                  [ngModel]="saleProduct.packedDate | date:'yyyy-MM-dd'"
+                  (ngModelChange)="saleProduct.packedDate = $event"
+                  name="packedDate"
+                  class="input-style"
+                  readonly
           style="background: var(--input-bg);
                color: var(--input-text);
                border: 1px solid var(--input-border)"
-        />
+                  />
 
-      </div>
+                </div>
 
-      <!-- Dimensions -->
-      <div class="flex flex-col">
-        <label
-          class="label-style"
-          style="color: var(--text)"
-        >Weight (g)</label>
-        <input
-          type="number"
-          [(ngModel)]="saleProduct.packedWeight"
-          name="packedWeight"
-          class="input-style"
-          readonly
+                <!-- Dimensions -->
+                <div class="flex flex-col">
+                  <label
+                    class="label-style"
+                    style="color: var(--text)"
+                  >Weight (g)</label>
+                  <input
+                    type="number"
+                    [(ngModel)]="saleProduct.packedWeight"
+                    name="packedWeight"
+                    class="input-style"
+                    readonly
           style="background: var(--input-bg);
                color: var(--input-text);
                border: 1px solid var(--input-border)"
-        />
-      </div>
+                    />
+                  </div>
 
-      <div class="flex flex-col">
-        <label
-          class="label-style"
-          style="color: var(--text)"
-        >Height (cm)</label>
-        <input
-          type="number"
-          [(ngModel)]="saleProduct.packedHeight"
-          name="packedHeight"
-          class="input-style"
-          readonly
+                  <div class="flex flex-col">
+                    <label
+                      class="label-style"
+                      style="color: var(--text)"
+                    >Height (cm)</label>
+                    <input
+                      type="number"
+                      [(ngModel)]="saleProduct.packedHeight"
+                      name="packedHeight"
+                      class="input-style"
+                      readonly
           style="background: var(--input-bg);
                color: var(--input-text);
                border: 1px solid var(--input-border)"
-        />
-      </div>
+                      />
+                    </div>
 
-      <div class="flex flex-col">
-        <label
-          class="label-style"
-          style="color: var(--text)"
-        >Depth (cm)</label>
-        <input
-          type="number"
-          [(ngModel)]="saleProduct.packedDepth"
-          name="packedDepth"
-          class="input-style"
-          readonly
+                    <div class="flex flex-col">
+                      <label
+                        class="label-style"
+                        style="color: var(--text)"
+                      >Depth (cm)</label>
+                      <input
+                        type="number"
+                        [(ngModel)]="saleProduct.packedDepth"
+                        name="packedDepth"
+                        class="input-style"
+                        readonly
           style="background: var(--input-bg);
                color: var(--input-text);
                border: 1px solid var(--input-border)"
-        />
-      </div>
+                        />
+                      </div>
 
-      <div class="flex flex-col">
-        <label
-          class="label-style"
-          style="color: var(--text)"
-        >Width (cm)</label>
-        <input
-          type="number"
-          [(ngModel)]="saleProduct.packedWidth"
-          name="packedWidth"
-          class="input-style"
-          readonly
+                      <div class="flex flex-col">
+                        <label
+                          class="label-style"
+                          style="color: var(--text)"
+                        >Width (cm)</label>
+                        <input
+                          type="number"
+                          [(ngModel)]="saleProduct.packedWidth"
+                          name="packedWidth"
+                          class="input-style"
+                          readonly
           style="background: var(--input-bg);
                color: var(--input-text);
                border: 1px solid var(--input-border)"
-        />
-      </div>
+                          />
+                        </div>
 
-      <!-- Perishable (Readonly Boolean Display) -->
-      <div class="flex flex-col">
-        <label
-          class="label-style"
-          style="color: var(--text)">
-          Perishable
-        </label>
+                        <!-- Perishable (Readonly Boolean Display) -->
+                        <div class="flex flex-col">
+                          <label
+                            class="label-style"
+                            style="color: var(--text)">
+                            Perishable
+                          </label>
 
-        <input
-          type="text"
-          [value]="saleProduct.isPerishable ? 'Yes' : 'No'"
-          readonly
-          class="input-style"
+                          <input
+                            type="text"
+                            [value]="saleProduct.isPerishable ? 'Yes' : 'No'"
+                            readonly
+                            class="input-style"
           style="background: var(--input-bg);
                  color: var(--input-text);
                  border: 1px solid var(--input-border)"
-        />
-      </div>
+                            />
+                          </div>
 
-    </div>
+                        </div>
 
-    <!-- 🔹 Financial / Pricing Section -->
-    <h4 class="text-lg font-bold text-[#00ffee] mt-6">Pricing</h4>
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
-      <div class="flex flex-col">
-        <label
-          class="label-style"
-          style="color: var(--text)"
-        >Purchase Price</label>
-        <input
-          type="number"
-          [(ngModel)]="saleProduct.purchasePrice"
-          name="purchasePrice"
-          class="input-style"
-          readonly
+                        <!-- 🔹 Financial / Pricing Section -->
+                        <h4 class="text-lg font-bold text-[#00ffee] mt-6">Pricing</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+                          <div class="flex flex-col">
+                            <label
+                              class="label-style"
+                              style="color: var(--text)"
+                            >Purchase Price</label>
+                            <input
+                              type="number"
+                              [(ngModel)]="saleProduct.purchasePrice"
+                              name="purchasePrice"
+                              class="input-style"
+                              readonly
           style="background: var(--input-bg);
                color: var(--input-text);
                border: 1px solid var(--input-border)"
-        />
-      </div>
+                              />
+                            </div>
 
-      <div class="flex flex-col">
-        <label
-          class="label-style"
-          style="color: var(--text)"
-        >Selling Price</label>
-        <input
-          type="number"
-          [(ngModel)]="saleProduct.sellingPrice"
-          name="sellingPrice"
-          class="input-style"
-          readonly
+                            <div class="flex flex-col">
+                              <label
+                                class="label-style"
+                                style="color: var(--text)"
+                              >Selling Price</label>
+                              <input
+                                type="number"
+                                [(ngModel)]="saleProduct.sellingPrice"
+                                name="sellingPrice"
+                                class="input-style"
+                                readonly
           style="background: var(--input-bg);
                color: var(--input-text);
                border: 1px solid var(--input-border)"
-        />
-      </div>
+                                />
+                              </div>
 
-      <div class="flex flex-col">
-        <label
-          class="label-style"
-          style="color: var(--text)"
-        >Tax Rate (%)</label>
-        <input
-          type="number"
-          [(ngModel)]="saleProduct.taxRate"
-          name="taxRate"
-          class="input-style"
-          readonly
+                              <div class="flex flex-col">
+                                <label
+                                  class="label-style"
+                                  style="color: var(--text)"
+                                >Tax Rate (%)</label>
+                                <input
+                                  type="number"
+                                  [(ngModel)]="saleProduct.taxRate"
+                                  name="taxRate"
+                                  class="input-style"
+                                  readonly
           style="background: var(--input-bg);
                color: var(--input-text);
                border: 1px solid var(--input-border)"
-        />
-      </div>
+                                  />
+                                </div>
 
-      <div class="flex flex-col">
-        <label
-          class="label-style"
-          style="color: var(--text)"
-        >Discount</label>
-        <input
-          type="number"
-          [(ngModel)]="saleProduct.discount"
-          name="discount"
-          placeholder="0.00"
-          min="0"
-          max="100"
-          #discount="ngModel"
-          class="input-style"
+                                <div class="flex flex-col">
+                                  <label
+                                    class="label-style"
+                                    style="color: var(--text)"
+                                  >Discount</label>
+                                  <input
+                                    type="number"
+                                    [(ngModel)]="saleProduct.discount"
+                                    name="discount"
+                                    placeholder="0.00"
+                                    min="0"
+                                    max="100"
+                                    #discount="ngModel"
+                                    class="input-style"
           style="background: var(--input-bg);
                color: var(--input-text);
                border: 1px solid var(--input-border)"
-        />
-        <span
-          *ngIf="discount.invalid && discount.touched"
-          class="text-red-500 text-xs"
-        >
-          Discount must be between 0 and 100.
-        </span>
-      </div>
+                                    />
+                                    @if (discount.invalid && discount.touched) {
+                                      <span
+                                        class="text-red-500 text-xs"
+                                        >
+                                        Discount must be between 0 and 100.
+                                      </span>
+                                    }
+                                  </div>
 
-      <!-- Available Quantity -->
-      <div class="flex flex-col md:col-span-2">
-        <label class="label-animated">Available Quantity</label>
-        <input
-          type="number"
-          [(ngModel)]="saleProduct.availableQuantity"
-          name="availableQuantity"
-          placeholder="Available Quantity"
-          readonly
-          class="input-animated cursor-not-allowed"
+                                  <!-- Available Quantity -->
+                                  <div class="flex flex-col md:col-span-2">
+                                    <label class="label-animated">Available Quantity</label>
+                                    <input
+                                      type="number"
+                                      [(ngModel)]="saleProduct.availableQuantity"
+                                      name="availableQuantity"
+                                      placeholder="Available Quantity"
+                                      readonly
+                                      class="input-animated cursor-not-allowed"
           style="background: var(--input-bg);
                  color: var(--input-text);
                  border: 1px solid var(--input-border)"
-        />
-      </div>
+                                      />
+                                    </div>
 
-      <!-- Quantity (Required for Sale) -->
-      <div class="flex flex-col md:col-span-2">
-        <label
-          class="label-style"
-          style="color: var(--text)"
-        >
-          Quantity <label style="color: red;">*</label>
-        </label>
+                                    <!-- Quantity (Required for Sale) -->
+                                    <div class="flex flex-col md:col-span-2">
+                                      <label
+                                        class="label-style"
+                                        style="color: var(--text)"
+                                        >
+                                        Quantity <label style="color: red;">*</label>
+                                      </label>
 
-        <input
-          type="number"
-          [(ngModel)]="saleProduct.quantity"
-          name="quantity"
-          placeholder="Enter Quantity"
-          required
-          min="1"
-          [max]="saleProduct.availableQuantity"
-          #quantity="ngModel"
-          class="input-style"
+                                      <input
+                                        type="number"
+                                        [(ngModel)]="saleProduct.quantity"
+                                        name="quantity"
+                                        placeholder="Enter Quantity"
+                                        required
+                                        min="1"
+                                        [max]="saleProduct.availableQuantity"
+                                        #quantity="ngModel"
+                                        class="input-style"
           style="background: var(--input-bg);
                color: var(--input-text);
                border: 1px solid var(--input-border)"
-        />
+                                        />
 
-        <!-- Validation Messages -->
-        <span
-          *ngIf="quantity.errors?.['required'] && quantity.touched"
-          class="text-red-500 text-xs"
-        >
-          Quantity is required.
-        </span>
+                                        <!-- Validation Messages -->
+                                        @if (quantity.errors?.['required'] && quantity.touched) {
+                                          <span
+                                            class="text-red-500 text-xs"
+                                            >
+                                            Quantity is required.
+                                          </span>
+                                        }
 
-        <span
-          *ngIf="quantity.errors?.['min'] && quantity.touched"
-          class="text-red-500 text-xs"
-        >
-          Quantity must be at least 1.
-        </span>
+                                        @if (quantity.errors?.['min'] && quantity.touched) {
+                                          <span
+                                            class="text-red-500 text-xs"
+                                            >
+                                            Quantity must be at least 1.
+                                          </span>
+                                        }
 
-        <span
-          *ngIf="quantity.errors?.['max'] && quantity.touched"
-          class="text-red-500 text-xs"
-        >
-          Quantity cannot exceed available quantity ({{ saleProduct.availableQuantity }}).
-        </span>
-      </div>
+                                        @if (quantity.errors?.['max'] && quantity.touched) {
+                                          <span
+                                            class="text-red-500 text-xs"
+                                            >
+                                            Quantity cannot exceed available quantity ({{ saleProduct.availableQuantity }}).
+                                          </span>
+                                        }
+                                      </div>
 
-    </div>
+                                    </div>
 
-    <!-- Save Product Button -->
-    <button
-      type="submit"
-      [disabled]="productForm.invalid"
-      class="w-full md:w-auto bg-[#00ffee] text-black px-6 py-2 rounded font-bold hover:bg-white transition disabled:opacity-50 disabled:cursor-not-allowed"
-    >
-      Add To Cart
-    </button>
-  </form>
+                                    <!-- Save Product Button -->
+                                    <button
+                                      type="submit"
+                                      [disabled]="productForm.invalid"
+                                      class="w-full md:w-auto bg-[#00ffee] text-black px-6 py-2 rounded font-bold hover:bg-white transition disabled:opacity-50 disabled:cursor-not-allowed"
+                                      >
+                                      Add To Cart
+                                    </button>
+                                  </form>
 
-  <!-- Cart Section -->
-  <div
-    class="p-6 rounded-xl shadow-lg space-y-4"
+                                  <!-- Cart Section -->
+                                  <div
+                                    class="p-6 rounded-xl shadow-lg space-y-4"
     style="background: var(--card-bg);
             color: var(--card-text);
             border: 1px solid var(--card-border)"
-  >
+                                    >
 
-    <div class="flex justify-between items-center mb-4">
-      <!-- Heading -->
-      <h3
-        class="text-xl font-extrabold uppercase tracking-wide drop-shadow-md"
-        style="color: var(--heading)"
-      >
-        Cart
-      </h3>
+                                    <div class="flex justify-between items-center mb-4">
+                                      <!-- Heading -->
+                                      <h3
+                                        class="text-xl font-extrabold uppercase tracking-wide drop-shadow-md"
+                                        style="color: var(--heading)"
+                                        >
+                                        Cart
+                                      </h3>
 
-      <!-- Extra Charges Button -->
-      <button
-        type="button"
-        (click)="openExtraChargesPopup()"
-        [disabled]="cart.length === 0"
-        class="font-semibold px-4 py-2 rounded-lg shadow flex items-center gap-2 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                                      <!-- Extra Charges Button -->
+                                      <button
+                                        type="button"
+                                        (click)="openExtraChargesPopup()"
+                                        [disabled]="cart.length === 0"
+                                        class="font-semibold px-4 py-2 rounded-lg shadow flex items-center gap-2 transition disabled:opacity-50 disabled:cursor-not-allowed"
         style="background: var(--accent-1);
          color: var(--sidebar-hover-text)"
-      >
-        <i class="bi bi-plus-circle text-lg"></i>
-        <span class="hidden sm:inline">Extra Charges</span>
-      </button>
-    </div>
+                                        >
+                                        <i class="bi bi-plus-circle text-lg"></i>
+                                        <span class="hidden sm:inline">Extra Charges</span>
+                                      </button>
+                                    </div>
 
-    <!-- Table -->
-    <div class="overflow-x-auto">
-      <table class="w-full text-sm border-collapse">
-        <thead>
-          <tr
-            style="background: var(--card-border); color: var(--heading)"
-            class="uppercase text-xs"
-          >
-            <th class="px-3 py-2 text-left">Product</th>
-            <th class="px-3 py-2 text-center">Qty</th>
-            <th class="px-3 py-2 text-center">Price(Per/Qty)</th>
-            <th class="px-3 py-2 text-center">Discount</th>
-            <th class="px-3 py-2 text-center">Tax</th>
-            <th class="px-3 py-2 text-center">Total</th>
-            <th class="px-3 py-2 text-center">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            *ngFor="let item of cart; let i = index"
-            style="border-bottom: 1px solid var(--border)"
-          >
-            <td class="px-3 py-2">{{ item.name }}</td>
-            <td class="px-3 py-2 text-center">{{ item.qty }}</td>
-            <td class="px-3 py-2 text-center">{{ item.sellingPrice | number:'1.2-2' }}</td>
-            <td class="px-3 py-2 text-center">{{ item.discountAmt }}</td>
-            <td class="px-3 py-2 text-center">{{ item.taxAmt }}%</td>
-            <td class="px-3 py-2 text-center font-semibold">{{ item.total | number:'1.2-2' }}</td>
-            <td class="px-3 py-2 text-center">
-              <div class="flex justify-center items-center gap-2 relative">
-                <!-- Edit Button -->
-                <button
-                  type="button"
-                  (click)="editCartItem(i)"
-                  class="text-yellow-400 hover:text-yellow-600"
-                  appTooltip="Edit item"
-                  [tooltipPosition]="'right'"
-                  [tooltipFixed]="false"
-                >
-                  <i class="fas fa-edit"></i>
-                </button>
+                                    <!-- Table -->
+                                    <div class="overflow-x-auto">
+                                      <table class="w-full text-sm border-collapse">
+                                        <thead>
+                                          <tr
+                                            style="background: var(--card-border); color: var(--heading)"
+                                            class="uppercase text-xs"
+                                            >
+                                            <th class="px-3 py-2 text-left">Product</th>
+                                            <th class="px-3 py-2 text-center">Qty</th>
+                                            <th class="px-3 py-2 text-center">Price(Per/Qty)</th>
+                                            <th class="px-3 py-2 text-center">Discount</th>
+                                            <th class="px-3 py-2 text-center">Tax</th>
+                                            <th class="px-3 py-2 text-center">Total</th>
+                                            <th class="px-3 py-2 text-center">Action</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          @for (item of cart; track item; let i = $index) {
+                                            <tr
+                                              style="border-bottom: 1px solid var(--border)"
+                                              >
+                                              <td class="px-3 py-2">{{ item.name }}</td>
+                                              <td class="px-3 py-2 text-center">{{ item.qty }}</td>
+                                              <td class="px-3 py-2 text-center">{{ item.sellingPrice | number:'1.2-2' }}</td>
+                                              <td class="px-3 py-2 text-center">{{ item.discountAmt }}</td>
+                                              <td class="px-3 py-2 text-center">{{ item.taxAmt }}%</td>
+                                              <td class="px-3 py-2 text-center font-semibold">{{ item.total | number:'1.2-2' }}</td>
+                                              <td class="px-3 py-2 text-center">
+                                                <div class="flex justify-center items-center gap-2 relative">
+                                                  <!-- Edit Button -->
+                                                  <button
+                                                    type="button"
+                                                    (click)="editCartItem(i)"
+                                                    class="text-yellow-400 hover:text-yellow-600"
+                                                    appTooltip="Edit item"
+                                                    [tooltipPosition]="'right'"
+                                                    [tooltipFixed]="false"
+                                                    >
+                                                    <i class="fas fa-edit"></i>
+                                                  </button>
+                                                  <!-- Delete Button -->
+                                                  <button
+                                                    type="button"
+                                                    (click)="removeFromCart(i)"
+                                                    class="text-red-400 hover:text-red-600"
+                                                    appTooltip="Remove item"
+                                                    [tooltipPosition]="'left'"
+                                                    [tooltipFixed]="false"
+                                                    >
+                                                    <i class="fas fa-trash"></i>
+                                                  </button>
+                                                </div>
+                                              </td>
+                                            </tr>
+                                          }
+                                        </tbody>
+                                      </table>
 
-                <!-- Delete Button -->
-                <button
-                  type="button"
-                  (click)="removeFromCart(i)"
-                  class="text-red-400 hover:text-red-600"
-                  appTooltip="Remove item"
-                  [tooltipPosition]="'left'"
-                  [tooltipFixed]="false"
-                >
-                  <i class="fas fa-trash"></i>
-                </button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+                                    </div>
 
-    </div>
+                                    <!-- Summary -->
+                                    <div class="flex flex-col md:flex-row justify-between items-center mt-4 text-lg font-bold">
+                                      <span>Total Items: {{ cart.length }}</span>
 
-    <!-- Summary -->
-    <div class="flex flex-col md:flex-row justify-between items-center mt-4 text-lg font-bold">
-      <span>Total Items: {{ cart.length }}</span>
+                                      <span style="color: var(--accent-1); text-shadow: 0 0 5px var(--accent-1)">
+                                        Total Extra Charges: ₹{{ totalExtraCharges || 0 }}
+                                      </span>
 
-      <span style="color: var(--accent-1); text-shadow: 0 0 5px var(--accent-1)">
-        Total Extra Charges: ₹{{ totalExtraCharges || 0 }}
-      </span>
-
-<span style="color: var(--total-color); text-shadow: var(--total-shadow)">
-  Grand Total: ₹{{ grandTotal | number:'1.2-2' }}
-</span>
-    </div>
-  </div>
+                                      <span style="color: var(--total-color); text-shadow: var(--total-shadow)">
+                                        Grand Total: ₹{{ grandTotal | number:'1.2-2' }}
+                                      </span>
+                                    </div>
+                                  </div>
 
 
-  <!-- Customer & Payment Info -->
-  <div
-    class="p-6 rounded-xl shadow-lg space-y-4"
-    style="background: var(--card-bg); border: 1px solid var(--card-border);"
-  >
-    <div class="flex items-center justify-between mb-4">
-      <h3
-        class="text-xl font-extrabold uppercase tracking-wide drop-shadow-md"
-        style="color: var(--heading);"
-      >
-        Customer & Payment
-      </h3>
+                                  <!-- Customer & Payment Info -->
+                                  <div
+                                    class="p-6 rounded-xl shadow-lg space-y-4"
+                                    style="background: var(--card-bg); border: 1px solid var(--card-border);"
+                                    >
+                                    <div class="flex items-center justify-between mb-4">
+                                      <h3
+                                        class="text-xl font-extrabold uppercase tracking-wide drop-shadow-md"
+                                        style="color: var(--heading);"
+                                        >
+                                        Customer & Payment
+                                      </h3>
 
-      <button
-        (click)="openOldCustomerSale()"
-        class="font-bold px-4 py-2 rounded-lg shadow-md transition"
-        style="background: var(--accent-1); color: #000;"
-      >
-        Sale to Old Customers
-      </button>
+                                      <button
+                                        (click)="openOldCustomerSale()"
+                                        class="font-bold px-4 py-2 rounded-lg shadow-md transition"
+                                        style="background: var(--accent-1); color: #000;"
+                                        >
+                                        Sale to Old Customers
+                                      </button>
 
-      <button
-        (click)="openAddCustomerPopup()"
-        class="font-bold px-4 py-2 rounded-lg shadow-md transition"
-        style="background: var(--accent-1); color: #000;"
-      >
-        Add New Customer
-      </button>
+                                      <button
+                                        (click)="openAddCustomerPopup()"
+                                        class="font-bold px-4 py-2 rounded-lg shadow-md transition"
+                                        style="background: var(--accent-1); color: #000;"
+                                        >
+                                        Add New Customer
+                                      </button>
 
-      @if(isAddcustomerPopupOpen){<app-add-customer-popup
-        [isOpen]="isAddcustomerPopupOpen"
-        (close)="isAddcustomerPopupOpen = false"
-        (save)="saveCustomer($event)"
-      ></app-add-customer-popup>}
+                                      @if(isAddcustomerPopupOpen){<app-add-customer-popup
+                                        [isOpen]="isAddcustomerPopupOpen"
+                                        (close)="isAddcustomerPopupOpen = false"
+                                        (save)="saveCustomer($event)"
+                                      ></app-add-customer-popup>}
 
-      <!-- Conditional render -->
-      @if(showOldCustomer){
-      <app-old-customer-popup
-        *ngIf="showOldCustomer"
-        (customerSelected)="onCustomerSelected($event)"
-        (close)="showOldCustomer = false"
-      ></app-old-customer-popup>
-      }
-    </div>
+                                      <!-- Conditional render -->
+                                      @if(showOldCustomer){
+                                        @if (showOldCustomer) {
+                                          <app-old-customer-popup
+                                            (customerSelected)="onCustomerSelected($event)"
+                                            (close)="showOldCustomer = false"
+                                          ></app-old-customer-popup>
+                                        }
+                                      }
+                                    </div>
 
-    <form
-      #saleForm="ngForm"
-      (ngSubmit)="MakeTheSale()"
-      class="space-y-6"
-    >
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <form
+                                      #saleForm="ngForm"
+                                      (ngSubmit)="MakeTheSale()"
+                                      class="space-y-6"
+                                      >
+                                      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-        <!-- Customer Name -->
-        <div class="flex flex-col">
-          <label
-            class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
-            style="color: var(--heading);"
-          >
-            Customer Name <span style="color: red;">*</span>
-          </label>
+                                        <!-- Customer Name -->
+                                        <div class="flex flex-col">
+                                          <label
+                                            class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
+                                            style="color: var(--heading);"
+                                            >
+                                            Customer Name <span style="color: red;">*</span>
+                                          </label>
 
-          <input
-            type="text"
-            [(ngModel)]="customer.customerName"
-            name="customerName"
-            placeholder="Enter Customer Name"
-            required
-            minlength="3"
-            #customerName="ngModel"
-            class="p-2 rounded-lg outline-none"
-            [readonly]="true"
+                                          <input
+                                            type="text"
+                                            [(ngModel)]="customer.customerName"
+                                            name="customerName"
+                                            placeholder="Enter Customer Name"
+                                            required
+                                            minlength="3"
+                                            #customerName="ngModel"
+                                            class="p-2 rounded-lg outline-none"
+                                            [readonly]="true"
             style="
             background: var(--input-bg);
             color: var(--input-text);
             border: 1px solid var(--input-border);
           "
-          />
+                                            />
 
-          <span
-            *ngIf="customerName.invalid && customerName.touched"
-            style="color:red"
-            class="text-xs"
-          >
-            Name is required (min 3 chars).
-          </span>
-        </div>
+                                            @if (customerName.invalid && customerName.touched) {
+                                              <span
+                                                style="color:red"
+                                                class="text-xs"
+                                                >
+                                                Name is required (min 3 chars).
+                                              </span>
+                                            }
+                                          </div>
 
-        <!-- Customer Email -->
-        <div class="flex flex-col">
-          <label
-            class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
-            style="color: var(--heading);"
-          >
-            Email <span style="color: red;">*</span>
-          </label>
+                                          <!-- Customer Email -->
+                                          <div class="flex flex-col">
+                                            <label
+                                              class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
+                                              style="color: var(--heading);"
+                                              >
+                                              Email <span style="color: red;">*</span>
+                                            </label>
 
-          <input
-            type="email"
-            [(ngModel)]="customer.email"
-            name="email"
-            placeholder="Enter Email"
-            required
-            email
-            #email="ngModel"
-            [readonly]="true"
-            class="p-2 rounded-lg outline-none"
+                                            <input
+                                              type="email"
+                                              [(ngModel)]="customer.email"
+                                              name="email"
+                                              placeholder="Enter Email"
+                                              required
+                                              email
+                                              #email="ngModel"
+                                              [readonly]="true"
+                                              class="p-2 rounded-lg outline-none"
             style="
             background: var(--input-bg);
             color: var(--input-text);
             border: 1px solid var(--input-border);
           "
-          />
+                                              />
 
-          <span
-            *ngIf="email.invalid && email.touched"
-            class="text-xs"
-            style="color:red"
-          >
-            Valid email is required.
-          </span>
-        </div>
+                                              @if (email.invalid && email.touched) {
+                                                <span
+                                                  class="text-xs"
+                                                  style="color:red"
+                                                  >
+                                                  Valid email is required.
+                                                </span>
+                                              }
+                                            </div>
 
-        <!-- Customer Phone -->
-        <div class="flex flex-col">
-          <label
-            class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
-            style="color: var(--heading);"
-          >
-            Phone <span style="color:red">*</span>
-          </label>
+                                            <!-- Customer Phone -->
+                                            <div class="flex flex-col">
+                                              <label
+                                                class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
+                                                style="color: var(--heading);"
+                                                >
+                                                Phone <span style="color:red">*</span>
+                                              </label>
 
-          <input
-            type="tel"
-            [(ngModel)]="customer.phoneNo"
-            name="phoneNo"
-            placeholder="Enter Phone Number"
-            required
-            pattern="^[0-9]{10}$"
-            maxlength="10"
-            #phoneNo="ngModel"
-            [readonly]="true"
-            class="p-2 rounded-lg outline-none"
+                                              <input
+                                                type="tel"
+                                                [(ngModel)]="customer.phoneNo"
+                                                name="phoneNo"
+                                                placeholder="Enter Phone Number"
+                                                required
+                                                pattern="^[0-9]{10}$"
+                                                maxlength="10"
+                                                #phoneNo="ngModel"
+                                                [readonly]="true"
+                                                class="p-2 rounded-lg outline-none"
             style="
             background: var(--input-bg);
             color: var(--input-text);
             border: 1px solid var(--input-border);
           "
-          />
+                                                />
 
-          <span
-            *ngIf="phoneNo.invalid && phoneNo.touched"
-            class="text-xs"
-            style="color:red"
-          >
-            Enter a valid 10-digit phone number.
-          </span>
-        </div>
+                                                @if (phoneNo.invalid && phoneNo.touched) {
+                                                  <span
+                                                    class="text-xs"
+                                                    style="color:red"
+                                                    >
+                                                    Enter a valid 10-digit phone number.
+                                                  </span>
+                                                }
+                                              </div>
 
-        <!-- Address -->
-        <div class="flex flex-col">
-          <label
-            class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
-            style="color: var(--heading);"
-          >
-            Address <span style="color:red">*</span>
-          </label>
+                                              <!-- Address -->
+                                              <div class="flex flex-col">
+                                                <label
+                                                  class="mb-2 text-sm md:text-base font-extrabold uppercase tracking-wide drop-shadow-md"
+                                                  style="color: var(--heading);"
+                                                  >
+                                                  Address <span style="color:red">*</span>
+                                                </label>
 
-          <textarea
-            [(ngModel)]="customer.customerAddress"
-            name="customerAddress"
-            rows="2"
-            placeholder="Enter Address"
-            required
-            #customerAddress="ngModel"
-            [readonly]="true"
-            class="p-2 rounded-lg resize-none outline-none"
+                                                <textarea
+                                                  [(ngModel)]="customer.customerAddress"
+                                                  name="customerAddress"
+                                                  rows="2"
+                                                  placeholder="Enter Address"
+                                                  required
+                                                  #customerAddress="ngModel"
+                                                  [readonly]="true"
+                                                  class="p-2 rounded-lg resize-none outline-none"
             style="
             background: var(--input-bg);
             color: var(--input-text);
             border: 1px solid var(--input-border);
           "
-          ></textarea>
+                                                ></textarea>
 
-          <span
-            *ngIf="customerAddress.invalid && customerAddress.touched"
-            class="text-xs"
-            style="color:red"
-          >
-            Address is required.
-          </span>
-        </div>
+                                                @if (customerAddress.invalid && customerAddress.touched) {
+                                                  <span
+                                                    class="text-xs"
+                                                    style="color:red"
+                                                    >
+                                                    Address is required.
+                                                  </span>
+                                                }
+                                              </div>
 
-        <!-- Payment Row 1 -->
-        <div class="flex flex-row gap-6 w-full items-center">
+                                              <!-- Payment Row 1 -->
+                                              <div class="flex flex-row gap-6 w-full items-center">
 
-          <!-- Payment Method -->
-          <div class="flex flex-col flex-1 relative">
-            <label
-              class="label-style"
-              style="color: var(--heading);"
-            >
-              PAYMENT METHOD <span style="color:red">*</span>
-            </label>
+                                                <!-- Payment Method -->
+                                                <div class="flex flex-col flex-1 relative">
+                                                  <label
+                                                    class="label-style"
+                                                    style="color: var(--heading);"
+                                                    >
+                                                    PAYMENT METHOD <span style="color:red">*</span>
+                                                  </label>
 
-            <div class="flex items-center gap-2">
-              <select
-                id="paymentMode"
-                [(ngModel)]="customer.paymentMode"
-                name="paymentMode"
-                required
-                #paymentMode="ngModel"
-                class="p-2 rounded-lg w-full outline-none"
+                                                  <div class="flex items-center gap-2">
+                                                    <select
+                                                      id="paymentMode"
+                                                      [(ngModel)]="customer.paymentMode"
+                                                      name="paymentMode"
+                                                      required
+                                                      #paymentMode="ngModel"
+                                                      class="p-2 rounded-lg w-full outline-none"
                 style="
                 background: var(--input-bg);
                 color: var(--input-text);
                 border: 1px solid var(--input-border);
               "
-                (change)="onPaymentModeChange($event)"
-              >
-                <option
-                  value=""
-                  disabled
-                  hidden
-                >Select a payment method</option>
-                <option value="1">Cash</option>
-                <option value="2">Cheque</option>
-                <option value="3">Bank Transfer</option>
-              </select>
+                                                      (change)="onPaymentModeChange($event)"
+                                                      >
+                                                      <option
+                                                        value=""
+                                                        disabled
+                                                        hidden
+                                                      >Select a payment method</option>
+                                                      <option value="1">Cash</option>
+                                                      <option value="2">Cheque</option>
+                                                      <option value="3">Bank Transfer</option>
+                                                    </select>
 
-              <!-- Tooltip icon -->
-              <div
-                *ngIf="customer.paymentMode === '2'"
-                class="relative group"
-              >
-                <button
-                  type="button"
-                  (click)="showChequePopup = true"
-                  class="p-2 rounded-full border transition-all duration-200 cursor-pointer"
+                                                    <!-- Tooltip icon -->
+                                                    @if (customer.paymentMode === '2') {
+                                                      <div
+                                                        class="relative group"
+                                                        >
+                                                        <button
+                                                          type="button"
+                                                          (click)="showChequePopup = true"
+                                                          class="p-2 rounded-full border transition-all duration-200 cursor-pointer"
                   style="
                   background: var(--bg-mid);
                   border-color: var(--card-border);
                   color: var(--heading);
                 "
-                >
-                  <i class="fa fa-info-circle text-lg"></i>
-                </button>
-
-                <span
-                  class="absolute left-10 top-1/2 -translate-y-1/2 text-xs px-2 py-1 rounded-md transition-opacity duration-300 whitespace-nowrap shadow-md"
+                                                          >
+                                                          <i class="fa fa-info-circle text-lg"></i>
+                                                        </button>
+                                                        <span
+                                                          class="absolute left-10 top-1/2 -translate-y-1/2 text-xs px-2 py-1 rounded-md transition-opacity duration-300 whitespace-nowrap shadow-md"
                   style="
                   background: var(--card-bg);
                   color: var(--text);
                   border: 1px solid var(--card-border);
                   opacity: 0;
                 "
-                >
-                  See cheque details
-                </span>
-              </div>
-            </div>
+                                                          >
+                                                          See cheque details
+                                                        </span>
+                                                      </div>
+                                                    }
+                                                  </div>
 
-            <span
-              *ngIf="paymentMode.invalid && paymentMode.touched"
-              class="text-xs"
-              style="color:red"
-            >
-              Payment method is required.
-            </span>
-          </div>
+                                                  @if (paymentMode.invalid && paymentMode.touched) {
+                                                    <span
+                                                      class="text-xs"
+                                                      style="color:red"
+                                                      >
+                                                      Payment method is required.
+                                                    </span>
+                                                  }
+                                                </div>
 
-          <!-- Paid Amount -->
-          <div class="flex flex-col flex-1">
-            <label style="color: var(--heading);">PAID AMOUNT <span style="color:red">*</span></label>
+                                                <!-- Paid Amount -->
+                                                <div class="flex flex-col flex-1">
+                                                  <label style="color: var(--heading);">PAID AMOUNT <span style="color:red">*</span></label>
 
-            <input
-              type="number"
-              id="paidAmt"
-              name="paidAmt"
-              required
-              min="0"
-              [max]="grandTotal"
-              [(ngModel)]="customer.paidAmt"
-              #paidamount="ngModel"
-              (ngModelChange)="onPaidChange($event)"
-              class="p-2 rounded-lg outline-none"
+                                                  <input
+                                                    type="number"
+                                                    id="paidAmt"
+                                                    name="paidAmt"
+                                                    required
+                                                    min="0"
+                                                    [max]="grandTotal"
+                                                    [(ngModel)]="customer.paidAmt"
+                                                    #paidamount="ngModel"
+                                                    (ngModelChange)="onPaidChange($event)"
+                                                    class="p-2 rounded-lg outline-none"
               style="
               background: var(--input-bg);
               color: var(--input-text);
               border: 1px solid var(--input-border);
             "
-            />
+                                                    />
 
-            <div
-              class="text-xs mt-1"
-              style="color:red;"
-            >
-              <span *ngIf="paidamount.invalid && paidamount.touched">
-                Paid amount must be at least 0.
-              </span>
+                                                    <div
+                                                      class="text-xs mt-1"
+                                                      style="color:red;"
+                                                      >
+                                                      @if (paidamount.invalid && paidamount.touched) {
+                                                        <span>
+                                                          Paid amount must be at least 0.
+                                                        </span>
+                                                      }
 
-              <span *ngIf="customer.paidAmt > grandTotal && paidamount.touched">
-                Paid amount cannot exceed Grand Total (₹{{ grandTotal | number:'1.2-2' }}).
-              </span>
-            </div>
-          </div>
+                                                      @if (customer.paidAmt > grandTotal && paidamount.touched) {
+                                                        <span>
+                                                          Paid amount cannot exceed Grand Total (₹{{ grandTotal | number:'1.2-2' }}).
+                                                        </span>
+                                                      }
+                                                    </div>
+                                                  </div>
 
-        </div>
+                                                </div>
 
-        <!-- Payment Row 2 -->
-        <div class="flex flex-row gap-6 w-full">
-          <!-- Balance Due -->
-          <div class="flex flex-col flex-1">
-            <label style="color: var(--heading);">BALANCE DUE <span style="color:red">*</span></label>
+                                                <!-- Payment Row 2 -->
+                                                <div class="flex flex-row gap-6 w-full">
+                                                  <!-- Balance Due -->
+                                                  <div class="flex flex-col flex-1">
+                                                    <label style="color: var(--heading);">BALANCE DUE <span style="color:red">*</span></label>
 
-            <input
-              type="number"
-              id="balanceDue"
-              [(ngModel)]="customer.balanceDue"
-              name="balanceDue"
-              required
-              min="0"
-              (ngModelChange)="onDueChange($event)"
-              #balanceDue="ngModel"
-              class="p-2 rounded-lg outline-none"
+                                                    <input
+                                                      type="number"
+                                                      id="balanceDue"
+                                                      [(ngModel)]="customer.balanceDue"
+                                                      name="balanceDue"
+                                                      required
+                                                      min="0"
+                                                      (ngModelChange)="onDueChange($event)"
+                                                      #balanceDue="ngModel"
+                                                      class="p-2 rounded-lg outline-none"
               style="
               background: var(--input-bg);
               color: var(--input-text);
               border: 1px solid var(--input-border);
             "
-            />
+                                                      />
 
-            <span
-              *ngIf="balanceDue.invalid && balanceDue.touched"
-              class="text-xs"
-              style="color:red"
-            >
-              Balance due cannot be less than 0.
-            </span>
-          </div>
+                                                      @if (balanceDue.invalid && balanceDue.touched) {
+                                                        <span
+                                                          class="text-xs"
+                                                          style="color:red"
+                                                          >
+                                                          Balance due cannot be less than 0.
+                                                        </span>
+                                                      }
+                                                    </div>
 
-          <!-- Total Amount -->
-          <div class="flex flex-col flex-1">
-            <label style="color: var(--heading);">TOTAL AMOUNT</label>
+                                                    <!-- Total Amount -->
+                                                    <div class="flex flex-col flex-1">
+                                                      <label style="color: var(--heading);">TOTAL AMOUNT</label>
 
-            <input
-              type="number"
-              id="totalAmt"
-              [(ngModel)]="customer.totalAmt"
-              name="totalAmt"
-              readonly
-              class="p-2 rounded-lg outline-none"
+                                                      <input
+                                                        type="number"
+                                                        id="totalAmt"
+                                                        [(ngModel)]="customer.totalAmt"
+                                                        name="totalAmt"
+                                                        readonly
+                                                        class="p-2 rounded-lg outline-none"
               style="
               background: var(--input-bg);
               color: var(--input-text);
               border: 1px solid var(--input-border);
             "
-            />
-          </div>
-        </div>
+                                                        />
+                                                      </div>
+                                                    </div>
 
-        <!-- Notes -->
-        <div class="flex flex-col md:col-span-2">
-          <label style="color: var(--heading);">Notes</label>
+                                                    <!-- Notes -->
+                                                    <div class="flex flex-col md:col-span-2">
+                                                      <label style="color: var(--heading);">Notes</label>
 
-          <textarea
-            [(ngModel)]="customer.remark"
-            name="remark"
-            rows="3"
-            placeholder="Additional notes"
-            class="p-2 rounded-lg resize-none outline-none"
+                                                      <textarea
+                                                        [(ngModel)]="customer.remark"
+                                                        name="remark"
+                                                        rows="3"
+                                                        placeholder="Additional notes"
+                                                        class="p-2 rounded-lg resize-none outline-none"
             style="
             background: var(--input-bg);
             color: var(--input-text);
             border: 1px solid var(--input-border);
           "
-          ></textarea>
-        </div>
+                                                      ></textarea>
+                                                    </div>
 
-      </div>
+                                                  </div>
 
-      <!-- Action Buttons -->
-      <div class="flex flex-col md:flex-row gap-4">
-        <!-- Submit -->
-        <button
-          type="submit"
-          [disabled]="saleForm.invalid || cart.length === 0"
-          class="w-full md:w-1/2 px-6 py-3 rounded-lg font-bold transition disabled:opacity-50 disabled:cursor-not-allowed"
-          style="background: var(--accent-1); color: #000;"
-        >
-          Submit Sale
-        </button>
+                                                  <!-- Action Buttons -->
+                                                  <div class="flex flex-col md:flex-row gap-4">
+                                                    <!-- Submit -->
+                                                    <button
+                                                      type="submit"
+                                                      [disabled]="saleForm.invalid || cart.length === 0"
+                                                      class="w-full md:w-1/2 px-6 py-3 rounded-lg font-bold transition disabled:opacity-50 disabled:cursor-not-allowed"
+                                                      style="background: var(--accent-1); color: #000;"
+                                                      >
+                                                      Submit Sale
+                                                    </button>
 
-        <!-- Clear -->
-        <button
-          type="button"
-          (click)="clearSale()"
-          class="w-full md:w-1/2 px-6 py-3 rounded-lg font-bold transition"
-          style="background: var(--bg-mid); color: var(--text); border: 1px solid var(--card-border);"
-        >
-          Clear Screen
-        </button>
-      </div>
+                                                    <!-- Clear -->
+                                                    <button
+                                                      type="button"
+                                                      (click)="clearSale()"
+                                                      class="w-full md:w-1/2 px-6 py-3 rounded-lg font-bold transition"
+                                                      style="background: var(--bg-mid); color: var(--text); border: 1px solid var(--card-border);"
+                                                      >
+                                                      Clear Screen
+                                                    </button>
+                                                  </div>
 
-    </form>
-  </div>
+                                                </form>
+                                              </div>
 
 
-  <!-- Extra Charges Popup -->
-  <div
-    *ngIf="showExtraChargesPopup"
-    class="fixed inset-0 z-50 flex items-center justify-center"
-    style="background: var(--modal-overlay);"
-  >
-    <div
-      class="p-6 rounded-2xl w-full max-w-xl shadow-2xl relative border"
-      style="background: var(--card-bg); border-color: var(--card-border);"
-    >
-
-      <!-- Close Button -->
-      <button
-        (click)="closeExtraChargesPopup()"
-        class="absolute top-3 right-3 text-xl font-bold transition"
-        style="color: var(--text-muted);"
-        (mouseover)="null"
-      >
-        ✕
-      </button>
-
-      <!-- Your Form -->
-      <form
-        [formGroup]="extraChargesForm"
-        class="p-4 rounded-xl shadow-lg space-y-4"
-        style="background: var(--bg-mid);"
-      >
-        <h3
-          class="text-xl font-extrabold uppercase tracking-wide mb-1"
-          style="color: var(--heading);"
-        >
-          Extra Charges
-        </h3>
-
-        <!-- Add Button -->
-        <div class="flex justify-end mb-4">
-          <button
-            type="button"
-            (click)="addCharge()"
-            class="flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all shadow-md"
+                                              <!-- Extra Charges Popup -->
+                                              @if (showExtraChargesPopup) {
+                                                <div
+                                                  class="fixed inset-0 z-50 flex items-center justify-center"
+                                                  style="background: var(--modal-overlay);"
+                                                  >
+                                                  <div
+                                                    class="p-6 rounded-2xl w-full max-w-xl shadow-2xl relative border"
+                                                    style="background: var(--card-bg); border-color: var(--card-border);"
+                                                    >
+                                                    <!-- Close Button -->
+                                                    <button
+                                                      (click)="closeExtraChargesPopup()"
+                                                      class="absolute top-3 right-3 text-xl font-bold transition"
+                                                      style="color: var(--text-muted);"
+                                                      (mouseover)="null"
+                                                      >
+                                                      ✕
+                                                    </button>
+                                                    <!-- Your Form -->
+                                                    <form
+                                                      [formGroup]="extraChargesForm"
+                                                      class="p-4 rounded-xl shadow-lg space-y-4"
+                                                      style="background: var(--bg-mid);"
+                                                      >
+                                                      <h3
+                                                        class="text-xl font-extrabold uppercase tracking-wide mb-1"
+                                                        style="color: var(--heading);"
+                                                        >
+                                                        Extra Charges
+                                                      </h3>
+                                                      <!-- Add Button -->
+                                                      <div class="flex justify-end mb-4">
+                                                        <button
+                                                          type="button"
+                                                          (click)="addCharge()"
+                                                          class="flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all shadow-md"
             style="
             background: var(--accent-1);
             color: #000;
           "
-          >
-            <i class="bi bi-plus-circle text-lg"></i>
-            <span class="hidden sm:inline">Add</span>
-          </button>
-        </div>
-
-        <!-- Dynamic Rows -->
-        <div
-          formArrayName="extraCharges"
-          class="space-y-3"
-        >
-          <div
-            *ngFor="let charge of extraCharges.controls; let i = index"
-            [formGroupName]="i"
-            class="flex items-center gap-3 p-3 rounded-xl border"
+                                                          >
+                                                          <i class="bi bi-plus-circle text-lg"></i>
+                                                          <span class="hidden sm:inline">Add</span>
+                                                        </button>
+                                                      </div>
+                                                      <!-- Dynamic Rows -->
+                                                      <div
+                                                        formArrayName="extraCharges"
+                                                        class="space-y-3"
+                                                        >
+                                                        @for (charge of extraCharges.controls; track charge; let i = $index) {
+                                                          <div
+                                                            [formGroupName]="i"
+                                                            class="flex items-center gap-3 p-3 rounded-xl border"
             style="
             background: var(--card);
             border-color: var(--card-border);
           "
-          >
-
-            <input
-              type="text"
-              placeholder="Charge Name"
-              formControlName="name"
-              class="flex-1 p-2 rounded-lg outline-none"
+                                                            >
+                                                            <input
+                                                              type="text"
+                                                              placeholder="Charge Name"
+                                                              formControlName="name"
+                                                              class="flex-1 p-2 rounded-lg outline-none"
               style="
               background: var(--input-bg);
               color: var(--input-text);
               border: 1px solid var(--input-border);
             "
-            />
-
-            <input
-              type="number"
-              placeholder="Amount (₹)"
-              formControlName="amount"
-              class="w-32 p-2 rounded-lg text-right outline-none"
+                                                              />
+                                                              <input
+                                                                type="number"
+                                                                placeholder="Amount (₹)"
+                                                                formControlName="amount"
+                                                                class="w-32 p-2 rounded-lg text-right outline-none"
               style="
               background: var(--input-bg);
               color: var(--input-text);
               border: 1px solid var(--input-border);
             "
-              [class.border-red-500]="charge.get('amount')?.value < 1"
-            />
-
-            <!-- Validation Message -->
-            <div
-              *ngIf="charge.get('amount')?.value < 1"
-              class="text-sm ml-2"
-              style="color: #ff6b6b;"
-            >
-              Amount must be at least ₹1
-            </div>
-
-            <button
-              type="button"
-              (click)="removeCharge(i)"
-              class="text-xl font-bold"
-              style="color: #ff6b6b;"
-            >
-              ✕
-            </button>
-          </div>
-        </div>
-
-        <!-- Total -->
-        <div
-          class="text-right mt-4 font-semibold text-lg"
-          style="color: var(--heading);"
-        >
-          Total Extra Charges: ₹{{ totalExtraCharges }}
-        </div>
-
-        <!-- Submit -->
-        <div class="text-right mt-4">
-          <button
-            type="button"
-            (click)="saveExtraCharges()"
-            [disabled]="!isFormValid()"
-            class="px-4 py-2 rounded-lg shadow font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                                                                [class.border-red-500]="charge.get('amount')?.value < 1"
+                                                                />
+                                                                <!-- Validation Message -->
+                                                                @if (charge.get('amount')?.value < 1) {
+                                                                  <div
+                                                                    class="text-sm ml-2"
+                                                                    style="color: #ff6b6b;"
+                                                                    >
+                                                                    Amount must be at least ₹1
+                                                                  </div>
+                                                                }
+                                                                <button
+                                                                  type="button"
+                                                                  (click)="removeCharge(i)"
+                                                                  class="text-xl font-bold"
+                                                                  style="color: #ff6b6b;"
+                                                                  >
+                                                                  ✕
+                                                                </button>
+                                                              </div>
+                                                            }
+                                                          </div>
+                                                          <!-- Total -->
+                                                          <div
+                                                            class="text-right mt-4 font-semibold text-lg"
+                                                            style="color: var(--heading);"
+                                                            >
+                                                            Total Extra Charges: ₹{{ totalExtraCharges }}
+                                                          </div>
+                                                          <!-- Submit -->
+                                                          <div class="text-right mt-4">
+                                                            <button
+                                                              type="button"
+                                                              (click)="saveExtraCharges()"
+                                                              [disabled]="!isFormValid()"
+                                                              class="px-4 py-2 rounded-lg shadow font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
             style="
             background: var(--accent-1);
             color: #000;
           "
-          >
-            Save Charges
-          </button>
-        </div>
+                                                              >
+                                                              Save Charges
+                                                            </button>
+                                                          </div>
+                                                        </form>
+                                                      </div>
+                                                    </div>
+                                                  }
+                                                </div>
 
-      </form>
-    </div>
-  </div>
-</div>
-
- <!-- Cheque Payment Modal (Dark Theme) -->
-  @if(customer.paymentMode === '2'){<app-cheque-popup
-    [show]="showChequePopup"
-    [cheque]="cheque"
-    (close)="cancelCheque()"
-    (save)="saveCheque($event)"
-  >
-  </app-cheque-popup>
-}
-@else if(customer.paymentMode === '3'){
-  <app-banktransferpopup
-  [show]="showBankTransferPopup"
-  [transfer]="banktransfer"
-  (close)="cancelBanktransfer()"
-  (save)="saveBankTransfer($event)"
->
-</app-banktransferpopup>
-}
+                                                <!-- Cheque Payment Modal (Dark Theme) -->
+                                                @if(customer.paymentMode === '2'){<app-cheque-popup
+                                                  [show]="showChequePopup"
+                                                  [cheque]="cheque"
+                                                  (close)="cancelCheque()"
+                                                  (save)="saveCheque($event)"
+                                                  >
+                                                </app-cheque-popup>
+                                              }
+                                              @else if(customer.paymentMode === '3'){
+                                              <app-banktransferpopup
+                                                [show]="showBankTransferPopup"
+                                                [transfer]="banktransfer"
+                                                (close)="cancelBanktransfer()"
+                                                (save)="saveBankTransfer($event)"
+                                                >
+                                              </app-banktransferpopup>
+                                            }

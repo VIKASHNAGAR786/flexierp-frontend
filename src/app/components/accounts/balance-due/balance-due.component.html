@@ -13,364 +13,350 @@
       border: 1px solid var(--input-border);
       --tw-ring-color: var(--accent-1);
     "
-  />
+    />
 
-  <!-- 📑 Rows Per Page -->
-  <select
-    [(ngModel)]="pageSize"
-    (change)="loadBalanceDueList()"
-    class="px-3 py-2 rounded"
-    style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
-  >
-    <option
-      *ngFor="let size of [5, 10, 20, 50]"
-      [value]="size"
+    <!-- 📑 Rows Per Page -->
+    <select
+      [(ngModel)]="pageSize"
+      (change)="loadBalanceDueList()"
+      class="px-3 py-2 rounded"
+      style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--input-border);"
+      >
+      @for (size of [5, 10, 20, 50]; track size) {
+        <option
+          [value]="size"
+          >
+          {{ size }} per page
+        </option>
+      }
+    </select>
+  </div>
+
+  <!-- 📋 Balance Due Table -->
+  <div
+    class="overflow-x-auto overflow-y-auto rounded-lg shadow-lg relative max-h-[500px]"
+    style="background: var(--card-bg); border: 1px solid var(--card-border);"
     >
-      {{ size }} per page
-    </option>
-  </select>
-</div>
-
-<!-- 📋 Balance Due Table -->
-<div
-  class="overflow-x-auto overflow-y-auto rounded-lg shadow-lg relative max-h-[500px]"
-  style="background: var(--card-bg); border: 1px solid var(--card-border);"
->
-  <table
-    class="min-w-full border-collapse"
-    style="color: var(--card-text);"
-  >
-    <thead
-      class="uppercase text-sm md:text-base tracking-wide sticky top-0 z-50"
+    <table
+      class="min-w-full border-collapse"
+      style="color: var(--card-text);"
+      >
+      <thead
+        class="uppercase text-sm md:text-base tracking-wide sticky top-0 z-50"
       style="
         background: linear-gradient(to right, var(--card-bg), var(--input-bg));
         color: var(--accent-1);"
-    >
-      <tr>
-        <th
-          class="px-4 py-3 border-b text-center w-16"
-          style="border-color: var(--input-border)"
-        >#</th>
-        <th
-          class="px-4 py-3 border-b text-left"
-          style="border-color: var(--input-border)"
-        >Customer Name</th>
-        <th
-          class="px-4 py-3 border-b text-left"
-          style="border-color: var(--input-border)"
-        >Address</th>
-        <th
-          class="px-4 py-3 border-b text-center"
-          style="border-color: var(--input-border)"
-        >Phone No</th>
-        <th
-          class="px-4 py-3 border-b text-left"
-          style="border-color: var(--input-border)"
-        >Email</th>
-        <th
-          class="px-4 py-3 border-b text-right"
-          style="border-color: var(--input-border)"
-        >Total Due</th>
-        <th
-          class="px-4 py-3 border-b text-center"
-          style="border-color: var(--input-border)"
-        >Last Transaction</th>
-        <th
-          class="px-4 py-3 border-b text-center w-40"
-          style="border-color: var(--input-border)"
-        >Action</th>
-      </tr>
-    </thead>
+        >
+        <tr>
+          <th
+            class="px-4 py-3 border-b text-center w-16"
+            style="border-color: var(--input-border)"
+          >#</th>
+          <th
+            class="px-4 py-3 border-b text-left"
+            style="border-color: var(--input-border)"
+          >Customer Name</th>
+          <th
+            class="px-4 py-3 border-b text-left"
+            style="border-color: var(--input-border)"
+          >Address</th>
+          <th
+            class="px-4 py-3 border-b text-center"
+            style="border-color: var(--input-border)"
+          >Phone No</th>
+          <th
+            class="px-4 py-3 border-b text-left"
+            style="border-color: var(--input-border)"
+          >Email</th>
+          <th
+            class="px-4 py-3 border-b text-right"
+            style="border-color: var(--input-border)"
+          >Total Due</th>
+          <th
+            class="px-4 py-3 border-b text-center"
+            style="border-color: var(--input-border)"
+          >Last Transaction</th>
+          <th
+            class="px-4 py-3 border-b text-center w-40"
+            style="border-color: var(--input-border)"
+          >Action</th>
+        </tr>
+      </thead>
 
-    <tbody>
-      <tr
-        *ngFor="let due of BalanceDueDtos; let i = index"
-        class="transition"
-        style="border-color: var(--input-border);"
-        onmouseover="this.style.background='var(--accent-hover)'"
-        onmouseout="this.style.background='transparent'"
-      >
-        <td class="px-4 py-2 text-center">
-          {{ (pageNumber - 1) * pageSize + i + 1 }}
-        </td>
-
-        <td class="px-4 py-2 text-left font-medium">{{ due.customerName }}</td>
-        <td class="px-4 py-2 text-left">{{ due.customerAddress }}</td>
-        <td class="px-4 py-2 text-center">{{ due.phoneNo }}</td>
-        <td class="px-4 py-2 text-left">{{ due.email }}</td>
-
-        <!-- 💸 Total Due -->
-        <td
-          class="px-4 py-2 text-right font-extrabold text-lg tracking-wide select-none transition-all duration-300 ease-in-out"
+      <tbody>
+        @for (due of BalanceDueDtos; track due; let i = $index) {
+          <tr
+            class="transition"
+            style="border-color: var(--input-border);"
+            onmouseover="this.style.background='var(--accent-hover)'"
+            onmouseout="this.style.background='transparent'"
+            >
+            <td class="px-4 py-2 text-center">
+              {{ (pageNumber - 1) * pageSize + i + 1 }}
+            </td>
+            <td class="px-4 py-2 text-left font-medium">{{ due.customerName }}</td>
+            <td class="px-4 py-2 text-left">{{ due.customerAddress }}</td>
+            <td class="px-4 py-2 text-center">{{ due.phoneNo }}</td>
+            <td class="px-4 py-2 text-left">{{ due.email }}</td>
+            <!-- 💸 Total Due -->
+            <td
+              class="px-4 py-2 text-right font-extrabold text-lg tracking-wide select-none transition-all duration-300 ease-in-out"
           [ngClass]="{
           'text-emerald-400 neon-green': due.totalDueAmount > 0,
           'text-rose-400 neon-red': due.totalDueAmount < 0,
           'text-slate-400': due.totalDueAmount === 0
         }"
-        >
-          <span
-            *ngIf="due.totalDueAmount > 0"
-            class="bg-gradient-to-r from-emerald-300 via-lime-400 to-green-500 bg-clip-text text-transparent animate-glow-green"
-          >
-            ₹{{ due.totalDueAmount | number: '1.2-2' }}
-          </span>
-
-          <span
-            *ngIf="due.totalDueAmount < 0"
-            class="bg-gradient-to-r from-rose-400 via-pink-500 to-red-600 bg-clip-text text-transparent animate-glow-red"
-          >
-            ₹{{ due.totalDueAmount | number: '1.2-2' }}
-          </span>
-
-          <span
-            *ngIf="due.totalDueAmount === 0"
-            class="text-gray-500"
-          >₹0.00</span>
-        </td>
-
-        <td class="px-4 py-2 text-center">{{ due.lastTransactionDate }}</td>
-
-        <!-- ⚡ Action Column -->
-        <td class="px-4 py-2 text-center">
-          <button
-            appTooltip="Settle the outstanding balance for this customer."
-            [tooltipPosition]="'left'"
-            [tooltipFixed]="false"
-            (click)="onSettleBalance(due)"
+              >
+              @if (due.totalDueAmount > 0) {
+                <span
+                  class="bg-gradient-to-r from-emerald-300 via-lime-400 to-green-500 bg-clip-text text-transparent animate-glow-green"
+                  >
+                  ₹{{ due.totalDueAmount | number: '1.2-2' }}
+                </span>
+              }
+              @if (due.totalDueAmount < 0) {
+                <span
+                  class="bg-gradient-to-r from-rose-400 via-pink-500 to-red-600 bg-clip-text text-transparent animate-glow-red"
+                  >
+                  ₹{{ due.totalDueAmount | number: '1.2-2' }}
+                </span>
+              }
+              @if (due.totalDueAmount === 0) {
+                <span
+                  class="text-gray-500"
+                >₹0.00</span>
+              }
+            </td>
+            <td class="px-4 py-2 text-center">{{ due.lastTransactionDate }}</td>
+            <!-- ⚡ Action Column -->
+            <td class="px-4 py-2 text-center">
+              <button
+                appTooltip="Settle the outstanding balance for this customer."
+                [tooltipPosition]="'left'"
+                [tooltipFixed]="false"
+                (click)="onSettleBalance(due)"
             class="relative inline-flex items-center gap-2 justify-center px-4 py-2 
            text-sm font-semibold text-[#00ffee] rounded-md overflow-hidden 
            transition-all duration-300 border border-[#00ffee]/50 
            hover:text-black hover:bg-[#00ffee] 
            hover:shadow-[0_0_10px_#00ffee,0_0_20px_#00ffee_inset]"
-          >
-            <i class="bi bi-cash-stack text-lg"></i>
-          </button>
-        </td>
+                >
+                <i class="bi bi-cash-stack text-lg"></i>
+              </button>
+            </td>
+          </tr>
+        }
 
-      </tr>
+        <!-- 💤 Empty State -->
+        @if (BalanceDueDtos.length === 0) {
+          <tr>
+            <td
+              colspan="8"
+              class="text-center py-4 text-gray-400"
+              >
+              No balance due records found.
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
 
-      <!-- 💤 Empty State -->
-      <tr *ngIf="BalanceDueDtos.length === 0">
-        <td
-          colspan="8"
-          class="text-center py-4 text-gray-400"
-        >
-          No balance due records found.
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-</div>
-
-<!-- 📄 Pagination + Total Count -->
-<div class="flex flex-wrap justify-between items-center mt-4 text-white">
-  <div class="text-sm sm:text-base">
-    <span class="text-gray-400">
-      Showing
-      <strong>
-        {{ BalanceDueDtos.length > 0 ? (pageNumber - 1) * pageSize + 1 : 0 }}
-      </strong>
-      –
-      <strong>
-        {{
-        (pageNumber * pageSize) < (BalanceDueDtos[0]?.totalrecords || 0) ? (pageNumber * pageSize) :
-          (BalanceDueDtos[0]?.totalrecords || 0) }} </strong>
-      of
-      <strong>{{ BalanceDueDtos[0]?.totalrecords || 0 }}</strong>
-      records
-    </span>
   </div>
 
-  <div class="flex items-center gap-2">
-    <button
-      (click)="prevPage()"
-      [disabled]="pageNumber === 1"
-      class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50 hover:bg-slate-700 transition"
-    >
-      Previous
-    </button>
+  <!-- 📄 Pagination + Total Count -->
+  <div class="flex flex-wrap justify-between items-center mt-4 text-white">
+    <div class="text-sm sm:text-base">
+      <span class="text-gray-400">
+        Showing
+        <strong>
+          {{ BalanceDueDtos.length > 0 ? (pageNumber - 1) * pageSize + 1 : 0 }}
+        </strong>
+        –
+        <strong>
+          {{
+          (pageNumber * pageSize) < (BalanceDueDtos[0]?.totalrecords || 0) ? (pageNumber * pageSize) :
+        (BalanceDueDtos[0]?.totalrecords || 0) }} </strong>
+        of
+        <strong>{{ BalanceDueDtos[0]?.totalrecords || 0 }}</strong>
+        records
+      </span>
+    </div>
 
-    <span class="text-gray-300">
-      Page {{ pageNumber }}
-    </span>
+    <div class="flex items-center gap-2">
+      <button
+        (click)="prevPage()"
+        [disabled]="pageNumber === 1"
+        class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50 hover:bg-slate-700 transition"
+        >
+        Previous
+      </button>
 
-    <button
-      (click)="nextPage()"
+      <span class="text-gray-300">
+        Page {{ pageNumber }}
+      </span>
+
+      <button
+        (click)="nextPage()"
       [disabled]="
         pageNumber * pageSize >= (BalanceDueDtos[0]?.totalrecords || 0)
       "
-      class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50 hover:bg-slate-700 transition"
-    >
-      Next
-    </button>
+        class="px-3 py-1 bg-slate-800 rounded disabled:opacity-50 hover:bg-slate-700 transition"
+        >
+        Next
+      </button>
+    </div>
   </div>
-</div>
 
 
-<div
-  *ngIf="showSettlePopup"
-  class="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-50"
->
-  <div
+  @if (showSettlePopup) {
+    <div
+      class="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-50"
+      >
+      <div
     class="bg-[var(--card-bg)] border border-[var(--accent)]/40 rounded-2xl
            shadow-[0_0_40px_var(--accent-shadow)] p-8 w-[90%] sm:w-[550px] md:w-[600px]
            relative animate-fade-in transition-transform duration-300 ease-out scale-100
            hover:scale-[1.01]"
-  >
-
-    <!-- Close -->
-    <button
-      (click)="closePopup()"
+        >
+        <!-- Close -->
+        <button
+          (click)="closePopup()"
       class="absolute top-3 right-4 text-[var(--accent)] hover:text-[var(--text)]
              text-3xl transition"
-    >
-      &times;
-    </button>
-
-    <!-- Content -->
-    <div class="text-center space-y-6">
-
+          >
+          &times;
+        </button>
+        <!-- Content -->
+        <div class="text-center space-y-6">
       <i class="bi bi-cash-stack text-5xl text-[var(--accent)]
                 drop-shadow-[0_0_15px_var(--accent-shadow)]"></i>
-
       <h2 class="text-2xl font-bold text-[var(--accent)]
                 tracking-wide uppercase">
-        Settle Balance
-      </h2>
-
-      <!-- Fields -->
-      <div class="space-y-5 text-left">
-
-        <!-- Settled Amount -->
-        <div>
-          <label class="block text-[var(--text)] mb-1 font-medium">
-            Settled Amount (₹)
-          </label>
-
-          <input
-            type="number"
-            [(ngModel)]="settleBalance!.settledamount"
-            #paymentMode="ngModel"
-            (ngModelChange)="adjustRemainingAmount()"
+            Settle Balance
+          </h2>
+          <!-- Fields -->
+          <div class="space-y-5 text-left">
+            <!-- Settled Amount -->
+            <div>
+              <label class="block text-[var(--text)] mb-1 font-medium">
+                Settled Amount (₹)
+              </label>
+              <input
+                type="number"
+                [(ngModel)]="settleBalance!.settledamount"
+                #paymentMode="ngModel"
+                (ngModelChange)="adjustRemainingAmount()"
             class="w-full bg-[var(--input-bg)] text-[var(--text)]
                    rounded-md px-4 py-2.5 border border-[var(--border)]
                    focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]
                    outline-none placeholder-[var(--text-muted)]
                    transition-all duration-200"
-            placeholder="Enter settled amount"
-          />
-        </div>
-
-        <!-- Remaining Amount -->
-        <div>
-          <label class="block text-[var(--text)] mb-1 font-medium">
-            Remaining Amount (₹)
-          </label>
-
-          <input
-            type="number"
-            [(ngModel)]="settleBalance!.remainingamount"
-            [readonly]="true"
+                placeholder="Enter settled amount"
+                />
+              </div>
+              <!-- Remaining Amount -->
+              <div>
+                <label class="block text-[var(--text)] mb-1 font-medium">
+                  Remaining Amount (₹)
+                </label>
+                <input
+                  type="number"
+                  [(ngModel)]="settleBalance!.remainingamount"
+                  [readonly]="true"
             class="w-full bg-[var(--input-bg)] text-[var(--text)]
                    rounded-md px-4 py-2.5 border border-[var(--border)]
                    focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]
                    outline-none placeholder-[var(--text-muted)]
                    transition-all duration-200 cursor-not-allowed opacity-70"
-            placeholder="Remaining amount will adjust automatically"
-          />
-        </div>
-
-        <!-- Payment Mode -->
-        <div>
-          <label class="block text-[var(--text)] mb-1 font-medium">
-            Payment Mode
-          </label>
-
-          <select
-            [(ngModel)]="settleBalance!.paymode"
-            (ngModelChange)="onPaymentModeChange($event)"
+                  placeholder="Remaining amount will adjust automatically"
+                  />
+                </div>
+                <!-- Payment Mode -->
+                <div>
+                  <label class="block text-[var(--text)] mb-1 font-medium">
+                    Payment Mode
+                  </label>
+                  <select
+                    [(ngModel)]="settleBalance!.paymode"
+                    (ngModelChange)="onPaymentModeChange($event)"
             class="w-full bg-[var(--input-bg)] text-[var(--text)]
                    rounded-md px-4 py-2.5 border border-[var(--border)]
                    focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]
                    outline-none transition-all"
-          >
-            <option value="" disabled>Select Mode</option>
-            <option value="1">Cash</option>
-            <option value="2">Cheque</option>
-            <option value="3">Bank Transfer</option>
-          </select>
-        </div>
-
-        <!-- Cheque Info Button -->
-        <div *ngIf="settleBalance!.paymode == 2" class="relative group">
-          <button
-            type="button"
-            (click)="showChequePopup = true"
+                    >
+                    <option value="" disabled>Select Mode</option>
+                    <option value="1">Cash</option>
+                    <option value="2">Cheque</option>
+                    <option value="3">Bank Transfer</option>
+                  </select>
+                </div>
+                <!-- Cheque Info Button -->
+                @if (settleBalance!.paymode == 2) {
+                  <div class="relative group">
+                    <button
+                      type="button"
+                      (click)="showChequePopup = true"
             class="flex items-center justify-center text-[var(--accent)]
                    hover:text-[var(--accent-hover)] bg-[var(--input-bg)]
                    hover:bg-[var(--input-bg-hover)] rounded-full p-2
                    transition-all duration-200 border border-[var(--border)]
                    shadow-md cursor-pointer"
-            aria-label="See cheque details"
-          >
-            <i class="fa fa-info-circle text-lg"></i>
-          </button>
-
-          <!-- Tooltip -->
-          <span
+                      aria-label="See cheque details"
+                      >
+                      <i class="fa fa-info-circle text-lg"></i>
+                    </button>
+                    <!-- Tooltip -->
+                    <span
             class="absolute left-10 top-1/2 -translate-y-1/2 bg-[var(--card-bg)]
                    text-[var(--text)] text-xs rounded-md px-2 py-1 opacity-0
                    group-hover:opacity-100 transition-opacity duration-300
                    whitespace-nowrap shadow-md border border-[var(--border)]"
-          >
-            See cheque details
-          </span>
-        </div>
-
-      </div>
-
-      <!-- Buttons -->
-      <div class="flex justify-center gap-6 mt-8">
-        <button
-          (click)="closePopup()"
+                      >
+                      See cheque details
+                    </span>
+                  </div>
+                }
+              </div>
+              <!-- Buttons -->
+              <div class="flex justify-center gap-6 mt-8">
+                <button
+                  (click)="closePopup()"
           class="px-6 py-2.5 rounded-md border border-[var(--border)]
                  text-[var(--text)] hover:bg-[var(--input-bg)]
                  hover:border-[var(--border-hover)]
                  transition-all duration-200 font-medium"
-        >
-          Cancel
-        </button>
-
-        <button
-          (click)="confirmSettle()"
+                  >
+                  Cancel
+                </button>
+                <button
+                  (click)="confirmSettle()"
           class="px-6 py-2.5 rounded-md bg-[var(--accent-1)] text-[var(--card-bg)]
          font-semibold transition-all duration-200
          hover:shadow-[0_0_10px_var(--accent-1)]
          hover:brightness-110"
+                  >
+                  Confirm
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+
+
+      <!-- Cheque Payment Modal -->
+      <app-cheque-popup
+        [show]="showChequePopup"
+        [cheque]="cheque"
+        (close)="cancelCheque()"
+        (save)="saveCheque($event)"
         >
-          Confirm
-        </button>
-      </div>
+      </app-cheque-popup>
 
-    </div>
-  </div>
-</div>
-
-
-<!-- Cheque Payment Modal -->
-<app-cheque-popup
-  [show]="showChequePopup"
-  [cheque]="cheque"
-  (close)="cancelCheque()"
-  (save)="saveCheque($event)"
->
-</app-cheque-popup>
-
-<app-banktransferpopup
-  [show]="showBankTransferPopup"
-  [transfer]="banktransfer"
-  (close)="cancelBanktransfer()"
-  (save)="saveBankTransfer($event)"
->
-</app-banktransferpopup>
+      <app-banktransferpopup
+        [show]="showBankTransferPopup"
+        [transfer]="banktransfer"
+        (close)="cancelBanktransfer()"
+        (save)="saveBankTransfer($event)"
+        >
+      </app-banktransferpopup>

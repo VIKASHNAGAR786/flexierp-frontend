@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {  SignupService } from '../../services/signup.service';
 import { FormsModule } from '@angular/forms';
 import { AlertService } from '../../services/alert.service';
-import { isPlatformBrowser, CommonModule } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { RegisterUser } from '../../MODEL/MODEL';
 import { Router } from '@angular/router';
 @Component({
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   standalone: true,
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule],
   providers: [SignupService]
 })
 export class SignupComponent {

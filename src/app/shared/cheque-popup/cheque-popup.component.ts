@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-cheque-popup',
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './cheque-popup.component.html',
   styleUrl: './cheque-popup.component.css'
 })

@@ -5,14 +5,14 @@ import { AlertService } from '../../services/alert.service';
 import { LoginService, LoginRequest } from '../../services/login.service';
 import { PLATFORM_ID } from '@angular/core';
 import { UserinfowithloginService } from '../../services/userinfowithlogin.service';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-login',
   standalone: true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule],
 })
 export class LoginComponent {
   loginData: LoginRequest = {
